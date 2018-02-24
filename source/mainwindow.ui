@@ -31,7 +31,6 @@
    </widget>
    <addaction name="menu_File"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionE_xit">
    <property name="text">
     <string>E&amp;xit</string>
