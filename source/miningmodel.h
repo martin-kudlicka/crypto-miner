@@ -12,7 +12,7 @@ class MiningModel : public QAbstractItemModel
   private:
     enum class Column
     {
-      Name,
+      Miner,
       Count
     };
 
