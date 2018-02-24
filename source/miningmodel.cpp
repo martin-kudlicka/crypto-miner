@@ -12,12 +12,19 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
     return QVariant();
   }
 
+  // TODO
+
   return QVariant();
 }
 
 QModelIndex MiningModel::index(int row, int column, const QModelIndex &parent /* QModelIndex() */) const
 {
-  return createIndex(row, column);
+  if (_miningUnits.isEmpty())
+  {
+    return createIndex(row, column);
+  }
+
+  return createIndex(row, column, _miningUnits.id(row));
 }
 
 QModelIndex MiningModel::parent(const QModelIndex &child) const
@@ -27,5 +34,5 @@ QModelIndex MiningModel::parent(const QModelIndex &child) const
 
 int MiningModel::rowCount(const QModelIndex &parent /* QModelIndex() */) const
 {
-  return 0;
+  return _miningUnits.count();
 }

@@ -2,6 +2,7 @@
 #define MININGMODEL_H
 
 #include <QtCore/QAbstractItemModel>
+#include "miningunits.h"
 
 class MiningModel : public QAbstractItemModel
 {
@@ -14,6 +15,8 @@ class MiningModel : public QAbstractItemModel
       Name,
       Count
     };
+
+    MiningUnits _miningUnits;
 
     virtual int         columnCount(const QModelIndex &parent = QModelIndex())                      const Q_DECL_OVERRIDE;
     virtual QVariant    data       (const QModelIndex &index, int role = Qt::DisplayRole)           const Q_DECL_OVERRIDE;

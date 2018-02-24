@@ -92,6 +92,7 @@
     <ClCompile Include="miningmodel.cpp" />
     <ClCompile Include="miningunitdialog.cpp" />
     <ClCompile Include="miningunitoptions.cpp" />
+    <ClCompile Include="miningunits.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -136,6 +137,7 @@
     <ClInclude Include="miningmodel.h" />
     <ClInclude Include="miningunitdialog.h" />
     <ClInclude Include="miningunitoptions.h" />
+    <ClInclude Include="miningunits.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
