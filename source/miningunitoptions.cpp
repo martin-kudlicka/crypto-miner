@@ -6,4 +6,6 @@ Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Wallet   = "pool/wall
 
 MiningUnitOptions::MiningUnitOptions(const MUuidPtr &id) : _id(id)
 {
+  beginGroup("miningUnits");
+  beginGroup(id.toString());
 }
