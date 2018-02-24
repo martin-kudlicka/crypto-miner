@@ -3,6 +3,7 @@
 
 #include "ui_mainwindow.h"
 #include "minerplugins.h"
+#include "miningmodel.h"
 
 class MainWindow : public QMainWindow
 {
@@ -15,6 +16,7 @@ class MainWindow : public QMainWindow
   private:
     Ui::MainWindow _ui;
     MinerPlugins   _minerPlugins;
+    MiningModel    _miningModel;
 
   private Q_SLOTS:
     void on_miningUnitAdd_clicked(bool checked = false);

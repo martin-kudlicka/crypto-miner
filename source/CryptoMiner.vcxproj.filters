@@ -54,6 +54,9 @@
     <ClCompile Include="miningunitoptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="miningmodel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -86,6 +89,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="miningunitoptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="miningmodel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
