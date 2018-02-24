@@ -18,8 +18,11 @@ class MainWindow : public QMainWindow
     MinerPlugins   _minerPlugins;
     MiningModel    _miningModel;
 
+    void setupWidgets();
+
   private Q_SLOTS:
-    void on_miningUnitAdd_clicked(bool checked = false);
+    void on_miningUnitAdd_clicked      (bool checked = false);
+    void on_miningView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) const;
 };
 
 #endif
