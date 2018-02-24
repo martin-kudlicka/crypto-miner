@@ -1,5 +1,7 @@
 #include "miningunitoptions.h"
 
+#include "miningunits.h"
+
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Miner = "miner";
 
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Address  = "pool/address";
@@ -8,7 +10,7 @@ Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Wallet   = "pool/wall
 
 MiningUnitOptions::MiningUnitOptions(const MUuidPtr &id) : _id(id)
 {
-  beginGroup("miningUnits");
+  beginGroup(MiningUnits::Property::Group);
   beginGroup(id.toString());
 }
 
