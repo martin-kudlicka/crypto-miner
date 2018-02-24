@@ -14,10 +14,11 @@ class MiningUnits
 
     MiningUnits();
 
-          quintptr        count  ()               const;
+          quintptr        count  ()                   const;
     const MiningUnitSPtr &get    (const MUuidPtr &id);
-          MUuidPtr        id     (quintptr index) const;
-          bool            isEmpty()               const;
+          MUuidPtr        id     (quintptr index)     const;
+          quintptr        index  (const MUuidPtr &id) const;
+          bool            isEmpty()                   const;
 
   private:
     QHash<MUuidPtr, MiningUnitSPtr> _miningUnits;

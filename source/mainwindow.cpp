@@ -20,5 +20,5 @@ void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
     return;
   }
 
-  // TODO
+  _miningModel.insert(minerDialog.options().id());
 }

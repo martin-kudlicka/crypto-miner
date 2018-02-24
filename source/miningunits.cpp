@@ -29,6 +29,24 @@ MUuidPtr MiningUnits::id(quintptr index) const
   return _settings.childGroups().at(index);
 }
 
+quintptr MiningUnits::index(const MUuidPtr &id) const
+{
+  quintptr index2 = 0;
+
+  for (const auto &id2 : _settings.childGroups())
+  {
+    if (id2 == id.toString())
+    {
+      return index2;
+    }
+
+    ++index2;
+  }
+
+  Q_UNREACHABLE();
+  return -1;
+}
+
 bool MiningUnits::isEmpty() const
 {
   return count() == 0;
