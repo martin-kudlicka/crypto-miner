@@ -10,6 +10,11 @@ MiningUnitDialog::MiningUnitDialog(const MinerInterface *miner, QWidget *parent)
   setupSettings();
 }
 
+const MiningUnitOptions &MiningUnitDialog::options() const
+{
+  return _options;
+}
+
 void MiningUnitDialog::setupSettings()
 {
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Address,  _ui.poolAddress);

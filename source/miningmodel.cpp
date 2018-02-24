@@ -1,5 +1,12 @@
 #include "miningmodel.h"
 
+void MiningModel::insert(const MUuidPtr &id)
+{
+  auto row = _miningUnits.index(id);
+
+  insertRow(row);
+}
+
 int MiningModel::columnCount(const QModelIndex &parent /* QModelIndex() */) const
 {
   return static_cast<int>(Column::Count);
@@ -31,6 +38,15 @@ QModelIndex MiningModel::index(int row, int column, const QModelIndex &parent /*
   }
 
   return createIndex(row, column, _miningUnits.id(row));
+}
+
+bool MiningModel::insertRows(int row, int count, const QModelIndex &parent /* QModelIndex() */)
+{
+  beginInsertRows(parent, row, row + count - 1);
+  // already added
+  endInsertRows();
+
+  return true;
 }
 
 QModelIndex MiningModel::parent(const QModelIndex &child) const
