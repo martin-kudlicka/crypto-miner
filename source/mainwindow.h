@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "ui_mainwindow.h"
+#include "minerplugins.h"
 
 class MainWindow : public QMainWindow
 {
@@ -13,6 +14,10 @@ class MainWindow : public QMainWindow
 
   private:
     Ui::MainWindow _ui;
+    MinerPlugins   _minerPlugins;
+
+  private Q_SLOTS:
+    void on_miningUnitAdd_clicked(bool checked = false);
 };
 
 #endif
