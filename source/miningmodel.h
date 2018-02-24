@@ -7,6 +7,7 @@
 class MiningModel : public QAbstractItemModel
 {
   public:
+             MiningModel(MinerPlugins *minerPlugins);
     virtual ~MiningModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
     void insert(const MUuidPtr &id);
