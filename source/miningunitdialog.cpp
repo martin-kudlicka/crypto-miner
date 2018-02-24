@@ -15,6 +15,8 @@ void MiningUnitDialog::setupSettings()
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Address,  _ui.poolAddress);
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Wallet,   _ui.poolWallet);
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Password, _ui.poolPassword);
+
+  _widgetSettings.load();
 }
 
 void MiningUnitDialog::setupWidgets() const
