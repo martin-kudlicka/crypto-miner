@@ -2,7 +2,7 @@
 
 #include "miningunitdialog.h"
 
-MainWindow::MainWindow()
+MainWindow::MainWindow() : _miningModel(&_minerPlugins)
 {
   _ui.setupUi(this);
 
@@ -19,9 +19,9 @@ void MainWindow::setupWidgets()
 void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
 {
   // for now take first and only plugin
-  auto minerPlugin = _minerPlugins.plugins().front();
+  auto minerPlugin = _minerPlugins.toList().front();
 
-  MiningUnitDialog minerDialog(*minerPlugin, this);
+  MiningUnitDialog minerDialog(minerPlugin, this);
   if (minerDialog.exec() == QDialog::Rejected)
   {
     return;

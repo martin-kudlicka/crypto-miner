@@ -1,5 +1,9 @@
 #include "miningmodel.h"
 
+MiningModel::MiningModel(MinerPlugins *minerPlugins) : _miningUnits(minerPlugins)
+{
+}
+
 void MiningModel::insert(const MUuidPtr &id)
 {
   auto row = _miningUnits.index(id);
