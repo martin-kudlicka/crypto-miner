@@ -1,8 +1,9 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
-// Used by CryptoMiner.rc
+// Microsoft Visual C++ vygeneroval soubor zahrnutí.
+// Použito resource.rc
+//
 
-// Další výchozí hodnoty pro nové objekty
+// Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
