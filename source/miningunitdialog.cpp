@@ -26,6 +26,8 @@ void MiningUnitDialog::setupWidgets() const
 
 void MiningUnitDialog::accept()
 {
+  _options.setMiner(_miner->name());
+
   _widgetSettings.save();
 
   QDialog::accept();
