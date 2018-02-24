@@ -14,6 +14,11 @@ MiningUnitOptions::MiningUnitOptions(const MUuidPtr &id) : _id(id)
   beginGroup(id.toString());
 }
 
+QString MiningUnitOptions::miner() const
+{
+  return value(Property::Miner).toString();
+}
+
 void MiningUnitOptions::setMiner(const QString &name)
 {
   setValue(Property::Miner, name);

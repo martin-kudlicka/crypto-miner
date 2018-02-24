@@ -2,7 +2,7 @@
 #define MININGUNITS_H
 
 #include <QtCore/QSettings>
-#include <MkCore/MUuidPtr>
+#include "miningunit.h"
 
 class MiningUnits
 {
@@ -14,12 +14,14 @@ class MiningUnits
 
     MiningUnits();
 
-    quintptr count  ()               const;
-    MUuidPtr id     (quintptr index) const;
-    bool     isEmpty()               const;
+          quintptr        count  ()               const;
+    const MiningUnitSPtr &get    (const MUuidPtr &id);
+          MUuidPtr        id     (quintptr index) const;
+          bool            isEmpty()               const;
 
   private:
-    QSettings _settings;
+    QHash<MUuidPtr, MiningUnitSPtr> _miningUnits;
+    QSettings                       _settings;
 };
 
 #endif

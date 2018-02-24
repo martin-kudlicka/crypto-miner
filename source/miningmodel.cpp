@@ -12,7 +12,13 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
     return QVariant();
   }
 
-  // TODO
+  auto miningUnit = const_cast<MiningUnits *>(&_miningUnits)->get(index.internalId());
+
+  switch (index.column())
+  {
+    case Column::Miner:
+      return miningUnit->options().miner();
+  }
 
   return QVariant();
 }

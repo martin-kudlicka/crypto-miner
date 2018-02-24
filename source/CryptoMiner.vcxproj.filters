@@ -60,6 +60,9 @@
     <ClCompile Include="miningunits.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="miningunit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -98,6 +101,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="miningunits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="miningunit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

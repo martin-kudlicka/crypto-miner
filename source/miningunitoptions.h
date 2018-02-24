@@ -18,7 +18,8 @@ class MiningUnitOptions : public MSettings
              MiningUnitOptions(const MUuidPtr &id);
     virtual ~MiningUnitOptions() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-    void setMiner(const QString &name);
+    QString miner   () const;
+    void    setMiner(const QString &name);
 
   private:
     MUuidPtr _id;
