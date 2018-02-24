@@ -89,6 +89,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="minerplugins.cpp" />
+    <ClCompile Include="miningmodel.cpp" />
     <ClCompile Include="miningunitdialog.cpp" />
     <ClCompile Include="miningunitoptions.cpp" />
   </ItemGroup>
@@ -132,6 +133,7 @@
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_mainwindow.h" />
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_miningunitdialog.h" />
     <ClInclude Include="minerplugins.h" />
+    <ClInclude Include="miningmodel.h" />
     <ClInclude Include="miningunitdialog.h" />
     <ClInclude Include="miningunitoptions.h" />
     <ClInclude Include="resource.h" />

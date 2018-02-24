@@ -5,6 +5,8 @@
 MainWindow::MainWindow()
 {
   _ui.setupUi(this);
+
+  _ui.miningView->setModel(&_miningModel);
 }
 
 void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
