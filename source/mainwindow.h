@@ -1,15 +1,18 @@
-#pragma once
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include <QtWidgets/QMainWindow>
 #include "ui_mainwindow.h"
 
 class MainWindow : public QMainWindow
 {
-	Q_OBJECT
+  Q_OBJECT
 
-public:
-	MainWindow(QWidget *parent = Q_NULLPTR);
+  public:
+             MainWindow();
+    virtual ~MainWindow() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-private:
-	Ui::MainWindowClass ui;
+  private:
+    Ui::MainWindow _ui;
 };
+
+#endif
