@@ -2,6 +2,8 @@
 #define MININGUNITDIALOG_H
 
 #include "ui_miningunitdialog.h"
+#include "miningunitoptions.h"
+#include <MkWidgets/MWidgetSettings>
 
 class MinerInterface;
 
@@ -14,8 +16,13 @@ class MiningUnitDialog : public QDialog
   private:
     const MinerInterface *_miner;
     Ui::MiningUnitDialog  _ui;
+    MiningUnitOptions     _options;
+    MWidgetSettings       _widgetSettings;
 
-    void setupWidgets() const;
+    void setupSettings();
+    void setupWidgets () const;
+
+    virtual void accept() Q_DECL_OVERRIDE;
 };
 
 #endif
