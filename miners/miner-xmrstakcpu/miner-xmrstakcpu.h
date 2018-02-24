@@ -6,7 +6,7 @@
 class MinerXmrStakCpu : public MinerInterface
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID IID_MINERINTERFACE FILE "miner-xmrstakcpu.json")
+  Q_PLUGIN_METADATA(IID IID_MINERINTERFACE)
   Q_INTERFACES(MinerInterface)
 
   private:
