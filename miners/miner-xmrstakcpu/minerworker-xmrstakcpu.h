@@ -4,10 +4,10 @@
 #include "../common/minerworkerinterface.h"
 #include "../common/poolcredentials.h"
 
-class MinerWorker : public MinerWorkerInterface
+class MinerWorkerXmrStakCpu : public MinerWorkerInterface
 {
   public:
-    virtual ~MinerWorker() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
+    virtual ~MinerWorkerXmrStakCpu() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
     virtual void setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;

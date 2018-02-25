@@ -34,11 +34,11 @@
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_miner-xmrstakcpu.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="minerworker.cpp">
-      <Filter>Source FIles</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerworkerinterface.cpp">
       <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minerworker-xmrstakcpu.cpp">
+      <Filter>Source FIles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,10 +53,10 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="minerworker.h">
+    <ClInclude Include="..\common\poolcredentials.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\common\poolcredentials.h">
+    <ClInclude Include="minerworker-xmrstakcpu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
