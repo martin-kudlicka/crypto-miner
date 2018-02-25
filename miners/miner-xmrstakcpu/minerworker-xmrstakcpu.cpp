@@ -1,8 +1,8 @@
 #include "minerworker-xmrstakcpu.h"
 
-MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &id)
+MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 {
-  _id = id;
+  _miningUnitId = miningUnitId;
 }
 
 void MinerWorkerXmrStakCpu::setPoolAddress(const QString &address)
