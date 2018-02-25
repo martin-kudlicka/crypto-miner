@@ -10,7 +10,8 @@ class MiningModel : public QAbstractItemModel
              MiningModel(MinerPlugins *minerPlugins);
     virtual ~MiningModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-    void insert(const MUuidPtr &id);
+    void           insert    (const MUuidPtr &id);
+    MiningUnitSPtr miningUnit(const QModelIndex &index);
 
   private:
     enum class Column

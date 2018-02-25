@@ -11,6 +11,12 @@ void MiningModel::insert(const MUuidPtr &id)
   insertRow(row);
 }
 
+MiningUnitSPtr MiningModel::miningUnit(const QModelIndex &index)
+{
+  auto id = _miningUnits.id(index.internalId());
+  return _miningUnits.get(id);
+}
+
 int MiningModel::columnCount(const QModelIndex &parent /* QModelIndex() */) const
 {
   return static_cast<int>(Column::Count);

@@ -30,6 +30,14 @@ void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
   _miningModel.insert(minerDialog.options().id());
 }
 
+void MainWindow::on_miningUnitStart_clicked(bool checked /* false */)
+{
+  auto index      = _ui.miningView->currentIndex();
+  auto miningUnit = _miningModel.miningUnit(index);
+
+  miningUnit->start();
+}
+
 void MainWindow::on_miningView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) const
 {
   auto isSelected = !_ui.miningView->selectionModel()->selectedRows().isEmpty();
