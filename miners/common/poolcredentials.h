@@ -6,14 +6,14 @@ struct PoolCredentials
   PoolCredentials()
   {
   }
-  PoolCredentials(const QString &wallet, const QString &password) : wallet(wallet), password(password)
+  PoolCredentials(const QString &username, const QString &password) : username(username), password(password)
   {
   };
-  PoolCredentials(const PoolCredentials &other) : wallet(other.wallet), password(other.password)
+  PoolCredentials(const PoolCredentials &other) : username(other.username), password(other.password)
   {
   };
 
-  QString wallet;
+  QString username;
   QString password;
 };
 

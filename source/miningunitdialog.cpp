@@ -2,7 +2,7 @@
 
 #include "../miners/common/minerinterface.h"
 
-MiningUnitDialog::MiningUnitDialog(const MinerInterface *miner, QWidget *parent) : QDialog(parent), _miner(miner), _options(MUuidPtr::createUuid()), _widgetSettings(&_options)
+MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, QWidget *parent) : QDialog(parent), _minerPlugin(minerPlugin), _options(MUuidPtr::createUuid()), _widgetSettings(&_options)
 {
   _ui.setupUi(this);
 
@@ -18,7 +18,7 @@ const MiningUnitOptions &MiningUnitDialog::options() const
 void MiningUnitDialog::setupSettings()
 {
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Address,  _ui.poolAddress);
-  _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Wallet,   _ui.poolWallet);
+  _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Username, _ui.poolUsername);
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Password, _ui.poolPassword);
 
   _widgetSettings.load();
@@ -26,12 +26,12 @@ void MiningUnitDialog::setupSettings()
 
 void MiningUnitDialog::setupWidgets() const
 {
-  _ui.name->setText(_miner->name());
+  _ui.name->setText(_minerPlugin->name());
 }
 
 void MiningUnitDialog::accept()
 {
-  _options.setMiner(_miner->name());
+  _options.setMiner(_minerPlugin->name());
 
   _widgetSettings.save();
 
