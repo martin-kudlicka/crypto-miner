@@ -56,5 +56,8 @@
     <ClInclude Include="minerworker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\common\poolcredentials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

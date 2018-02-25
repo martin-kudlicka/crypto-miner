@@ -78,7 +78,9 @@
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerinterface.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerworkerinterface.cpp" />
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerworkerinterface.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_miner-xmrstakcpu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -123,6 +125,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\common\poolcredentials.h" />
     <ClInclude Include="minerworker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
