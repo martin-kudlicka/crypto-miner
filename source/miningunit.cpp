@@ -1,6 +1,7 @@
 #include "miningunit.h"
 
 #include "minerplugins.h"
+#include "../miners/common/poolcredentials.h"
 
 MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins) : _minerPlugin(Q_NULLPTR), _options(id)
 {
@@ -18,4 +19,12 @@ MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins) : _minerP
 const MiningUnitOptions &MiningUnit::options() const
 {
   return _options;
+}
+
+void MiningUnit::start()
+{
+  _worker = _minerPlugin->createWorker();
+
+  _worker->setPoolAddress(_options.poolAddress());
+  _worker->setPoolCredentials(PoolCredentials(_options.poolWallet(), _options.poolPassword()));
 }

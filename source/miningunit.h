@@ -3,6 +3,7 @@
 
 #include <QtCore/QSharedPointer>
 #include "miningunitoptions.h"
+#include "../miners/common/minerworkerinterface.h"
 
 class MinerInterface;
 class MinerPlugins;
@@ -13,10 +14,12 @@ class MiningUnit
     MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins);
 
     const MiningUnitOptions &options() const;
+          void               start  ();
 
   private:
-    const MinerInterface    *_minerPlugin;
-          MiningUnitOptions  _options;
+    const MinerInterface          *_minerPlugin;
+          MiningUnitOptions        _options;
+          MinerWorkerInterfaceSPtr _worker;
 };
 
 using MiningUnitSPtr = QSharedPointer<MiningUnit>;
