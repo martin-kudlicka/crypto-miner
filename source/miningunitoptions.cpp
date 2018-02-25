@@ -24,6 +24,21 @@ QString MiningUnitOptions::miner() const
   return value(Property::Miner).toString();
 }
 
+QString MiningUnitOptions::poolAddress() const
+{
+  return value(Property::Pool_Address).toString();
+}
+
+QString MiningUnitOptions::poolPassword() const
+{
+  return value(Property::Pool_Password).toString();
+}
+
+QString MiningUnitOptions::poolWallet() const
+{
+  return value(Property::Pool_Wallet).toString();
+}
+
 void MiningUnitOptions::setMiner(const QString &name)
 {
   setValue(Property::Miner, name);
