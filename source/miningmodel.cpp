@@ -13,8 +13,7 @@ void MiningModel::insert(const MUuidPtr &id)
 
 MiningUnitSPtr MiningModel::miningUnit(const QModelIndex &index)
 {
-  auto id = _miningUnits.id(index.internalId());
-  return _miningUnits.get(id);
+  return _miningUnits.get(index.internalId());
 }
 
 int MiningModel::columnCount(const QModelIndex &parent /* QModelIndex() */) const
