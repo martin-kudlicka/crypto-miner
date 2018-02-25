@@ -23,7 +23,7 @@ const MiningUnitOptions &MiningUnit::options() const
 
 void MiningUnit::start()
 {
-  _worker = _minerPlugin->createWorker();
+  _worker = _minerPlugin->createWorker(_options.id());
 
   _worker->setPoolAddress(_options.poolAddress());
   _worker->setPoolCredentials(PoolCredentials(_options.poolUsername(), _options.poolPassword()));

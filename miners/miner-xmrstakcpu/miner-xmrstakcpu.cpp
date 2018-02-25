@@ -3,9 +3,9 @@
 #include <QtCore/QSharedPointer>
 #include "minerworker-xmrstakcpu.h"
 
-MinerWorkerInterfaceSPtr MinerXmrStakCpu::createWorker() const
+MinerWorkerInterfaceSPtr MinerXmrStakCpu::createWorker(const MUuidPtr &id) const
 {
-  return QSharedPointer<MinerWorkerXmrStakCpu>::create();
+  return QSharedPointer<MinerWorkerXmrStakCpu>::create(id);
 }
 
 QString MinerXmrStakCpu::name() const
