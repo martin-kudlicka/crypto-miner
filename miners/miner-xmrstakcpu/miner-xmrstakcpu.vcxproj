@@ -88,7 +88,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="miner-xmrstakcpu.cpp" />
-    <ClCompile Include="minerworker.cpp" />
+    <ClCompile Include="minerworker-xmrstakcpu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\common\minerinterface.h">
@@ -126,7 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\poolcredentials.h" />
-    <ClInclude Include="minerworker.h" />
+    <ClInclude Include="minerworker-xmrstakcpu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
