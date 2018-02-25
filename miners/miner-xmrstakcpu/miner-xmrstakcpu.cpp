@@ -1,11 +1,11 @@
 #include "miner-xmrstakcpu.h"
 
 #include <QtCore/QSharedPointer>
+#include "minerworker.h"
 
 MinerWorkerInterfaceSPtr MinerXmrStakCpu::createWorker() const
 {
-  // TODO
-  return MinerWorkerInterfaceSPtr::create();
+  return QSharedPointer<MinerWorker>::create();
 }
 
 QString MinerXmrStakCpu::name() const
