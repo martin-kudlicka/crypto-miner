@@ -7,7 +7,7 @@
 class MinerWorkerXmrStakCpu : public MinerWorkerInterface
 {
   public:
-             MinerWorkerXmrStakCpu(const MUuidPtr &id);
+             MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId);
     virtual ~MinerWorkerXmrStakCpu() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
