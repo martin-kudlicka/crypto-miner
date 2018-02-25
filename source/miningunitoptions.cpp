@@ -6,7 +6,7 @@ Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Miner = "miner";
 
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Address  = "pool/address";
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Password = "pool/password";
-Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Wallet   = "pool/wallet";
+Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Username = "pool/username";
 
 MiningUnitOptions::MiningUnitOptions(const MUuidPtr &id) : _id(id)
 {
@@ -34,9 +34,9 @@ QString MiningUnitOptions::poolPassword() const
   return value(Property::Pool_Password).toString();
 }
 
-QString MiningUnitOptions::poolWallet() const
+QString MiningUnitOptions::poolUsername() const
 {
-  return value(Property::Pool_Wallet).toString();
+  return value(Property::Pool_Username).toString();
 }
 
 void MiningUnitOptions::setMiner(const QString &name)

@@ -26,5 +26,5 @@ void MiningUnit::start()
   _worker = _minerPlugin->createWorker();
 
   _worker->setPoolAddress(_options.poolAddress());
-  _worker->setPoolCredentials(PoolCredentials(_options.poolWallet(), _options.poolPassword()));
+  _worker->setPoolCredentials(PoolCredentials(_options.poolUsername(), _options.poolPassword()));
 }

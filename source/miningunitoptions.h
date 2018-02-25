@@ -12,7 +12,7 @@ class MiningUnitOptions : public MSettings
       static Q_DECL_CONSTEXPR QString Miner;
       static Q_DECL_CONSTEXPR QString Pool_Address;
       static Q_DECL_CONSTEXPR QString Pool_Password;
-      static Q_DECL_CONSTEXPR QString Pool_Wallet;
+      static Q_DECL_CONSTEXPR QString Pool_Username;
     };
 
              MiningUnitOptions(const MUuidPtr &id);
@@ -22,7 +22,7 @@ class MiningUnitOptions : public MSettings
           QString   miner       () const;
           QString   poolAddress () const;
           QString   poolPassword() const;
-          QString   poolWallet  () const;
+          QString   poolUsername() const;
           void      setMiner    (const QString &name);
 
   private:

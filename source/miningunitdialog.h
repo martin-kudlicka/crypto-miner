@@ -10,16 +10,16 @@ class MinerInterface;
 class MiningUnitDialog : public QDialog
 {
   public:
-             MiningUnitDialog(const MinerInterface *miner, QWidget *parent);
+             MiningUnitDialog(const MinerInterface *minerPlugin, QWidget *parent);
     virtual ~MiningUnitDialog() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
     const MiningUnitOptions &options() const;
 
   private:
-    const MinerInterface *_miner;
-    Ui::MiningUnitDialog  _ui;
-    MiningUnitOptions     _options;
-    MWidgetSettings       _widgetSettings;
+    const MinerInterface       *_minerPlugin;
+          Ui::MiningUnitDialog  _ui;
+          MiningUnitOptions     _options;
+          MWidgetSettings       _widgetSettings;
 
     void setupSettings();
     void setupWidgets () const;
