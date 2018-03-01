@@ -2,7 +2,7 @@
 
 #include <QtCore/QStandardPaths>
 #include <QtCore/QDir>
-#include <MkCore/MModuleInfo>
+#include <MkLib/MModuleInfo>
 
 MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 {
