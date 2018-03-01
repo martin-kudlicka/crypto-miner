@@ -4,21 +4,42 @@
 #include <QtCore/QDir>
 #include <MkLib/MModuleInfo>
 #include <QtCore/QTextStream>
+#include <QtCore/QThread>
 
 MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 {
   _miningUnitId = miningUnitId;
 }
 
+void MinerWorkerXmrStakCpu::modifyConfig(QString *config) const
+{
+  QString cpuThreadsConf = "\"cpu_threads_conf\" :\n[";
+  for (auto cpu = 0; cpu < QThread::idealThreadCount(); cpu++)
+  {
+    cpuThreadsConf += QString("\n     { \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %1 },").arg(cpu);
+  }
+  cpuThreadsConf    += "\n],";
+  auto poolAddress   = R"("pool_address" : ")" + _poolAddress + "\",";
+  auto walletAddress = R"("wallet_address" : ")" + _poolCredentials.username + "\",";
+  auto poolPassword  = R"("pool_password" : ")" + _poolCredentials.password + "\",";
+  auto verboseLevel  = R"("verbose_level" : 4,)";
+
+  config->replace("\"cpu_threads_conf\" : \nnull,",                 cpuThreadsConf);
+  config->replace(R"("pool_address" : "pool.usxmrpool.com:3333",)", poolAddress);
+  config->replace(R"("wallet_address" : "",)",                      walletAddress);
+  config->replace(R"("pool_password" : "",)",                       poolPassword);
+  config->replace(R"("verbose_level" : 3,)",                        verboseLevel);
+}
+
 QString MinerWorkerXmrStakCpu::prepareConfigFile() const
 {
-  auto vanillaConfig = readVanillaConfig();
+  auto config = readVanillaConfig();
 
-  // TODO
+  modifyConfig(&config);
 
-  writeWorkerConfig(vanillaConfig);
+  auto filePath = writeWorkerConfig(config);
 
-  return vanillaConfig;
+  return filePath;
 }
 
 QString MinerWorkerXmrStakCpu::readVanillaConfig() const
@@ -42,7 +63,7 @@ QString MinerWorkerXmrStakCpu::readVanillaConfig() const
   return configStream.readAll();
 }
 
-void MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
+QString MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
 {
   auto moduleFileInfo = MModuleInfo().fileInfo();
   auto moduleBaseName = moduleFileInfo.baseName();
@@ -64,6 +85,8 @@ void MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
   configFile.open(QIODevice::WriteOnly | QIODevice::Text);
   QTextStream configStream(&configFile);
   configStream << config;
+
+  return configFilePath;
 }
 
 void MinerWorkerXmrStakCpu::setPoolAddress(const QString &address)
