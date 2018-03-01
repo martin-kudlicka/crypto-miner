@@ -11,7 +11,9 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
     virtual ~MinerWorkerXmrStakCpu() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
-    QString prepareConfigFile() const;
+    QString prepareConfigFile()                      const;
+    QString readVanillaConfig()                      const;
+    void    writeWorkerConfig(const QString &config) const;
 
     virtual void setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
     virtual void setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;

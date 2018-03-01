@@ -3,6 +3,7 @@
 #include <QtCore/QStandardPaths>
 #include <QtCore/QDir>
 #include <MkLib/MModuleInfo>
+#include <QtCore/QTextStream>
 
 MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 {
@@ -11,33 +12,58 @@ MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 
 QString MinerWorkerXmrStakCpu::prepareConfigFile() const
 {
+  auto vanillaConfig = readVanillaConfig();
+
+  // TODO
+
+  writeWorkerConfig(vanillaConfig);
+
+  return vanillaConfig;
+}
+
+QString MinerWorkerXmrStakCpu::readVanillaConfig() const
+{
   auto moduleFileInfo = MModuleInfo().fileInfo();
   auto moduleBaseName = moduleFileInfo.baseName();
   auto dashPos        = moduleBaseName.indexOf('-');
 
-  auto vanillaConfigFilePath = moduleFileInfo.path();
-  vanillaConfigFilePath.append(QDir::separator());
-  vanillaConfigFilePath.append("miners");
-  vanillaConfigFilePath.append(QDir::separator());
-  vanillaConfigFilePath.append(moduleBaseName.mid(dashPos + 1));
-  vanillaConfigFilePath.append(QDir::separator());
-  vanillaConfigFilePath.append("config.txt");
+  auto configFilePath = moduleFileInfo.path();
+  configFilePath.append(QDir::separator());
+  configFilePath.append("miners");
+  configFilePath.append(QDir::separator());
+  configFilePath.append(moduleBaseName.mid(dashPos + 1));
+  configFilePath.append(QDir::separator());
+  configFilePath.append("config.txt");
 
-  auto workerConfigFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-  workerConfigFilePath.append(QDir::separator());
-  workerConfigFilePath.append("miners");
-  workerConfigFilePath.append(QDir::separator());
-  workerConfigFilePath.append(moduleBaseName.mid(dashPos + 1));
+  QFile configFile(configFilePath);
+  configFile.open(QIODevice::ReadOnly | QIODevice::Text);
+  QTextStream configStream(&configFile);
 
-  QDir().mkpath(workerConfigFilePath);
+  return configStream.readAll();
+}
 
-  workerConfigFilePath.append(QDir::separator());
-  workerConfigFilePath.append(_miningUnitId.toString());
-  workerConfigFilePath.append(".txt");
+void MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
+{
+  auto moduleFileInfo = MModuleInfo().fileInfo();
+  auto moduleBaseName = moduleFileInfo.baseName();
+  auto dashPos        = moduleBaseName.indexOf('-');
 
-  // TODO
+  auto configFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+  configFilePath.append(QDir::separator());
+  configFilePath.append("miners");
+  configFilePath.append(QDir::separator());
+  configFilePath.append(moduleBaseName.mid(dashPos + 1));
 
-  return workerConfigFilePath;
+  QDir().mkpath(configFilePath);
+
+  configFilePath.append(QDir::separator());
+  configFilePath.append(_miningUnitId.toString());
+  configFilePath.append(".txt");
+
+  QFile configFile(configFilePath);
+  configFile.open(QIODevice::WriteOnly | QIODevice::Text);
+  QTextStream configStream(&configFile);
+  configStream << config;
 }
 
 void MinerWorkerXmrStakCpu::setPoolAddress(const QString &address)
