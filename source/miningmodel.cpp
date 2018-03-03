@@ -34,6 +34,8 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
   {
     case Column::Miner:
       return miningUnit->options().miner();
+    case Column::SessionResuts:
+      return miningUnit->sessionStatistics().results;
     case Column::TotalResults:
       return miningUnit->options().acceptedResults();
   }
