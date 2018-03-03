@@ -34,20 +34,11 @@
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_miner-xmrstakcpu.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerworkerinterface.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="minerworker-xmrstakcpu.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
     <ClCompile Include="log.cpp">
       <Filter>Source FIles</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerworker-xmrstakcpu.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_minerworker-xmrstakcpu.cpp">
-      <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

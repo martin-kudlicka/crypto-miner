@@ -31,17 +31,10 @@ void MiningUnit::start()
   _worker->setPoolAddress(_options.poolAddress());
   _worker->setPoolCredentials(PoolCredentials(_options.poolUsername(), _options.poolPassword()));
 
-  connect(&*_worker, SIGNAL(finished()), SLOT(on_woker_finished()));
-
   _worker->start();
 }
 
 void MiningUnit::stop()
-{
-  _worker->stop();
-}
-
-void MiningUnit::on_woker_finished()
 {
   _worker.clear();
 
