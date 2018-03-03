@@ -13,17 +13,26 @@ class MiningUnit : public QObject
   Q_OBJECT
 
   public:
+    struct Statistics
+    {
+      quintptr results;
+
+      Statistics();
+    };
+
              MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins);
     virtual ~MiningUnit() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-    const MiningUnitOptions &options() const;
-          void               start  ();
-          void               stop   ();
+    const MiningUnitOptions &options          () const;
+    const Statistics        &sessionStatistics() const;
+          void               start            ();
+          void               stop             ();
 
   private:
     const MinerInterface          *_minerPlugin;
           MiningUnitOptions        _options;
           MinerWorkerInterfaceSPtr _worker;
+          Statistics               _sessionStatistics;
 
   private Q_SLOTS:
     void on_worker_resultAccepted();

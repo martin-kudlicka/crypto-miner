@@ -22,6 +22,11 @@ const MiningUnitOptions &MiningUnit::options() const
   return _options;
 }
 
+const MiningUnit::Statistics &MiningUnit::sessionStatistics() const
+{
+  return _sessionStatistics;
+}
+
 void MiningUnit::start()
 {
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " started";
@@ -45,5 +50,11 @@ void MiningUnit::stop()
 
 void MiningUnit::on_worker_resultAccepted()
 {
+  ++_sessionStatistics.results;
+
   _options.setAcceptedResults(_options.acceptedResults() + 1);
+}
+
+MiningUnit::Statistics::Statistics() : results(0)
+{
 }
