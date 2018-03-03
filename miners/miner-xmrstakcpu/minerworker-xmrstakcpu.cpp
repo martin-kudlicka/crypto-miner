@@ -5,6 +5,7 @@
 #include <MkLib/MModuleInfo>
 #include <QtCore/QTextStream>
 #include <QtCore/QThread>
+#include "log.h"
 
 MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 {
@@ -111,4 +112,6 @@ void MinerWorkerXmrStakCpu::start()
 
   _minerProcess.setArguments(QStringList() << configFilePath);
   _minerProcess.start();
+
+  mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " started";
 }

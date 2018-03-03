@@ -40,6 +40,9 @@
     <ClCompile Include="minerworker-xmrstakcpu.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
+    <ClCompile Include="log.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="miner-xmrstakcpu.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="minerworker-xmrstakcpu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
