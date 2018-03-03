@@ -8,10 +8,13 @@
 class MinerInterface;
 class MinerPlugins;
 
-class MiningUnit
+class MiningUnit : public QObject
 {
+  Q_OBJECT
+
   public:
-    MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins);
+             MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins);
+    virtual ~MiningUnit() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
     const MiningUnitOptions &options() const;
           void               start  ();
@@ -21,6 +24,9 @@ class MiningUnit
     const MinerInterface          *_minerPlugin;
           MiningUnitOptions        _options;
           MinerWorkerInterfaceSPtr _worker;
+
+  private Q_SLOTS:
+    void on_worker_resultAccepted();
 };
 
 using MiningUnitSPtr = QSharedPointer<MiningUnit>;

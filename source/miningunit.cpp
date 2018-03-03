@@ -31,6 +31,8 @@ void MiningUnit::start()
   _worker->setPoolAddress(_options.poolAddress());
   _worker->setPoolCredentials(PoolCredentials(_options.poolUsername(), _options.poolPassword()));
 
+  connect(&*_worker, SIGNAL(resultAccepted()), SLOT(on_worker_resultAccepted()));
+
   _worker->start();
 }
 
@@ -39,4 +41,9 @@ void MiningUnit::stop()
   _worker.clear();
 
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
+}
+
+void MiningUnit::on_worker_resultAccepted()
+{
+  _options.setAcceptedResults(_options.acceptedResults() + 1);
 }

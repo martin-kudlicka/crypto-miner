@@ -13,17 +13,20 @@ class MiningUnitOptions : public MSettings
       static Q_DECL_CONSTEXPR QString Pool_Address;
       static Q_DECL_CONSTEXPR QString Pool_Password;
       static Q_DECL_CONSTEXPR QString Pool_Username;
+      static Q_DECL_CONSTEXPR QString Statistics_AcceptedResults;
     };
 
              MiningUnitOptions(const MUuidPtr &id);
     virtual ~MiningUnitOptions() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-    const MUuidPtr &id          () const;
-          QString   miner       () const;
-          QString   poolAddress () const;
-          QString   poolPassword() const;
-          QString   poolUsername() const;
-          void      setMiner    (const QString &name);
+          quintptr  acceptedResults   () const;
+    const MUuidPtr &id                () const;
+          QString   miner             () const;
+          QString   poolAddress       () const;
+          QString   poolPassword      () const;
+          QString   poolUsername      () const;
+          void      setAcceptedResults(quintptr count);
+          void      setMiner          (const QString &name);
 
   private:
     MUuidPtr _id;
