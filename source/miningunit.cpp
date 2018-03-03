@@ -33,3 +33,10 @@ void MiningUnit::start()
 
   _worker->start();
 }
+
+void MiningUnit::stop()
+{
+  _worker.clear();
+
+  mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
+}

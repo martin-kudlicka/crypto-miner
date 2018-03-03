@@ -49,14 +49,30 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>40</y>
+      <x>340</x>
+      <y>100</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
      <string>&amp;Start</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="miningUnitStop">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>140</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>S&amp;top</string>
     </property>
    </widget>
   </widget>

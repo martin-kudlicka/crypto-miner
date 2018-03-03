@@ -15,6 +15,7 @@ class MiningUnit
 
     const MiningUnitOptions &options() const;
           void               start  ();
+          void               stop   ();
 
   private:
     const MinerInterface          *_minerPlugin;
