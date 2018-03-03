@@ -23,6 +23,8 @@ MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 
   _minerProcess.setProgram(_vanillaDir.path() + QDir::separator() + "xmr-stak-cpu-notls.exe");
   _minerProcess.setWorkingDirectory(_vanillaDir.path());
+
+  connect(&_minerProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerXmrStakCpu::on_minerProcess_finished);
 }
 
 MinerWorkerXmrStakCpu::~MinerWorkerXmrStakCpu()
@@ -78,13 +80,6 @@ QString MinerWorkerXmrStakCpu::readVanillaConfig() const
   return configStream.readAll();
 }
 
-void MinerWorkerXmrStakCpu::stop()
-{
-  _minerProcess.terminate();
-
-  mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
-}
-
 QString MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
 {
   auto moduleBaseName = _fileInfo.baseName();
@@ -129,4 +124,16 @@ void MinerWorkerXmrStakCpu::start()
   _minerProcess.start();
 
   mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " started";
+}
+
+void MinerWorkerXmrStakCpu::stop()
+{
+  _minerProcess.terminate();
+}
+
+void MinerWorkerXmrStakCpu::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
+{
+  mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
+
+  emit finished();
 }
