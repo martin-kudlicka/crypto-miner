@@ -86,6 +86,7 @@
     <ClCompile Include="..\..\..\intermediate\cryptominer\Release\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
     <ClCompile Include="minerplugins.cpp" />
@@ -134,6 +135,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_mainwindow.h" />
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_miningunitdialog.h" />
+    <ClInclude Include="log.h" />
     <ClInclude Include="minerplugins.h" />
     <ClInclude Include="miningmodel.h" />
     <ClInclude Include="miningunit.h" />

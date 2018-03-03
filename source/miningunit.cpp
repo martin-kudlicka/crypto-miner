@@ -2,6 +2,7 @@
 
 #include "minerplugins.h"
 #include "../miners/common/poolcredentials.h"
+#include "log.h"
 
 MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins) : _minerPlugin(Q_NULLPTR), _options(id)
 {
@@ -23,8 +24,12 @@ const MiningUnitOptions &MiningUnit::options() const
 
 void MiningUnit::start()
 {
+  mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " started";
+
   _worker = _minerPlugin->createWorker(_options.id());
 
   _worker->setPoolAddress(_options.poolAddress());
   _worker->setPoolCredentials(PoolCredentials(_options.poolUsername(), _options.poolPassword()));
+
+  _worker->start();
 }
