@@ -8,10 +8,17 @@ Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Address  = "pool/addr
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Password = "pool/password";
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Username = "pool/username";
 
+Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Statistics_AcceptedResults = "statistics/acceptedResults";
+
 MiningUnitOptions::MiningUnitOptions(const MUuidPtr &id) : _id(id)
 {
   beginGroup(MiningUnits::Property::Group);
   beginGroup(id.toString());
+}
+
+quintptr MiningUnitOptions::acceptedResults() const
+{
+  return value(Property::Statistics_AcceptedResults).toUInt();
 }
 
 const MUuidPtr &MiningUnitOptions::id() const
@@ -37,6 +44,11 @@ QString MiningUnitOptions::poolPassword() const
 QString MiningUnitOptions::poolUsername() const
 {
   return value(Property::Pool_Username).toString();
+}
+
+void MiningUnitOptions::setAcceptedResults(quintptr count)
+{
+  setValue(Property::Statistics_AcceptedResults, count);
 }
 
 void MiningUnitOptions::setMiner(const QString &name)
