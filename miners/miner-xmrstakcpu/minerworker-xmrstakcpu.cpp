@@ -155,6 +155,11 @@ void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
       else
       {
         mCInfo(XmrStakCpu) << message;
+
+        if (message.contains("accepted"))
+        {
+          emit resultAccepted();
+        }
       }
     }
 
