@@ -9,6 +9,8 @@
 
 class MinerWorkerXmrStakCpu : public MinerWorkerInterface
 {
+  Q_OBJECT
+
   public:
              MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId);
     virtual ~MinerWorkerXmrStakCpu() Q_DECL_OVERRIDE;
@@ -17,12 +19,12 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
     void    modifyConfig     (QString *config)       const;
     QString prepareConfigFile()                      const;
     QString readVanillaConfig()                      const;
-    void    stop             ();
     QString writeWorkerConfig(const QString &config) const;
 
     virtual void setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
     virtual void setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;
     virtual void start             ()                                   Q_DECL_OVERRIDE;
+    virtual void stop              ()                                   Q_DECL_OVERRIDE;
 
     PoolCredentials _poolCredentials;
     QDir            _vanillaDir;
@@ -30,6 +32,9 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
     QProcess        _minerProcess;
     QString         _minerName;
     QString         _poolAddress;
+
+    private Q_SLOTS:
+      void on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const;
 };
 
 #endif
