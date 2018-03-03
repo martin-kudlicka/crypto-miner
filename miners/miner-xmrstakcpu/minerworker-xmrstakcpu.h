@@ -6,20 +6,25 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtCore/QProcess>
+#include <QtCore/QTextStream>
 
 class MinerWorkerXmrStakCpu : public MinerWorkerInterface
 {
+  Q_OBJECT
+
   public:
              MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId);
     virtual ~MinerWorkerXmrStakCpu() Q_DECL_OVERRIDE;
 
   private:
     PoolCredentials _poolCredentials;
-    QDir            _vanillaDir;
+    QDir            _minerDir;
     QFileInfo       _fileInfo;
     QProcess        _minerProcess;
     QString         _minerName;
     QString         _poolAddress;
+    QString         _stdOutLastLine;
+    QTextStream     _stdOutStream;
 
     void    modifyConfig     (QString *config)       const;
     QString prepareConfigFile()                      const;
@@ -29,6 +34,9 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
     virtual void setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
     virtual void setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;
     virtual void start             ()                                   Q_DECL_OVERRIDE;
+
+  private Q_SLOTS:
+    void on_minerProcess_readyReadStandardOutput();
 };
 
 #endif

@@ -80,10 +80,22 @@
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerinterface.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerworker-xmrstakcpu.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerworkerinterface.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_miner-xmrstakcpu.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_minerinterface.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_minerworker-xmrstakcpu.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_minerworkerinterface.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="log.cpp" />
@@ -114,36 +126,28 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="..\common\minerworkerinterface.h">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_CORE_LIB -DMINERXMRSTAKCPU_LIB -DBUILD_STATIC -DWINVER=0x0600 -D_WIN32_WINNT=0x0600 -DPSAPI_VERSION=1 -D_user_mode_=1 -D_WINDLL "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCore" "-I.\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\."</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DMINERXMRSTAKCPU_LIB -DBUILD_STATIC -DWINVER=0x0600 -D_WIN32_WINNT=0x0600 -DPSAPI_VERSION=1 -D_user_mode_=1 -D_WINDLL "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCore" "-I.\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\."</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\poolcredentials.h" />
     <ClInclude Include="log.h" />
     <CustomBuild Include="minerworker-xmrstakcpu.h">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_CORE_LIB -DMINERXMRSTAKCPU_LIB -DBUILD_STATIC -DWINVER=0x0600 -D_WIN32_WINNT=0x0600 -DPSAPI_VERSION=1 -D_user_mode_=1 -D_WINDLL "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCore" "-I.\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\."</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DMINERXMRSTAKCPU_LIB -DBUILD_STATIC -DWINVER=0x0600 -D_WIN32_WINNT=0x0600 -DPSAPI_VERSION=1 -D_user_mode_=1 -D_WINDLL "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCore" "-I.\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\."</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
