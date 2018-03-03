@@ -25,6 +25,14 @@ MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
   _minerProcess.setWorkingDirectory(_vanillaDir.path());
 }
 
+MinerWorkerXmrStakCpu::~MinerWorkerXmrStakCpu()
+{
+  if (_minerProcess.state() != QProcess::NotRunning)
+  {
+    stop();
+  }
+}
+
 void MinerWorkerXmrStakCpu::modifyConfig(QString *config) const
 {
   QString cpuThreadsConf = "\"cpu_threads_conf\" :\n[";
@@ -68,6 +76,13 @@ QString MinerWorkerXmrStakCpu::readVanillaConfig() const
 
   QTextStream configStream(&configFile);
   return configStream.readAll();
+}
+
+void MinerWorkerXmrStakCpu::stop()
+{
+  _minerProcess.terminate();
+
+  mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
 }
 
 QString MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const

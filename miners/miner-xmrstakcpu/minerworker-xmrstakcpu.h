@@ -11,12 +11,13 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
 {
   public:
              MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId);
-    virtual ~MinerWorkerXmrStakCpu() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
+    virtual ~MinerWorkerXmrStakCpu() Q_DECL_OVERRIDE;
 
   private:
     void    modifyConfig     (QString *config)       const;
     QString prepareConfigFile()                      const;
     QString readVanillaConfig()                      const;
+    void    stop             ();
     QString writeWorkerConfig(const QString &config) const;
 
     virtual void setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
