@@ -19,6 +19,9 @@ class MinerWorkerInterface : public QObject
     virtual ~MinerWorkerInterface() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
     MUuidPtr _miningUnitId;
+
+  Q_SIGNALS:
+    void resultAccepted() const;
 };
 
 using MinerWorkerInterfaceSPtr = QSharedPointer<MinerWorkerInterface>;
