@@ -1,9 +1,7 @@
 #include "minerworker-xmrstakcpu.h"
 
 #include <QtCore/QStandardPaths>
-#include <QtCore/QDir>
 #include <MkLib/MModuleInfo>
-#include <QtCore/QTextStream>
 #include <QtCore/QThread>
 #include "log.h"
 
@@ -17,12 +15,12 @@ MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
   auto dashPos  = baseName.indexOf('-');
   _minerName    = baseName.mid(dashPos + 1);
 
-  _vanillaDir.setPath(_fileInfo.path());
-  _vanillaDir.cd("miners");
-  _vanillaDir.cd(_minerName);
+  _minerDir.setPath(_fileInfo.path());
+  _minerDir.cd("miners");
+  _minerDir.cd(_minerName);
 
-  _minerProcess.setProgram(_vanillaDir.path() + QDir::separator() + "xmr-stak-cpu-notls.exe");
-  _minerProcess.setWorkingDirectory(_vanillaDir.path());
+  _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "xmr-stak-cpu-notls.exe");
+  _minerProcess.setWorkingDirectory(_minerDir.path());
 }
 
 MinerWorkerXmrStakCpu::~MinerWorkerXmrStakCpu()
@@ -71,7 +69,7 @@ QString MinerWorkerXmrStakCpu::prepareConfigFile() const
 
 QString MinerWorkerXmrStakCpu::readVanillaConfig() const
 {
-  auto configFileInfo = QFileInfo(_vanillaDir, "config.txt");
+  auto configFileInfo = QFileInfo(_minerDir, "config.txt");
 
   QFile configFile(configFileInfo.filePath());
   configFile.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -121,7 +119,45 @@ void MinerWorkerXmrStakCpu::start()
   auto configFilePath = prepareConfigFile();
   _minerProcess.setArguments(QStringList() << configFilePath);
 
+  _stdOutStream.setDevice(&_minerProcess);
+
+  connect(&_minerProcess, &QProcess::readyReadStandardOutput, this, &MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput);
+
   _minerProcess.start(QIODevice::ReadOnly);
 
   mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " started";
+}
+
+void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
+{
+  forever
+  {
+    _stdOutLastLine += _stdOutStream.readLine();
+    if (_stdOutStream.atEnd())
+    {
+      break;
+    }
+
+    if (_stdOutLastLine.startsWith('['))
+    {
+      auto message    = _miningUnitId.toString() + ": ";
+      auto messagePos = _stdOutLastLine.indexOf(": ");
+      message.append(_stdOutLastLine.mid(messagePos + 2));
+
+      if (message.contains("ERROR") || message.contains("FAILED"))
+      {
+        mCCritical(XmrStakCpu) << message;
+      }
+      else if (message.contains("lost"))
+      {
+        mCWarning(XmrStakCpu) << message;
+      }
+      else
+      {
+        mCInfo(XmrStakCpu) << message;
+      }
+    }
+
+    _stdOutLastLine.clear();
+  }
 }
