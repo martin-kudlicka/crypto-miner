@@ -17,6 +17,7 @@ class MiningModel : public QAbstractItemModel
     enum class Column
     {
       Miner,
+      TotalResults,
       Count
     };
 
