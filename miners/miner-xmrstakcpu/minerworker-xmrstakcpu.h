@@ -3,6 +3,9 @@
 
 #include "../common/minerworkerinterface.h"
 #include "../common/poolcredentials.h"
+#include <QtCore/QFileInfo>
+#include <QtCore/QDir>
+#include <QtCore/QProcess>
 
 class MinerWorkerXmrStakCpu : public MinerWorkerInterface
 {
@@ -21,6 +24,10 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
     virtual void start             ()                                   Q_DECL_OVERRIDE;
 
     PoolCredentials _poolCredentials;
+    QDir            _vanillaDir;
+    QFileInfo       _fileInfo;
+    QProcess        _minerProcess;
+    QString         _minerName;
     QString         _poolAddress;
 };
 

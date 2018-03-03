@@ -9,6 +9,19 @@
 MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 {
   _miningUnitId = miningUnitId;
+
+  _fileInfo     = MModuleInfo().fileInfo();
+
+  auto baseName = _fileInfo.baseName();
+  auto dashPos  = baseName.indexOf('-');
+  _minerName    = baseName.mid(dashPos + 1);
+
+  _vanillaDir.setPath(_fileInfo.path());
+  _vanillaDir.cd("miners");
+  _vanillaDir.cd(_minerName);
+
+  _minerProcess.setProgram(_vanillaDir.path() + QDir::separator() + "xmr-stak-cpu-notls.exe");
+  _minerProcess.setWorkingDirectory(_vanillaDir.path());
 }
 
 void MinerWorkerXmrStakCpu::modifyConfig(QString *config) const
@@ -17,11 +30,14 @@ void MinerWorkerXmrStakCpu::modifyConfig(QString *config) const
   for (auto cpu = 0; cpu < QThread::idealThreadCount(); cpu++)
   {
     cpuThreadsConf += QString("\n     { \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %1 },").arg(cpu);
+#ifdef _DEBUG
+    break;
+#endif
   }
   cpuThreadsConf    += "\n],";
-  auto poolAddress   = R"("pool_address" : ")" + _poolAddress + "\",";
+  auto poolAddress   = R"("pool_address" : ")"   + _poolAddress              + "\",";
   auto walletAddress = R"("wallet_address" : ")" + _poolCredentials.username + "\",";
-  auto poolPassword  = R"("pool_password" : ")" + _poolCredentials.password + "\",";
+  auto poolPassword  = R"("pool_password" : ")"  + _poolCredentials.password + "\",";
   auto verboseLevel  = R"("verbose_level" : 4,)";
 
   config->replace("\"cpu_threads_conf\" : \nnull,",                 cpuThreadsConf);
@@ -44,29 +60,18 @@ QString MinerWorkerXmrStakCpu::prepareConfigFile() const
 
 QString MinerWorkerXmrStakCpu::readVanillaConfig() const
 {
-  auto moduleFileInfo = MModuleInfo().fileInfo();
-  auto moduleBaseName = moduleFileInfo.baseName();
-  auto dashPos        = moduleBaseName.indexOf('-');
+  auto configFileInfo = QFileInfo(_vanillaDir, "config.txt");
 
-  auto configFilePath = moduleFileInfo.path();
-  configFilePath.append(QDir::separator());
-  configFilePath.append("miners");
-  configFilePath.append(QDir::separator());
-  configFilePath.append(moduleBaseName.mid(dashPos + 1));
-  configFilePath.append(QDir::separator());
-  configFilePath.append("config.txt");
-
-  QFile configFile(configFilePath);
+  QFile configFile(configFileInfo.filePath());
   configFile.open(QIODevice::ReadOnly | QIODevice::Text);
-  QTextStream configStream(&configFile);
 
+  QTextStream configStream(&configFile);
   return configStream.readAll();
 }
 
 QString MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
 {
-  auto moduleFileInfo = MModuleInfo().fileInfo();
-  auto moduleBaseName = moduleFileInfo.baseName();
+  auto moduleBaseName = _fileInfo.baseName();
   auto dashPos        = moduleBaseName.indexOf('-');
 
   auto configFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
@@ -83,6 +88,7 @@ QString MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
 
   QFile configFile(configFilePath);
   configFile.open(QIODevice::WriteOnly | QIODevice::Text);
+
   QTextStream configStream(&configFile);
   configStream << config;
 
@@ -103,5 +109,6 @@ void MinerWorkerXmrStakCpu::start()
 {
   auto configFilePath = prepareConfigFile();
 
-  // TODO
+  _minerProcess.setArguments(QStringList() << configFilePath);
+  _minerProcess.start();
 }
