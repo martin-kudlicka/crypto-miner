@@ -2,7 +2,7 @@
 
 Q_DECL_CONSTEXPR QString MiningUnits::Property::Group = "miningUnits";
 
-MiningUnits::MiningUnits(MinerPlugins *minerPlugins) : _minerPlugins(minerPlugins)
+MiningUnits::MiningUnits(MinerPlugins *minerPlugins, MiningModel *miningModel) : _minerPlugins(minerPlugins), _miningModel(miningModel)
 {
   _settings.beginGroup(Property::Group);
 }
@@ -19,7 +19,7 @@ const MiningUnitSPtr &MiningUnits::get(const MUuidPtr &id)
     return _miningUnits[id];
   }
 
-  auto rule = _miningUnits.insert(id, MiningUnitSPtr(new MiningUnit(id, _minerPlugins)));
+  auto rule = _miningUnits.insert(id, MiningUnitSPtr(new MiningUnit(id, _minerPlugins, _miningModel)));
 
   return *rule;
 }

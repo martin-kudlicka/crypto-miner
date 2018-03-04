@@ -7,21 +7,22 @@
 class MiningModel : public QAbstractItemModel
 {
   public:
-             MiningModel(MinerPlugins *minerPlugins);
-    virtual ~MiningModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
-
-    void           insert    (const MUuidPtr &id);
-    MiningUnitSPtr miningUnit(const QModelIndex &index);
-
-  private:
     enum class Column
     {
       Miner,
-      SessionResuts,
-      TotalResults,
+      HashRate,
+      Results,
       Count
     };
 
+             MiningModel(MinerPlugins *minerPlugins);
+    virtual ~MiningModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
+
+    void           insert        (const MUuidPtr &id);
+    MiningUnitSPtr miningUnit    (const QModelIndex &index);
+    void           setDataChanged(const MUuidPtr &id, Column column);
+
+  private:
     MiningUnits _miningUnits;
 
     virtual int         columnCount(const QModelIndex &parent = QModelIndex())                      const Q_DECL_OVERRIDE;
