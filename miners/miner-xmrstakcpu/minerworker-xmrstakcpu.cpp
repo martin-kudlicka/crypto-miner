@@ -29,8 +29,6 @@ MinerWorkerXmrStakCpu::~MinerWorkerXmrStakCpu()
   if (_minerProcess.state() != QProcess::NotRunning)
   {
     _minerProcess.kill();
-
-    mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
   }
 }
 
@@ -40,6 +38,12 @@ void MinerWorkerXmrStakCpu::modifyConfig(QString *config) const
   for (auto cpu = 0; cpu < QThread::idealThreadCount(); ++cpu)
   {
     cpuThreadsConf += QString("\n     { \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %1 },").arg(cpu);
+#ifdef _DEBUG
+    if (QThread::idealThreadCount() < 2 || cpu == QThread::idealThreadCount() - 2)
+    {
+      break;
+    }
+#endif
   }
   cpuThreadsConf += "\n],";
 
@@ -116,11 +120,19 @@ void MinerWorkerXmrStakCpu::start()
 
   _stdOutStream.setDevice(&_minerProcess);
 
-  connect(&_minerProcess, &QProcess::readyReadStandardOutput, this, &MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput);
+  connect(&_minerProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerXmrStakCpu::on_minerProcess_finished);
+  connect(&_minerProcess, &QProcess::readyReadStandardOutput,                            this, &MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput);
 
   _minerProcess.start(QIODevice::ReadOnly);
 
   mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " started";
+}
+
+void MinerWorkerXmrStakCpu::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
+{
+  mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
+
+  emit finished();
 }
 
 void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
