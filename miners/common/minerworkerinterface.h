@@ -21,7 +21,8 @@ class MinerWorkerInterface : public QObject
     MUuidPtr _miningUnitId;
 
   Q_SIGNALS:
-    void resultAccepted() const;
+    void hashRate      (float value) const;
+    void resultAccepted()            const;
 };
 
 using MinerWorkerInterfaceSPtr = QSharedPointer<MinerWorkerInterface>;
