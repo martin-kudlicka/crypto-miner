@@ -23,8 +23,8 @@ class MiningUnits
   private:
     MinerPlugins                   *_minerPlugins;
     MiningModel                    *_miningModel;
-    QHash<MUuidPtr, MiningUnitSPtr> _miningUnits;
     QSettings                       _settings;
+    QHash<MUuidPtr, MiningUnitSPtr> _miningUnits;
 };
 
 #endif
