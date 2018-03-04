@@ -46,10 +46,20 @@ void MainWindow::on_miningUnitStop_clicked(bool checked /* false */)
   miningUnit->stop();
 }
 
-void MainWindow::on_miningView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) const
+void MainWindow::on_miningView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
   auto isSelected = !_ui.miningView->selectionModel()->selectedRows().isEmpty();
+  if (isSelected)
+  {
+    auto index      = _ui.miningView->currentIndex();
+    auto miningUnit = _miningModel.miningUnit(index);
 
-  _ui.miningUnitStart->setEnabled(isSelected);
-  _ui.miningUnitStop->setEnabled(isSelected);
+    _ui.miningUnitStart->setEnabled(!miningUnit->isRunning());
+    _ui.miningUnitStop->setEnabled(miningUnit->isRunning());
+  }
+  else
+  {
+    _ui.miningUnitStart->setEnabled(false);
+    _ui.miningUnitStop->setEnabled(false);
+  }
 }

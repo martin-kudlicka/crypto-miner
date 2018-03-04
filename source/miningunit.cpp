@@ -18,6 +18,11 @@ MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins, MiningMod
   Q_ASSERT_X(_minerPlugin, "MiningUnit::MiningUnit", "_minerPlugin");
 }
 
+bool MiningUnit::isRunning() const
+{
+  return _worker;
+}
+
 const MiningUnitOptions &MiningUnit::options() const
 {
   return _options;
