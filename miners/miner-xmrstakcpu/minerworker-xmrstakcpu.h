@@ -36,6 +36,7 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
     virtual void start             ()                                   Q_DECL_OVERRIDE;
 
   private Q_SLOTS:
+    void on_minerProcess_finished               (int exitCode, QProcess::ExitStatus exitStatus) const;
     void on_minerProcess_readyReadStandardOutput();
 };
 

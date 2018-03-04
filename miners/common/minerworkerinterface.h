@@ -21,6 +21,7 @@ class MinerWorkerInterface : public QObject
     MUuidPtr _miningUnitId;
 
   Q_SIGNALS:
+    void finished      ()            const;
     void hashRate      (float value) const;
     void resultAccepted()            const;
 };
