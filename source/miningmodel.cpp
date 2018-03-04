@@ -62,7 +62,7 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
         case Column::Miner:
           return miningUnit->options().miner();
         case Column::HashRate:
-          return QString::number(miningUnit->sessionStatistics().hashRate, 'f', 1) + " H/s";
+          return QString::number(miningUnit->sessionStatistics().hashRate, 'f', 1);
         case Column::Results:
           return miningUnit->sessionStatistics().results;
       }
