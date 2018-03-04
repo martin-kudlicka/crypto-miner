@@ -21,6 +21,7 @@ class MainWindow : public QMainWindow
     void setupWidgets();
 
   private Q_SLOTS:
+    void on_actionAbout_triggered       (bool checked = false);
     void on_actionSendFeedback_triggered(bool checked = false) const;
     void on_miningUnitAdd_clicked       (bool checked = false);
     void on_miningUnitStart_clicked     (bool checked = false);

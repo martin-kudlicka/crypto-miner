@@ -96,6 +96,7 @@
      <string>&amp;Help</string>
     </property>
     <addaction name="actionSendFeedback"/>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Help"/>
@@ -108,6 +109,11 @@
   <action name="actionSendFeedback">
    <property name="text">
     <string>&amp;Send feedback</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About</string>
    </property>
   </action>
  </widget>
