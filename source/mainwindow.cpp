@@ -15,6 +15,10 @@ void MainWindow::setupWidgets()
 {
   _ui.miningView->setModel(&_miningModel);
 
+  _ui.miningView->header()->setSectionResizeMode(static_cast<int>(MiningModel::Column::Miner),    QHeaderView::Stretch);
+  _ui.miningView->header()->setSectionResizeMode(static_cast<int>(MiningModel::Column::HashRate), QHeaderView::ResizeToContents);
+  _ui.miningView->header()->setSectionResizeMode(static_cast<int>(MiningModel::Column::Results),  QHeaderView::ResizeToContents);
+
   connect(_ui.miningView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::on_miningView_selectionChanged);
 }
 

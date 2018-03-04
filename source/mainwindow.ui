@@ -29,6 +29,9 @@
     <property name="itemsExpandable">
      <bool>false</bool>
     </property>
+    <attribute name="headerStretchLastSection">
+     <bool>false</bool>
+    </attribute>
    </widget>
    <widget class="QPushButton" name="miningUnitAdd">
     <property name="geometry">
