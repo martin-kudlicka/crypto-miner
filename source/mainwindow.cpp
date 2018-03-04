@@ -38,13 +38,25 @@ void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
   // for now take first and only plugin
   auto minerPlugin = _minerPlugins.toList().front();
 
-  MiningUnitDialog minerDialog(minerPlugin, this);
-  if (minerDialog.exec() == QDialog::Rejected)
+  MiningUnitDialog miningUnitDialog(minerPlugin, this);
+  if (miningUnitDialog.exec() == QDialog::Rejected)
   {
     return;
   }
 
-  _miningModel.insert(minerDialog.options().id());
+  _miningModel.insert(miningUnitDialog.options().id());
+}
+
+void MainWindow::on_miningUnitEdit_clicked(bool checked /* false */)
+{
+  // for now take first and only plugin
+  auto minerPlugin = _minerPlugins.toList().front();
+
+  auto index = _ui.miningView->currentIndex();
+  auto id    = _miningModel.id(index);
+
+  MiningUnitDialog miningUnitDialog(id, minerPlugin, this);
+  miningUnitDialog.exec();
 }
 
 void MainWindow::on_miningUnitStart_clicked(bool checked /* false */)
@@ -66,6 +78,9 @@ void MainWindow::on_miningUnitStop_clicked(bool checked /* false */)
 void MainWindow::on_miningView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
   auto isSelected = !_ui.miningView->selectionModel()->selectedRows().isEmpty();
+
+  _ui.miningUnitEdit->setEnabled(isSelected);
+
   if (isSelected)
   {
     auto index      = _ui.miningView->currentIndex();

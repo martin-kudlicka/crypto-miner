@@ -24,6 +24,7 @@ class MainWindow : public QMainWindow
     void on_actionAbout_triggered       (bool checked = false);
     void on_actionSendFeedback_triggered(bool checked = false) const;
     void on_miningUnitAdd_clicked       (bool checked = false);
+    void on_miningUnitEdit_clicked      (bool checked = false);
     void on_miningUnitStart_clicked     (bool checked = false);
     void on_miningUnitStop_clicked      (bool checked = false);
     void on_miningView_selectionChanged (const QItemSelection &selected, const QItemSelection &deselected);

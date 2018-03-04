@@ -53,7 +53,7 @@
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>100</y>
+      <y>130</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -69,13 +69,29 @@
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>140</y>
+      <y>170</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
      <string>S&amp;top</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="miningUnitEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>100</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&amp;Edit</string>
     </property>
    </widget>
   </widget>

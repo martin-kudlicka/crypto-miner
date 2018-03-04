@@ -11,6 +11,7 @@ class MiningUnitDialog : public QDialog
 {
   public:
              MiningUnitDialog(const MinerInterface *minerPlugin, QWidget *parent);
+             MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, QWidget *parent);
     virtual ~MiningUnitDialog() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
     const MiningUnitOptions &options() const;

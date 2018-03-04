@@ -2,7 +2,11 @@
 
 #include "../miners/common/minerinterface.h"
 
-MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, QWidget *parent) : QDialog(parent), _minerPlugin(minerPlugin), _options(MUuidPtr::createUuid()), _widgetSettings(&_options)
+MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, parent)
+{
+}
+
+MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, QWidget *parent) : QDialog(parent), _minerPlugin(minerPlugin), _options(id), _widgetSettings(&_options)
 {
   _ui.setupUi(this);
 
