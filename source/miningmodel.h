@@ -9,6 +9,7 @@ class MiningModel : public QAbstractItemModel
   public:
     enum class Column
     {
+      Status,
       Miner,
       HashRate,
       Results,

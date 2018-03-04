@@ -1,4 +1,7 @@
 <RCC>
-    <qresource prefix="MainWindow">
-    </qresource>
+  <qresource prefix="MainWindow"/>
+  <qresource prefix="miningview">
+    <file>resources/miningview/statusrunning.png</file>
+    <file>resources/miningview/statusstopped.png</file>
+  </qresource>
 </RCC>

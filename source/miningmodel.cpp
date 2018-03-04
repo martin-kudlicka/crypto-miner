@@ -1,5 +1,7 @@
 #include "miningmodel.h"
 
+#include <QtGui/QIcon>
+
 MiningModel::MiningModel(MinerPlugins *minerPlugins) : _miningUnits(minerPlugins, this)
 {
 }
@@ -30,21 +32,32 @@ int MiningModel::columnCount(const QModelIndex &parent /* QModelIndex() */) cons
 
 QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole */) const
 {
-  if (role != Qt::DisplayRole)
+  if (role != Qt::DisplayRole && role != Qt::DecorationRole)
   {
     return QVariant();
   }
 
   auto miningUnit = const_cast<MiningUnits *>(&_miningUnits)->get(index.internalId());
 
-  switch (index.column())
+  switch (role)
   {
-    case Column::Miner:
-      return miningUnit->options().miner();
-    case Column::HashRate:
-      return QString::number(miningUnit->sessionStatistics().hashRate, 'f', 1) + " H/s";
-    case Column::Results:
-      return miningUnit->sessionStatistics().results;
+    case Qt::DisplayRole:
+      switch (index.column())
+      {
+        case Column::Miner:
+          return miningUnit->options().miner();
+        case Column::HashRate:
+          return QString::number(miningUnit->sessionStatistics().hashRate, 'f', 1) + " H/s";
+        case Column::Results:
+          return miningUnit->sessionStatistics().results;
+      }
+      break;
+    case Qt::DecorationRole:
+      switch (index.column())
+      {
+        case Column::Status:
+          return miningUnit->isRunning() ? QIcon(":/miningview/resources/miningview/statusrunning.png") : QIcon(":/miningview/resources/miningview/statusstopped.png");
+      }
   }
 
   return QVariant();
@@ -67,7 +80,6 @@ QVariant MiningModel::headerData(int section, Qt::Orientation orientation, int r
       return tr("Results");
   }
 
-  Q_UNREACHABLE();
   return QVariant();
 }
 
