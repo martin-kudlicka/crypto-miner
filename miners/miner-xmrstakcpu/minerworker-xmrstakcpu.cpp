@@ -36,24 +36,24 @@ MinerWorkerXmrStakCpu::~MinerWorkerXmrStakCpu()
 void MinerWorkerXmrStakCpu::modifyConfig(QString *config) const
 {
   QString cpuThreadsConf = "\"cpu_threads_conf\" :\n[";
-  for (auto cpu = 0; cpu < QThread::idealThreadCount(); cpu++)
+  for (auto cpu = 0; cpu < QThread::idealThreadCount(); ++cpu)
   {
     cpuThreadsConf += QString("\n     { \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %1 },").arg(cpu);
 #ifdef _DEBUG
-    break;
+    if (cpu == 2)
+    {
+      break;
+    }
 #endif
   }
-  cpuThreadsConf    += "\n],";
-  auto poolAddress   = R"("pool_address" : ")"   + _poolAddress              + "\",";
-  auto walletAddress = R"("wallet_address" : ")" + _poolCredentials.username + "\",";
-  auto poolPassword  = R"("pool_password" : ")"  + _poolCredentials.password + "\",";
-  auto verboseLevel  = R"("verbose_level" : 4,)";
+  cpuThreadsConf += "\n],";
 
   config->replace("\"cpu_threads_conf\" : \nnull,",                 cpuThreadsConf);
-  config->replace(R"("pool_address" : "pool.usxmrpool.com:3333",)", poolAddress);
-  config->replace(R"("wallet_address" : "",)",                      walletAddress);
-  config->replace(R"("pool_password" : "",)",                       poolPassword);
-  config->replace(R"("verbose_level" : 3,)",                        verboseLevel);
+  config->replace(R"("pool_address" : "pool.usxmrpool.com:3333",)", R"("pool_address" : ")"   + _poolAddress              + "\",");
+  config->replace(R"("wallet_address" : "",)",                      R"("wallet_address" : ")" + _poolCredentials.username + "\",");
+  config->replace(R"("pool_password" : "",)",                       R"("pool_password" : ")"  + _poolCredentials.password + "\",");
+  config->replace(R"("verbose_level" : 3,)",                        R"("verbose_level" : 4,)");
+  config->replace(R"("h_print_time" : 60,)",                        R"("h_print_time" : 1,)");
 }
 
 QString MinerWorkerXmrStakCpu::prepareConfigFile() const
@@ -140,15 +140,15 @@ void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
 
     if (_stdOutLastLine.startsWith('['))
     {
-      auto message    = _miningUnitId.toString() + ": ";
-      auto messagePos = _stdOutLastLine.indexOf(": ");
-      message.append(_stdOutLastLine.mid(messagePos + 2));
+      auto message = _miningUnitId.toString() + ' ';
+      auto linePos = _stdOutLastLine.indexOf(": ");
+      message.append(_stdOutLastLine.mid(linePos + 2));
 
       if (message.contains("ERROR") || message.contains("FAILED"))
       {
         mCCritical(XmrStakCpu) << message;
       }
-      else if (message.contains("lost"))
+      else if (message.contains("Pool connection lost."))
       {
         mCWarning(XmrStakCpu) << message;
       }
@@ -156,7 +156,7 @@ void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
       {
         mCInfo(XmrStakCpu) << message;
 
-        if (message.contains("accepted"))
+        if (message.contains("Result accepted by the pool."))
         {
           emit resultAccepted();
         }
