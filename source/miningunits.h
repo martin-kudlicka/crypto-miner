@@ -19,6 +19,7 @@ class MiningUnits
           MUuidPtr        id     (quintptr index)     const;
           quintptr        index  (const MUuidPtr &id) const;
           bool            isEmpty()                   const;
+          void            removeIndex(quintptr index);
 
   private:
     MinerPlugins                   *_minerPlugins;

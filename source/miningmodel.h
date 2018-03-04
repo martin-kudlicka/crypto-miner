@@ -23,6 +23,7 @@ class MiningModel : public QAbstractItemModel
     void           insert        (const MUuidPtr &id);
     MiningUnitSPtr miningUnit    (const MUuidPtr &id);
     MiningUnitSPtr miningUnit    (const QModelIndex &index);
+    void           remove        (const QModelIndex &index);
     void           setDataChanged(const MUuidPtr &id, Column column);
 
   private:
@@ -34,6 +35,7 @@ class MiningModel : public QAbstractItemModel
     virtual QModelIndex index      (int row, int column, const QModelIndex &parent = QModelIndex())       const Q_DECL_OVERRIDE;
     virtual bool        insertRows (int row, int count, const QModelIndex &parent = QModelIndex())              Q_DECL_OVERRIDE;
     virtual QModelIndex parent     (const QModelIndex &child)                                             const Q_DECL_OVERRIDE;
+    virtual bool        removeRows (int row, int count, const QModelIndex &parent = QModelIndex())              Q_DECL_OVERRIDE;
     virtual int         rowCount   (const QModelIndex &parent = QModelIndex())                            const Q_DECL_OVERRIDE;
 };
 

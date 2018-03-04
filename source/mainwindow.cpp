@@ -69,6 +69,19 @@ void MainWindow::on_miningUnitEdit_clicked(bool checked /* false */)
   }
 }
 
+void MainWindow::on_miningUnitRemove_clicked(bool checked /* false */)
+{
+  auto index      = _ui.miningView->currentIndex();
+  auto miningUnit = _miningModel.miningUnit(index);
+
+  if (miningUnit->isRunning())
+  {
+    miningUnit->stop();
+  }
+
+  _miningModel.remove(index);
+}
+
 void MainWindow::on_miningUnitStart_clicked(bool checked /* false */)
 {
   auto index      = _ui.miningView->currentIndex();
@@ -90,6 +103,7 @@ void MainWindow::on_miningView_selectionChanged(const QItemSelection &selected, 
   auto isSelected = !_ui.miningView->selectionModel()->selectedRows().isEmpty();
 
   _ui.miningUnitEdit->setEnabled(isSelected);
+  _ui.miningUnitRemove->setEnabled(isSelected);
 
   if (isSelected)
   {
