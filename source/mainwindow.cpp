@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
 #include "miningunitdialog.h"
+#include <MkWidgets/MAboutBox>
 #include <MkSupport/MFeedback>
 
 MainWindow::MainWindow() : _miningModel(&_minerPlugins)
@@ -15,6 +16,11 @@ void MainWindow::setupWidgets()
   _ui.miningView->setModel(&_miningModel);
 
   connect(_ui.miningView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::on_miningView_selectionChanged);
+}
+
+void MainWindow::on_actionAbout_triggered(bool checked /* false */)
+{
+  MAboutBox(this).exec();
 }
 
 void MainWindow::on_actionSendFeedback_triggered(bool checked /* false */) const
