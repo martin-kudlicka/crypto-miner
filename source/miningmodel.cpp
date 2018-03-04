@@ -50,6 +50,27 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
   return QVariant();
 }
 
+QVariant MiningModel::headerData(int section, Qt::Orientation orientation, int role /* Qt::DisplayRole */) const
+{
+  if (orientation != Qt::Horizontal || role != Qt::DisplayRole)
+  {
+    return QVariant();
+  }
+
+  switch (section)
+  {
+    case Column::Miner:
+      return tr("Miner");
+    case Column::HashRate:
+      return "H/s";
+    case Column::Results:
+      return tr("Results");
+  }
+
+  Q_UNREACHABLE();
+  return QVariant();
+}
+
 QModelIndex MiningModel::index(int row, int column, const QModelIndex &parent /* QModelIndex() */) const
 {
   if (_miningUnits.isEmpty())
