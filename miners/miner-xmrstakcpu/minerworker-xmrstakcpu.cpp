@@ -4,6 +4,7 @@
 #include <MkLib/MModuleInfo>
 #include <QtCore/QThread>
 #include "log.h"
+#include <QtCore/QRegularExpression>
 
 MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 {
@@ -39,12 +40,6 @@ void MinerWorkerXmrStakCpu::modifyConfig(QString *config) const
   for (auto cpu = 0; cpu < QThread::idealThreadCount(); ++cpu)
   {
     cpuThreadsConf += QString("\n     { \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %1 },").arg(cpu);
-#ifdef _DEBUG
-    if (cpu == 2)
-    {
-      break;
-    }
-#endif
   }
   cpuThreadsConf += "\n],";
 
@@ -138,17 +133,17 @@ void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
       break;
     }
 
-    if (_stdOutLastLine.startsWith('['))
+    QRegularExpression regExp("^\\[.*\\] : (.*)");
+    auto regExpMatch = regExp.match(_stdOutLastLine);
+    if (regExpMatch.hasMatch())
     {
-      auto message = _miningUnitId.toString() + ' ';
-      auto linePos = _stdOutLastLine.indexOf(": ");
-      message.append(_stdOutLastLine.mid(linePos + 2));
+      auto message = _miningUnitId.toString() + ' ' + regExpMatch.capturedRef(1);
 
-      if (message.contains("ERROR") || message.contains("FAILED"))
+      if (regExpMatch.capturedRef(1).contains("ERROR") || regExpMatch.capturedRef(1).contains("FAILED"))
       {
         mCCritical(XmrStakCpu) << message;
       }
-      else if (message.contains("Pool connection lost."))
+      else if (regExpMatch.capturedRef(1).startsWith("Pool connection lost."))
       {
         mCWarning(XmrStakCpu) << message;
       }
@@ -156,7 +151,7 @@ void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
       {
         mCInfo(XmrStakCpu) << message;
 
-        if (message.contains("Result accepted by the pool."))
+        if (regExpMatch.capturedRef(1) == "Result accepted by the pool.")
         {
           emit resultAccepted();
         }
