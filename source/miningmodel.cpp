@@ -18,6 +18,11 @@ void MiningModel::insert(const MUuidPtr &id)
   insertRow(row);
 }
 
+MiningUnitSPtr MiningModel::miningUnit(const MUuidPtr &id)
+{
+  return _miningUnits.get(id);
+}
+
 MiningUnitSPtr MiningModel::miningUnit(const QModelIndex &index)
 {
   return _miningUnits.get(index.internalId());
