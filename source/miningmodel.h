@@ -21,6 +21,7 @@ class MiningModel : public QAbstractItemModel
 
     MUuidPtr       id            (const QModelIndex &index) const;
     void           insert        (const MUuidPtr &id);
+    MiningUnitSPtr miningUnit    (const MUuidPtr &id);
     MiningUnitSPtr miningUnit    (const QModelIndex &index);
     void           setDataChanged(const MUuidPtr &id, Column column);
 

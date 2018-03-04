@@ -56,7 +56,17 @@ void MainWindow::on_miningUnitEdit_clicked(bool checked /* false */)
   auto id    = _miningModel.id(index);
 
   MiningUnitDialog miningUnitDialog(id, minerPlugin, this);
-  miningUnitDialog.exec();
+  if (miningUnitDialog.exec() == QDialog::Rejected)
+  {
+    return;
+  }
+
+  auto miningUnit = _miningModel.miningUnit(id);
+  if (miningUnit->isRunning())
+  {
+    miningUnit->stop();
+    miningUnit->start();
+  }
 }
 
 void MainWindow::on_miningUnitStart_clicked(bool checked /* false */)
