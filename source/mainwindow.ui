@@ -91,11 +91,23 @@
     </property>
     <addaction name="actionE_xit"/>
    </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionSendFeedback"/>
+   </widget>
    <addaction name="menu_File"/>
+   <addaction name="menu_Help"/>
   </widget>
   <action name="actionE_xit">
    <property name="text">
     <string>E&amp;xit</string>
+   </property>
+  </action>
+  <action name="actionSendFeedback">
+   <property name="text">
+    <string>&amp;Send feedback</string>
    </property>
   </action>
  </widget>
