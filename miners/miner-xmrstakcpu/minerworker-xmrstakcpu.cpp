@@ -157,6 +157,22 @@ void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
         }
       }
     }
+    else
+    {
+      regExp.setPattern(R"(^Totals:\s+(\(na\)|\d+\.\d)\s+(\(na\)|\d+\.\d)\s+(\(na\)|\d+\.\d))");
+      regExpMatch = regExp.match(_stdOutLastLine);
+      if (regExpMatch.hasMatch())
+      {
+        for (auto capIndex = 0; capIndex <= regExpMatch.lastCapturedIndex(); ++capIndex)
+        {
+          auto captured = regExpMatch.capturedRef(capIndex);
+          if (captured.front().isDigit())
+          {
+            auto hashRate = captured.toFloat();
+          }
+        }
+      }
+    }
 
     _stdOutLastLine.clear();
   }
