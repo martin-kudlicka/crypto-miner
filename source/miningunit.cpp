@@ -20,7 +20,12 @@ MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins, MiningMod
 
 bool MiningUnit::isRunning() const
 {
-  return _worker;
+  if (!_worker)
+  {
+    return false;
+  }
+
+  return _worker->isRunning();
 }
 
 const MiningUnitOptions &MiningUnit::options() const
