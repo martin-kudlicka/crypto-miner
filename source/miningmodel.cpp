@@ -6,6 +6,11 @@ MiningModel::MiningModel(MinerPlugins *minerPlugins) : _miningUnits(minerPlugins
 {
 }
 
+MUuidPtr MiningModel::id(const QModelIndex &index) const
+{
+  return index.internalId();
+}
+
 void MiningModel::insert(const MUuidPtr &id)
 {
   auto row = _miningUnits.index(id);
