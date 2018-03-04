@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
 #include "miningunitdialog.h"
+#include <MkSupport/MFeedback>
 
 MainWindow::MainWindow() : _miningModel(&_minerPlugins)
 {
@@ -14,6 +15,11 @@ void MainWindow::setupWidgets()
   _ui.miningView->setModel(&_miningModel);
 
   connect(_ui.miningView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::on_miningView_selectionChanged);
+}
+
+void MainWindow::on_actionSendFeedback_triggered(bool checked /* false */) const
+{
+  MFeedback::createEmailForm();
 }
 
 void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
