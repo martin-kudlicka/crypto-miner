@@ -56,8 +56,6 @@ void MiningUnit::stop()
 
 void MiningUnit::on_worker_finished()
 {
-  stop();
-
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
 }
 
