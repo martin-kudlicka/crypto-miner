@@ -79,14 +79,9 @@ QString MinerWorkerXmrStakCpu::readVanillaConfig() const
 
 QString MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
 {
-  auto moduleBaseName = _fileInfo.baseName();
-  auto dashPos        = moduleBaseName.indexOf('-');
-
   auto configFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
   configFilePath.append(QDir::separator());
-  configFilePath.append("miners");
-  configFilePath.append(QDir::separator());
-  configFilePath.append(moduleBaseName.mid(dashPos + 1));
+  configFilePath.append(_fileInfo.baseName());
 
   QDir().mkpath(configFilePath);
 
