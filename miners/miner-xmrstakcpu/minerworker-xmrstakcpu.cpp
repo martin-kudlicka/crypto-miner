@@ -22,6 +22,7 @@ MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "xmr-stak-cpu-notls.exe");
   _minerProcess.setWorkingDirectory(_minerDir.path());
+  _minerProcess.closeWriteChannel();
 }
 
 MinerWorkerXmrStakCpu::~MinerWorkerXmrStakCpu()
@@ -145,7 +146,7 @@ void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
       break;
     }
 
-    QRegularExpression regExp("^\\[.*\\] : (.*)");
+    QRegularExpression regExp(R"(^\[.*\] : (.*))");
     auto regExpMatch = regExp.match(_stdOutLastLine);
     if (regExpMatch.hasMatch())
     {
