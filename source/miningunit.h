@@ -39,6 +39,7 @@ class MiningUnit : public QObject
           Statistics               _sessionStatistics;
 
   private Q_SLOTS:
+    void on_worker_finished      ();
     void on_worker_hashRate      (float value);
     void on_worker_resultAccepted();
 };

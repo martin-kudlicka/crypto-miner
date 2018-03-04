@@ -42,6 +42,7 @@ void MiningUnit::start()
   _worker->setPoolAddress(_options.poolAddress());
   _worker->setPoolCredentials(PoolCredentials(_options.poolUsername(), _options.poolPassword()));
 
+  connect(&*_worker, SIGNAL(finished()),       SLOT(on_worker_finished()));
   connect(&*_worker, SIGNAL(hashRate(float)),  SLOT(on_worker_hashRate(float)));
   connect(&*_worker, SIGNAL(resultAccepted()), SLOT(on_worker_resultAccepted()));
 
@@ -51,6 +52,11 @@ void MiningUnit::start()
 void MiningUnit::stop()
 {
   _worker.clear();
+}
+
+void MiningUnit::on_worker_finished()
+{
+  stop();
 
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
 }
