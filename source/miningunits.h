@@ -12,7 +12,7 @@ class MiningUnits
       static Q_DECL_CONSTEXPR QString Group;
     };
 
-    MiningUnits(MinerPlugins *minerPlugins);
+    MiningUnits(MinerPlugins *minerPlugins, MiningModel *miningModel);
 
           quintptr        count  ()                   const;
     const MiningUnitSPtr &get    (const MUuidPtr &id);
@@ -22,6 +22,7 @@ class MiningUnits
 
   private:
     MinerPlugins                   *_minerPlugins;
+    MiningModel                    *_miningModel;
     QHash<MUuidPtr, MiningUnitSPtr> _miningUnits;
     QSettings                       _settings;
 };

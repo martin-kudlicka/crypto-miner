@@ -1,6 +1,6 @@
 #include "miningmodel.h"
 
-MiningModel::MiningModel(MinerPlugins *minerPlugins) : _miningUnits(minerPlugins)
+MiningModel::MiningModel(MinerPlugins *minerPlugins) : _miningUnits(minerPlugins, this)
 {
 }
 
@@ -14,6 +14,13 @@ void MiningModel::insert(const MUuidPtr &id)
 MiningUnitSPtr MiningModel::miningUnit(const QModelIndex &index)
 {
   return _miningUnits.get(index.internalId());
+}
+
+void MiningModel::setDataChanged(const MUuidPtr &id, Column column)
+{
+  auto row    = _miningUnits.index(id);
+  auto index2 = index(row, static_cast<int>(column));
+  emit dataChanged(index2, index2);
 }
 
 int MiningModel::columnCount(const QModelIndex &parent /* QModelIndex() */) const
@@ -34,10 +41,10 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
   {
     case Column::Miner:
       return miningUnit->options().miner();
-    case Column::SessionResuts:
+    case Column::HashRate:
+      return QString::number(miningUnit->sessionStatistics().hashRate, 'f', 1) + " H/s";
+    case Column::Results:
       return miningUnit->sessionStatistics().results;
-    case Column::TotalResults:
-      return miningUnit->options().acceptedResults();
   }
 
   return QVariant();
