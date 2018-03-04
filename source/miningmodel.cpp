@@ -28,6 +28,11 @@ MiningUnitSPtr MiningModel::miningUnit(const QModelIndex &index)
   return _miningUnits.get(index.internalId());
 }
 
+void MiningModel::remove(const QModelIndex &index)
+{
+  removeRow(index.row());
+}
+
 void MiningModel::setDataChanged(const MUuidPtr &id, Column column)
 {
   auto row    = _miningUnits.index(id);
@@ -115,6 +120,17 @@ bool MiningModel::insertRows(int row, int count, const QModelIndex &parent /* QM
 QModelIndex MiningModel::parent(const QModelIndex &child) const
 {
   return QModelIndex();
+}
+
+bool MiningModel::removeRows(int row, int count, const QModelIndex &parent /* QModelIndex() */)
+{
+  beginRemoveRows(parent, row, row + count - 1);
+
+  _miningUnits.removeIndex(row);
+
+  endRemoveRows();
+
+  return true;
 }
 
 int MiningModel::rowCount(const QModelIndex &parent /* QModelIndex() */) const
