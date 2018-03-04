@@ -22,7 +22,6 @@ MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "xmr-stak-cpu-notls.exe");
   _minerProcess.setWorkingDirectory(_minerDir.path());
-  _minerProcess.closeWriteChannel();
 }
 
 MinerWorkerXmrStakCpu::~MinerWorkerXmrStakCpu()
@@ -102,6 +101,11 @@ QString MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
   configStream << config;
 
   return configFilePath;
+}
+
+bool MinerWorkerXmrStakCpu::isRunning() const
+{
+  return _minerProcess.state() != QProcess::NotRunning;
 }
 
 void MinerWorkerXmrStakCpu::setPoolAddress(const QString &address)
