@@ -52,15 +52,21 @@ void MiningUnit::start()
   connect(&*_worker, SIGNAL(resultAccepted()), SLOT(on_worker_resultAccepted()));
 
   _worker->start();
+
+  _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
 }
 
 void MiningUnit::stop()
 {
   _worker.clear();
+
+  _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
 }
 
 void MiningUnit::on_worker_finished()
 {
+  _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
+
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
 }
 
