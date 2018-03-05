@@ -53,6 +53,10 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
   }
 
   auto miningUnit = const_cast<MiningUnits *>(&_miningUnits)->get(index.internalId());
+  if (!miningUnit)
+  {
+    return QVariant();
+  }
 
   switch (role)
   {
