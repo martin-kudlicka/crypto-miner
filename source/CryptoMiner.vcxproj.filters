@@ -72,6 +72,9 @@
     <ClCompile Include="..\..\..\intermediate\cryptominer\Release\moc_miningunit.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="consolewindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -88,6 +91,9 @@
     </CustomBuild>
     <CustomBuild Include="miningunit.h">
       <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="consolewindow.ui">
+      <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +122,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\intermediate\cryptominer\ui_consolewindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="consolewindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

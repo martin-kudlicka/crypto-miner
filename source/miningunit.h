@@ -6,6 +6,7 @@
 #include "../miners/common/minerworkerinterface.h"
 #include <QtCore/QElapsedTimer>
 
+class ConsoleWindow;
 class MinerInterface;
 class MinerPlugins;
 class MiningModel;
@@ -29,16 +30,18 @@ class MiningUnit : public QObject
           bool               isRunning        () const;
     const MiningUnitOptions &options          () const;
     const Statistics        &sessionStatistics() const;
+          void               showConsole      ();
           void               start            ();
           void               stop             ();
 
   private:
-    const MinerInterface          *_minerPlugin;
-          MiningModel             *_miningModel;
-          MiningUnitOptions        _options;
-          MinerWorkerInterfaceSPtr _worker;
-          QElapsedTimer            _miningTime;
-          Statistics               _sessionStatistics;
+          QScopedPointer<ConsoleWindow> _consoleWindow;
+    const MinerInterface               *_minerPlugin;
+          MiningModel                  *_miningModel;
+          MiningUnitOptions             _options;
+          MinerWorkerInterfaceSPtr      _worker;
+          QElapsedTimer                 _miningTime;
+          Statistics                    _sessionStatistics;
 
   private Q_SLOTS:
     void on_worker_finished      ();

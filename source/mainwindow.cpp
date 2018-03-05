@@ -47,9 +47,12 @@ void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
   _miningModel.insert(miningUnitDialog.options().id());
 }
 
-void MainWindow::on_miningUnitConsole_clicked(bool checked /* false */) const
+void MainWindow::on_miningUnitConsole_clicked(bool checked /* false */)
 {
-  // TODO
+  auto index      = _ui.miningView->currentIndex();
+  auto miningUnit = _miningModel.miningUnit(index);
+
+  miningUnit->showConsole();
 }
 
 void MainWindow::on_miningUnitEdit_clicked(bool checked /* false */)
