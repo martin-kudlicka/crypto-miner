@@ -6,7 +6,7 @@
 class ConsoleWindow : public QDialog
 {
   public:
-             ConsoleWindow();
+             ConsoleWindow(const QString &text);
     virtual ~ConsoleWindow() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
