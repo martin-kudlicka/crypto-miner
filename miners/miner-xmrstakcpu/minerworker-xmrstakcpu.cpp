@@ -154,6 +154,8 @@ void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
       break;
     }
 
+    _minerOutput.append(_stdOutLastLine + '\n');
+
     QRegularExpression regExp(R"(^\[.*\] : (.*))");
     auto regExpMatch = regExp.match(_stdOutLastLine);
     if (regExpMatch.hasMatch())
