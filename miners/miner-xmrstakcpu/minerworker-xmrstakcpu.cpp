@@ -98,6 +98,11 @@ QString MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
   return configFilePath;
 }
 
+const QString &MinerWorkerXmrStakCpu::consoleOutput() const
+{
+  return _minerOutput;
+}
+
 bool MinerWorkerXmrStakCpu::isRunning() const
 {
   return _minerProcess.state() != QProcess::NotRunning;

@@ -11,10 +11,11 @@ class MinerWorkerInterface : public QObject
   Q_OBJECT
 
   public:
-    virtual bool isRunning         () const                             = 0;
-    virtual void setPoolAddress    (const QString &address)             = 0;
-    virtual void setPoolCredentials(const PoolCredentials &credentials) = 0;
-    virtual void start             ()                                   = 0;
+    virtual const QString &consoleOutput     () const                             = 0;
+    virtual       bool     isRunning         () const                             = 0;
+    virtual       void     setPoolAddress    (const QString &address)             = 0;
+    virtual       void     setPoolCredentials(const PoolCredentials &credentials) = 0;
+    virtual       void     start             ()                                   = 0;
 
   protected:
     virtual ~MinerWorkerInterface() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
