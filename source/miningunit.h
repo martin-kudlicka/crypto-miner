@@ -4,6 +4,7 @@
 #include <QtCore/QSharedPointer>
 #include "miningunitoptions.h"
 #include "../miners/common/minerworkerinterface.h"
+#include <QtCore/QElapsedTimer>
 
 class MinerInterface;
 class MinerPlugins;
@@ -36,6 +37,7 @@ class MiningUnit : public QObject
           MiningModel             *_miningModel;
           MiningUnitOptions        _options;
           MinerWorkerInterfaceSPtr _worker;
+          QElapsedTimer            _miningTime;
           Statistics               _sessionStatistics;
 
   private Q_SLOTS:

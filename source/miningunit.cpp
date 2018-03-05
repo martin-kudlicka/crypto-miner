@@ -51,6 +51,8 @@ void MiningUnit::start()
   connect(&*_worker, SIGNAL(hashRate(float)),  SLOT(on_worker_hashRate(float)));
   connect(&*_worker, SIGNAL(resultAccepted()), SLOT(on_worker_resultAccepted()));
 
+  _miningTime.start();
+
   _worker->start();
 
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
@@ -65,6 +67,12 @@ void MiningUnit::stop()
 
 void MiningUnit::on_worker_finished()
 {
+  auto miningTime = _options.miningTime() + _miningTime.elapsed() / 1000;
+  _miningTime.invalidate();
+  _options.setMiningTime(miningTime);
+
+  // worker will be destroyed when mining unit is destroyed or new one is created
+
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
 
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
