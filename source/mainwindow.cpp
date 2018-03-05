@@ -47,6 +47,11 @@ void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
   _miningModel.insert(miningUnitDialog.options().id());
 }
 
+void MainWindow::on_miningUnitConsole_clicked(bool checked /* false */) const
+{
+  // TODO
+}
+
 void MainWindow::on_miningUnitEdit_clicked(bool checked /* false */)
 {
   // for now take first and only plugin
@@ -112,10 +117,12 @@ void MainWindow::on_miningView_selectionChanged(const QItemSelection &selected, 
 
     _ui.miningUnitStart->setEnabled(!miningUnit->isRunning());
     _ui.miningUnitStop->setEnabled(miningUnit->isRunning());
+    _ui.miningUnitConsole->setEnabled(miningUnit->isRunning());
   }
   else
   {
     _ui.miningUnitStart->setEnabled(false);
     _ui.miningUnitStop->setEnabled(false);
+    _ui.miningUnitConsole->setEnabled(false);
   }
 }
