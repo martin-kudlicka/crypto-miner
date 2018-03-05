@@ -41,14 +41,18 @@ const MiningUnit::Statistics &MiningUnit::sessionStatistics() const
 
 void MiningUnit::showConsole()
 {
-  if (!_consoleWindow)
+  if (_consoleWindow)
+  {
+    _consoleWindow->activateWindow();
+  }
+  else
   {
     _consoleWindow.reset(new ConsoleWindow);
     _consoleWindow->setAttribute(Qt::WA_DeleteOnClose);
     connect(&*_consoleWindow, &ConsoleWindow::destroyed, this, &MiningUnit::on_consoleWindow_destroyed);
-  }
 
-  _consoleWindow->show();
+    _consoleWindow->show();
+  }
 }
 
 void MiningUnit::start()
