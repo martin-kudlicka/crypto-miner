@@ -16,6 +16,12 @@ const MiningUnitSPtr &MiningUnits::get(const MUuidPtr &id)
 {
   if (_miningUnits.contains(id))
   {
+    if (!_miningUnits[id].toWeakRef().toStrongRef())
+    {
+      // under destruction
+      return MiningUnitSPtr();
+    }
+
     return _miningUnits[id];
   }
 
