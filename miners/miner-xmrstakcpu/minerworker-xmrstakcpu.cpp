@@ -12,7 +12,7 @@ MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 
   _fileInfo = MModuleInfo().fileInfo();
 
-  auto baseName = _fileInfo.baseName();
+  auto baseName = _fileInfo.completeBaseName();
   auto dashPos  = baseName.indexOf('-');
   _minerName    = baseName.mid(dashPos + 1);
 
@@ -81,7 +81,7 @@ QString MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
 {
   auto configFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
   configFilePath.append(QDir::separator());
-  configFilePath.append(_fileInfo.baseName());
+  configFilePath.append(_fileInfo.completeBaseName());
 
   QDir().mkpath(configFilePath);
 
@@ -125,7 +125,16 @@ void MinerWorkerXmrStakCpu::start()
 
   _minerProcess.start(QIODevice::ReadOnly);
 
-  mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " started";
+  if (_minerProcess.error() == QProcess::FailedToStart)
+  {
+    mCCritical(XmrStakCpu) << "failed to start miner for mining unit " << _miningUnitId.toString();
+
+    emit finished();
+  }
+  else
+  {
+    mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " started";
+  }
 }
 
 void MinerWorkerXmrStakCpu::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
