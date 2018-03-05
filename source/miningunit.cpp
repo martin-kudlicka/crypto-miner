@@ -61,8 +61,6 @@ void MiningUnit::start()
 void MiningUnit::stop()
 {
   _worker.clear();
-
-  _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
 }
 
 void MiningUnit::on_worker_finished()
