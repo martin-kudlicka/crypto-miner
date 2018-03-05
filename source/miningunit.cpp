@@ -4,6 +4,7 @@
 #include "../miners/common/poolcredentials.h"
 #include "log.h"
 #include "miningmodel.h"
+#include "consolewindow.h"
 
 MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins, MiningModel *miningModel) : _miningModel(miningModel), _minerPlugin(Q_NULLPTR), _options(id)
 {
@@ -36,6 +37,16 @@ const MiningUnitOptions &MiningUnit::options() const
 const MiningUnit::Statistics &MiningUnit::sessionStatistics() const
 {
   return _sessionStatistics;
+}
+
+void MiningUnit::showConsole()
+{
+  if (!_consoleWindow)
+  {
+    _consoleWindow.reset(new ConsoleWindow);
+  }
+
+  _consoleWindow->show();
 }
 
 void MiningUnit::start()
