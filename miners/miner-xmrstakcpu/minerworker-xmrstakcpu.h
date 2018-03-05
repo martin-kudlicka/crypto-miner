@@ -22,6 +22,7 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
     QFileInfo       _fileInfo;
     QProcess        _minerProcess;
     QString         _minerName;
+    QString         _minerOutput;
     QString         _poolAddress;
     QString         _stdOutLastLine;
     QTextStream     _stdOutStream;
