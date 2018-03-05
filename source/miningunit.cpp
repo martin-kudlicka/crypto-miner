@@ -44,6 +44,8 @@ void MiningUnit::showConsole()
   if (!_consoleWindow)
   {
     _consoleWindow.reset(new ConsoleWindow);
+    _consoleWindow->setAttribute(Qt::WA_DeleteOnClose);
+    connect(&*_consoleWindow, &ConsoleWindow::destroyed, this, &MiningUnit::on_consoleWindow_destroyed);
   }
 
   _consoleWindow->show();
@@ -72,6 +74,11 @@ void MiningUnit::start()
 void MiningUnit::stop()
 {
   _worker.clear();
+}
+
+void MiningUnit::on_consoleWindow_destroyed(QObject *obj /* Q_NULLPTR */)
+{
+  _consoleWindow.take();
 }
 
 void MiningUnit::on_worker_finished()

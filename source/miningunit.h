@@ -44,9 +44,10 @@ class MiningUnit : public QObject
           Statistics                    _sessionStatistics;
 
   private Q_SLOTS:
-    void on_worker_finished      ();
-    void on_worker_hashRate      (float value);
-    void on_worker_resultAccepted();
+    void on_consoleWindow_destroyed(QObject *obj = Q_NULLPTR);
+    void on_worker_finished        ();
+    void on_worker_hashRate        (float value);
+    void on_worker_resultAccepted  ();
 };
 
 using MiningUnitSPtr = QSharedPointer<MiningUnit>;
