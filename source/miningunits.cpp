@@ -12,14 +12,14 @@ quintptr MiningUnits::count() const
   return _settings.childGroups().count();
 }
 
-const MiningUnitSPtr &MiningUnits::get(const MUuidPtr &id)
+MiningUnitSPtr MiningUnits::get(const MUuidPtr &id)
 {
   if (_miningUnits.contains(id))
   {
     if (!_miningUnits[id].toWeakRef().toStrongRef())
     {
       // under destruction
-      return MiningUnitSPtr();
+      return Q_NULLPTR;
     }
 
     return _miningUnits[id];

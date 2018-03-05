@@ -14,12 +14,12 @@ class MiningUnits
 
     MiningUnits(MinerPlugins *minerPlugins, MiningModel *miningModel);
 
-          quintptr        count  ()                   const;
-    const MiningUnitSPtr &get    (const MUuidPtr &id);
-          MUuidPtr        id     (quintptr index)     const;
-          quintptr        index  (const MUuidPtr &id) const;
-          bool            isEmpty()                   const;
-          void            removeIndex(quintptr index);
+    quintptr       count      ()                   const;
+    MiningUnitSPtr get        (const MUuidPtr &id);
+    MUuidPtr       id         (quintptr index)     const;
+    quintptr       index      (const MUuidPtr &id) const;
+    bool           isEmpty    ()                   const;
+    void           removeIndex(quintptr index);
 
   private:
     MinerPlugins                   *_minerPlugins;
