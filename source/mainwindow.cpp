@@ -112,6 +112,7 @@ void MainWindow::on_miningView_selectionChanged(const QItemSelection &selected, 
 
   _ui.miningUnitEdit->setEnabled(isSelected);
   _ui.miningUnitRemove->setEnabled(isSelected);
+  _ui.miningUnitConsole->setEnabled(isSelected);
 
   if (isSelected)
   {
@@ -120,7 +121,6 @@ void MainWindow::on_miningView_selectionChanged(const QItemSelection &selected, 
 
     _ui.miningUnitStart->setEnabled(!miningUnit->isRunning());
     _ui.miningUnitStop->setEnabled(miningUnit->isRunning());
-    _ui.miningUnitConsole->setEnabled(miningUnit->isRunning());
   }
   else
   {
