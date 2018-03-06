@@ -47,7 +47,9 @@ void MiningUnit::showConsole()
   }
   else
   {
-    _consoleWindow.reset(new ConsoleWindow(_worker->consoleOutput()));
+    auto text = _worker ? _worker->consoleOutput() : "";
+    _consoleWindow.reset(new ConsoleWindow(text));
+
     _consoleWindow->setAttribute(Qt::WA_DeleteOnClose);
     connect(&*_consoleWindow, &ConsoleWindow::destroyed, this, &MiningUnit::on_consoleWindow_destroyed);
 
