@@ -50,6 +50,11 @@ void MiningUnit::showConsole()
     auto text = _worker ? _worker->consoleOutput() : "";
     _consoleWindow.reset(new ConsoleWindow(text));
 
+    if (_worker)
+    {
+      connect(&*_worker, SIGNAL(outputLine(const QString &)), &*_consoleWindow, SLOT(on_minerWorker_outputLine(const QString &)));
+    }
+
     _consoleWindow->setAttribute(Qt::WA_DeleteOnClose);
     connect(&*_consoleWindow, &ConsoleWindow::destroyed, this, &MiningUnit::on_consoleWindow_destroyed);
 
@@ -69,6 +74,11 @@ void MiningUnit::start()
   connect(&*_worker, SIGNAL(finished()),       SLOT(on_worker_finished()));
   connect(&*_worker, SIGNAL(hashRate(float)),  SLOT(on_worker_hashRate(float)));
   connect(&*_worker, SIGNAL(resultAccepted()), SLOT(on_worker_resultAccepted()));
+
+  if (_consoleWindow)
+  {
+    connect(&*_worker, SIGNAL(outputLine(const QString &)), &*_consoleWindow, SLOT(on_minerWorker_outputLine(const QString &)));
+  }
 
   _miningTime.start();
 
