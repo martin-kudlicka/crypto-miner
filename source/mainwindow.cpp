@@ -23,6 +23,15 @@ void MainWindow::setupWidgets()
   connect(_ui.miningView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::on_miningView_selectionChanged);
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+  for (auto row = 0; row < _miningModel.rowCount(); ++row)
+  {
+    auto miningUnit = _miningModel.miningUnit(row);
+    miningUnit->closeConsole();
+  }
+}
+
 void MainWindow::on_actionAbout_triggered(bool checked /* false */)
 {
   MAboutBox(this).exec();

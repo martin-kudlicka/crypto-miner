@@ -27,6 +27,7 @@ class MiningUnit : public QObject
              MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins, MiningModel *miningModel);
     virtual ~MiningUnit() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
+          void               closeConsole     ();
           bool               isRunning        () const;
     const MiningUnitOptions &options          () const;
     const Statistics        &sessionStatistics() const;
