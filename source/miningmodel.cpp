@@ -18,6 +18,13 @@ void MiningModel::insert(const MUuidPtr &id)
   insertRow(row);
 }
 
+MiningUnitSPtr MiningModel::miningUnit(int row)
+{
+  auto index2 = index(row, 0);
+
+  return miningUnit(index2);
+}
+
 MiningUnitSPtr MiningModel::miningUnit(const MUuidPtr &id)
 {
   return _miningUnits.get(id);
@@ -38,6 +45,11 @@ void MiningModel::setDataChanged(const MUuidPtr &id, Column column)
   auto row    = _miningUnits.index(id);
   auto index2 = index(row, static_cast<int>(column));
   emit dataChanged(index2, index2);
+}
+
+int MiningModel::rowCount(const QModelIndex &parent /* QModelIndex() */) const
+{
+  return _miningUnits.count();
 }
 
 int MiningModel::columnCount(const QModelIndex &parent /* QModelIndex() */) const
@@ -135,9 +147,4 @@ bool MiningModel::removeRows(int row, int count, const QModelIndex &parent /* QM
   endRemoveRows();
 
   return true;
-}
-
-int MiningModel::rowCount(const QModelIndex &parent /* QModelIndex() */) const
-{
-  return _miningUnits.count();
 }

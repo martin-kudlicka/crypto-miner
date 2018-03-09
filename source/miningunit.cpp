@@ -19,6 +19,14 @@ MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins, MiningMod
   Q_ASSERT_X(_minerPlugin, "MiningUnit::MiningUnit", "_minerPlugin");
 }
 
+void MiningUnit::closeConsole()
+{
+  if (_consoleWindow)
+  {
+    _consoleWindow.reset();
+  }
+}
+
 bool MiningUnit::isRunning() const
 {
   if (!_worker)
