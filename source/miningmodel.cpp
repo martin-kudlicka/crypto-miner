@@ -87,7 +87,7 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
       switch (index.column())
       {
         case Column::Status:
-          return miningUnit->isRunning() ? QIcon(":/miningview/resources/miningview/statusrunning.png") : QIcon(":/miningview/resources/miningview/statusstopped.png");
+          return miningUnit->isRunning() ? QIcon(":/resources/images/statusrunning.png") : QIcon(":/resources/images/statusstopped.png");
       }
   }
 
