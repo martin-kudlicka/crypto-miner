@@ -93,6 +93,8 @@ void MiningUnit::start()
   _worker->start();
 
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
+
+  emit started();
 }
 
 void MiningUnit::stop()
@@ -116,6 +118,8 @@ void MiningUnit::on_worker_finished()
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
 
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
+
+  emit finished();
 }
 
 void MiningUnit::on_worker_hashRate(float value)

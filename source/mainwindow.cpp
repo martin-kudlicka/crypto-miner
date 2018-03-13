@@ -42,6 +42,24 @@ void MainWindow::on_actionSendFeedback_triggered(bool checked /* false */) const
   MFeedback::createEmailForm();
 }
 
+void MainWindow::on_miningUnit_finished()
+{
+  auto index      = _ui.miningView->currentIndex();
+  auto miningUnit = _miningModel.miningUnit(index);
+
+  _ui.miningUnitStart->setEnabled(!miningUnit->isRunning());
+  _ui.miningUnitStop->setEnabled(miningUnit->isRunning());
+}
+
+void MainWindow::on_miningUnit_started()
+{
+  auto index      = _ui.miningView->currentIndex();
+  auto miningUnit = _miningModel.miningUnit(index);
+
+  _ui.miningUnitStart->setEnabled(!miningUnit->isRunning());
+  _ui.miningUnitStop->setEnabled(miningUnit->isRunning());
+}
+
 void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
 {
   // for now take first and only plugin
@@ -105,6 +123,9 @@ void MainWindow::on_miningUnitStart_clicked(bool checked /* false */)
 
   auto index      = _ui.miningView->currentIndex();
   auto miningUnit = _miningModel.miningUnit(index);
+
+  connect(&*miningUnit, &MiningUnit::started,  this, &MainWindow::on_miningUnit_started,  Qt::UniqueConnection);
+  connect(&*miningUnit, &MiningUnit::finished, this, &MainWindow::on_miningUnit_finished, Qt::UniqueConnection);
 
   miningUnit->start();
 }
