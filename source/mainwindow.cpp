@@ -46,9 +46,11 @@ void MainWindow::on_miningUnit_finished()
 {
   auto index      = _ui.miningView->currentIndex();
   auto miningUnit = _miningModel.miningUnit(index);
-
-  _ui.miningUnitStart->setEnabled(!miningUnit->isRunning());
-  _ui.miningUnitStop->setEnabled(miningUnit->isRunning());
+  if (miningUnit)
+  {
+    _ui.miningUnitStart->setEnabled(!miningUnit->isRunning());
+    _ui.miningUnitStop->setEnabled(miningUnit->isRunning());
+  }
 }
 
 void MainWindow::on_miningUnit_started()
