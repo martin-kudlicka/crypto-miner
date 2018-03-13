@@ -44,6 +44,10 @@ class MiningUnit : public QObject
           QElapsedTimer                 _miningTime;
           Statistics                    _sessionStatistics;
 
+  Q_SIGNALS:
+    void finished() const;
+    void started () const;
+
   private Q_SLOTS:
     void on_consoleWindow_destroyed(QObject *obj = Q_NULLPTR);
     void on_worker_finished        ();
