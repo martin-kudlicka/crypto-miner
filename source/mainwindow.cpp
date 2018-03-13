@@ -101,6 +101,8 @@ void MainWindow::on_miningUnitRemove_clicked(bool checked /* false */)
 
 void MainWindow::on_miningUnitStart_clicked(bool checked /* false */)
 {
+  _ui.miningUnitStart->setEnabled(false);
+
   auto index      = _ui.miningView->currentIndex();
   auto miningUnit = _miningModel.miningUnit(index);
 
@@ -109,6 +111,8 @@ void MainWindow::on_miningUnitStart_clicked(bool checked /* false */)
 
 void MainWindow::on_miningUnitStop_clicked(bool checked /* false */)
 {
+  _ui.miningUnitStop->setEnabled(false);
+
   auto index      = _ui.miningView->currentIndex();
   auto miningUnit = _miningModel.miningUnit(index);
 
