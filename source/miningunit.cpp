@@ -5,6 +5,7 @@
 #include "log.h"
 #include "miningmodel.h"
 #include "consolewindow.h"
+#include <MkAnalytics/MAnalytics>
 
 MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins, MiningModel *miningModel) : _miningModel(miningModel), _minerPlugin(Q_NULLPTR), _options(id)
 {
@@ -138,6 +139,8 @@ void MiningUnit::on_worker_resultAccepted()
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Results);
 
   _options.setAcceptedResults(_options.acceptedResults() + 1);
+
+  mAnalytics->sendEvent("miner", "resultFound", _worker->name(), 1);
 }
 
 MiningUnit::Statistics::Statistics() : hashRate(0.0), results(0)
