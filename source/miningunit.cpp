@@ -109,11 +109,15 @@ void MiningUnit::on_consoleWindow_destroyed(QObject *obj /* Q_NULLPTR */)
 
 void MiningUnit::on_worker_finished()
 {
-  auto miningTime = _options.miningTime() + _miningTime.elapsed() / 1000;
+  auto totalMiningTime = _options.miningTime() + _miningTime.elapsed() / 1000;
   _miningTime.invalidate();
-  _options.setMiningTime(miningTime);
+  _options.setMiningTime(totalMiningTime);
 
-  // worker will be destroyed when mining unit is destroyed or new one is created
+  if (_worker.toWeakRef().toStrongRef())
+  {
+    _worker.clear();
+  }
+  // else worker is under destruction
 
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
 
