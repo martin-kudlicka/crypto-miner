@@ -108,6 +108,11 @@ bool MinerWorkerXmrStakCpu::isRunning() const
   return _minerProcess.state() != QProcess::NotRunning;
 }
 
+const QString &MinerWorkerXmrStakCpu::name() const
+{
+  return _minerName;
+}
+
 void MinerWorkerXmrStakCpu::setPoolAddress(const QString &address)
 {
   _poolAddress = address;

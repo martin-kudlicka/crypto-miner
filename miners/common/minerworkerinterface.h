@@ -13,6 +13,7 @@ class MinerWorkerInterface : public QObject
   public:
     virtual const QString &consoleOutput     () const                             = 0;
     virtual       bool     isRunning         () const                             = 0;
+    virtual const QString &name              () const                             = 0;
     virtual       void     setPoolAddress    (const QString &address)             = 0;
     virtual       void     setPoolCredentials(const PoolCredentials &credentials) = 0;
     virtual       void     start             ()                                   = 0;

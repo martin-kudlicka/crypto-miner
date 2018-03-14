@@ -34,6 +34,7 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
 
     virtual const QString &consoleOutput     () const                             Q_DECL_OVERRIDE;
     virtual       bool     isRunning         () const                             Q_DECL_OVERRIDE;
+    virtual const QString &name              () const                             Q_DECL_OVERRIDE;
     virtual       void     setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
     virtual       void     setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;
     virtual       void     start             ()                                   Q_DECL_OVERRIDE;
