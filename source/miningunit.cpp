@@ -110,7 +110,8 @@ void MiningUnit::on_consoleWindow_destroyed(QObject *obj /* Q_NULLPTR */)
 
 void MiningUnit::on_worker_finished()
 {
-  auto totalMiningTime = _options.miningTime() + _miningTime.elapsed() / 1000;
+  auto miningTime      = _miningTime.elapsed();
+  auto totalMiningTime = _options.miningTime() + miningTime / 1000;
   _miningTime.invalidate();
   _options.setMiningTime(totalMiningTime);
 
@@ -125,6 +126,8 @@ void MiningUnit::on_worker_finished()
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
 
   emit finished();
+
+  mAnalytics->sendTiming("miner", MAnalyticsTiming::Title::RunTime, miningTime, _worker->name());
 }
 
 void MiningUnit::on_worker_hashRate(float value)
