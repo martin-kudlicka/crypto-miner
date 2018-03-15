@@ -100,7 +100,7 @@ void MiningUnit::start()
 
 void MiningUnit::stop()
 {
-  _worker.clear();
+  _worker->stop();
 }
 
 void MiningUnit::on_consoleWindow_destroyed(QObject *obj /* Q_NULLPTR */)
@@ -115,12 +115,6 @@ void MiningUnit::on_worker_finished()
   _miningTime.invalidate();
   _options.setMiningTime(totalMiningTime);
 
-  if (_worker.toWeakRef().toStrongRef())
-  {
-    _worker.clear();
-  }
-  // else worker is under destruction
-
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
 
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
@@ -128,6 +122,12 @@ void MiningUnit::on_worker_finished()
   emit finished();
 
   mAnalytics->sendTiming("miner", MAnalyticsTiming::Title::RunTime, miningTime, _worker->name());
+
+  if (_worker.toWeakRef().toStrongRef())
+  {
+    _worker.clear();
+  }
+  // else worker is under destruction
 }
 
 void MiningUnit::on_worker_hashRate(float value)
