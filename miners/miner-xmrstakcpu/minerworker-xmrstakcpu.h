@@ -20,8 +20,8 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
     PoolCredentials _poolCredentials;
     QDir            _minerDir;
     QFileInfo       _fileInfo;
-    QProcess        _minerProcess;
     QString         _minerName;
+    QProcess        _minerProcess;
     QString         _minerOutput;
     QString         _poolAddress;
     QString         _stdOutLastLine;
