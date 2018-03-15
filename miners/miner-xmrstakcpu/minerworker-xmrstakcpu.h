@@ -14,7 +14,7 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
 
   public:
              MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId);
-    virtual ~MinerWorkerXmrStakCpu() Q_DECL_OVERRIDE;
+    virtual ~MinerWorkerXmrStakCpu() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
     PoolCredentials _poolCredentials;
@@ -38,6 +38,7 @@ class MinerWorkerXmrStakCpu : public MinerWorkerInterface
     virtual       void     setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
     virtual       void     setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;
     virtual       void     start             ()                                   Q_DECL_OVERRIDE;
+    virtual       void     stop              ()                                   Q_DECL_OVERRIDE;
 
   private Q_SLOTS:
     void on_minerProcess_finished               (int exitCode, QProcess::ExitStatus exitStatus) const;
