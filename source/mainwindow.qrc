@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>resources/images/mainwindow.png</file>
     <file>resources/images/status/running.png</file>
     <file>resources/images/status/stopped.png</file>
   </qresource>

@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>400</height>
+    <height>233</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Crypto Miner</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="mainwindow.qrc">
+    <normaloff>:/resources/images/mainwindow.png</normaloff>:/resources/images/mainwindow.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
