@@ -144,7 +144,14 @@
     <addaction name="actionSendFeedback"/>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menu_Configuration">
+    <property name="title">
+     <string>&amp;Configuration</string>
+    </property>
+    <addaction name="actionOptions"/>
+   </widget>
    <addaction name="menu_File"/>
+   <addaction name="menu_Configuration"/>
    <addaction name="menu_Help"/>
   </widget>
   <action name="actionE_xit">
@@ -160,6 +167,11 @@
   <action name="actionAbout">
    <property name="text">
     <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="actionOptions">
+   <property name="text">
+    <string>&amp;Options...</string>
    </property>
   </action>
  </widget>
