@@ -3,6 +3,7 @@
 #include "miningunitdialog.h"
 #include <MkWidgets/MAboutBox>
 #include <MkSupport/MFeedback>
+#include "optionsdialog.h"
 
 MainWindow::MainWindow() : _miningModel(&_minerPlugins)
 {
@@ -26,6 +27,12 @@ void MainWindow::setupWidgets()
 void MainWindow::on_actionAbout_triggered(bool checked /* false */)
 {
   MAboutBox(this).exec();
+}
+
+void MainWindow::on_actionOptions_triggered(bool checked /* false */)
+{
+  OptionsDialog optionsDialog(this);
+  optionsDialog.exec();
 }
 
 void MainWindow::on_actionSendFeedback_triggered(bool checked /* false */) const

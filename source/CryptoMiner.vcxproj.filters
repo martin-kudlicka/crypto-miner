@@ -81,6 +81,9 @@
     <ClCompile Include="..\..\..\intermediate\cryptominer\Release\moc_consolewindow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="optionsdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -103,6 +106,9 @@
     </CustomBuild>
     <CustomBuild Include="consolewindow.h">
       <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="optionsdialog.ui">
+      <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +141,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_consolewindow.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\intermediate\cryptominer\ui_optionsdialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="optionsdialog.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
