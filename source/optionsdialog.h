@@ -2,6 +2,7 @@
 #define OPTIONSDIALOG_H
 
 #include "ui_optionsdialog.h"
+#include <MkWidgets/MWidgetSettings>
 
 class OptionsDialog : public QDialog
 {
@@ -11,8 +12,9 @@ class OptionsDialog : public QDialog
 
 	private:
 		Ui::OptionsDialog _ui;
+    MWidgetSettings   _widgetSettings;
 
-    void setupSettings() const;
+    void setupSettings();
 
     virtual void accept() Q_DECL_OVERRIDE;
 };

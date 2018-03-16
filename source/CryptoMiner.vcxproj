@@ -99,6 +99,7 @@
     <ClCompile Include="miningunitdialog.cpp" />
     <ClCompile Include="miningunitoptions.cpp" />
     <ClCompile Include="miningunits.cpp" />
+    <ClCompile Include="options.cpp" />
     <ClCompile Include="optionsdialog.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="miningunitdialog.h" />
     <ClInclude Include="miningunitoptions.h" />
     <ClInclude Include="miningunits.h" />
+    <ClInclude Include="options.h" />
     <ClInclude Include="optionsdialog.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
