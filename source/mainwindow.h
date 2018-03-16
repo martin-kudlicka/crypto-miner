@@ -20,8 +20,6 @@ class MainWindow : public QMainWindow
 
     void setupWidgets();
 
-    virtual void closeEvent(QCloseEvent *event);
-
   private Q_SLOTS:
     void on_actionAbout_triggered       (bool checked = false);
     void on_actionSendFeedback_triggered(bool checked = false) const;

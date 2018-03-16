@@ -1,11 +1,10 @@
 #include "consolewindow.h"
 
-ConsoleWindow::ConsoleWindow(const QString &text)
+ConsoleWindow::ConsoleWindow(const QString &text) : QDialog(QApplication::activeWindow())
 {
   _ui.setupUi(this);
 
   _ui.minerText->setPlainText(text);
-
   _ui.minerText->moveCursor(QTextCursor::End);
 }
 
