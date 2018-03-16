@@ -32,7 +32,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="mineOnStart">
+        <widget class="QCheckBox" name="mineOnStartup">
          <property name="text">
           <string>Automatically start miners</string>
          </property>

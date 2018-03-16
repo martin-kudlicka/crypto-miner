@@ -12,7 +12,7 @@ MainWindow::MainWindow() : _miningModel(&_minerPlugins)
 
   setupWidgets();
 
-  if (gOptions->mineOnStart())
+  if (gOptions->mineOnStartup())
   {
     for (auto row = 0; row < _miningModel.rowCount(); ++row)
     {

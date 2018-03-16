@@ -1,6 +1,6 @@
 #include "options.h"
 
-Q_DECL_CONSTEXPR QString Options::Property::Startup_MineOnStart = "startup/mineOnStart";
+Q_DECL_CONSTEXPR QString Options::Property::Startup_MineOnStartup = "startup/mineOnStartup";
 
 MLazySingleton<Options> gOptions;
 
@@ -9,7 +9,7 @@ Options::Options()
   beginGroup("options");
 }
 
-bool Options::mineOnStart() const
+bool Options::mineOnStartup() const
 {
-  return value(Property::Startup_MineOnStart).toBool();
+  return value(Property::Startup_MineOnStartup).toBool();
 }
