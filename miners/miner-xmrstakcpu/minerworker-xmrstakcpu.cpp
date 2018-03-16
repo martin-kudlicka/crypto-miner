@@ -27,11 +27,11 @@ MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId)
 void MinerWorkerXmrStakCpu::modifyConfig(QString *config) const
 {
   QString cpuThreadsConf = "\"cpu_threads_conf\" :\n[";
-  for (auto cpu = 0; cpu < QThread::idealThreadCount(); ++cpu)
+  for (auto threadNum = 0; threadNum < QThread::idealThreadCount(); ++threadNum)
   {
-    cpuThreadsConf += QString("\n     { \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %1 },").arg(cpu);
+    cpuThreadsConf += QString("\n     { \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %1 },").arg(threadNum);
 #ifdef _DEBUG
-    if (QThread::idealThreadCount() < 2 || cpu == QThread::idealThreadCount() - 2)
+    if (QThread::idealThreadCount() < 2 || threadNum == QThread::idealThreadCount() - 2)
     {
       break;
     }
