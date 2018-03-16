@@ -14,6 +14,8 @@ class Options : public MSettings
 
              Options();
     virtual ~Options() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
+
+    bool mineOnStart() const;
 };
 
 extern MLazySingleton<Options> gOptions;

@@ -4,12 +4,22 @@
 #include <MkWidgets/MAboutBox>
 #include <MkSupport/MFeedback>
 #include "optionsdialog.h"
+#include "options.h"
 
 MainWindow::MainWindow() : _miningModel(&_minerPlugins)
 {
   _ui.setupUi(this);
 
   setupWidgets();
+
+  if (gOptions->mineOnStart())
+  {
+    for (auto row = 0; row < _miningModel.rowCount(); ++row)
+    {
+      auto miningUnit = _miningModel.miningUnit(row);
+      miningUnit->start();
+    }
+  }
 }
 
 void MainWindow::setupWidgets()
