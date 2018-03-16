@@ -14,7 +14,7 @@ void OptionsDialog::setupSettings()
 {
   _ui.startWithLogon->setChecked(MCoreApplication::registeredOnStartup());
 
-  _widgetSettings.setWidget(Options::Property::Startup_MineOnStart, _ui.mineOnStart);
+  _widgetSettings.setWidget(Options::Property::Startup_MineOnStartup, _ui.mineOnStartup);
 
   _widgetSettings.load();
 }
