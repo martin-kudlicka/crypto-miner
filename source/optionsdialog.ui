@@ -23,19 +23,35 @@
       <attribute name="title">
        <string>Startup</string>
       </attribute>
-      <widget class="QCheckBox" name="startWithLogon">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>191</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Automatically start when logged on</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QCheckBox" name="startWithLogon">
+         <property name="text">
+          <string>Automatically start when logged on</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="mineOnStart">
+         <property name="text">
+          <string>Automatically start miners</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>

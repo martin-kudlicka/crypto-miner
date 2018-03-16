@@ -84,6 +84,9 @@
     <ClCompile Include="optionsdialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -146,6 +149,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="optionsdialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="options.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
