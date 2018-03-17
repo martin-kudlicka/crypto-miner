@@ -12,8 +12,9 @@ class MinerXmrStakCpu : public MinerInterface
   private:
     virtual ~MinerXmrStakCpu() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-    virtual MinerWorkerInterfaceSPtr createWorker(const MUuidPtr &id) const Q_DECL_OVERRIDE;
-    virtual QString                  name        ()                   const Q_DECL_OVERRIDE;
+    virtual MinerWorkerInterfaceSPtr createWorker     (const MUuidPtr &id) const Q_DECL_OVERRIDE;
+    virtual QString                  name             ()                   const Q_DECL_OVERRIDE;
+    virtual HwComponentList          supportedHardware()                   const Q_DECL_OVERRIDE;
 };
 
 #endif
