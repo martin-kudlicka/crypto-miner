@@ -2,7 +2,6 @@
 #define MINERWORKERINTERFACE_H
 
 #include <QtCore/QObject>
-#include <MkCore/MUuidPtr>
 
 struct PoolCredentials;
 
@@ -21,8 +20,6 @@ class MinerWorkerInterface : public QObject
 
   protected:
     virtual ~MinerWorkerInterface() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
-
-    MUuidPtr _miningUnitId;
 
   Q_SIGNALS:
     void finished      ()                    const;

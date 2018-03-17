@@ -89,6 +89,7 @@
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_minerworkerinterface.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\minerworkercommon.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="miner-xmrstakcpu.cpp" />
     <ClCompile Include="minerworker-xmrstakcpu.cpp" />
@@ -127,6 +128,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -D_UNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DMINERXMRSTAKCPU_LIB -DBUILD_STATIC -DWINVER=0x0600 -D_WIN32_WINNT=0x0600 -DPSAPI_VERSION=1 -D_user_mode_=1 -D_WINDLL "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCore" "-I.\..\..\..\..\intermediate\miner-xmrstakcpu\$(ConfigurationName)\."</Command>
     </CustomBuild>
+    <ClInclude Include="..\minerworkercommon.h" />
     <ClInclude Include="..\specification.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="resource.h" />
