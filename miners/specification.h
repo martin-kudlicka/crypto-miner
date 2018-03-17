@@ -5,7 +5,7 @@
 
 enum class Company
 {
-  All,
+  Any,
   Amd,
   Nvidia
 };

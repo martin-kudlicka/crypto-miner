@@ -20,5 +20,5 @@ CoinInfoList MinerXmrStakCpu::supportedCoins() const
 
 HwComponentList MinerXmrStakCpu::supportedHardware() const
 {
-  return { HwComponent(Company::All, Hardware::Cpu) };
+  return { HwComponent(Company::Any, Hardware::Cpu) };
 }
