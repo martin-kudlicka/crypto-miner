@@ -3,15 +3,12 @@
 
 namespace Coin
 {
-  struct Info
+  enum Symbol
   {
-    QString symbol;
-    QString name;
+    XMR
   };
 
-  static Q_DECL_CONSTEXPR Info Monero = { "XMR", "Monero" };
+  using SymbolList = QList<Symbol>;
 }
-
-using CoinInfoList = QList<Coin::Info>;
 
 #endif

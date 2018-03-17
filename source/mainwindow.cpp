@@ -5,6 +5,7 @@
 #include <MkSupport/MFeedback>
 #include "optionsdialog.h"
 #include "options.h"
+#include "minerselectiondialog.h"
 
 MainWindow::MainWindow() : _miningModel(&_minerPlugins)
 {
@@ -72,7 +73,13 @@ void MainWindow::on_miningUnit_started()
 
 void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
 {
-  // for now take first and only plugin
+  MinerSelectionDialog minerSelectionDialog(&_minerPlugins, this);
+  if (minerSelectionDialog.exec() == QDialog::Rejected)
+  {
+    return;
+  }
+
+  // TODO for now take first and only plugin
   auto minerPlugin = _minerPlugins.toList().front();
 
   MiningUnitDialog miningUnitDialog(minerPlugin, this);
@@ -94,7 +101,7 @@ void MainWindow::on_miningUnitConsole_clicked(bool checked /* false */)
 
 void MainWindow::on_miningUnitEdit_clicked(bool checked /* false */)
 {
-  // for now take first and only plugin
+  // TODO for now take first and only plugin
   auto minerPlugin = _minerPlugins.toList().front();
 
   auto index = _ui.miningView->currentIndex();

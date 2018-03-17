@@ -14,7 +14,7 @@ class MinerInterface : public QObject
   public:
     virtual MinerWorkerInterfaceSPtr createWorker     (const MUuidPtr &id) const = 0;
     virtual QString                  name             ()                   const = 0;
-    virtual CoinInfoList             supportedCoins   ()                   const = 0;
+    virtual Coin::SymbolList         supportedCoins   ()                   const = 0;
     virtual HwComponentList          supportedHardware()                   const = 0;
 
   protected:
