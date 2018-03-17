@@ -2,9 +2,17 @@
 
 #include "companystrings.h"
 #include "hardwarestrings.h"
+#include "minerplugins.h"
 
-HardwareModel::HardwareModel(const HwComponentList *hwComponents) : _hwComponents(hwComponents)
+HardwareModel::HardwareModel(const HwComponentList *hwComponents, MinerPlugins *minerPlugins) : _hwComponents(hwComponents)
 {
+  for (auto &miner : minerPlugins->toList())
+  {
+    for (const auto &hwComponent : miner->supportedHardware())
+    {
+      _hwComponentMiners[hwComponent].insert(miner);
+    }
+  }
 }
 
 QVariant HardwareModel::data(const QModelIndex &index, int role /* Qt::DisplayRole */) const
