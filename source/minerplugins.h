@@ -2,7 +2,7 @@
 #define MINERPLUGINS_H
 
 #include <MkCore/MPluginContainer>
-#include "../miners/common/minerinterface.h"
+#include "../miners/minerinterface.h"
 
 class MinerPlugins : public MPluginContainer<MinerInterface>
 {

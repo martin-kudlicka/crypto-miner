@@ -1,7 +1,7 @@
 #ifndef MINERXMRSTAKCPU_H
 #define MINERXMRSTAKCPU_H
 
-#include "../common/minerinterface.h"
+#include "../minerinterface.h"
 
 class MinerXmrStakCpu : public MinerInterface
 {

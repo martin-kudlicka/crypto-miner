@@ -1,6 +1,6 @@
 #include "miningunitdialog.h"
 
-#include "../miners/common/minerinterface.h"
+#include "../miners/minerinterface.h"
 
 MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, parent)
 {
