@@ -4,6 +4,7 @@
 #include "ui_minerselectiondialog.h"
 #include "hardwaremodel.h"
 #include "coinsmodel.h"
+#include "minermodel.h"
 
 class MinerPlugins;
 
@@ -19,6 +20,7 @@ class MinerSelectionDialog : public QDialog
     HwComponentList          _supportedHwComponents;
     HardwareModel            _hardwareModel;
     MinerPlugins            *_minerPlugins;
+    MinerModel               _minerModel;
     Ui::MinerSelectionDialog _ui;
 
     void setupWidgets();
