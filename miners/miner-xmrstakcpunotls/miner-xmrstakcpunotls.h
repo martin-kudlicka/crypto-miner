@@ -1,16 +1,16 @@
-#ifndef MINERXMRSTAKCPU_H
-#define MINERXMRSTAKCPU_H
+#ifndef MINERXMRSTAKCPUNOTLS_H
+#define MINERXMRSTAKCPUNOTLS_H
 
 #include "../minerinterface.h"
 
-class MinerXmrStakCpu : public MinerInterface
+class MinerXmrStakCpuNoTls : public MinerInterface
 {
   Q_OBJECT
   Q_PLUGIN_METADATA(IID IID_MINERINTERFACE)
   Q_INTERFACES(MinerInterface)
 
   private:
-    virtual ~MinerXmrStakCpu() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
+    virtual ~MinerXmrStakCpuNoTls() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
     virtual MinerWorkerInterfaceSPtr          createWorker     (const MUuidPtr &id) const Q_DECL_OVERRIDE;
     virtual QString                           name             ()                   const Q_DECL_OVERRIDE;

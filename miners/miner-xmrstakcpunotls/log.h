@@ -4,6 +4,6 @@
 #include <MkCore/MLoggingCategory>
 #include <MkCore/MMessageLogger>
 
-Q_DECLARE_LOGGING_CATEGORY(XmrStakCpu)
+Q_DECLARE_LOGGING_CATEGORY(XmrStakCpuNoTls)
 
 #endif

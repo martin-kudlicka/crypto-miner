@@ -1,17 +1,17 @@
-#ifndef MINERWORKERXMRSTAKCPU_H
-#define MINERWORKERXMRSTAKCPU_H
+#ifndef MINERWORKERXMRSTAKCPUNOTLS_H
+#define MINERWORKERXMRSTAKCPUNOTLS_H
 
 #include "../minerworkercommon.h"
 #include <QtCore/QProcess>
 #include <QtCore/QTextStream>
 
-class MinerWorkerXmrStakCpu : public MinerWorkerCommon
+class MinerWorkerXmrStakCpuNoTls : public MinerWorkerCommon
 {
   Q_OBJECT
 
   public:
-             MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId);
-    virtual ~MinerWorkerXmrStakCpu() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
+             MinerWorkerXmrStakCpuNoTls(const MUuidPtr &miningUnitId);
+    virtual ~MinerWorkerXmrStakCpuNoTls() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
     QProcess    _minerProcess;

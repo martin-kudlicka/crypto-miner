@@ -1,17 +1,17 @@
-#include "minerworker-xmrstakcpu.h"
+#include "minerworker-xmrstakcpunotls.h"
 
 #include <QtCore/QStandardPaths>
 #include <QtCore/QThread>
 #include "log.h"
 #include <QtCore/QRegularExpression>
 
-MinerWorkerXmrStakCpu::MinerWorkerXmrStakCpu(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId)
+MinerWorkerXmrStakCpuNoTls::MinerWorkerXmrStakCpuNoTls(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId)
 {
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "xmr-stak-cpu-notls.exe");
   _minerProcess.setWorkingDirectory(_minerDir.path());
 }
 
-void MinerWorkerXmrStakCpu::modifyConfig(QString *config) const
+void MinerWorkerXmrStakCpuNoTls::modifyConfig(QString *config) const
 {
   QString cpuThreadsConf = "\"cpu_threads_conf\" :\n[";
   for (auto threadNum = 0; threadNum < QThread::idealThreadCount(); ++threadNum)
@@ -34,7 +34,7 @@ void MinerWorkerXmrStakCpu::modifyConfig(QString *config) const
   config->replace(R"("h_print_time" : 60,)",                        R"("h_print_time" : 1,)");
 }
 
-QString MinerWorkerXmrStakCpu::prepareConfigFile() const
+QString MinerWorkerXmrStakCpuNoTls::prepareConfigFile() const
 {
   auto config = readVanillaConfig();
 
@@ -45,7 +45,7 @@ QString MinerWorkerXmrStakCpu::prepareConfigFile() const
   return filePath;
 }
 
-QString MinerWorkerXmrStakCpu::readVanillaConfig() const
+QString MinerWorkerXmrStakCpuNoTls::readVanillaConfig() const
 {
   auto configFileInfo = QFileInfo(_minerDir, "config.txt");
 
@@ -56,7 +56,7 @@ QString MinerWorkerXmrStakCpu::readVanillaConfig() const
   return configStream.readAll();
 }
 
-QString MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
+QString MinerWorkerXmrStakCpuNoTls::writeWorkerConfig(const QString &config) const
 {
   auto configFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
   configFilePath.append(QDir::separator());
@@ -77,53 +77,53 @@ QString MinerWorkerXmrStakCpu::writeWorkerConfig(const QString &config) const
   return configFilePath;
 }
 
-const QString &MinerWorkerXmrStakCpu::consoleOutput() const
+const QString &MinerWorkerXmrStakCpuNoTls::consoleOutput() const
 {
   return _minerOutput;
 }
 
-bool MinerWorkerXmrStakCpu::isRunning() const
+bool MinerWorkerXmrStakCpuNoTls::isRunning() const
 {
   return _minerProcess.state() != QProcess::NotRunning;
 }
 
-void MinerWorkerXmrStakCpu::start()
+void MinerWorkerXmrStakCpuNoTls::start()
 {
   auto configFilePath = prepareConfigFile();
   _minerProcess.setArguments(QStringList() << configFilePath);
 
   _stdOutStream.setDevice(&_minerProcess);
 
-  connect(&_minerProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerXmrStakCpu::on_minerProcess_finished);
-  connect(&_minerProcess, &QProcess::readyReadStandardOutput,                            this, &MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput);
+  connect(&_minerProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerXmrStakCpuNoTls::on_minerProcess_finished);
+  connect(&_minerProcess, &QProcess::readyReadStandardOutput,                            this, &MinerWorkerXmrStakCpuNoTls::on_minerProcess_readyReadStandardOutput);
 
   _minerProcess.start(QIODevice::ReadOnly);
 
   if (_minerProcess.error() == QProcess::FailedToStart)
   {
-    mCCritical(XmrStakCpu) << "failed to start miner for mining unit " << _miningUnitId.toString();
+    mCCritical(XmrStakCpuNoTls) << "failed to start miner for mining unit " << _miningUnitId.toString();
 
     emit finished();
   }
   else
   {
-    mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " started";
+    mCInfo(XmrStakCpuNoTls) << "miner for mining unit " << _miningUnitId.toString() << " started";
   }
 }
 
-void MinerWorkerXmrStakCpu::stop()
+void MinerWorkerXmrStakCpuNoTls::stop()
 {
   _minerProcess.kill();
 }
 
-void MinerWorkerXmrStakCpu::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
+void MinerWorkerXmrStakCpuNoTls::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
 {
-  mCInfo(XmrStakCpu) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
+  mCInfo(XmrStakCpuNoTls) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
 
   emit finished();
 }
 
-void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
+void MinerWorkerXmrStakCpuNoTls::on_minerProcess_readyReadStandardOutput()
 {
   forever
   {
@@ -144,15 +144,15 @@ void MinerWorkerXmrStakCpu::on_minerProcess_readyReadStandardOutput()
 
       if (regExpMatch.capturedRef(1).contains("ERROR") || regExpMatch.capturedRef(1).contains("FAILED"))
       {
-        mCCritical(XmrStakCpu) << message;
+        mCCritical(XmrStakCpuNoTls) << message;
       }
       else if (regExpMatch.capturedRef(1).startsWith("Pool connection lost."))
       {
-        mCWarning(XmrStakCpu) << message;
+        mCWarning(XmrStakCpuNoTls) << message;
       }
       else
       {
-        mCInfo(XmrStakCpu) << message;
+        mCInfo(XmrStakCpuNoTls) << message;
 
         if (regExpMatch.capturedRef(1) == "Result accepted by the pool.")
         {
