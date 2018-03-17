@@ -2,5 +2,6 @@
 
 CoinSymbolStrings::CoinSymbolStrings()
 {
-  insert(Coin::Symbol::XMR, "XMR");
+  insert(Coin::Symbol::AEON, "AEON");
+  insert(Coin::Symbol::XMR,  "XMR");
 }

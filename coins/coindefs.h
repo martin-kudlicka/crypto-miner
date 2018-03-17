@@ -5,6 +5,7 @@ namespace Coin
 {
   enum Symbol
   {
+    AEON,
     XMR
   };
 
