@@ -1,4 +1,4 @@
-#include "minerxmrstakwin64.h"
+#include "miner-xmrstakwin64.h"
 
 MinerXmrStakWin64::MinerXmrStakWin64()
 {
