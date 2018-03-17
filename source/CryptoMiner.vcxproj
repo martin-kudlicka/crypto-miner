@@ -91,6 +91,7 @@
     </ClCompile>
     <ClCompile Include="coinsmodel.cpp" />
     <ClCompile Include="coinsymbolstrings.cpp" />
+    <ClCompile Include="companystrings.cpp" />
     <ClCompile Include="consolewindow.cpp" />
     <ClCompile Include="hardwaremodel.cpp" />
     <ClCompile Include="hardwarestrings.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_optionsdialog.h" />
     <ClInclude Include="coinsmodel.h" />
     <ClInclude Include="coinsymbolstrings.h" />
+    <ClInclude Include="companystrings.h" />
     <ClInclude Include="hardwaremodel.h" />
     <ClInclude Include="hardwarestrings.h" />
     <ClInclude Include="log.h" />
