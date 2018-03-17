@@ -1,7 +1,7 @@
 #ifndef SPECIFICATION_H
 #define SPECIFICATION_H
 
-#include <QtCore/QSet>
+#include <QtCore/QList>
 
 enum class Company
 {
@@ -23,6 +23,10 @@ struct HwComponent
 
   HwComponent(Company company, Hardware hardware) : company(company), hardware(hardware)
   {
+  }
+  bool operator==(const HwComponent &other) const
+  {
+    return other.company == company && other.hardware == hardware;
   }
 };
 
