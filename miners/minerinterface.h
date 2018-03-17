@@ -3,6 +3,7 @@
 
 #include "minerworkerinterface.h"
 #include "specification.h"
+#include "../coins/coindefs.h"
 
 #define IID_MINERINTERFACE "cz.martink.CryptoMiner.MinerInterface"
 
@@ -13,6 +14,7 @@ class MinerInterface : public QObject
   public:
     virtual MinerWorkerInterfaceSPtr createWorker     (const MUuidPtr &id) const = 0;
     virtual QString                  name             ()                   const = 0;
+    virtual CoinInfoList             supportedCoins   ()                   const = 0;
     virtual HwComponentList          supportedHardware()                   const = 0;
 
   protected:
