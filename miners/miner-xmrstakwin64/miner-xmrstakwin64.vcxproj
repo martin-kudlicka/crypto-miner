@@ -72,12 +72,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="minerxmrstakwin64.cpp" />
+    <ClInclude Include="miner-xmrstakwin64.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="minerxmrstakwin64.h" />
+    <ResourceCompile Include="miner-xmrstakwin64.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="miner-xmrstakwin64.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
