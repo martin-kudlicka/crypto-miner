@@ -3,7 +3,7 @@
 
 #include <QtCore/QSharedPointer>
 #include "miningunitoptions.h"
-#include "../miners/common/minerworkerinterface.h"
+#include "../miners/minerworkerinterface.h"
 #include <QtCore/QElapsedTimer>
 
 class ConsoleWindow;

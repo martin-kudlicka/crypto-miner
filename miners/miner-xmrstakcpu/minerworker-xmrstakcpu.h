@@ -1,7 +1,7 @@
 #ifndef MINERWORKER_H
 #define MINERWORKER_H
 
-#include "../common/minerworkerinterface.h"
+#include "../minerworkerinterface.h"
 #include "../common/poolcredentials.h"
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
