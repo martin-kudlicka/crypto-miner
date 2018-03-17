@@ -1,5 +1,6 @@
 #include "hardwaremodel.h"
 
+#include "companystrings.h"
 #include "hardwarestrings.h"
 
 HardwareModel::HardwareModel(const HwComponentList *hwComponents) : _hwComponents(hwComponents)
@@ -13,11 +14,18 @@ QVariant HardwareModel::data(const QModelIndex &index, int role /* Qt::DisplayRo
     return QVariant();
   }
 
+  static CompanyStrings companyStrings;
   static HardwareStrings hardwareStrings;
 
   auto hwComponent = &_hwComponents->at(index.row());
 
-  auto value = hardwareStrings.toString(hwComponent->hardware);
+  QString value;
+  if (hwComponent->company != Company::Any)
+  {
+    value.append(companyStrings.toString(hwComponent->company));
+    value.append(' ');
+  }
+  value.append(hardwareStrings.toString(hwComponent->hardware));
 
   return value;
 }
