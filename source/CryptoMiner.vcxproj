@@ -97,6 +97,7 @@
     <ClCompile Include="log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="minermodel.cpp" />
     <ClCompile Include="minerplugins.cpp" />
     <ClCompile Include="minerselectiondialog.cpp" />
     <ClCompile Include="miningmodel.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="hardwaremodel.h" />
     <ClInclude Include="hardwarestrings.h" />
     <ClInclude Include="log.h" />
+    <ClInclude Include="minermodel.h" />
     <ClInclude Include="minerplugins.h" />
     <ClInclude Include="minerselectiondialog.h" />
     <ClInclude Include="miningmodel.h" />

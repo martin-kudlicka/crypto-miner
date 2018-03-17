@@ -70,9 +70,9 @@
   <widget class="QListView" name="hwComponentsView">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>90</y>
-     <width>141</width>
+     <width>111</width>
      <height>141</height>
     </rect>
    </property>
@@ -80,9 +80,19 @@
   <widget class="QListView" name="coinsView">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>140</x>
      <y>90</y>
-     <width>141</width>
+     <width>111</width>
+     <height>141</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QListView" name="minerView">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>90</y>
+     <width>111</width>
      <height>141</height>
     </rect>
    </property>
