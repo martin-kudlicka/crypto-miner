@@ -19,37 +19,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="miner-xmrstakcpu.cpp">
+    <ClCompile Include="miner-xmrstakcpunotls.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_miner-xmrstakcpu.cpp">
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Debug\moc_miner-xmrstakcpunotls.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_miner-xmrstakcpu.cpp">
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Release\moc_miner-xmrstakcpunotls.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="minerworker-xmrstakcpu.cpp">
+    <ClCompile Include="minerworker-xmrstakcpunotls.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
     <ClCompile Include="log.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerworker-xmrstakcpu.cpp">
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Debug\moc_minerworker-xmrstakcpunotls.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_minerworker-xmrstakcpu.cpp">
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Release\moc_minerworker-xmrstakcpunotls.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerinterface.cpp">
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Debug\moc_minerinterface.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_minerinterface.cpp">
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Release\moc_minerinterface.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Debug\moc_minerworkerinterface.cpp">
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Debug\moc_minerworkerinterface.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpu\Release\moc_minerworkerinterface.cpp">
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Release\moc_minerworkerinterface.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="..\minerworkercommon.cpp">
@@ -57,10 +57,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="miner-xmrstakcpu.h">
+    <CustomBuild Include="miner-xmrstakcpunotls.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="minerworker-xmrstakcpu.h">
+    <CustomBuild Include="minerworker-xmrstakcpunotls.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="..\minerinterface.h">
@@ -88,7 +88,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="miner-xmrstakcpu.rc">
+    <ResourceCompile Include="miner-xmrstakcpunotls.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by miner-xmrstakcpu.rc
+// Used by miner-xmrstakcpunotls.rc
 
 // Další výchozí hodnoty pro nové objekty
 // 

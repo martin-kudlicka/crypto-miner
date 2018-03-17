@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CryptoMiner", "source\Crypt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "miners", "miners", "{575096F1-6AB4-4D15-A0AA-8745B0A161EC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "miner-xmrstakcpu", "miners\miner-xmrstakcpu\miner-xmrstakcpu.vcxproj", "{50CC2DD5-4FC8-47EF-B2B9-3ACB79D85DEF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "miner-xmrstakcpunotls", "miners\miner-xmrstakcpunotls\miner-xmrstakcpunotls.vcxproj", "{50CC2DD5-4FC8-47EF-B2B9-3ACB79D85DEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
