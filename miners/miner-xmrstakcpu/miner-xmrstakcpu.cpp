@@ -12,3 +12,8 @@ QString MinerXmrStakCpu::name() const
 {
   return "XMR-Stak CPU";
 }
+
+HwComponentList MinerXmrStakCpu::supportedHardware() const
+{
+  return { HwComponent(Company::All, Hardware::Cpu) };
+}
