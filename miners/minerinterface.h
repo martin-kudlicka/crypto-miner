@@ -5,6 +5,8 @@
 #include "specification.h"
 #include "../coins/coindefs.h"
 
+class MUuidPtr;
+
 #define IID_MINERINTERFACE "cz.martink.CryptoMiner.MinerInterface"
 
 class MinerInterface : public QObject
