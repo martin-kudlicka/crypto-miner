@@ -15,13 +15,13 @@ class MinerSelectionDialog : public QDialog
     virtual ~MinerSelectionDialog() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
+    Ui::MinerSelectionDialog _ui;
     Coin::SymbolList         _supportedCoins;
     CoinsModel               _coinsModel;
     HwComponentList          _supportedHwComponents;
     HardwareModel            _hardwareModel;
     MinerPlugins            *_minerPlugins;
     MinerModel               _minerModel;
-    Ui::MinerSelectionDialog _ui;
 
     void setupWidgets();
 };

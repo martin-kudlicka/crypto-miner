@@ -1,9 +1,17 @@
 #include "coinsmodel.h"
 
 #include "coinsymbolstrings.h"
+#include "minerplugins.h"
 
-CoinsModel::CoinsModel(const Coin::SymbolList *symbols) : _symbols(symbols)
+CoinsModel::CoinsModel(const Coin::SymbolList *symbols, MinerPlugins *minerPlugins) : _symbols(symbols)
 {
+  for (auto &miner : minerPlugins->toList())
+  {
+    for (auto symbol : miner->supportedCoins())
+    {
+      _symbolMiners[symbol].insert(miner);
+    }
+  }
 }
 
 QVariant CoinsModel::data(const QModelIndex &index, int role /* Qt::DisplayRole */) const

@@ -5,6 +5,7 @@
 #include "specification.h"
 #include "../coins/coindefs.h"
 #include <MkCore/MOperatingSystemVersion>
+#include <QtCore/QSet>
 
 class MUuidPtr;
 
@@ -24,6 +25,8 @@ class MinerInterface : public QObject
   protected:
     virtual ~MinerInterface() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 };
+
+using MinerInterfacePtrSet = QSet<MinerInterface *>;
 
 Q_DECLARE_INTERFACE(MinerInterface, IID_MINERINTERFACE);
 

@@ -1,8 +1,6 @@
 #include "minerselectiondialog.h"
 
-#include "minerplugins.h"
-
-MinerSelectionDialog::MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *parent) : QDialog(parent), _minerPlugins(minerPlugins), _coinsModel(&_supportedCoins), _hardwareModel(&_supportedHwComponents), _minerModel(minerPlugins)
+MinerSelectionDialog::MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *parent) : QDialog(parent), _minerPlugins(minerPlugins), _coinsModel(&_supportedCoins, minerPlugins), _hardwareModel(&_supportedHwComponents, minerPlugins), _minerModel(minerPlugins)
 {
   _ui.setupUi(this);
 

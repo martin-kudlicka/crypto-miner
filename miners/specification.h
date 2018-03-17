@@ -30,6 +30,11 @@ struct HwComponent
   }
 };
 
+static uint qHash(const HwComponent &key, uint seed = 0)
+{
+  return qHash(static_cast<uchar>(key.company), seed) ^ qHash(static_cast<uchar>(key.hardware), seed);
+}
+
 using HwComponentList = QList<HwComponent>;
 
 #endif
