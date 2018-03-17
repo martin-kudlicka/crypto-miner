@@ -96,6 +96,12 @@
     <ClCompile Include="hardwarestrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="coinsmodel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coinsymbolstrings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -176,6 +182,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hardwarestrings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coinsmodel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coinsymbolstrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

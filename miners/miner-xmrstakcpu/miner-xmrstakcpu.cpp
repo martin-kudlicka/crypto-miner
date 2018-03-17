@@ -13,9 +13,9 @@ QString MinerXmrStakCpu::name() const
   return "XMR-Stak CPU";
 }
 
-CoinInfoList MinerXmrStakCpu::supportedCoins() const
+Coin::SymbolList MinerXmrStakCpu::supportedCoins() const
 {
-  return { Coin::Monero };
+  return { Coin::Symbol::XMR };
 }
 
 HwComponentList MinerXmrStakCpu::supportedHardware() const

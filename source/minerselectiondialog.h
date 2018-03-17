@@ -3,6 +3,7 @@
 
 #include "ui_minerselectiondialog.h"
 #include "hardwaremodel.h"
+#include "coinsmodel.h"
 
 class MinerPlugins;
 
@@ -13,6 +14,8 @@ class MinerSelectionDialog : public QDialog
     virtual ~MinerSelectionDialog() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
+    Coin::SymbolList         _supportedCoins;
+    CoinsModel               _coinsModel;
     HwComponentList          _supportedHwComponents;
     HardwareModel            _hardwareModel;
     MinerPlugins            *_minerPlugins;

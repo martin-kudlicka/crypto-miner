@@ -14,7 +14,7 @@ class MinerXmrStakCpu : public MinerInterface
 
     virtual MinerWorkerInterfaceSPtr createWorker     (const MUuidPtr &id) const Q_DECL_OVERRIDE;
     virtual QString                  name             ()                   const Q_DECL_OVERRIDE;
-    virtual CoinInfoList             supportedCoins   ()                   const Q_DECL_OVERRIDE;
+    virtual Coin::SymbolList         supportedCoins   ()                   const Q_DECL_OVERRIDE;
     virtual HwComponentList          supportedHardware()                   const Q_DECL_OVERRIDE;
 };
 
