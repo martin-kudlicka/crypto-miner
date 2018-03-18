@@ -53,6 +53,9 @@
     </item>
     <item>
      <widget class="QPushButton" name="okButton">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="text">
        <string>OK</string>
       </property>
@@ -87,7 +90,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QListView" name="minerView">
+  <widget class="QListView" name="minersView">
    <property name="geometry">
     <rect>
      <x>260</x>
