@@ -17,7 +17,9 @@ class MinerSelectionDialog : public QDialog
     virtual ~MinerSelectionDialog() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
-    MinerInterfacePtrSet     _allowedMiners;
+    MinerInterfacePtrSet     _allowedCoinMiners;
+    MinerInterfacePtrSet     _allowedHwComponentMiners;
+    MinerInterfacePtrSet     _allowedMinerMiners;
     CoinsModel               _coinsModel;
     HardwareModel            _hardwareModel;
     MinerPlugins            *_minerPlugins;
