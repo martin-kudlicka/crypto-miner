@@ -1,11 +1,5 @@
 #include "miningunitoptions.h"
 
-#include "miningunits.h"
-
-Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Miner_Name                   = "miner/name";
-Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Miner_Parameters_Coin        = "miner/parameters/coin";
-Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Miner_Parameters_HwComponent = "miner/parameters/hwComponent";
-
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Address  = "pool/address";
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Password = "pool/password";
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Username = "pool/username";
@@ -13,9 +7,9 @@ Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Username = "pool/user
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Statistics_AcceptedResults = "statistics/acceptedResults";
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Statistics_MiningTime      = "statistics/miningTime";
 
-MiningUnitOptions::MiningUnitOptions(const MUuidPtr &id) : _id(id)
+MiningUnitOptions::MiningUnitOptions(const MUuidPtr &id) : _id(id), _minerOptions(id)
 {
-  beginGroup(MiningUnits::Property::Group);
+  beginGroup("miningUnits");
   beginGroup(id.toString());
 }
 
@@ -29,9 +23,14 @@ const MUuidPtr &MiningUnitOptions::id() const
   return _id;
 }
 
-QString MiningUnitOptions::minerName() const
+MinerOptions &MiningUnitOptions::miner()
 {
-  return value(Property::Miner_Name).toString();
+  return _minerOptions;
+}
+
+const MinerOptions &MiningUnitOptions::miner() const
+{
+  return _minerOptions;
 }
 
 quintptr MiningUnitOptions::miningTime() const
@@ -57,11 +56,6 @@ QString MiningUnitOptions::poolUsername() const
 void MiningUnitOptions::setAcceptedResults(quintptr count)
 {
   setValue(Property::Statistics_AcceptedResults, count);
-}
-
-void MiningUnitOptions::setMiner(const QString &name)
-{
-  setValue(Property::Miner_Name, name);
 }
 
 void MiningUnitOptions::setMiningTime(quintptr seconds)

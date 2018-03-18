@@ -7,11 +7,6 @@
 class MiningUnits
 {
   public:
-    struct Property
-    {
-      static Q_DECL_CONSTEXPR QString Group;
-    };
-
     MiningUnits(MinerPlugins *minerPlugins, MiningModel *miningModel);
 
     quintptr       count      ()                   const;

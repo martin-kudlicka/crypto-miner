@@ -1,10 +1,8 @@
 #include "miningunits.h"
 
-Q_DECL_CONSTEXPR QString MiningUnits::Property::Group = "miningUnits";
-
 MiningUnits::MiningUnits(MinerPlugins *minerPlugins, MiningModel *miningModel) : _minerPlugins(minerPlugins), _miningModel(miningModel)
 {
-  _settings.beginGroup(Property::Group);
+  _settings.beginGroup("miningUnits");
 }
 
 quintptr MiningUnits::count() const

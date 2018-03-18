@@ -32,8 +32,8 @@ const MiningUnitOptions &MiningUnitDialog::options() const
 void MiningUnitDialog::setupSettings()
 {
   // parameters
-  _widgetSettings.setWidget(MiningUnitOptions::Property::Miner_Parameters_HwComponent, _ui.parameterHwComponent);
-  _widgetSettings.setWidget(MiningUnitOptions::Property::Miner_Parameters_Coin,        _ui.parameterCoin);
+  _widgetSettings.setWidget(MinerOptions::Property::Parameters_HwComponent, _ui.parameterHwComponent);
+  _widgetSettings.setWidget(MinerOptions::Property::Parameters_Coin,        _ui.parameterCoin);
 
   // pool
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Address,  _ui.poolAddress);
@@ -77,7 +77,7 @@ void MiningUnitDialog::setupWidgets(const HwComponent &hwComponent, Coin::Symbol
 
 void MiningUnitDialog::accept()
 {
-  _options.setMiner(_minerPlugin->name());
+  _options.miner().setName(_minerPlugin->name());
 
   _widgetSettings.save();
 
