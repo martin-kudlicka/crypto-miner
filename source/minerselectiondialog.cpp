@@ -37,6 +37,11 @@ void MinerSelectionDialog::refreshAllowedMiners()
   }
 }
 
+void MinerSelectionDialog::refreshOkButton() const
+{
+  _ui.okButton->setEnabled(!_ui.hwComponentsView->selectionModel()->selectedRows().isEmpty() && !_ui.coinsView->selectionModel()->selectedRows().isEmpty() && !_ui.minersView->selectionModel()->selectedRows().isEmpty());
+}
+
 void MinerSelectionDialog::setupWidgets()
 {
   for (auto &miner : _minerPlugins->toList())
@@ -63,11 +68,6 @@ void MinerSelectionDialog::setupWidgets()
   _ui.minersView->setModel(&_minersModel);
 }
 
-void MinerSelectionDialog::updateOkButton() const
-{
-  _ui.okButton->setEnabled(!_ui.hwComponentsView->selectionModel()->selectedRows().isEmpty() && !_ui.coinsView->selectionModel()->selectedRows().isEmpty() && !_ui.minersView->selectionModel()->selectedRows().isEmpty());
-}
-
 void MinerSelectionDialog::on_coinsView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
   auto isSelected = _ui.coinsView->selectionModel()->selectedRows().isEmpty();
@@ -82,7 +82,7 @@ void MinerSelectionDialog::on_coinsView_selectionChanged(const QItemSelection &s
   }
   refreshAllowedMiners();
 
-  updateOkButton();
+  refreshOkButton();
 }
 
 void MinerSelectionDialog::on_hwComponentsView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
@@ -99,7 +99,7 @@ void MinerSelectionDialog::on_hwComponentsView_selectionChanged(const QItemSelec
   }
   refreshAllowedMiners();
 
-  updateOkButton();
+  refreshOkButton();
 }
 
 void MinerSelectionDialog::on_minersView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
@@ -116,5 +116,5 @@ void MinerSelectionDialog::on_minersView_selectionChanged(const QItemSelection &
   }
   refreshAllowedMiners();
 
-  updateOkButton();
+  refreshOkButton();
 }
