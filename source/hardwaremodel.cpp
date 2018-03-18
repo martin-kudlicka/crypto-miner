@@ -1,7 +1,6 @@
 #include "hardwaremodel.h"
 
-#include "companystrings.h"
-#include "hardwarestrings.h"
+#include "hwcomponentstrings.h"
 #include "minerplugins.h"
 
 HardwareModel::HardwareModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins) : _allowedMiners(allowedMiners)
@@ -20,6 +19,11 @@ HardwareModel::HardwareModel(const MinerInterfacePtrSet *allowedMiners, MinerPlu
   }
 }
 
+HwComponent HardwareModel::hwComponent(const QModelIndex &index) const
+{
+  return _hwComponents.at(index.row());
+}
+
 MinerInterfacePtrSet HardwareModel::miners(const QModelIndex &index) const
 {
   auto hwComponent = &_hwComponents.at(index.row());
@@ -34,20 +38,9 @@ QVariant HardwareModel::data(const QModelIndex &index, int role /* Qt::DisplayRo
     return QVariant();
   }
 
-  static CompanyStrings companyStrings;
-  static HardwareStrings hardwareStrings;
-
   auto hwComponent = &_hwComponents.at(index.row());
 
-  QString value;
-  if (hwComponent->company != Company::Any)
-  {
-    value.append(companyStrings.toString(hwComponent->company));
-    value.append(' ');
-  }
-  value.append(hardwareStrings.toString(hwComponent->hardware));
-
-  return value;
+  return HwComponentStrings::toString(*hwComponent);
 }
 
 Qt::ItemFlags HardwareModel::flags(const QModelIndex &index) const
@@ -58,7 +51,7 @@ Qt::ItemFlags HardwareModel::flags(const QModelIndex &index) const
   {
     auto hwComponent       = &_hwComponents.at(index.row());
     auto hwComponentMiners = _hwComponentMiners.value(*hwComponent);
-    if (hwComponentMiners.intersect(*_allowedMiners).isEmpty())
+    if (!hwComponentMiners.intersects(*_allowedMiners))
     {
       itemFlags &= ~Qt::ItemIsEnabled;
     }

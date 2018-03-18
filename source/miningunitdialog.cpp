@@ -14,6 +14,15 @@ MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *min
 
   setupWidgets();
   setupSettings();
+
+  // parameters
+  auto value = HwComponentStrings::toString(hwComponent);
+  auto index = _ui.parameterHwComponent->findData(value);
+  _ui.parameterHwComponent->setCurrentIndex(index);
+
+  value = gCoinSymbolStrings->toString(coinSymbol);
+  index = _ui.parameterCoin->findData(value);
+  _ui.parameterCoin->setCurrentIndex(index);
 }
 
 const MiningUnitOptions &MiningUnitDialog::options() const
@@ -23,6 +32,11 @@ const MiningUnitOptions &MiningUnitDialog::options() const
 
 void MiningUnitDialog::setupSettings()
 {
+  // parameters
+  _widgetSettings.setWidget(MiningUnitOptions::Property::Miner_Parameters_HwComponent, _ui.parameterHwComponent);
+  _widgetSettings.setWidget(MiningUnitOptions::Property::Miner_Parameters_Coin,        _ui.parameterCoin);
+
+  // pool
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Address,  _ui.poolAddress);
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Username, _ui.poolUsername);
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Password, _ui.poolPassword);
@@ -38,14 +52,12 @@ void MiningUnitDialog::setupWidgets() const
   for (const auto &hwComponent : _minerPlugin->supportedHardware())
   {
     auto value = HwComponentStrings::toString(hwComponent);
-    _ui.parameterHardware->addItem(value, value);
+    _ui.parameterHwComponent->addItem(value, value);
   }
-
-  static CoinSymbolStrings coinSymbolStrings;
 
   for (auto coinSymbol : _minerPlugin->supportedCoins())
   {
-    auto value = coinSymbolStrings.toString(coinSymbol);
+    auto value = gCoinSymbolStrings->toString(coinSymbol);
     _ui.parameterCoin->addItem(value, value);
   }
 }

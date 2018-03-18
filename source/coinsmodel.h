@@ -2,7 +2,7 @@
 #define COINSMODEL_H
 
 #include <QtCore/QAbstractListModel>
-#include "../coins/coindefs.h"
+#include "../coins/coin.h"
 #include "../miners/minerinterface.h"
 
 class MinerPlugins;
@@ -13,7 +13,8 @@ class CoinsModel : public QAbstractListModel
              CoinsModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins);
     virtual ~CoinsModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-    MinerInterfacePtrSet miners(const QModelIndex &index) const;
+    Coin::Symbol         coinSymbol(const QModelIndex &index) const;
+    MinerInterfacePtrSet miners    (const QModelIndex &index) const;
 
   private:
           Coin::SymbolList                          _symbols;

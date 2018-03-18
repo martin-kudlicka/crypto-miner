@@ -13,6 +13,21 @@ MinerSelectionDialog::MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *
   connect(_ui.minersView->selectionModel(),       &QItemSelectionModel::selectionChanged, this, &MinerSelectionDialog::on_minersView_selectionChanged);
 }
 
+Coin::Symbol MinerSelectionDialog::selectedCoinSymbol() const
+{
+  return _coinsModel.coinSymbol(_ui.coinsView->currentIndex());
+}
+
+HwComponent MinerSelectionDialog::selectedHwComponent() const
+{
+  return _hardwareModel.hwComponent(_ui.hwComponentsView->currentIndex());
+}
+
+MinerInterface *MinerSelectionDialog::selectedMiner() const
+{
+  return _minersMiner;
+}
+
 void MinerSelectionDialog::refreshAllowedMiners()
 {
   if (_minersMiner)
@@ -57,7 +72,7 @@ void MinerSelectionDialog::on_coinsView_selectionChanged(const QItemSelection &s
   auto isSelected = !_ui.coinsView->selectionModel()->selectedRows().isEmpty();
   if (isSelected)
   {
-    auto index  = _ui.coinsView->selectionModel()->selectedIndexes().first();
+    auto index  = _ui.coinsView->selectionModel()->selectedIndexes().constFirst();
     _coinMiners = _coinsModel.miners(index);
   }
   else
@@ -77,7 +92,7 @@ void MinerSelectionDialog::on_hwComponentsView_selectionChanged(const QItemSelec
   auto isSelected = !_ui.hwComponentsView->selectionModel()->selectedRows().isEmpty();
   if (isSelected)
   {
-    auto index         = _ui.hwComponentsView->selectionModel()->selectedIndexes().first();
+    auto index         = _ui.hwComponentsView->selectionModel()->selectedIndexes().constFirst();
     _hwComponentMiners = _hardwareModel.miners(index);
   }
   else
@@ -97,7 +112,7 @@ void MinerSelectionDialog::on_minersView_selectionChanged(const QItemSelection &
   auto isSelected = !_ui.minersView->selectionModel()->selectedRows().isEmpty();
   if (isSelected)
   {
-    auto index   = _ui.minersView->selectionModel()->selectedIndexes().first();
+    auto index   = _ui.minersView->selectionModel()->selectedIndexes().constFirst();
     _minersMiner = _minerPlugins->toList().operator[](index.row());
   }
   else
