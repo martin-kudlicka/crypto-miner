@@ -18,7 +18,6 @@ class MinerSelectionDialog : public QDialog
 
   private:
     Ui::MinerSelectionDialog _ui;
-    Coin::SymbolList         _supportedCoins;
     CoinsModel               _coinsModel;
     HwComponentList          _supportedHwComponents;
     HardwareModel            _hardwareModel;
