@@ -5,11 +5,11 @@
 
 class MinerPlugins;
 
-class MinerModel : public QAbstractListModel
+class MinersModel : public QAbstractListModel
 {
   public:
-             MinerModel(MinerPlugins *minerPlugins);
-    virtual ~MinerModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
+             MinersModel(MinerPlugins *minerPlugins);
+    virtual ~MinersModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
     MinerPlugins *_minerPlugins;

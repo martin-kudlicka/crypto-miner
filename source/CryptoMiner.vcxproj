@@ -104,7 +104,7 @@
     <ClCompile Include="log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
-    <ClCompile Include="minermodel.cpp" />
+    <ClCompile Include="minersmodel.cpp" />
     <ClCompile Include="minerplugins.cpp" />
     <ClCompile Include="minerselectiondialog.cpp" />
     <ClCompile Include="miningmodel.cpp" />
@@ -173,7 +173,7 @@
     <ClInclude Include="hardwaremodel.h" />
     <ClInclude Include="hardwarestrings.h" />
     <ClInclude Include="log.h" />
-    <ClInclude Include="minermodel.h" />
+    <ClInclude Include="minersmodel.h" />
     <ClInclude Include="minerplugins.h" />
     <CustomBuild Include="minerselectiondialog.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>
