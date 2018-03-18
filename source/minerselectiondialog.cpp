@@ -15,16 +15,7 @@ MinerSelectionDialog::MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *
 
 void MinerSelectionDialog::refreshAllowedMiners()
 {
-  if (_minersMiner)
-  {
-    _allowedMiners = { _minersMiner };
-
-    return;
-  }
-  else
-  {
-    _allowedMiners = _minerPlugins->toRawList().toSet();
-  }
+  _allowedMiners = _minerPlugins->toRawList().toSet();
 
   if (!_hwComponentMiners.isEmpty())
   {
