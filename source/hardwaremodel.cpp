@@ -4,12 +4,17 @@
 #include "hardwarestrings.h"
 #include "minerplugins.h"
 
-HardwareModel::HardwareModel(const HwComponentList *hwComponents, MinerPlugins *minerPlugins) : _hwComponents(hwComponents)
+HardwareModel::HardwareModel(MinerPlugins *minerPlugins)
 {
   for (auto &miner : minerPlugins->toList())
   {
     for (const auto &hwComponent : miner->supportedHardware())
     {
+      if (!_hwComponents.contains(hwComponent))
+      {
+        _hwComponents.append(hwComponent);
+      }
+
       _hwComponentMiners[hwComponent].insert(miner);
     }
   }
@@ -17,7 +22,7 @@ HardwareModel::HardwareModel(const HwComponentList *hwComponents, MinerPlugins *
 
 MinerInterfacePtrSet HardwareModel::miners(const QModelIndex &index) const
 {
-  auto hwComponent = &_hwComponents->at(index.row());
+  auto hwComponent = &_hwComponents.at(index.row());
 
   return _hwComponentMiners.value(*hwComponent);
 }
@@ -32,7 +37,7 @@ QVariant HardwareModel::data(const QModelIndex &index, int role /* Qt::DisplayRo
   static CompanyStrings companyStrings;
   static HardwareStrings hardwareStrings;
 
-  auto hwComponent = &_hwComponents->at(index.row());
+  auto hwComponent = &_hwComponents.at(index.row());
 
   QString value;
   if (hwComponent->company != Company::Any)
@@ -45,7 +50,16 @@ QVariant HardwareModel::data(const QModelIndex &index, int role /* Qt::DisplayRo
   return value;
 }
 
+Qt::ItemFlags HardwareModel::flags(const QModelIndex &index) const
+{
+  auto itemFlags = QAbstractListModel::flags(index);
+
+  // TODO
+
+  return itemFlags;
+}
+
 int HardwareModel::rowCount(const QModelIndex &parent /* QModelIndex() */) const
 {
-  return _hwComponents->count();
+  return _hwComponents.count();
 }
