@@ -10,6 +10,8 @@ class MinerPlugins;
 
 class MinerSelectionDialog : public QDialog
 {
+  Q_OBJECT
+
   public:
              MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *parent);
     virtual ~MinerSelectionDialog() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
@@ -23,7 +25,13 @@ class MinerSelectionDialog : public QDialog
     MinerPlugins            *_minerPlugins;
     MinerModel               _minerModel;
 
-    void setupWidgets();
+    void setupWidgets  ();
+    void updateOkButton() const;
+
+  private Q_SLOTS:
+    void on_coinsView_selectionChanged       (const QItemSelection &selected, const QItemSelection &deselected) const;
+    void on_hwComponentsView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) const;
+    void on_minersView_selectionChanged      (const QItemSelection &selected, const QItemSelection &deselected) const;
 };
 
 #endif
