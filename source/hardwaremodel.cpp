@@ -15,6 +15,13 @@ HardwareModel::HardwareModel(const HwComponentList *hwComponents, MinerPlugins *
   }
 }
 
+MinerInterfacePtrSet HardwareModel::miners(const QModelIndex &index) const
+{
+  auto hwComponent = &_hwComponents->at(index.row());
+
+  return _hwComponentMiners.value(*hwComponent);
+}
+
 QVariant HardwareModel::data(const QModelIndex &index, int role /* Qt::DisplayRole */) const
 {
   if (role != Qt::DisplayRole)

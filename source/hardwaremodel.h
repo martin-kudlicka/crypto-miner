@@ -13,6 +13,8 @@ class HardwareModel : public QAbstractListModel
              HardwareModel(const HwComponentList *hwComponents, MinerPlugins *minerPlugins);
     virtual ~HardwareModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
+    MinerInterfacePtrSet miners(const QModelIndex &index) const;
+
   private:
     const HwComponentList                         *_hwComponents;
           QHash<HwComponent, MinerInterfacePtrSet> _hwComponentMiners;

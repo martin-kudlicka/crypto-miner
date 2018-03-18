@@ -14,6 +14,13 @@ CoinsModel::CoinsModel(const Coin::SymbolList *symbols, MinerPlugins *minerPlugi
   }
 }
 
+MinerInterfacePtrSet CoinsModel::miners(const QModelIndex &index) const
+{
+  auto symbol = _symbols->at(index.row());
+
+  return _symbolMiners.value(symbol);
+}
+
 QVariant CoinsModel::data(const QModelIndex &index, int role /* Qt::DisplayRole */) const
 {
   if (role != Qt::DisplayRole)
