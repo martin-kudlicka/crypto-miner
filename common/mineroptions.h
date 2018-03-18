@@ -11,14 +11,15 @@ class MinerOptions : public MSettings
     struct Property
     {
       static Q_DECL_CONSTEXPR QString Name;
-      static Q_DECL_CONSTEXPR QString Parameters_Coin;
+      static Q_DECL_CONSTEXPR QString Parameters_CoinSymbol;
       static Q_DECL_CONSTEXPR QString Parameters_HwComponent;
     };
 
              MinerOptions(const MUuidPtr &id);
     virtual ~MinerOptions() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-    QString name   () const;
+    QString coinSymbol() const;
+    QString name      () const;
     void    setName(const QString &name);
 };
 

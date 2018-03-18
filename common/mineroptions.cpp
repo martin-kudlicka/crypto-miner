@@ -3,7 +3,7 @@
 #include <MkCore/MUuidPtr>
 
 Q_DECL_CONSTEXPR QString MinerOptions::Property::Name                   = "name";
-Q_DECL_CONSTEXPR QString MinerOptions::Property::Parameters_Coin        = "parameters/coin";
+Q_DECL_CONSTEXPR QString MinerOptions::Property::Parameters_CoinSymbol  = "parameters/coinSymbol";
 Q_DECL_CONSTEXPR QString MinerOptions::Property::Parameters_HwComponent = "parameters/hwComponent";
 
 MinerOptions::MinerOptions(const MUuidPtr &id)
@@ -11,6 +11,11 @@ MinerOptions::MinerOptions(const MUuidPtr &id)
   beginGroup("miningUnits");
   beginGroup(id.toString());
   beginGroup("miner");
+}
+
+QString MinerOptions::coinSymbol() const
+{
+  return value(Property::Parameters_CoinSymbol).toString();
 }
 
 QString MinerOptions::name() const
