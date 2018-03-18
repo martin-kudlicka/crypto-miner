@@ -4,6 +4,7 @@
 #include "../minerworkercommon.h"
 #include <QtCore/QProcess>
 #include <QtCore/QTextStream>
+#include "../../common/mineroptions.h"
 
 class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
 {
@@ -14,15 +15,14 @@ class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
     virtual ~MinerWorkerXmrStakWin64() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
-    QProcess    _minerProcess;
-    QString     _minerOutput;
-    QString     _stdOutLastLine;
-    QTextStream _stdOutStream;
+    MinerOptions _options;
+    QProcess     _minerProcess;
+    QString      _minerOutput;
+    QString      _stdOutLastLine;
+    QTextStream  _stdOutStream;
 
-    void    modifyConfig     (QString *config)       const;
-    QString prepareConfigFile()                      const;
-    QString readVanillaConfig()                      const;
-    QString writeWorkerConfig(const QString &config) const;
+    QStringList prepareArguments   () const;
+    QString     prepareCommonConfig() const;
 
     virtual const QString &consoleOutput() const Q_DECL_OVERRIDE;
     virtual       bool     isRunning    () const Q_DECL_OVERRIDE;

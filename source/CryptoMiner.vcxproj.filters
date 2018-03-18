@@ -99,7 +99,7 @@
     <ClCompile Include="coinsmodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="coinsymbolstrings.cpp">
+    <ClCompile Include="..\common\coinsymbolstrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="companystrings.cpp">
@@ -205,7 +205,7 @@
     <ClInclude Include="coinsmodel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="coinsymbolstrings.h">
+    <ClInclude Include="..\common\coinsymbolstrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="companystrings.h">

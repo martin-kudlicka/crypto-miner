@@ -2,7 +2,7 @@
 
 #include "../miners/minerinterface.h"
 #include "hwcomponentstrings.h"
-#include "coinsymbolstrings.h"
+#include "../common/coinsymbolstrings.h"
 
 MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Symbol coinSymbol, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, hwComponent, coinSymbol, parent)
 {
@@ -33,7 +33,7 @@ void MiningUnitDialog::setupSettings()
 {
   // parameters
   _widgetSettings.setWidget(MinerOptions::Property::Parameters_HwComponent, _ui.parameterHwComponent);
-  _widgetSettings.setWidget(MinerOptions::Property::Parameters_Coin,        _ui.parameterCoin);
+  _widgetSettings.setWidget(MinerOptions::Property::Parameters_CoinSymbol,  _ui.parameterCoin);
 
   // pool
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Address,  _ui.poolAddress);

@@ -1,6 +1,6 @@
 #include "coinsmodel.h"
 
-#include "coinsymbolstrings.h"
+#include "../common/coinsymbolstrings.h"
 #include "minerplugins.h"
 
 CoinsModel::CoinsModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins) : _allowedMiners(allowedMiners)
