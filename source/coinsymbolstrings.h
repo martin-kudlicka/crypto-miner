@@ -2,7 +2,7 @@
 #define COINSYMBOLSTRINGS_H
 
 #include <MkCore/MStringizer>
-#include "../coins/coindefs.h"
+#include "../coins/coin.h"
 
 class CoinSymbolStrings : public MStringizer<Coin::Symbol>
 {

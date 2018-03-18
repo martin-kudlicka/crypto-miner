@@ -1,5 +1,5 @@
-#ifndef COINDEFS_H
-#define COINDEFS_H
+#ifndef COIN_H
+#define COIN_H
 
 namespace Coin
 {

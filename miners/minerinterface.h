@@ -3,7 +3,7 @@
 
 #include "minerworkerinterface.h"
 #include "specification.h"
-#include "../coins/coindefs.h"
+#include "../coins/coin.h"
 #include <MkCore/MOperatingSystemVersion>
 #include <QtCore/QSet>
 
