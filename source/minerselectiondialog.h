@@ -19,7 +19,6 @@ class MinerSelectionDialog : public QDialog
   private:
     Ui::MinerSelectionDialog _ui;
     CoinsModel               _coinsModel;
-    HwComponentList          _supportedHwComponents;
     HardwareModel            _hardwareModel;
     MinerPlugins            *_minerPlugins;
     MinersModel              _minersModel;
