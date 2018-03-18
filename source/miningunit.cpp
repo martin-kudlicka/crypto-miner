@@ -11,7 +11,7 @@ MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins, MiningMod
 {
   for (auto &minerPlugin : minerPlugins->toList())
   {
-    if (minerPlugin->name() == _options.minerName())
+    if (minerPlugin->name() == _options.miner().name())
     {
       _minerPlugin = minerPlugin;
       break;
