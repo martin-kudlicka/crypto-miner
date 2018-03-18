@@ -38,6 +38,11 @@ bool MiningUnit::isRunning() const
   return _worker->isRunning();
 }
 
+const MinerInterface *MiningUnit::minerPlugin() const
+{
+  return _minerPlugin;
+}
+
 const MiningUnitOptions &MiningUnit::options() const
 {
   return _options;
