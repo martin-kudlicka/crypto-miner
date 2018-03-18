@@ -76,7 +76,7 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
       switch (index.column())
       {
         case Column::Miner:
-          return miningUnit->options().miner();
+          return miningUnit->options().minerName();
         case Column::HashRate:
           return QString::number(miningUnit->sessionStatistics().hashRate, 'f', 1);
         case Column::Results:

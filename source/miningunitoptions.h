@@ -9,7 +9,7 @@ class MiningUnitOptions : public MSettings
   public:
     struct Property
     {
-      static Q_DECL_CONSTEXPR QString Miner;
+      static Q_DECL_CONSTEXPR QString Miner_Name;
       static Q_DECL_CONSTEXPR QString Pool_Address;
       static Q_DECL_CONSTEXPR QString Pool_Password;
       static Q_DECL_CONSTEXPR QString Pool_Username;
@@ -22,7 +22,7 @@ class MiningUnitOptions : public MSettings
 
           quintptr  acceptedResults   () const;
     const MUuidPtr &id                () const;
-          QString   miner             () const;
+          QString   minerName         () const;
           quintptr  miningTime        () const;
           QString   poolAddress       () const;
           QString   poolPassword      () const;
