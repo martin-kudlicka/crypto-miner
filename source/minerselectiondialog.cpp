@@ -2,7 +2,7 @@
 
 #include "minerplugins.h"
 
-MinerSelectionDialog::MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *parent) : QDialog(parent), _minerPlugins(minerPlugins), _coinsModel(&_allowedMiners, minerPlugins), _hardwareModel(&_allowedMiners, minerPlugins), _minersModel(&_allowedMiners, minerPlugins), _minersMiner(Q_NULLPTR)
+MinerSelectionDialog::MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *parent) : QDialog(parent), _minerPlugins(minerPlugins), _coinsModel(&_allowedCoinMiners, minerPlugins), _hardwareModel(&_allowedHwComponentMiners, minerPlugins), _minersModel(&_allowedMinerMiners, minerPlugins), _minersMiner(Q_NULLPTR)
 {
   _ui.setupUi(this);
 
@@ -15,16 +15,28 @@ MinerSelectionDialog::MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *
 
 void MinerSelectionDialog::refreshAllowedMiners()
 {
-  _allowedMiners = _minerPlugins->toRawList().toSet();
+  if (_minersMiner)
+  {
+    _allowedHwComponentMiners = { _minersMiner };
+    _allowedCoinMiners        = { _minersMiner };
+  }
+  else
+  {
+    _allowedHwComponentMiners = _minerPlugins->toRawList().toSet();
+    _allowedCoinMiners        = _minerPlugins->toRawList().toSet();
+  }
+  _allowedMinerMiners = _minerPlugins->toRawList().toSet();
 
   if (!_hwComponentMiners.isEmpty())
   {
-    _allowedMiners.intersect(_hwComponentMiners);
+    _allowedCoinMiners.intersect(_hwComponentMiners);
+    _allowedMinerMiners.intersect(_hwComponentMiners);
   }
 
   if (!_coinMiners.isEmpty())
   {
-    _allowedMiners.intersect(_coinMiners);
+    _allowedHwComponentMiners.intersect(_coinMiners);
+    _allowedMinerMiners.intersect(_coinMiners);
   }
 }
 
