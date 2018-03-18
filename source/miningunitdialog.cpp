@@ -1,7 +1,8 @@
 #include "miningunitdialog.h"
 
 #include "../miners/minerinterface.h"
-#include "../coins/coins.h"
+#include "hwcomponentstrings.h"
+#include "coinsymbolstrings.h"
 
 MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Symbol coinSymbol, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, hwComponent, coinSymbol, parent)
 {
@@ -34,9 +35,18 @@ void MiningUnitDialog::setupWidgets() const
   _ui.name->setText(_minerPlugin->name());
 
   // parameters
-  for (const auto &coinInfo : gCoins->infoList())
+  for (const auto &hwComponent : _minerPlugin->supportedHardware())
   {
-    _ui.parameterCoin->addItem(coinInfo.name, coinInfo.symbol);
+    auto value = HwComponentStrings::toString(hwComponent);
+    _ui.parameterHardware->addItem(value, value);
+  }
+
+  static CoinSymbolStrings coinSymbolStrings;
+
+  for (auto coinSymbol : _minerPlugin->supportedCoins())
+  {
+    auto value = coinSymbolStrings.toString(coinSymbol);
+    _ui.parameterCoin->addItem(value, value);
   }
 }
 
