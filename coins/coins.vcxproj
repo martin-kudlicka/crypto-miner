@@ -87,8 +87,8 @@
     <ClCompile Include="coins.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="coin.h" />
     <ClInclude Include="coins.h" />
-    <ClInclude Include="coins_global.h" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
