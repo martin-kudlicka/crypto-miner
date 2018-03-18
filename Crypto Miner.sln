@@ -11,6 +11,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "miner-xmrstakcpunotls", "mi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "miner-xmrstakwin64", "miners\miner-xmrstakwin64\miner-xmrstakwin64.vcxproj", "{B0D8A647-72FA-4E1A-ACBD-5D861EEE31F5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "coins", "coins", "{608A2226-7C4A-452D-AA94-48CB20BC5998}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "coins", "coins\coins.vcxproj", "{7E381709-38CB-492F-A445-BCBF3A8AAB25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -29,6 +33,10 @@ Global
 		{B0D8A647-72FA-4E1A-ACBD-5D861EEE31F5}.Debug|x86.Build.0 = Debug|Win32
 		{B0D8A647-72FA-4E1A-ACBD-5D861EEE31F5}.Release|x86.ActiveCfg = Release|Win32
 		{B0D8A647-72FA-4E1A-ACBD-5D861EEE31F5}.Release|x86.Build.0 = Release|Win32
+		{7E381709-38CB-492F-A445-BCBF3A8AAB25}.Debug|x86.ActiveCfg = Debug|Win32
+		{7E381709-38CB-492F-A445-BCBF3A8AAB25}.Debug|x86.Build.0 = Debug|Win32
+		{7E381709-38CB-492F-A445-BCBF3A8AAB25}.Release|x86.ActiveCfg = Release|Win32
+		{7E381709-38CB-492F-A445-BCBF3A8AAB25}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{50CC2DD5-4FC8-47EF-B2B9-3ACB79D85DEF} = {575096F1-6AB4-4D15-A0AA-8745B0A161EC}
 		{B0D8A647-72FA-4E1A-ACBD-5D861EEE31F5} = {575096F1-6AB4-4D15-A0AA-8745B0A161EC}
+		{7E381709-38CB-492F-A445-BCBF3A8AAB25} = {608A2226-7C4A-452D-AA94-48CB20BC5998}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93DDA5EC-D439-4F3B-A5DC-DBCB8859BCCC}
