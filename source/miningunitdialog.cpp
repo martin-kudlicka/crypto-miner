@@ -1,12 +1,13 @@
 #include "miningunitdialog.h"
 
 #include "../miners/minerinterface.h"
+#include "../coins/coins.h"
 
-MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, parent)
+MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Symbol coinSymbol, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, hwComponent, coinSymbol, parent)
 {
 }
 
-MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, QWidget *parent) : QDialog(parent), _minerPlugin(minerPlugin), _options(id), _widgetSettings(&_options)
+MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Symbol coinSymbol, QWidget *parent) : QDialog(parent), _options(id), _minerPlugin(minerPlugin), _widgetSettings(&_options)
 {
   _ui.setupUi(this);
 
@@ -31,6 +32,12 @@ void MiningUnitDialog::setupSettings()
 void MiningUnitDialog::setupWidgets() const
 {
   _ui.name->setText(_minerPlugin->name());
+
+  // parameters
+  for (const auto &coinInfo : gCoins->infoList())
+  {
+    _ui.parameterCoin->addItem(coinInfo.name, coinInfo.symbol);
+  }
 }
 
 void MiningUnitDialog::accept()

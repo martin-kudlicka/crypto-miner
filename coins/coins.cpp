@@ -1,5 +1,7 @@
 #include "coins.h"
 
+MLazySingleton<Coins> gCoins;
+
 Coins::Coins()
 {
   _infoList <<

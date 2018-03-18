@@ -2,6 +2,7 @@
 
 #include "coins_global.h"
 #include "coin.h"
+#include <MkCore/MLazySingleton>
 
 class COINS_EXPORT Coins
 {
@@ -13,3 +14,5 @@ class COINS_EXPORT Coins
   private:
     Coin::InfoList _infoList;
 };
+
+extern MLazySingleton<Coins> gCoins;
