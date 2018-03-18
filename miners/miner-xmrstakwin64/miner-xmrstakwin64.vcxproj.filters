@@ -34,6 +34,27 @@
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakwin64\Release\moc_minerinterface.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="minerworker-xmrstakwin64.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\minerworkercommon.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakwin64\Debug\moc_minerworker-xmrstakwin64.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakwin64\Release\moc_minerworker-xmrstakwin64.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="log.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakwin64\Debug\moc_minerworkerinterface.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakwin64\Release\moc_minerworkerinterface.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="miner-xmrstakwin64.h">
@@ -42,12 +63,24 @@
     <CustomBuild Include="..\minerinterface.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="minerworker-xmrstakwin64.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\minerworkerinterface.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\specification.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\minerworkercommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
