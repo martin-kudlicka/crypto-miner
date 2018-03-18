@@ -10,17 +10,18 @@ class MinerPlugins;
 class CoinsModel : public QAbstractListModel
 {
   public:
-             CoinsModel(const Coin::SymbolList *symbols, MinerPlugins *minerPlugins);
+             CoinsModel(MinerPlugins *minerPlugins);
     virtual ~CoinsModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
     MinerInterfacePtrSet miners(const QModelIndex &index) const;
 
   private:
-    const Coin::SymbolList                         *_symbols;
-          QHash<Coin::Symbol, MinerInterfacePtrSet> _symbolMiners;
+    Coin::SymbolList                          _symbols;
+    QHash<Coin::Symbol, MinerInterfacePtrSet> _symbolMiners;
 
-    virtual QVariant data    (const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
-    virtual int      rowCount(const QModelIndex &parent = QModelIndex())            const Q_DECL_OVERRIDE;
+    virtual QVariant      data    (const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    virtual Qt::ItemFlags flags   (const QModelIndex &index)                             const Q_DECL_OVERRIDE;
+    virtual int           rowCount(const QModelIndex &parent = QModelIndex())            const Q_DECL_OVERRIDE;
 };
 
 #endif
