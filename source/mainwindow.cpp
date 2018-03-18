@@ -100,24 +100,22 @@ void MainWindow::on_miningUnitConsole_clicked(bool checked /* false */)
 
 void MainWindow::on_miningUnitEdit_clicked(bool checked /* false */)
 {
-  // TODO for now take first and only plugin
-  auto minerPlugin = _minerPlugins.toList().constFirst();
+  auto index       = _ui.miningView->currentIndex();
+  auto id          = _miningModel.id(index);
+  auto miningUnit  = _miningModel.miningUnit(index);
+  auto minerPlugin = miningUnit->minerPlugin();
 
-  auto index = _ui.miningView->currentIndex();
-  auto id    = _miningModel.id(index);
-
-  /* TODO MiningUnitDialog miningUnitDialog(id, minerPlugin, this);
+  MiningUnitDialog miningUnitDialog(id, minerPlugin, this);
   if (miningUnitDialog.exec() == QDialog::Rejected)
   {
     return;
   }
 
-  auto miningUnit = _miningModel.miningUnit(id);
   if (miningUnit->isRunning())
   {
     miningUnit->stop();
     miningUnit->start();
-  }*/
+  }
 }
 
 void MainWindow::on_miningUnitRemove_clicked(bool checked /* false */)

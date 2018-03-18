@@ -8,21 +8,20 @@ MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const HwCo
 {
 }
 
-MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Symbol coinSymbol, QWidget *parent) : QDialog(parent), _options(id), _minerPlugin(minerPlugin), _widgetSettings(&_options)
+MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, QWidget *parent) : QDialog(parent), _options(id), _minerPlugin(minerPlugin), _widgetSettings(&_options)
 {
   _ui.setupUi(this);
 
   setupWidgets();
   setupSettings();
+}
 
-  // parameters
-  auto value = HwComponentStrings::toString(hwComponent);
-  auto index = _ui.parameterHwComponent->findData(value);
-  _ui.parameterHwComponent->setCurrentIndex(index);
+MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Symbol coinSymbol, QWidget *parent) : QDialog(parent), _options(id), _minerPlugin(minerPlugin), _widgetSettings(&_options)
+{
+  _ui.setupUi(this);
 
-  value = gCoinSymbolStrings->toString(coinSymbol);
-  index = _ui.parameterCoin->findData(value);
-  _ui.parameterCoin->setCurrentIndex(index);
+  setupWidgets(hwComponent, coinSymbol);
+  setupSettings();
 }
 
 const MiningUnitOptions &MiningUnitDialog::options() const
@@ -60,6 +59,20 @@ void MiningUnitDialog::setupWidgets() const
     auto value = gCoinSymbolStrings->toString(coinSymbol);
     _ui.parameterCoin->addItem(value, value);
   }
+}
+
+void MiningUnitDialog::setupWidgets(const HwComponent &hwComponent, Coin::Symbol coinSymbol) const
+{
+  setupWidgets();
+
+  // parameters
+  auto value = HwComponentStrings::toString(hwComponent);
+  auto index = _ui.parameterHwComponent->findData(value);
+  _ui.parameterHwComponent->setCurrentIndex(index);
+
+  value = gCoinSymbolStrings->toString(coinSymbol);
+  index = _ui.parameterCoin->findData(value);
+  _ui.parameterCoin->setCurrentIndex(index);
 }
 
 void MiningUnitDialog::accept()

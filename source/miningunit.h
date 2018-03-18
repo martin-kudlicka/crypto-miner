@@ -29,6 +29,7 @@ class MiningUnit : public QObject
 
           void               closeConsole     ();
           bool               isRunning        () const;
+    const MinerInterface    *minerPlugin      () const;
     const MiningUnitOptions &options          () const;
     const Statistics        &sessionStatistics() const;
           void               showConsole      ();
