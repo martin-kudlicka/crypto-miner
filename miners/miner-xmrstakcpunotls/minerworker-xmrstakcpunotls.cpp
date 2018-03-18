@@ -4,6 +4,7 @@
 #include <QtCore/QThread>
 #include "log.h"
 #include <QtCore/QRegularExpression>
+#include <MkCore/MFile>
 
 MinerWorkerXmrStakCpuNoTls::MinerWorkerXmrStakCpuNoTls(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId)
 {
@@ -61,18 +62,11 @@ QString MinerWorkerXmrStakCpuNoTls::writeWorkerConfig(const QString &config) con
   auto configFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
   configFilePath.append(QDir::separator());
   configFilePath.append(_fileInfo.completeBaseName());
-
-  QDir().mkpath(configFilePath);
-
   configFilePath.append(QDir::separator());
   configFilePath.append(_miningUnitId.toString());
   configFilePath.append(".txt");
 
-  QFile configFile(configFilePath);
-  configFile.open(QIODevice::WriteOnly | QIODevice::Text);
-
-  QTextStream configStream(&configFile);
-  configStream << config;
+  MFile::write(configFilePath, config);
 
   return configFilePath;
 }
