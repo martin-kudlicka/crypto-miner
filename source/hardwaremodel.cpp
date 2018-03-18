@@ -4,7 +4,7 @@
 #include "hardwarestrings.h"
 #include "minerplugins.h"
 
-HardwareModel::HardwareModel(MinerPlugins *minerPlugins)
+HardwareModel::HardwareModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins) : _allowedMiners(allowedMiners)
 {
   for (auto &miner : minerPlugins->toList())
   {
@@ -54,7 +54,15 @@ Qt::ItemFlags HardwareModel::flags(const QModelIndex &index) const
 {
   auto itemFlags = QAbstractListModel::flags(index);
 
-  // TODO
+  if (!_allowedMiners->isEmpty())
+  {
+    auto hwComponent       = &_hwComponents.at(index.row());
+    auto hwComponentMiners = _hwComponentMiners.value(*hwComponent);
+    if (hwComponentMiners.intersect(*_allowedMiners).isEmpty())
+    {
+      itemFlags &= ~Qt::ItemIsEnabled;
+    }
+  }
 
   return itemFlags;
 }
