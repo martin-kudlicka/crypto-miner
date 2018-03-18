@@ -34,9 +34,7 @@
     <ClInclude Include="coins.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="coins_global.h">
+    <ClInclude Include="coin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
