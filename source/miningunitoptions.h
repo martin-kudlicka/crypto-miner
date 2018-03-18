@@ -10,6 +10,8 @@ class MiningUnitOptions : public MSettings
     struct Property
     {
       static Q_DECL_CONSTEXPR QString Miner_Name;
+      static Q_DECL_CONSTEXPR QString Miner_Parameters_Coin;
+      static Q_DECL_CONSTEXPR QString Miner_Parameters_HwComponent;
       static Q_DECL_CONSTEXPR QString Pool_Address;
       static Q_DECL_CONSTEXPR QString Pool_Password;
       static Q_DECL_CONSTEXPR QString Pool_Username;

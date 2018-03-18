@@ -19,6 +19,11 @@ CoinsModel::CoinsModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *
   }
 }
 
+Coin::Symbol CoinsModel::coinSymbol(const QModelIndex &index) const
+{
+  return _symbols.at(index.row());
+}
+
 MinerInterfacePtrSet CoinsModel::miners(const QModelIndex &index) const
 {
   auto symbol = _symbols.at(index.row());
@@ -33,13 +38,9 @@ QVariant CoinsModel::data(const QModelIndex &index, int role /* Qt::DisplayRole 
     return QVariant();
   }
 
-  static CoinSymbolStrings coinSymbolStrings;
-
   auto symbol = _symbols.at(index.row());
 
-  auto value = coinSymbolStrings.toString(symbol);
-
-  return value;
+  return gCoinSymbolStrings->toString(symbol);
 }
 
 Qt::ItemFlags CoinsModel::flags(const QModelIndex &index) const
@@ -50,7 +51,7 @@ Qt::ItemFlags CoinsModel::flags(const QModelIndex &index) const
   {
     auto symbol       = _symbols.at(index.row());
     auto symbolMiners = _symbolMiners.value(symbol);
-    if (symbolMiners.intersect(*_allowedMiners).isEmpty())
+    if (!symbolMiners.intersects(*_allowedMiners))
     {
       itemFlags &= ~Qt::ItemIsEnabled;
     }

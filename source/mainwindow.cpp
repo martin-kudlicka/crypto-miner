@@ -79,10 +79,9 @@ void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
     return;
   }
 
-  // TODO for now take first and only plugin
-  auto minerPlugin = _minerPlugins.toList().front();
+  auto minerPlugin = minerSelectionDialog.selectedMiner();
 
-  MiningUnitDialog miningUnitDialog(minerPlugin, this);
+  MiningUnitDialog miningUnitDialog(minerPlugin, minerSelectionDialog.selectedHwComponent(), minerSelectionDialog.selectedCoinSymbol(), this);
   if (miningUnitDialog.exec() == QDialog::Rejected)
   {
     return;
@@ -102,12 +101,12 @@ void MainWindow::on_miningUnitConsole_clicked(bool checked /* false */)
 void MainWindow::on_miningUnitEdit_clicked(bool checked /* false */)
 {
   // TODO for now take first and only plugin
-  auto minerPlugin = _minerPlugins.toList().front();
+  auto minerPlugin = _minerPlugins.toList().constFirst();
 
   auto index = _ui.miningView->currentIndex();
   auto id    = _miningModel.id(index);
 
-  MiningUnitDialog miningUnitDialog(id, minerPlugin, this);
+  /* TODO MiningUnitDialog miningUnitDialog(id, minerPlugin, this);
   if (miningUnitDialog.exec() == QDialog::Rejected)
   {
     return;
@@ -118,7 +117,7 @@ void MainWindow::on_miningUnitEdit_clicked(bool checked /* false */)
   {
     miningUnit->stop();
     miningUnit->start();
-  }
+  }*/
 }
 
 void MainWindow::on_miningUnitRemove_clicked(bool checked /* false */)

@@ -16,6 +16,10 @@ class MinerSelectionDialog : public QDialog
              MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *parent);
     virtual ~MinerSelectionDialog() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
+    Coin::Symbol    selectedCoinSymbol () const;
+    HwComponent     selectedHwComponent() const;
+    MinerInterface *selectedMiner      () const;
+
   private:
     MinerInterfacePtrSet     _allowedCoinMiners;
     MinerInterfacePtrSet     _allowedHwComponentMiners;

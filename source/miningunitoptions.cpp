@@ -2,7 +2,9 @@
 
 #include "miningunits.h"
 
-Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Miner_Name = "miner/name";
+Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Miner_Name                   = "miner/name";
+Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Miner_Parameters_Coin        = "miner/parameters/coin";
+Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Miner_Parameters_HwComponent = "miner/parameters/hwComponent";
 
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Address  = "pool/address";
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Password = "pool/password";
