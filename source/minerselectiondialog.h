@@ -17,7 +17,7 @@ class MinerSelectionDialog : public QDialog
     virtual ~MinerSelectionDialog() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
-    Ui::MinerSelectionDialog _ui;
+    MinerInterfacePtrSet     _allowedMiners;
     CoinsModel               _coinsModel;
     HardwareModel            _hardwareModel;
     MinerPlugins            *_minerPlugins;
@@ -25,7 +25,7 @@ class MinerSelectionDialog : public QDialog
     MinerInterfacePtrSet     _coinMiners;
     MinerInterfacePtrSet     _hwComponentMiners;
     MinerInterface          *_minersMiner;
-    MinerInterfacePtrSet     _allowedMiners;
+    Ui::MinerSelectionDialog _ui;
 
     void refreshAllowedMiners();
     void refreshOkButton     () const;
