@@ -13,6 +13,8 @@ class CoinsModel : public QAbstractListModel
              CoinsModel(const Coin::SymbolList *symbols, MinerPlugins *minerPlugins);
     virtual ~CoinsModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
+    MinerInterfacePtrSet miners(const QModelIndex &index) const;
+
   private:
     const Coin::SymbolList                         *_symbols;
           QHash<Coin::Symbol, MinerInterfacePtrSet> _symbolMiners;

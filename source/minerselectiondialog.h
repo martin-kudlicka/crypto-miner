@@ -24,14 +24,19 @@ class MinerSelectionDialog : public QDialog
     HardwareModel            _hardwareModel;
     MinerPlugins            *_minerPlugins;
     MinersModel              _minersModel;
+    MinerInterfacePtrSet     _coinMiners;
+    MinerInterfacePtrSet     _hwComponentMiners;
+    MinerInterface          *_minersMiner;
+    MinerInterfacePtrSet     _allowedMiners;
 
-    void setupWidgets  ();
-    void updateOkButton() const;
+    void refreshAllowedMiners();
+    void setupWidgets        ();
+    void updateOkButton      () const;
 
   private Q_SLOTS:
-    void on_coinsView_selectionChanged       (const QItemSelection &selected, const QItemSelection &deselected) const;
-    void on_hwComponentsView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) const;
-    void on_minersView_selectionChanged      (const QItemSelection &selected, const QItemSelection &deselected) const;
+    void on_coinsView_selectionChanged       (const QItemSelection &selected, const QItemSelection &deselected);
+    void on_hwComponentsView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+    void on_minersView_selectionChanged      (const QItemSelection &selected, const QItemSelection &deselected);
 };
 
 #endif
