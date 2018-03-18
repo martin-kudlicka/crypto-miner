@@ -30,8 +30,8 @@ class MinerSelectionDialog : public QDialog
     MinerInterfacePtrSet     _allowedMiners;
 
     void refreshAllowedMiners();
+    void refreshOkButton     () const;
     void setupWidgets        ();
-    void updateOkButton      () const;
 
   private Q_SLOTS:
     void on_coinsView_selectionChanged       (const QItemSelection &selected, const QItemSelection &deselected);
