@@ -108,6 +108,12 @@
     <ClCompile Include="companystrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\intermediate\cryptominer\Debug\moc_minerselectiondialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\intermediate\cryptominer\Release\moc_minerselectiondialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -136,6 +142,9 @@
     </CustomBuild>
     <CustomBuild Include="minerselectiondialog.ui">
       <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="minerselectiondialog.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -180,9 +189,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_minerselectiondialog.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="minerselectiondialog.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hardwaremodel.h">
       <Filter>Header Files</Filter>
