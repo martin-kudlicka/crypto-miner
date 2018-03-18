@@ -2,7 +2,7 @@
 
 #include "minerplugins.h"
 
-MinerSelectionDialog::MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *parent) : QDialog(parent), _minerPlugins(minerPlugins), _coinsModel(&_supportedCoins, minerPlugins), _hardwareModel(&_supportedHwComponents, minerPlugins), _minerModel(minerPlugins)
+MinerSelectionDialog::MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *parent) : QDialog(parent), _minerPlugins(minerPlugins), _coinsModel(&_supportedCoins, minerPlugins), _hardwareModel(&_supportedHwComponents, minerPlugins), _minersModel(minerPlugins)
 {
   _ui.setupUi(this);
 
@@ -36,7 +36,7 @@ void MinerSelectionDialog::setupWidgets()
 
   _ui.hwComponentsView->setModel(&_hardwareModel);
   _ui.coinsView->setModel(&_coinsModel);
-  _ui.minersView->setModel(&_minerModel);
+  _ui.minersView->setModel(&_minersModel);
 }
 
 void MinerSelectionDialog::updateOkButton() const

@@ -102,9 +102,6 @@
     <ClCompile Include="coinsymbolstrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="minermodel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="companystrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -113,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\intermediate\cryptominer\Release\moc_minerselectiondialog.cpp">
       <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minersmodel.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -202,10 +202,10 @@
     <ClInclude Include="coinsymbolstrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="minermodel.h">
+    <ClInclude Include="companystrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="companystrings.h">
+    <ClInclude Include="minersmodel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
