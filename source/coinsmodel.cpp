@@ -3,7 +3,7 @@
 #include "coinsymbolstrings.h"
 #include "minerplugins.h"
 
-CoinsModel::CoinsModel(MinerPlugins *minerPlugins)
+CoinsModel::CoinsModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins) : _allowedMiners(allowedMiners)
 {
   for (auto &miner : minerPlugins->toList())
   {
@@ -46,7 +46,15 @@ Qt::ItemFlags CoinsModel::flags(const QModelIndex &index) const
 {
   auto itemFlags = QAbstractListModel::flags(index);
 
-  // TODO
+  if (!_allowedMiners->isEmpty())
+  {
+    auto symbol       = _symbols.at(index.row());
+    auto symbolMiners = _symbolMiners.value(symbol);
+    if (symbolMiners.intersect(*_allowedMiners).isEmpty())
+    {
+      itemFlags &= ~Qt::ItemIsEnabled;
+    }
+  }
 
   return itemFlags;
 }

@@ -10,14 +10,15 @@ class MinerPlugins;
 class HardwareModel : public QAbstractListModel
 {
   public:
-             HardwareModel(MinerPlugins *minerPlugins);
+             HardwareModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins);
     virtual ~HardwareModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
     MinerInterfacePtrSet miners(const QModelIndex &index) const;
 
   private:
-    HwComponentList                          _hwComponents;
-    QHash<HwComponent, MinerInterfacePtrSet> _hwComponentMiners;
+          HwComponentList                          _hwComponents;
+          QHash<HwComponent, MinerInterfacePtrSet> _hwComponentMiners;
+    const MinerInterfacePtrSet                    *_allowedMiners;
 
     virtual QVariant      data    (const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
     virtual Qt::ItemFlags flags   (const QModelIndex &index)                             const Q_DECL_OVERRIDE;
