@@ -10,8 +10,8 @@ QString toString(const Hardware::Component &hwComponent)
 {
   QString value;
 
-  static CompanyStrings companyStrings;
-  static HardwareStrings hardwareStrings;
+  static HwCompanyStrings companyStrings;
+  static HardwareStrings  hardwareStrings;
 
   if (hwComponent.company != Hardware::Company::Any)
   {

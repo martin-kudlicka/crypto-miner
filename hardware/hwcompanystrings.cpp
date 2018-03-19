@@ -1,6 +1,6 @@
 #include "hwcompanystrings.h"
 
-CompanyStrings::CompanyStrings()
+HwCompanyStrings::HwCompanyStrings()
 {
   insert(Hardware::Company::Amd,    "AMD");
   insert(Hardware::Company::Nvidia, "NVIDIA");
