@@ -1,4 +1,4 @@
-#include "companystrings.h"
+#include "hwcompanystrings.h"
 
 CompanyStrings::CompanyStrings()
 {

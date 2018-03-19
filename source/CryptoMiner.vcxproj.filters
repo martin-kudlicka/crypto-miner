@@ -93,13 +93,7 @@
     <ClCompile Include="hardwaremodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hardwarestrings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="coinsmodel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="companystrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\intermediate\cryptominer\Debug\moc_minerselectiondialog.cpp">
@@ -109,9 +103,6 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="minersmodel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hwcomponentstrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\common\mineroptions.cpp">
@@ -196,19 +187,10 @@
     <ClInclude Include="hardwaremodel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hardwarestrings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="coinsmodel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="companystrings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="minersmodel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hwcomponentstrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\common\mineroptions.h">

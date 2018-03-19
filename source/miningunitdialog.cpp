@@ -1,7 +1,7 @@
 #include "miningunitdialog.h"
 
 #include "../miners/minerinterface.h"
-#include "hwcomponentstrings.h"
+#include "../hardware/hwcomponentstrings.h"
 #include "../coins/coins.h"
 
 MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const Hardware::Component &hwComponent, Coin::Name coinName, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, hwComponent, coinName, parent)

@@ -2,7 +2,7 @@
 #define HWCOMPONENTSTRINGS_H
 
 #include <QtCore/QString>
-#include "../hardware/hardware.h"
+#include "hardware.h"
 
 namespace HwComponentStrings
 {

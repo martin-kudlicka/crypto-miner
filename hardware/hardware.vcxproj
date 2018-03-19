@@ -55,10 +55,12 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\property sheets\MartinK build settings.props" />
+    <Import Project="..\..\Mk\Mk lib.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\property sheets\MartinK build settings.props" />
+    <Import Project="..\..\Mk\Mk lib.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -75,10 +77,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="hardware.cpp" />
+    <ClCompile Include="hwcompanystrings.cpp" />
+    <ClCompile Include="hwcomponentstrings.cpp" />
+    <ClCompile Include="hwtypestrings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hardware.h" />
     <ClInclude Include="hardware_global.h" />
+    <ClInclude Include="hwcompanystrings.h" />
+    <ClInclude Include="hwcomponentstrings.h" />
+    <ClInclude Include="hwtypestrings.h" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

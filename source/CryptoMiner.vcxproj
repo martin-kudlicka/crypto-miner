@@ -97,11 +97,8 @@
     </ClCompile>
     <ClCompile Include="..\common\mineroptions.cpp" />
     <ClCompile Include="coinsmodel.cpp" />
-    <ClCompile Include="companystrings.cpp" />
     <ClCompile Include="consolewindow.cpp" />
     <ClCompile Include="hardwaremodel.cpp" />
-    <ClCompile Include="hardwarestrings.cpp" />
-    <ClCompile Include="hwcomponentstrings.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
@@ -170,10 +167,7 @@
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_optionsdialog.h" />
     <ClInclude Include="..\common\mineroptions.h" />
     <ClInclude Include="coinsmodel.h" />
-    <ClInclude Include="companystrings.h" />
     <ClInclude Include="hardwaremodel.h" />
-    <ClInclude Include="hardwarestrings.h" />
-    <ClInclude Include="hwcomponentstrings.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="minersmodel.h" />
     <ClInclude Include="minerplugins.h" />
@@ -262,6 +256,9 @@
   <ItemGroup>
     <ProjectReference Include="..\coins\coins.vcxproj">
       <Project>{7e381709-38cb-492f-a445-bcbf3a8aab25}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\hardware\hardware.vcxproj">
+      <Project>{a4ae5a83-4abd-4281-99b5-5f62e1897150}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
