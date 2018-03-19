@@ -22,14 +22,14 @@ class HARDWARE_EXPORT Hardware
     struct Component
     {
       Company company;
-      Type    hardware;
+      Type    type;
 
-      Component(Company company, Type hardware) : company(company), hardware(hardware)
+      Component(Company company, Type type) : company(company), type(type)
       {
       }
       bool operator==(const Component &other) const
       {
-        return other.company == company && other.hardware == hardware;
+        return other.company == company && other.type == type;
       }
     };
 
@@ -40,7 +40,7 @@ class HARDWARE_EXPORT Hardware
 
 static uint qHash(const Hardware::Component &key, uint seed = 0)
 {
-  return qHash(static_cast<uchar>(key.company), seed) ^ qHash(static_cast<uchar>(key.hardware), seed);
+  return qHash(static_cast<uchar>(key.company), seed) ^ qHash(static_cast<uchar>(key.type), seed);
 }
 
 #endif
