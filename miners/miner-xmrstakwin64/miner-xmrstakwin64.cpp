@@ -1,9 +1,10 @@
 #include "miner-xmrstakwin64.h"
 
+#include "minerworker-xmrstakwin64.h"
+
 MinerWorkerInterfaceSPtr MinerXmrStakWin64::createWorker(const MUuidPtr &id) const
 {
-  // TODO
-  return Q_NULLPTR;
+  return QSharedPointer<MinerWorkerXmrStakWin64>::create(id);
 }
 
 QString MinerXmrStakWin64::name() const
