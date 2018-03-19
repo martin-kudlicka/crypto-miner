@@ -4,7 +4,7 @@
 #include "hwcomponentstrings.h"
 #include "../coins/coins.h"
 
-MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Name coinName, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, hwComponent, coinName, parent)
+MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const Hardware::HwComponent &hwComponent, Coin::Name coinName, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, hwComponent, coinName, parent)
 {
 }
 
@@ -16,7 +16,7 @@ MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *min
   setupSettings();
 }
 
-MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Name coinName, QWidget *parent) : QDialog(parent), _options(id), _minerPlugin(minerPlugin), _widgetSettings(&_options)
+MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const Hardware::HwComponent &hwComponent, Coin::Name coinName, QWidget *parent) : QDialog(parent), _options(id), _minerPlugin(minerPlugin), _widgetSettings(&_options)
 {
   _ui.setupUi(this);
 
@@ -32,8 +32,8 @@ const MiningUnitOptions &MiningUnitDialog::options() const
 void MiningUnitDialog::setupSettings()
 {
   // parameters
-  _widgetSettings.setWidget(MinerOptions::Property::Parameters_HwComponent, _ui.parameterHwComponent);
-  _widgetSettings.setWidget(MinerOptions::Property::Parameters_CoinName,    _ui.parameterCoin);
+  _widgetSettings.setWidget(MinerOptions::Property::Parameters_HwComponent, _ui.parameterHwComponent, &_options.miner());
+  _widgetSettings.setWidget(MinerOptions::Property::Parameters_CoinName,    _ui.parameterCoin,        &_options.miner());
 
   // pool
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Address,  _ui.poolAddress);
@@ -56,12 +56,12 @@ void MiningUnitDialog::setupWidgets() const
   for (auto coinName : _minerPlugin->supportedCoins())
   {
     auto name     = gCoins->toString(coinName);
-    auto fullName = name + gCoins->toString(gCoins->symbol(coinName));
+    auto fullName = name + ' ' + gCoins->toString(gCoins->symbol(coinName));
     _ui.parameterCoin->addItem(fullName, name);
   }
 }
 
-void MiningUnitDialog::setupWidgets(const HwComponent &hwComponent, Coin::Name coinName) const
+void MiningUnitDialog::setupWidgets(const Hardware::HwComponent &hwComponent, Coin::Name coinName) const
 {
   setupWidgets();
 

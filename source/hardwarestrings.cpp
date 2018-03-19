@@ -2,6 +2,6 @@
 
 HardwareStrings::HardwareStrings()
 {
-  insert(Hardware::Cpu, "CPU");
-  insert(Hardware::Gpu, "GPU");
+  insert(Hardware::Type::Cpu, "CPU");
+  insert(Hardware::Type::Gpu, "GPU");
 }
