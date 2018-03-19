@@ -11,7 +11,7 @@ QString toString(const Hardware::Component &hwComponent)
   QString value;
 
   static HwCompanyStrings companyStrings;
-  static HardwareStrings  hardwareStrings;
+  static HwTypeStrings    hardwareStrings;
 
   if (hwComponent.company != Hardware::Company::Any)
   {

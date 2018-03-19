@@ -1,6 +1,6 @@
 #include "hwtypestrings.h"
 
-HardwareStrings::HardwareStrings()
+HwTypeStrings::HwTypeStrings()
 {
   insert(Hardware::Type::Cpu, "CPU");
   insert(Hardware::Type::Gpu, "GPU");
