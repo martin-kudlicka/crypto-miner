@@ -19,7 +19,7 @@ HardwareModel::HardwareModel(const MinerInterfacePtrSet *allowedMiners, MinerPlu
   }
 }
 
-HwComponent HardwareModel::hwComponent(const QModelIndex &index) const
+Hardware::HwComponent HardwareModel::hwComponent(const QModelIndex &index) const
 {
   return _hwComponents.at(index.row());
 }

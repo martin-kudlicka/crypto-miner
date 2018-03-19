@@ -2,9 +2,9 @@
 #define HARDWARESTRINGS_H
 
 #include <MkCore/MStringizer>
-#include "../miners/specification.h"
+#include "../hardware/hardware.h"
 
-class HardwareStrings : public MStringizer<Hardware>
+class HardwareStrings : public MStringizer<Hardware::Type>
 {
   public:
              HardwareStrings();

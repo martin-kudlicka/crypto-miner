@@ -77,9 +77,6 @@
     <ClInclude Include="log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\specification.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\minerworkercommon.h">
       <Filter>Header Files</Filter>
     </ClInclude>

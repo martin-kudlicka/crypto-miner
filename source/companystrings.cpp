@@ -2,6 +2,6 @@
 
 CompanyStrings::CompanyStrings()
 {
-  insert(Company::Amd,    "AMD");
-  insert(Company::Nvidia, "NVIDIA");
+  insert(Hardware::Company::Amd,    "AMD");
+  insert(Hardware::Company::Nvidia, "NVIDIA");
 }

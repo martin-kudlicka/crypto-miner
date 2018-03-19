@@ -2,9 +2,9 @@
 #define COMPANYSTRINGS_H
 
 #include <MkCore/MStringizer>
-#include "../miners/specification.h"
+#include "../hardware/hardware.h"
 
-class CompanyStrings : public MStringizer<Company>
+class CompanyStrings : public MStringizer<Hardware::Company>
 {
   public:
              CompanyStrings();
