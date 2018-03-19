@@ -1,4 +1,4 @@
-#include "hardwarestrings.h"
+#include "hwtypestrings.h"
 
 HardwareStrings::HardwareStrings()
 {

@@ -29,9 +29,27 @@
     <ClCompile Include="hardware.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hwcomponentstrings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hwtypestrings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hwcompanystrings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hardware.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hwcomponentstrings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hwtypestrings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hwcompanystrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

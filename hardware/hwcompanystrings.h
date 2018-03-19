@@ -1,8 +1,8 @@
-#ifndef COMPANYSTRINGS_H
-#define COMPANYSTRINGS_H
+#ifndef HWCOMPANYSTRINGS_H
+#define HWCOMPANYSTRINGS_H
 
 #include <MkCore/MStringizer>
-#include "../hardware/hardware.h"
+#include "hardware.h"
 
 class CompanyStrings : public MStringizer<Hardware::Company>
 {

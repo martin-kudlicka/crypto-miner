@@ -1,6 +1,6 @@
 #include "hardwaremodel.h"
 
-#include "hwcomponentstrings.h"
+#include "../hardware/hwcomponentstrings.h"
 #include "minerplugins.h"
 
 HardwareModel::HardwareModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins) : _allowedMiners(allowedMiners)

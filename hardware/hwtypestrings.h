@@ -1,8 +1,8 @@
-#ifndef HARDWARESTRINGS_H
-#define HARDWARESTRINGS_H
+#ifndef HWTYPESTRINGS_H
+#define HWTYPESTRINGS_H
 
 #include <MkCore/MStringizer>
-#include "../hardware/hardware.h"
+#include "hardware.h"
 
 class HardwareStrings : public MStringizer<Hardware::Type>
 {

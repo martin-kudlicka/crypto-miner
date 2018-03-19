@@ -1,7 +1,7 @@
 #include "hwcomponentstrings.h"
 
-#include "companystrings.h"
-#include "hardwarestrings.h"
+#include "hwcompanystrings.h"
+#include "hwtypestrings.h"
 
 namespace HwComponentStrings
 {
