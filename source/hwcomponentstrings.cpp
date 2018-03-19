@@ -18,7 +18,7 @@ QString toString(const Hardware::Component &hwComponent)
     value.append(companyStrings.toString(hwComponent.company));
     value.append(' ');
   }
-  value.append(hardwareStrings.toString(hwComponent.hardware));
+  value.append(hardwareStrings.toString(hwComponent.type));
 
   return value;
 }
