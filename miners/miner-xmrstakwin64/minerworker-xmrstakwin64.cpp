@@ -24,15 +24,15 @@ QStringList MinerWorkerXmrStakWin64::prepareArguments() const
 QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
 {
   QResource configResource(":/resources/files/config.txt");
-  QString configData = reinterpret_cast<const char *>(configResource.data());
+  QByteArray configData = reinterpret_cast<const char *>(configResource.data());
 
-  configData.replace("%pool_address%",   _poolAddress);
-  configData.replace("%wallet_address%", _poolCredentials.username);
-  configData.replace("%pool_password%",  _poolCredentials.password);
+  configData.replace("%pool_address%",   _poolAddress.toLocal8Bit());
+  configData.replace("%wallet_address%", _poolCredentials.username.toLocal8Bit());
+  configData.replace("%pool_password%",  _poolCredentials.password.toLocal8Bit());
 
   QString currency;
-  auto coinSymbol = gCoins->nameFromString(_options.coinName());
-  switch (coinSymbol)
+  auto coinName = gCoins->nameFromString(_options.coinName());
+  switch (coinName)
   {
     case Coin::Name::Aeon:
       currency = "aeon";
@@ -41,9 +41,9 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
       currency = "monero";
       break;
     default:
-      Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::prepareCommonConfig", "switch (coinSymbol)");
+      Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::prepareCommonConfig", "switch (coinName)");
   }
-  configData.replace("%currency%", currency);
+  configData.replace("%currency%", currency.toLocal8Bit());
 
   auto configFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
   configFilePath.append(QDir::separator());
