@@ -4,7 +4,7 @@
 #include "hwcomponentstrings.h"
 #include "../coins/coins.h"
 
-MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const Hardware::HwComponent &hwComponent, Coin::Name coinName, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, hwComponent, coinName, parent)
+MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const Hardware::Component &hwComponent, Coin::Name coinName, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, hwComponent, coinName, parent)
 {
 }
 
@@ -16,7 +16,7 @@ MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *min
   setupSettings();
 }
 
-MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const Hardware::HwComponent &hwComponent, Coin::Name coinName, QWidget *parent) : QDialog(parent), _options(id), _minerPlugin(minerPlugin), _widgetSettings(&_options)
+MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const Hardware::Component &hwComponent, Coin::Name coinName, QWidget *parent) : QDialog(parent), _options(id), _minerPlugin(minerPlugin), _widgetSettings(&_options)
 {
   _ui.setupUi(this);
 
@@ -61,7 +61,7 @@ void MiningUnitDialog::setupWidgets() const
   }
 }
 
-void MiningUnitDialog::setupWidgets(const Hardware::HwComponent &hwComponent, Coin::Name coinName) const
+void MiningUnitDialog::setupWidgets(const Hardware::Component &hwComponent, Coin::Name coinName) const
 {
   setupWidgets();
 

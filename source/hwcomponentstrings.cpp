@@ -6,7 +6,7 @@
 namespace HwComponentStrings
 {
 
-QString toString(const Hardware::HwComponent &hwComponent)
+QString toString(const Hardware::Component &hwComponent)
 {
   QString value;
 

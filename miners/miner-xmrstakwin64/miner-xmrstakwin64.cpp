@@ -24,5 +24,5 @@ Coin::NameList MinerXmrStakWin64::supportedCoins() const
 
 Hardware::HwComponentList MinerXmrStakWin64::supportedHardware() const
 {
-  return { Hardware::HwComponent(Hardware::Company::Any, Hardware::Type::Cpu), Hardware::HwComponent(Hardware::Company::Amd, Hardware::Type::Gpu), Hardware::HwComponent(Hardware::Company::Nvidia, Hardware::Type::Gpu) };
+  return { Hardware::Component(Hardware::Company::Any, Hardware::Type::Cpu), Hardware::Component(Hardware::Company::Amd, Hardware::Type::Gpu), Hardware::Component(Hardware::Company::Nvidia, Hardware::Type::Gpu) };
 }
