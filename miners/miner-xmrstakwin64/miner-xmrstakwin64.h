@@ -16,7 +16,7 @@ class MinerXmrStakWin64 : public MinerInterface
     virtual QString                           name             ()                   const Q_DECL_OVERRIDE;
     virtual MOperatingSystemVersion::Platform platform         ()                   const Q_DECL_OVERRIDE;
     virtual Coin::NameList                    supportedCoins   ()                   const Q_DECL_OVERRIDE;
-    virtual Hardware::HwComponentList         supportedHardware()                   const Q_DECL_OVERRIDE;
+    virtual Hardware::ComponentList           supportedHardware()                   const Q_DECL_OVERRIDE;
 };
 
 

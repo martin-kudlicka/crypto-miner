@@ -17,7 +17,7 @@ class HardwareModel : public QAbstractListModel
     MinerInterfacePtrSet miners     (const QModelIndex &index) const;
 
   private:
-          Hardware::HwComponentList                        _hwComponents;
+          Hardware::ComponentList                          _hwComponents;
           QHash<Hardware::Component, MinerInterfacePtrSet> _hwComponentMiners;
     const MinerInterfacePtrSet                            *_allowedMiners;
 

@@ -22,7 +22,7 @@ Coin::NameList MinerXmrStakWin64::supportedCoins() const
   return { Coin::Name::Aeon, Coin::Name::Monero };
 }
 
-Hardware::HwComponentList MinerXmrStakWin64::supportedHardware() const
+Hardware::ComponentList MinerXmrStakWin64::supportedHardware() const
 {
   return { Hardware::Component(Hardware::Company::Any, Hardware::Type::Cpu), Hardware::Component(Hardware::Company::Amd, Hardware::Type::Gpu), Hardware::Component(Hardware::Company::Nvidia, Hardware::Type::Gpu) };
 }
