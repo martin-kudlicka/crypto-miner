@@ -4,11 +4,11 @@
 #include <MkCore/MStringizer>
 #include "hardware.h"
 
-class CompanyStrings : public MStringizer<Hardware::Company>
+class HwCompanyStrings : public MStringizer<Hardware::Company>
 {
   public:
-             CompanyStrings();
-    virtual ~CompanyStrings() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
+             HwCompanyStrings();
+    virtual ~HwCompanyStrings() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 };
 
 #endif
