@@ -16,9 +16,9 @@ MOperatingSystemVersion::Platform MinerXmrStakWin64::platform() const
   return MOperatingSystemVersion::Platform::X64;
 }
 
-Coin::SymbolList MinerXmrStakWin64::supportedCoins() const
+Coin::NameList MinerXmrStakWin64::supportedCoins() const
 {
-  return { Coin::Symbol::AEON, Coin::Symbol::XMR };
+  return { Coin::Name::Aeon, Coin::Name::Monero };
 }
 
 HwComponentList MinerXmrStakWin64::supportedHardware() const

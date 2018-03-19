@@ -1,7 +1,5 @@
 #include "coinsymbolstrings.h"
 
-MLazySingleton<CoinSymbolStrings> gCoinSymbolStrings;
-
 CoinSymbolStrings::CoinSymbolStrings()
 {
   insert(Coin::Symbol::AEON, "AEON");

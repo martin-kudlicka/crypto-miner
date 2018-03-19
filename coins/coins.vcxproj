@@ -76,11 +76,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="coinnamestrings.cpp" />
     <ClCompile Include="coins.cpp" />
+    <ClCompile Include="coinsymbolstrings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="coin.h" />
+    <ClInclude Include="coinnamestrings.h" />
     <ClInclude Include="coins.h" />
+    <ClInclude Include="coinsymbolstrings.h" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

@@ -1,6 +1,5 @@
 #include "miner-xmrstakcpunotls.h"
 
-#include <QtCore/QSharedPointer>
 #include "minerworker-xmrstakcpunotls.h"
 
 MinerWorkerInterfaceSPtr MinerXmrStakCpuNoTls::createWorker(const MUuidPtr &id) const
@@ -18,9 +17,9 @@ MOperatingSystemVersion::Platform MinerXmrStakCpuNoTls::platform() const
   return MOperatingSystemVersion::Platform::X64;
 }
 
-Coin::SymbolList MinerXmrStakCpuNoTls::supportedCoins() const
+Coin::NameList MinerXmrStakCpuNoTls::supportedCoins() const
 {
-  return { Coin::Symbol::XMR };
+  return { Coin::Name::Monero };
 }
 
 HwComponentList MinerXmrStakCpuNoTls::supportedHardware() const

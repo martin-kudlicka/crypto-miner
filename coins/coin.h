@@ -6,24 +6,18 @@
 
 namespace Coin
 {
+  enum Name
+  {
+    Aeon,
+    Monero
+  };
   enum Symbol
   {
     AEON,
     XMR
   };
 
-  struct Info
-  {
-    Symbol  symbol;
-    QString name;
-
-    Info(Symbol symbol, const QString &name) : symbol(symbol), name(name)
-    {
-    }
-  };
-
-  using InfoList   = QList<Info>;
-  using SymbolList = QList<Symbol>;
+  using NameList = QList<Name>;
 }
 
 #endif

@@ -2,6 +2,7 @@
 #define MINERWORKERINTERFACE_H
 
 #include <QtCore/QObject>
+#include <QtCore/QSharedPointer>
 
 struct PoolCredentials;
 

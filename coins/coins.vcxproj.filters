@@ -29,12 +29,24 @@
     <ClCompile Include="coins.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="coinnamestrings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coinsymbolstrings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="coins.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="coin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coinnamestrings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coinsymbolstrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

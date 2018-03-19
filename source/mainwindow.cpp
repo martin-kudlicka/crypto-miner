@@ -81,7 +81,7 @@ void MainWindow::on_miningUnitAdd_clicked(bool checked /* false */)
 
   auto minerPlugin = minerSelectionDialog.selectedMiner();
 
-  MiningUnitDialog miningUnitDialog(minerPlugin, minerSelectionDialog.selectedHwComponent(), minerSelectionDialog.selectedCoinSymbol(), this);
+  MiningUnitDialog miningUnitDialog(minerPlugin, minerSelectionDialog.selectedHwComponent(), minerSelectionDialog.selectedCoinName(), this);
   if (miningUnitDialog.exec() == QDialog::Rejected)
   {
     return;

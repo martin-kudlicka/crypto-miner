@@ -99,9 +99,6 @@
     <ClCompile Include="coinsmodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\common\coinsymbolstrings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="companystrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -203,9 +200,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="coinsmodel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\common\coinsymbolstrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="companystrings.h">

@@ -3,7 +3,6 @@
 
 #include <MkCore/MStringizer>
 #include "../coins/coin.h"
-#include <MkCore/MLazySingleton>
 
 class CoinSymbolStrings : public MStringizer<Coin::Symbol>
 {
@@ -11,7 +10,5 @@ class CoinSymbolStrings : public MStringizer<Coin::Symbol>
              CoinSymbolStrings();
     virtual ~CoinSymbolStrings() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 };
-
-extern MLazySingleton<CoinSymbolStrings> gCoinSymbolStrings;
 
 #endif

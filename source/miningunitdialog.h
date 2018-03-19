@@ -13,9 +13,9 @@ struct HwComponent;
 class MiningUnitDialog : public QDialog
 {
   public:
-             MiningUnitDialog(const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Symbol coinSymbol, QWidget *parent);
+             MiningUnitDialog(const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Name coinName, QWidget *parent);
              MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, QWidget *parent);
-             MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Symbol coinSymbol, QWidget *parent);
+             MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Name coinName, QWidget *parent);
     virtual ~MiningUnitDialog() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
     const MiningUnitOptions &options() const;
@@ -27,8 +27,8 @@ class MiningUnitDialog : public QDialog
           MWidgetSettings       _widgetSettings;
 
     void setupSettings();
-    void setupWidgets ()                                                        const;
-    void setupWidgets (const HwComponent &hwComponent, Coin::Symbol coinSymbol) const;
+    void setupWidgets ()                                                    const;
+    void setupWidgets (const HwComponent &hwComponent, Coin::Name coinName) const;
 
     virtual void accept() Q_DECL_OVERRIDE;
 };
