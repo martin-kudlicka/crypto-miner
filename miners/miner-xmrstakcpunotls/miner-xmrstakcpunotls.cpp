@@ -22,7 +22,7 @@ Coin::NameList MinerXmrStakCpuNoTls::supportedCoins() const
   return { Coin::Name::Monero };
 }
 
-Hardware::HwComponentList MinerXmrStakCpuNoTls::supportedHardware() const
+Hardware::ComponentList MinerXmrStakCpuNoTls::supportedHardware() const
 {
   return { Hardware::Component(Hardware::Company::Any, Hardware::Type::Cpu) };
 }

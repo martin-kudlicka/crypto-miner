@@ -33,7 +33,7 @@ class HARDWARE_EXPORT Hardware
       }
     };
 
-    using HwComponentList = QList<Component>;
+    using ComponentList = QList<Component>;
 
     Hardware();
 };
