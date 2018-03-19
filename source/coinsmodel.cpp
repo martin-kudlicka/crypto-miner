@@ -1,34 +1,34 @@
 #include "coinsmodel.h"
 
-#include "../common/coinsymbolstrings.h"
+#include "../coins/coins.h"
 #include "minerplugins.h"
 
 CoinsModel::CoinsModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins) : _allowedMiners(allowedMiners)
 {
   for (auto &miner : minerPlugins->toList())
   {
-    for (auto symbol : miner->supportedCoins())
+    for (auto coin : miner->supportedCoins())
     {
-      if (!_symbols.contains(symbol))
+      if (!_coins.contains(coin))
       {
-        _symbols.append(symbol);
+        _coins.append(coin);
       }
 
-      _symbolMiners[symbol].insert(miner);
+      _coinMiners[coin].insert(miner);
     }
   }
 }
 
-Coin::Symbol CoinsModel::coinSymbol(const QModelIndex &index) const
+Coin::Name CoinsModel::coinName(const QModelIndex &index) const
 {
-  return _symbols.at(index.row());
+  return _coins.at(index.row());
 }
 
 MinerInterfacePtrSet CoinsModel::miners(const QModelIndex &index) const
 {
-  auto symbol = _symbols.at(index.row());
+  auto coin = _coins.at(index.row());
 
-  return _symbolMiners.value(symbol);
+  return _coinMiners.value(coin);
 }
 
 QVariant CoinsModel::data(const QModelIndex &index, int role /* Qt::DisplayRole */) const
@@ -38,9 +38,9 @@ QVariant CoinsModel::data(const QModelIndex &index, int role /* Qt::DisplayRole 
     return QVariant();
   }
 
-  auto symbol = _symbols.at(index.row());
+  auto coin = _coins.at(index.row());
 
-  return gCoinSymbolStrings->toString(symbol);
+  return gCoins->toFullString(coin);
 }
 
 Qt::ItemFlags CoinsModel::flags(const QModelIndex &index) const
@@ -49,9 +49,9 @@ Qt::ItemFlags CoinsModel::flags(const QModelIndex &index) const
 
   if (!_allowedMiners->isEmpty())
   {
-    auto symbol       = _symbols.at(index.row());
-    auto symbolMiners = _symbolMiners.value(symbol);
-    if (!symbolMiners.intersects(*_allowedMiners))
+    auto coin       = _coins.at(index.row());
+    auto coinMiners = _coinMiners.value(coin);
+    if (!coinMiners.intersects(*_allowedMiners))
     {
       itemFlags &= ~Qt::ItemIsEnabled;
     }
@@ -62,5 +62,5 @@ Qt::ItemFlags CoinsModel::flags(const QModelIndex &index) const
 
 int CoinsModel::rowCount(const QModelIndex &parent /* QModelIndex() */) const
 {
-  return _symbols.count();
+  return _coins.count();
 }

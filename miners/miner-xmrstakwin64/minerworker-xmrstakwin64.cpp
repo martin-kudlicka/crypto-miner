@@ -2,7 +2,7 @@
 
 #include "log.h"
 #include <QtCore/QResource>
-#include "../../common/coinsymbolstrings.h"
+#include "../../coins/coins.h"
 #include <QtCore/QStandardPaths>
 #include <MkCore/MFile>
 
@@ -31,13 +31,13 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
   configData.replace("%pool_password%",  _poolCredentials.password);
 
   QString currency;
-  auto coinSymbol = gCoinSymbolStrings->fromString(_options.coinSymbol());
+  auto coinSymbol = gCoins->nameFromString(_options.coinName());
   switch (coinSymbol)
   {
-    case Coin::Symbol::AEON:
+    case Coin::Name::Aeon:
       currency = "aeon";
       break;
-    case Coin::Symbol::XMR:
+    case Coin::Name::Monero:
       currency = "monero";
       break;
     default:

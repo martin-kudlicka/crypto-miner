@@ -2,9 +2,9 @@
 
 #include "../miners/minerinterface.h"
 #include "hwcomponentstrings.h"
-#include "../common/coinsymbolstrings.h"
+#include "../coins/coins.h"
 
-MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Symbol coinSymbol, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, hwComponent, coinSymbol, parent)
+MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Name coinName, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, hwComponent, coinName, parent)
 {
 }
 
@@ -16,11 +16,11 @@ MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *min
   setupSettings();
 }
 
-MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Symbol coinSymbol, QWidget *parent) : QDialog(parent), _options(id), _minerPlugin(minerPlugin), _widgetSettings(&_options)
+MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Name coinName, QWidget *parent) : QDialog(parent), _options(id), _minerPlugin(minerPlugin), _widgetSettings(&_options)
 {
   _ui.setupUi(this);
 
-  setupWidgets(hwComponent, coinSymbol);
+  setupWidgets(hwComponent, coinName);
   setupSettings();
 }
 
@@ -33,7 +33,7 @@ void MiningUnitDialog::setupSettings()
 {
   // parameters
   _widgetSettings.setWidget(MinerOptions::Property::Parameters_HwComponent, _ui.parameterHwComponent);
-  _widgetSettings.setWidget(MinerOptions::Property::Parameters_CoinSymbol,  _ui.parameterCoin);
+  _widgetSettings.setWidget(MinerOptions::Property::Parameters_CoinName,    _ui.parameterCoin);
 
   // pool
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Address,  _ui.poolAddress);
@@ -53,15 +53,15 @@ void MiningUnitDialog::setupWidgets() const
     auto value = HwComponentStrings::toString(hwComponent);
     _ui.parameterHwComponent->addItem(value, value);
   }
-
-  for (auto coinSymbol : _minerPlugin->supportedCoins())
+  for (auto coinName : _minerPlugin->supportedCoins())
   {
-    auto value = gCoinSymbolStrings->toString(coinSymbol);
-    _ui.parameterCoin->addItem(value, value);
+    auto name     = gCoins->toString(coinName);
+    auto fullName = name + gCoins->toString(gCoins->symbol(coinName));
+    _ui.parameterCoin->addItem(fullName, name);
   }
 }
 
-void MiningUnitDialog::setupWidgets(const HwComponent &hwComponent, Coin::Symbol coinSymbol) const
+void MiningUnitDialog::setupWidgets(const HwComponent &hwComponent, Coin::Name coinName) const
 {
   setupWidgets();
 
@@ -70,7 +70,7 @@ void MiningUnitDialog::setupWidgets(const HwComponent &hwComponent, Coin::Symbol
   auto index = _ui.parameterHwComponent->findData(value);
   _ui.parameterHwComponent->setCurrentIndex(index);
 
-  value = gCoinSymbolStrings->toString(coinSymbol);
+  value = gCoins->toString(coinName);
   index = _ui.parameterCoin->findData(value);
   _ui.parameterCoin->setCurrentIndex(index);
 }
