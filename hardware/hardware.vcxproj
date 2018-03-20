@@ -78,14 +78,12 @@
   <ItemGroup>
     <ClCompile Include="hwcompanystrings.cpp" />
     <ClCompile Include="hwcomponent.cpp" />
-    <ClCompile Include="hwcomponentstrings.cpp" />
     <ClCompile Include="hwtypestrings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hardware_global.h" />
     <ClInclude Include="hwcompanystrings.h" />
     <ClInclude Include="hwcomponent.h" />
-    <ClInclude Include="hwcomponentstrings.h" />
     <ClInclude Include="hwtypestrings.h" />
   </ItemGroup>
   <ItemGroup>

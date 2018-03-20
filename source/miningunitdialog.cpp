@@ -1,7 +1,6 @@
 #include "miningunitdialog.h"
 
 #include "../miners/minerinterface.h"
-#include "../hardware/hwcomponentstrings.h"
 #include "../coins/coin.h"
 #include "../coins/coinnamestrings.h"
 #include "../coins/coinsymbolstrings.h"
@@ -52,7 +51,7 @@ void MiningUnitDialog::setupWidgets() const
   // parameters
   for (const auto &hwComponent : _minerPlugin->supportedHardware())
   {
-    auto value = HwComponentStrings::toString(hwComponent);
+    auto value = hwComponent.toString();
     _ui.parameterHwComponent->addItem(value, value);
   }
   for (auto coinName : _minerPlugin->supportedCoins())
@@ -72,7 +71,7 @@ void MiningUnitDialog::setupWidgets(const HwComponent &hwComponent, Coin::Name c
   setupWidgets();
 
   // parameters
-  auto value = HwComponentStrings::toString(hwComponent);
+  auto value = hwComponent.toString();
   auto index = _ui.parameterHwComponent->findData(value);
   _ui.parameterHwComponent->setCurrentIndex(index);
 

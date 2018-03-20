@@ -1,6 +1,5 @@
 #include "hardwaremodel.h"
 
-#include "../hardware/hwcomponentstrings.h"
 #include "minerplugins.h"
 
 HardwareModel::HardwareModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins) : _allowedMiners(allowedMiners)
@@ -40,7 +39,7 @@ QVariant HardwareModel::data(const QModelIndex &index, int role /* Qt::DisplayRo
 
   auto hwComponent = &_hwComponents.at(index.row());
 
-  return HwComponentStrings::toString(*hwComponent);
+  return hwComponent->toString();
 }
 
 Qt::ItemFlags HardwareModel::flags(const QModelIndex &index) const
