@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "coins", "coins", "{608A2226
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "coins", "coins\coins.vcxproj", "{7E381709-38CB-492F-A445-BCBF3A8AAB25}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hardware", "hardware\hardware.vcxproj", "{A4AE5A83-4ABD-4281-99B5-5F62E1897150}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -37,6 +39,10 @@ Global
 		{7E381709-38CB-492F-A445-BCBF3A8AAB25}.Debug|x86.Build.0 = Debug|Win32
 		{7E381709-38CB-492F-A445-BCBF3A8AAB25}.Release|x86.ActiveCfg = Release|Win32
 		{7E381709-38CB-492F-A445-BCBF3A8AAB25}.Release|x86.Build.0 = Release|Win32
+		{A4AE5A83-4ABD-4281-99B5-5F62E1897150}.Debug|x86.ActiveCfg = Debug|Win32
+		{A4AE5A83-4ABD-4281-99B5-5F62E1897150}.Debug|x86.Build.0 = Debug|Win32
+		{A4AE5A83-4ABD-4281-99B5-5F62E1897150}.Release|x86.ActiveCfg = Release|Win32
+		{A4AE5A83-4ABD-4281-99B5-5F62E1897150}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
