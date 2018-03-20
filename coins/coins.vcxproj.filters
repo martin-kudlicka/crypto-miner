@@ -49,5 +49,8 @@
     <ClInclude Include="coinsymbolstrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="coins_global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

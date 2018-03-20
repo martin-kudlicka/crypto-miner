@@ -1,5 +1,7 @@
 #include "coins.h"
 
+#include "coinnamestrings.h"
+
 MLazySingleton<Coins> gCoins;
 
 Coins::Coins()
@@ -11,11 +13,6 @@ Coins::Coins()
   };
 }
 
-Coin::Name Coins::nameFromString(const QString &text) const
-{
-  return _coinNameStrings.fromString(text);
-}
-
 Coin::Symbol Coins::symbol(Coin::Name coinName) const
 {
   return _coinsInfo.value(coinName);
@@ -23,7 +20,9 @@ Coin::Symbol Coins::symbol(Coin::Name coinName) const
 
 QString Coins::toFullString(Coin::Name coinName) const
 {
-  QString text = _coinNameStrings.toString(coinName);
+  static CoinNameStrings coinNameStrings;
+
+  QString text = coinNameStrings.toString(coinName);
   text.append(' ');
 
   auto coinSymbolStr = _coinSymbolStrings.toString(symbol(coinName));
@@ -34,7 +33,9 @@ QString Coins::toFullString(Coin::Name coinName) const
 
 QString Coins::toString(Coin::Name coinName) const
 {
-  return _coinNameStrings.toString(coinName);
+  static CoinNameStrings coinNameStrings;
+
+  return coinNameStrings.toString(coinName);
 }
 
 QString Coins::toString(Coin::Symbol coinSymbol) const
