@@ -31,13 +31,6 @@ QString Coins::toFullString(Coin::Name coinName) const
   return text;
 }
 
-QString Coins::toString(Coin::Name coinName) const
-{
-  static CoinNameStrings coinNameStrings;
-
-  return coinNameStrings.toString(coinName);
-}
-
 QString Coins::toString(Coin::Symbol coinSymbol) const
 {
   return _coinSymbolStrings.toString(coinSymbol);

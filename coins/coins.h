@@ -12,10 +12,9 @@ class COINS_EXPORT Coins
   public:
     Coins();
 
-    Coin::Symbol symbol        (Coin::Name coinName)     const;
-    QString      toFullString  (Coin::Name coinName)     const;
-    QString      toString      (Coin::Name coinName)     const;
-    QString      toString      (Coin::Symbol coinSymbol) const;
+    Coin::Symbol symbol      (Coin::Name coinName)     const;
+    QString      toFullString(Coin::Name coinName)     const;
+    QString      toString    (Coin::Symbol coinSymbol) const;
 
   private:
     CoinSymbolStrings               _coinSymbolStrings;
