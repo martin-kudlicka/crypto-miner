@@ -2,7 +2,7 @@
 
 #include "log.h"
 #include <QtCore/QResource>
-#include "../../coins/coins.h"
+#include "../../coins/coinnamestrings.h"
 #include <QtCore/QStandardPaths>
 #include <MkCore/MFile>
 
@@ -14,6 +14,10 @@ MinerWorkerXmrStakWin64::MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId) :
 
 QStringList MinerWorkerXmrStakWin64::prepareArguments() const
 {
+  QStringList arguments;
+
+  //arguments << "--noUAC";
+
   auto commonConfigFilePath = prepareCommonConfig();
 
   // TODO
@@ -30,8 +34,10 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
   configData.replace("%wallet_address%", _poolCredentials.username.toLocal8Bit());
   configData.replace("%pool_password%",  _poolCredentials.password.toLocal8Bit());
 
+  static CoinNameStrings coinNameStrings;
+
   QString currency;
-  auto coinName = gCoins->nameFromString(_options.coinName());
+  auto coinName = coinNameStrings.fromString(_options.coinName());
   switch (coinName)
   {
     case Coin::Name::Aeon:

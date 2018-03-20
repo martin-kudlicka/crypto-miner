@@ -85,6 +85,7 @@
     <ClInclude Include="coinnamestrings.h" />
     <ClInclude Include="coins.h" />
     <ClInclude Include="coinsymbolstrings.h" />
+    <ClInclude Include="coins_global.h" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
