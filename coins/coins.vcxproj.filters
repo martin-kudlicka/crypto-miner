@@ -26,9 +26,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="coins.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="coinnamestrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -38,11 +35,11 @@
     <ClCompile Include="coinfullstrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="coin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="coins.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="coin.h">
       <Filter>Header Files</Filter>
     </ClInclude>

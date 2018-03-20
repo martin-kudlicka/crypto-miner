@@ -1,23 +1,32 @@
 #ifndef COIN_H
 #define COIN_H
 
-#include <QtCore/QString>
+#include "coins_global.h"
 #include <QtCore/QList>
+#include <QtCore/QHash>
 
-namespace Coin
+class COINS_EXPORT Coin
 {
-  enum Name
-  {
-    Aeon,
-    Monero
-  };
-  enum Symbol
-  {
-    AEON,
-    XMR
-  };
+  public:
+    enum Name
+    {
+      Aeon,
+      Monero
+    };
+    enum Symbol
+    {
+      AEON,
+      XMR
+    };
 
-  using NameList = QList<Name>;
-}
+    using NameList = QList<Name>;
+
+    Coin();
+
+    Symbol symbol(Name coinName) const;
+
+  private:
+    QHash<Name, Symbol> _coinsInfo;
+};
 
 #endif
