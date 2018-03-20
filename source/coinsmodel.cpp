@@ -1,6 +1,6 @@
 #include "coinsmodel.h"
 
-#include "../coins/coins.h"
+#include "../coins/coinfullstrings.h"
 #include "minerplugins.h"
 
 CoinsModel::CoinsModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins) : _allowedMiners(allowedMiners)
@@ -40,7 +40,9 @@ QVariant CoinsModel::data(const QModelIndex &index, int role /* Qt::DisplayRole 
 
   auto coin = _coins.at(index.row());
 
-  return gCoins->toFullString(coin);
+  static CoinFullStrings coinFullStrings;
+
+  return coinFullStrings.toString(coin);
 }
 
 Qt::ItemFlags CoinsModel::flags(const QModelIndex &index) const
