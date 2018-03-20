@@ -2,11 +2,11 @@
 #define HWCOMPONENTSTRINGS_H
 
 #include <QtCore/QString>
-#include "hardware.h"
+#include "hwcomponent.h"
 
 namespace HwComponentStrings
 {
-  QString toString(const Hardware::Component &hwComponent);
+  QString toString(const HwComponent &hwComponent);
 };
 
 #endif

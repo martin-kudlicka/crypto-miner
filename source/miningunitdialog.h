@@ -5,29 +5,29 @@
 #include "miningunitoptions.h"
 #include <MkWidgets/MWidgetSettings>
 #include "../coins/coin.h"
-#include "../hardware/hardware.h"
+#include "../hardware/hwcomponent.h"
 
 class MinerInterface;
 
 class MiningUnitDialog : public QDialog
 {
   public:
-             MiningUnitDialog(const MinerInterface *minerPlugin, const Hardware::Component &hwComponent, Coin::Name coinName, QWidget *parent);
+             MiningUnitDialog(const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Name coinName, QWidget *parent);
              MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, QWidget *parent);
-             MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const Hardware::Component &hwComponent, Coin::Name coinName, QWidget *parent);
+             MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin::Name coinName, QWidget *parent);
     virtual ~MiningUnitDialog() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
     const MiningUnitOptions &options() const;
 
   private:
-    const MinerInterface       *_minerPlugin;
-          Ui::MiningUnitDialog  _ui;
-          MiningUnitOptions     _options;
-          MWidgetSettings       _widgetSettings;
+    const MinerInterface      *_minerPlugin;
+          Ui::MiningUnitDialog _ui;
+          MiningUnitOptions    _options;
+          MWidgetSettings      _widgetSettings;
 
     void setupSettings();
-    void setupWidgets ()                                                            const;
-    void setupWidgets (const Hardware::Component &hwComponent, Coin::Name coinName) const;
+    void setupWidgets ()                                                    const;
+    void setupWidgets (const HwComponent &hwComponent, Coin::Name coinName) const;
 
     virtual void accept() Q_DECL_OVERRIDE;
 };

@@ -18,7 +18,7 @@ Coin::Name MinerSelectionDialog::selectedCoinName() const
   return _coinsModel.coinName(_ui.coinsView->currentIndex());
 }
 
-Hardware::Component MinerSelectionDialog::selectedHwComponent() const
+HwComponent MinerSelectionDialog::selectedHwComponent() const
 {
   return _hardwareModel.hwComponent(_ui.hwComponentsView->currentIndex());
 }

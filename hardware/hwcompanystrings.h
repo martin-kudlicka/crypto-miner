@@ -2,9 +2,9 @@
 #define HWCOMPANYSTRINGS_H
 
 #include <MkCore/MStringizer>
-#include "hardware.h"
+#include "hwcomponent.h"
 
-class HwCompanyStrings : public MStringizer<Hardware::Company>
+class HwCompanyStrings : public MStringizer<HwComponent::Company>
 {
   public:
              HwCompanyStrings();

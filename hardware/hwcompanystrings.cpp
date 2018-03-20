@@ -2,6 +2,6 @@
 
 HwCompanyStrings::HwCompanyStrings()
 {
-  insert(Hardware::Company::Amd,    "AMD");
-  insert(Hardware::Company::Nvidia, "NVIDIA");
+  insert(HwComponent::Company::Amd,    "AMD");
+  insert(HwComponent::Company::Nvidia, "NVIDIA");
 }

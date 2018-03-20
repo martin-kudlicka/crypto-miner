@@ -145,6 +145,11 @@
   <ItemGroup>
     <ResourceCompile Include="miner-xmrstakcpunotls.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\hardware\hardware.vcxproj">
+      <Project>{a4ae5a83-4abd-4281-99b5-5f62e1897150}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
