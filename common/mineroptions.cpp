@@ -1,6 +1,7 @@
 #include "mineroptions.h"
 
 #include <MkCore/MUuidPtr>
+#include "../coins/coinnamestrings.h"
 
 Q_DECL_CONSTEXPR QString MinerOptions::Property::Name                   = "name";
 Q_DECL_CONSTEXPR QString MinerOptions::Property::Parameters_CoinName    = "parameters/coinName";
@@ -13,9 +14,13 @@ MinerOptions::MinerOptions(const MUuidPtr &id)
   beginGroup("miner");
 }
 
-QString MinerOptions::coinName() const
+Coin::Name MinerOptions::coinName() const
 {
-  return value(Property::Parameters_CoinName).toString();
+  static CoinNameStrings coinNameStrings;
+
+  auto coinNameStr = value(Property::Parameters_CoinName).toString();
+
+  return coinNameStrings.fromString(coinNameStr);
 }
 
 QString MinerOptions::name() const

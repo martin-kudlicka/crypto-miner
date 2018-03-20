@@ -2,7 +2,6 @@
 
 #include "log.h"
 #include <QtCore/QResource>
-#include "../../coins/coinnamestrings.h"
 #include <QtCore/QStandardPaths>
 #include <MkCore/MFile>
 
@@ -34,10 +33,8 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
   configData.replace("%wallet_address%", _poolCredentials.username.toLocal8Bit());
   configData.replace("%pool_password%",  _poolCredentials.password.toLocal8Bit());
 
-  static CoinNameStrings coinNameStrings;
-
   QString currency;
-  auto coinName = coinNameStrings.fromString(_options.coinName());
+  auto coinName = _options.coinName();
   switch (coinName)
   {
     case Coin::Name::Aeon:
