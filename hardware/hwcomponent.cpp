@@ -1,5 +1,8 @@
 #include "hwcomponent.h"
 
+#include "hwcompanystrings.h"
+#include "hwtypestrings.h"
+
 HwComponent::HwComponent(Company company, Type type) : _company(company), _type(type)
 {
 }
@@ -7,6 +10,23 @@ HwComponent::HwComponent(Company company, Type type) : _company(company), _type(
 HwComponent::Company HwComponent::company() const
 {
   return _company;
+}
+
+QString HwComponent::toString() const
+{
+  QString value;
+
+  static HwCompanyStrings companyStrings;
+  static HwTypeStrings hardwareStrings;
+
+  if (_company != HwComponent::Company::Any)
+  {
+    value.append(companyStrings.toString(_company));
+    value.append(' ');
+  }
+  value.append(hardwareStrings.toString(_type));
+
+  return value;
 }
 
 HwComponent::Type HwComponent::type() const

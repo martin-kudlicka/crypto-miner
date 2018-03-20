@@ -1,9 +1,10 @@
 #ifndef HWCOMPONENT_H
 #define HWCOMPONENT_H
 
+#include "hardware_global.h"
 #include <QtCore/QList>
 
-class HwComponent
+class HARDWARE_EXPORT HwComponent
 {
   public:
     enum class Company
@@ -20,8 +21,9 @@ class HwComponent
 
     HwComponent(Company company, Type type);
 
-    Company company() const;
-    Type    type   () const;
+    Company company () const;
+    QString toString() const;
+    Type    type    () const;
 
     bool operator==(const HwComponent &other) const;
 
@@ -32,6 +34,6 @@ class HwComponent
 
 using HwComponentList = QList<HwComponent>;
 
-uint qHash(const HwComponent &key, uint seed = 0);
+uint HARDWARE_EXPORT qHash(const HwComponent &key, uint seed = 0);
 
 #endif

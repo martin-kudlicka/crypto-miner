@@ -26,9 +26,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="hwcomponentstrings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="hwtypestrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -40,9 +37,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="hwcomponentstrings.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="hwtypestrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
