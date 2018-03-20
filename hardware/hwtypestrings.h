@@ -2,9 +2,9 @@
 #define HWTYPESTRINGS_H
 
 #include <MkCore/MStringizer>
-#include "hardware.h"
+#include "hwcomponent.h"
 
-class HwTypeStrings : public MStringizer<Hardware::Type>
+class HwTypeStrings : public MStringizer<HwComponent::Type>
 {
   public:
              HwTypeStrings();

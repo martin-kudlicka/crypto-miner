@@ -2,7 +2,7 @@
 #define MINERINTERFACE_H
 
 #include "minerworkerinterface.h"
-#include "../hardware/hardware.h"
+#include "../hardware/hwcomponent.h"
 #include "../coins/coin.h"
 #include <MkCore/MOperatingSystemVersion>
 #include <QtCore/QSet>
@@ -20,7 +20,7 @@ class MinerInterface : public QObject
     virtual QString                           name             ()                   const = 0;
     virtual MOperatingSystemVersion::Platform platform         ()                   const = 0;
     virtual Coin::NameList                    supportedCoins   ()                   const = 0;
-    virtual Hardware::ComponentList           supportedHardware()                   const = 0;
+    virtual HwComponentList                   supportedHardware()                   const = 0;
 
   protected:
     virtual ~MinerInterface() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;

@@ -6,19 +6,19 @@
 namespace HwComponentStrings
 {
 
-QString toString(const Hardware::Component &hwComponent)
+QString toString(const HwComponent &hwComponent)
 {
   QString value;
 
   static HwCompanyStrings companyStrings;
   static HwTypeStrings    hardwareStrings;
 
-  if (hwComponent.company != Hardware::Company::Any)
+  if (hwComponent.company() != HwComponent::Company::Any)
   {
-    value.append(companyStrings.toString(hwComponent.company));
+    value.append(companyStrings.toString(hwComponent.company()));
     value.append(' ');
   }
-  value.append(hardwareStrings.toString(hwComponent.type));
+  value.append(hardwareStrings.toString(hwComponent.type()));
 
   return value;
 }
