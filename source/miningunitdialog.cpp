@@ -2,7 +2,7 @@
 
 #include "../miners/minerinterface.h"
 #include "../hardware/hwcomponentstrings.h"
-#include "../coins/coins.h"
+#include "../coins/coin.h"
 #include "../coins/coinnamestrings.h"
 #include "../coins/coinsymbolstrings.h"
 
@@ -58,10 +58,11 @@ void MiningUnitDialog::setupWidgets() const
   for (auto coinName : _minerPlugin->supportedCoins())
   {
     static CoinNameStrings coinNameStrings;
+    static Coin coin;
     static CoinSymbolStrings coinSymbolStrings;
 
     auto name     = coinNameStrings.toString(coinName);
-    auto fullName = name + ' ' + coinSymbolStrings.toString(gCoins->symbol(coinName));
+    auto fullName = name + ' ' + coinSymbolStrings.toString(coin.symbol(coinName));
     _ui.parameterCoin->addItem(fullName, name);
   }
 }

@@ -2,7 +2,7 @@
 
 #include "coinnamestrings.h"
 #include "coinsymbolstrings.h"
-#include "coins.h"
+#include "coin.h"
 
 QString CoinFullStrings::toString(Coin::Name coinName)
 {
@@ -11,9 +11,10 @@ QString CoinFullStrings::toString(Coin::Name coinName)
   QString text = coinNameStrings.toString(coinName);
   text.append(' ');
 
+  static Coin coin;
   static CoinSymbolStrings coinSymbolStrings;
 
-  auto coinSymbolStr = coinSymbolStrings.toString(gCoins->symbol(coinName));
+  auto coinSymbolStr = coinSymbolStrings.toString(coin.symbol(coinName));
   text.append(coinSymbolStr);
 
   return text;
