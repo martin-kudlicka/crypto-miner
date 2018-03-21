@@ -7,7 +7,8 @@
 class MiningUnits
 {
   public:
-    MiningUnits(MinerPlugins *minerPlugins, MiningModel *miningModel);
+     MiningUnits(MinerPlugins *minerPlugins, MiningModel *miningModel);
+    ~MiningUnits();
 
     quintptr       count      ()                   const;
     MiningUnitSPtr get        (const MUuidPtr &id);
