@@ -23,6 +23,7 @@ class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
 
     QStringList prepareArguments   () const;
     QString     prepareCommonConfig() const;
+    QString     prepareCpuConfig   () const;
 
     virtual const QString &consoleOutput() const Q_DECL_OVERRIDE;
     virtual       bool     isRunning    () const Q_DECL_OVERRIDE;

@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>resources/files/config.txt</file>
+        <file>resources/files/cpu.txt</file>
     </qresource>
 </RCC>
