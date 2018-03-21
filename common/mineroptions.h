@@ -3,6 +3,7 @@
 
 #include <MkCore/MSettings>
 #include "../coins/coin.h"
+#include "../hardware/hwcomponent.h"
 
 class MUuidPtr;
 
@@ -19,9 +20,10 @@ class MinerOptions : public MSettings
              MinerOptions(const MUuidPtr &id);
     virtual ~MinerOptions() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-    Coin::Name coinName() const;
-    QString    name    () const;
-    void       setName (const QString &name);
+    Coin        coin       () const;
+    HwComponent hwComponent() const;
+    QString     name       () const;
+    void        setName    (const QString &name);
 };
 
 #endif

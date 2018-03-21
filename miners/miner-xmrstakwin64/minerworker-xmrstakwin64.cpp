@@ -19,6 +19,7 @@ QStringList MinerWorkerXmrStakWin64::prepareArguments() const
 
   auto commonConfigFilePath = prepareCommonConfig();
 
+  auto hwComponent = _options.hwComponent();
   // TODO
 
   return QStringList();
@@ -34,8 +35,8 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
   configData.replace("%pool_password%",  _poolCredentials.password.toLocal8Bit());
 
   QString currency;
-  auto coinName = _options.coinName();
-  switch (coinName)
+  auto coin = _options.coin();
+  switch (coin.name())
   {
     case Coin::Name::Aeon:
       currency = "aeon";

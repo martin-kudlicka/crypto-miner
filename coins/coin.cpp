@@ -4,15 +4,20 @@
 #include "coinnamestrings.h"
 #include "coinsymbolstrings.h"
 
+Coin::CoinsInfo Coin::_coinsInfo =
+{
+  { Name::Aeon,   Symbol::AEON },
+  { Name::Monero, Symbol::XMR }
+};
+
 Coin::Coin(Name name) : _name(name)
 {
-  static QHash<Name, Symbol> coinsInfo =
-  {
-    { Name::Aeon,   Symbol::AEON },
-    { Name::Monero, Symbol::XMR }
-  };
+  _symbol = _coinsInfo.value(name);
+}
 
-  _symbol = coinsInfo.value(name);
+Coin::Coin(Symbol symbol) : _symbol(symbol)
+{
+  _name = _coinsInfo.key(symbol);
 }
 
 Coin::Name Coin::name() const
@@ -54,6 +59,31 @@ QString Coin::toString(Parts parts /* Part::All */) const
 bool Coin::operator==(const Coin &other) const
 {
   return other._name == _name && other._symbol == _symbol;
+}
+
+Coin Coin::fromString(const QString &text, Parts parts /* Part::All */)
+{
+  auto partsStr = text.split(' ');
+
+  if (parts.testFlag(Part::Name))
+  {
+    static CoinNameStrings coinNameStrings;
+
+    auto name = coinNameStrings.fromString(partsStr.takeFirst());
+
+    return Coin(name);
+  }
+
+  if (parts.testFlag(Part::Symbol))
+  {
+    static CoinSymbolStrings coinSymbolStrings;
+
+    auto symbol = coinSymbolStrings.fromString(partsStr.takeFirst());
+
+    return Coin(symbol);
+  }
+
+  Q_UNREACHABLE();
 }
 
 uint qHash(const Coin &key, uint seed /* 0 */)
