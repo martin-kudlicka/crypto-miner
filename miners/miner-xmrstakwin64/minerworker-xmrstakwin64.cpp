@@ -13,8 +13,17 @@ MinerWorkerXmrStakWin64::MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId) :
 
 QString MinerWorkerXmrStakWin64::prepareAmdConfig() const
 {
-  // TODO
-  return QString();
+  QResource configResource(":/resources/files/amd.txt");
+  QByteArray configData = reinterpret_cast<const char *>(configResource.data());
+
+  auto configFilePath = _workDir.path();
+  configFilePath.append(QDir::separator());
+  configFilePath.append(_miningUnitId.toString());
+  configFilePath.append("-amd.txt");
+
+  MFile::write(configFilePath, configData);
+
+  return configFilePath;
 }
 
 QStringList MinerWorkerXmrStakWin64::prepareArguments() const
@@ -44,10 +53,12 @@ QStringList MinerWorkerXmrStakWin64::prepareArguments() const
           arguments << "--amd";
           arguments << prepareAmdConfig();
           arguments << "--noNVIDIA";
+          break;
         case HwComponent::Company::Nvidia:
           arguments << "--noAMD";
           arguments << "--nvidia";
           // TODO
+          break;
         default:
           Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::prepareArguments", "switch (hwComponent.company())");
       }
