@@ -4,6 +4,7 @@
 #include <QtCore/QResource>
 #include <QtCore/QStandardPaths>
 #include <MkCore/MFile>
+#include <QtCore/QThread>
 
 MinerWorkerXmrStakWin64::MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId), _options(miningUnitId)
 {
@@ -15,11 +16,28 @@ QStringList MinerWorkerXmrStakWin64::prepareArguments() const
 {
   QStringList arguments;
 
+  arguments << "--config";
+  arguments << prepareCommonConfig();
+
   //arguments << "--noUAC";
 
-  auto commonConfigFilePath = prepareCommonConfig();
-
   auto hwComponent = _options.hwComponent();
+  switch (hwComponent.type())
+  {
+    case HwComponent::Type::Cpu:
+      arguments << "--cpu";
+      arguments << prepareCpuConfig();
+      arguments << "--noAMD";
+      arguments << "--noNVIDIA";
+      break;
+    case HwComponent::Type::Gpu:
+      arguments << "--noCPU";
+      // TODO
+      break;
+    default:
+      Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::prepareArguments", "switch (hwComponent.type())");
+  }
+
   // TODO
 
   return QStringList();
@@ -55,6 +73,36 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
   configFilePath.append(QDir::separator());
   configFilePath.append(_miningUnitId.toString());
   configFilePath.append("-config.txt");
+
+  MFile::write(configFilePath, configData);
+
+  return configFilePath;
+}
+
+QString MinerWorkerXmrStakWin64::prepareCpuConfig() const
+{
+  QResource configResource(":/resources/files/cpu.txt");
+  QByteArray configData = reinterpret_cast<const char *>(configResource.data());
+
+  QString cpuThreadsConf;
+  for (auto threadNum = 0; threadNum < QThread::idealThreadCount(); ++threadNum)
+  {
+#ifdef _DEBUG
+    if (QThread::idealThreadCount() < 2 || threadNum == QThread::idealThreadCount() - 1)
+    {
+      break;
+    }
+#endif
+    cpuThreadsConf += QString("\n     { \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %1 },").arg(threadNum);
+  }
+  configData.replace("%cpu_threads_conf%", cpuThreadsConf.toLocal8Bit());
+
+  auto configFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+  configFilePath.append(QDir::separator());
+  configFilePath.append(_fileInfo.completeBaseName());
+  configFilePath.append(QDir::separator());
+  configFilePath.append(_miningUnitId.toString());
+  configFilePath.append("-cpu.txt");
 
   MFile::write(configFilePath, configData);
 
