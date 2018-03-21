@@ -33,7 +33,7 @@ QStringList MinerWorkerXmrStakWin64::prepareArguments() const
   arguments << "--config";
   arguments << prepareCommonConfig();
 
-  //arguments << "--noUAC";
+  arguments << "--noUAC";
 
   auto hwComponent = _options.hwComponent();
   switch (hwComponent.type())
@@ -57,7 +57,7 @@ QStringList MinerWorkerXmrStakWin64::prepareArguments() const
         case HwComponent::Company::Nvidia:
           arguments << "--noAMD";
           arguments << "--nvidia";
-          // TODO
+          arguments << prepareNvidiaConfig();
           break;
         default:
           Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::prepareArguments", "switch (hwComponent.company())");
@@ -67,9 +67,7 @@ QStringList MinerWorkerXmrStakWin64::prepareArguments() const
       Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::prepareArguments", "switch (hwComponent.type())");
   }
 
-  // TODO
-
-  return QStringList();
+  return arguments;
 }
 
 QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
@@ -128,6 +126,23 @@ QString MinerWorkerXmrStakWin64::prepareCpuConfig() const
   configFilePath.append(QDir::separator());
   configFilePath.append(_miningUnitId.toString());
   configFilePath.append("-cpu.txt");
+
+  MFile::write(configFilePath, configData);
+
+  return configFilePath;
+}
+
+QString MinerWorkerXmrStakWin64::prepareNvidiaConfig() const
+{
+  QResource configResource(":/resources/files/nvidia.txt");
+  QByteArray configData = reinterpret_cast<const char *>(configResource.data());
+
+  // TODO
+
+  auto configFilePath = _workDir.path();
+  configFilePath.append(QDir::separator());
+  configFilePath.append(_miningUnitId.toString());
+  configFilePath.append("-nvidia.txt");
 
   MFile::write(configFilePath, configData);
 
