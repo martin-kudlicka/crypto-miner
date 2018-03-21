@@ -21,11 +21,8 @@ class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
     QString      _stdOutLastLine;
     QTextStream  _stdOutStream;
 
-    QString     prepareAmdConfig   () const;
     QStringList prepareArguments   () const;
     QString     prepareCommonConfig() const;
-    QString     prepareCpuConfig   () const;
-    QString     prepareNvidiaConfig() const;
 
     virtual const QString &consoleOutput() const Q_DECL_OVERRIDE;
     virtual       bool     isRunning    () const Q_DECL_OVERRIDE;
