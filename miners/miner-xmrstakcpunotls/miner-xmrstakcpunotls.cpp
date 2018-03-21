@@ -17,7 +17,7 @@ MOperatingSystemVersion::Platform MinerXmrStakCpuNoTls::platform() const
   return MOperatingSystemVersion::Platform::X64;
 }
 
-Coin::NameList MinerXmrStakCpuNoTls::supportedCoins() const
+CoinList MinerXmrStakCpuNoTls::supportedCoins() const
 {
   return { Coin::Name::Monero };
 }

@@ -13,9 +13,9 @@ MinerSelectionDialog::MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *
   connect(_ui.minersView->selectionModel(),       &QItemSelectionModel::selectionChanged, this, &MinerSelectionDialog::on_minersView_selectionChanged);
 }
 
-Coin::Name MinerSelectionDialog::selectedCoinName() const
+Coin MinerSelectionDialog::selectedCoin() const
 {
-  return _coinsModel.coinName(_ui.coinsView->currentIndex());
+  return _coinsModel.coin(_ui.coinsView->currentIndex());
 }
 
 HwComponent MinerSelectionDialog::selectedHwComponent() const

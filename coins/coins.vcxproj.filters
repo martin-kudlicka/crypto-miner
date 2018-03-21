@@ -32,9 +32,6 @@
     <ClCompile Include="coinsymbolstrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="coinfullstrings.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="coin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -50,9 +47,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="coins_global.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="coinfullstrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

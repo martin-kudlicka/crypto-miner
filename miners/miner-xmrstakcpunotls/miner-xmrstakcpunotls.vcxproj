@@ -146,6 +146,9 @@
     <ResourceCompile Include="miner-xmrstakcpunotls.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\coins\coins.vcxproj">
+      <Project>{7e381709-38cb-492f-a445-bcbf3a8aab25}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\hardware\hardware.vcxproj">
       <Project>{a4ae5a83-4abd-4281-99b5-5f62e1897150}</Project>
     </ProjectReference>
