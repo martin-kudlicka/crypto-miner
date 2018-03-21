@@ -5,6 +5,17 @@ MiningUnits::MiningUnits(MinerPlugins *minerPlugins, MiningModel *miningModel) :
   _settings.beginGroup("miningUnits");
 }
 
+MiningUnits::~MiningUnits()
+{
+  for (const auto &miningUnit : _miningUnits)
+  {
+    if (miningUnit->isRunning())
+    {
+      miningUnit->stop();
+    }
+  }
+}
+
 quintptr MiningUnits::count() const
 {
   return _settings.childGroups().count();
