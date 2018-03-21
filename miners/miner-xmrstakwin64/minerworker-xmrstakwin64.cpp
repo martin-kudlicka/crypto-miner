@@ -2,7 +2,6 @@
 
 #include "log.h"
 #include <QtCore/QResource>
-#include <QtCore/QStandardPaths>
 #include <MkCore/MFile>
 #include <QtCore/QThread>
 
@@ -10,6 +9,12 @@ MinerWorkerXmrStakWin64::MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId) :
 {
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "xmr-stak.exe");
   _minerProcess.setWorkingDirectory(_minerDir.path());
+}
+
+QString MinerWorkerXmrStakWin64::prepareAmdConfig() const
+{
+  // TODO
+  return QString();
 }
 
 QStringList MinerWorkerXmrStakWin64::prepareArguments() const
@@ -32,7 +37,20 @@ QStringList MinerWorkerXmrStakWin64::prepareArguments() const
       break;
     case HwComponent::Type::Gpu:
       arguments << "--noCPU";
-      // TODO
+
+      switch (hwComponent.company())
+      {
+        case HwComponent::Company::Amd:
+          arguments << "--amd";
+          arguments << prepareAmdConfig();
+          arguments << "--noNVIDIA";
+        case HwComponent::Company::Nvidia:
+          arguments << "--noAMD";
+          arguments << "--nvidia";
+          // TODO
+        default:
+          Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::prepareArguments", "switch (hwComponent.company())");
+      }
       break;
     default:
       Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::prepareArguments", "switch (hwComponent.type())");
@@ -67,9 +85,7 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
   }
   configData.replace("%currency%", currency.toLocal8Bit());
 
-  auto configFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-  configFilePath.append(QDir::separator());
-  configFilePath.append(_fileInfo.completeBaseName());
+  auto configFilePath = _workDir.path();
   configFilePath.append(QDir::separator());
   configFilePath.append(_miningUnitId.toString());
   configFilePath.append("-config.txt");
@@ -97,9 +113,7 @@ QString MinerWorkerXmrStakWin64::prepareCpuConfig() const
   }
   configData.replace("%cpu_threads_conf%", cpuThreadsConf.toLocal8Bit());
 
-  auto configFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-  configFilePath.append(QDir::separator());
-  configFilePath.append(_fileInfo.completeBaseName());
+  auto configFilePath = _workDir.path();
   configFilePath.append(QDir::separator());
   configFilePath.append(_miningUnitId.toString());
   configFilePath.append("-cpu.txt");

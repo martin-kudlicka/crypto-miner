@@ -1,6 +1,5 @@
 #include "minerworker-xmrstakcpunotls.h"
 
-#include <QtCore/QStandardPaths>
 #include <QtCore/QThread>
 #include "log.h"
 #include <QtCore/QRegularExpression>
@@ -17,13 +16,13 @@ void MinerWorkerXmrStakCpuNoTls::modifyConfig(QString *config) const
   QString cpuThreadsConf = "\"cpu_threads_conf\" :\n[";
   for (auto threadNum = 0; threadNum < QThread::idealThreadCount(); ++threadNum)
   {
-    cpuThreadsConf += QString("\n     { \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %1 },").arg(threadNum);
 #ifdef _DEBUG
     if (QThread::idealThreadCount() < 2 || threadNum == QThread::idealThreadCount() - 2)
     {
       break;
     }
 #endif
+    cpuThreadsConf += QString("\n     { \"low_power_mode\" : false, \"no_prefetch\" : true, \"affine_to_cpu\" : %1 },").arg(threadNum);
   }
   cpuThreadsConf += "\n],";
 
@@ -59,9 +58,7 @@ QString MinerWorkerXmrStakCpuNoTls::readVanillaConfig() const
 
 QString MinerWorkerXmrStakCpuNoTls::writeWorkerConfig(const QString &config) const
 {
-  auto configFilePath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-  configFilePath.append(QDir::separator());
-  configFilePath.append(_fileInfo.completeBaseName());
+  auto configFilePath = _workDir.path();
   configFilePath.append(QDir::separator());
   configFilePath.append(_miningUnitId.toString());
   configFilePath.append(".txt");
