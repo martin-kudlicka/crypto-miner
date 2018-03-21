@@ -39,6 +39,26 @@ bool HwComponent::operator==(const HwComponent &other) const
   return other._company == _company && other._type == _type;
 }
 
+HwComponent HwComponent::fromString(const QString &text)
+{
+  auto partsStr = text.split(' ');
+
+  auto company = Company::Any;
+  if (partsStr.count() > 1)
+  {
+    static HwCompanyStrings companyStrings;
+
+    company = companyStrings.fromString(partsStr.takeFirst());
+  }
+
+  static HwTypeStrings hardwareStrings;
+
+  auto type = hardwareStrings.fromString(partsStr.takeFirst());
+
+  return HwComponent(company, type);
+
+}
+
 uint qHash(const HwComponent &key, uint seed /* 0 */)
 {
   return qHash(static_cast<uchar>(key.company()), seed) ^ qHash(static_cast<uchar>(key.type()), seed);

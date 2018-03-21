@@ -27,6 +27,8 @@ class HARDWARE_EXPORT HwComponent
 
     bool operator==(const HwComponent &other) const;
 
+    static HwComponent fromString(const QString &text);
+
   private:
     Company _company;
     Type    _type;
