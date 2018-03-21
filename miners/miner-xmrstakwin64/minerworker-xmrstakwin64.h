@@ -21,6 +21,8 @@ class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
     QString      _stdOutLastLine;
     QTextStream  _stdOutStream;
 
+    QStringList currencyArguments  () const;
+    QStringList poolArguments      () const;
     QStringList prepareArguments   () const;
     QString     prepareCommonConfig() const;
 
