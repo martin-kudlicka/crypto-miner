@@ -17,7 +17,7 @@ class MinerWorkerCommon : public MinerWorkerInterface
     MUuidPtr        _miningUnitId;
     PoolCredentials _poolCredentials;
     QDir            _minerDir;
-    QFileInfo       _fileInfo;
+    QDir            _workDir;
     QString         _poolAddress;
 
   private:
