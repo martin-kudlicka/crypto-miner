@@ -25,9 +25,7 @@ HwComponent MinerOptions::hwComponent() const
 {
   auto hwComponentStr = value(Property::Parameters_HwComponent).toString();
 
-  // TODO
-
-  return HwComponent(HwComponent::Company::Any, HwComponent::Type::Cpu);
+  return HwComponent::fromString(hwComponentStr);
 }
 
 QString MinerOptions::name() const
