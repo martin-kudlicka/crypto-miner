@@ -76,14 +76,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="coinfullstrings.cpp" />
     <ClCompile Include="coinnamestrings.cpp" />
     <ClCompile Include="coin.cpp" />
     <ClCompile Include="coinsymbolstrings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="coin.h" />
-    <ClInclude Include="coinfullstrings.h" />
     <ClInclude Include="coinnamestrings.h" />
     <ClInclude Include="coinsymbolstrings.h" />
     <ClInclude Include="coins_global.h" />

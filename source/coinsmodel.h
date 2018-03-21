@@ -13,13 +13,13 @@ class CoinsModel : public QAbstractListModel
              CoinsModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins);
     virtual ~CoinsModel() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-    Coin::Name           coinName(const QModelIndex &index) const;
-    MinerInterfacePtrSet miners  (const QModelIndex &index) const;
+    Coin                 coin  (const QModelIndex &index) const;
+    MinerInterfacePtrSet miners(const QModelIndex &index) const;
 
   private:
-          Coin::NameList                          _coins;
-          QHash<Coin::Name, MinerInterfacePtrSet> _coinMiners;
-    const MinerInterfacePtrSet                   *_allowedMiners;
+          CoinList                          _coins;
+          QHash<Coin, MinerInterfacePtrSet> _coinMiners;
+    const MinerInterfacePtrSet             *_allowedMiners;
 
     virtual QVariant      data    (const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
     virtual Qt::ItemFlags flags   (const QModelIndex &index)                             const Q_DECL_OVERRIDE;

@@ -3,7 +3,6 @@
 
 #include "coins_global.h"
 #include <QtCore/QList>
-#include <QtCore/QHash>
 
 class COINS_EXPORT Coin
 {
@@ -13,20 +12,35 @@ class COINS_EXPORT Coin
       Aeon,
       Monero
     };
+    enum class Part
+    {
+      None,
+      Name,
+      Symbol,
+      All = Name | Symbol
+    };
+    Q_DECLARE_FLAGS(Parts, Part)
     enum Symbol
     {
       AEON,
       XMR
     };
 
-    using NameList = QList<Name>;
+    Coin(Name name);
 
-    Coin();
+    Name    name    ()                        const;
+    Symbol  symbol  ()                        const;
+    QString toString(Parts parts = Part::All) const;
 
-    Symbol symbol(Name coinName) const;
+    bool operator==(const Coin &other) const;
 
   private:
-    QHash<Name, Symbol> _coinsInfo;
+    Name   _name;
+    Symbol _symbol;
 };
+
+using CoinList = QList<Coin>;
+
+uint COINS_EXPORT qHash(const Coin &key, uint seed = 0);
 
 #endif
