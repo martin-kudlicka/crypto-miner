@@ -27,6 +27,7 @@ class COINS_EXPORT Coin
     };
 
     Coin(Name name);
+    Coin(Symbol symbol);
 
     Name    name    ()                        const;
     Symbol  symbol  ()                        const;
@@ -34,9 +35,15 @@ class COINS_EXPORT Coin
 
     bool operator==(const Coin &other) const;
 
+    static Coin fromString(const QString &text, Parts parts = Part::All);
+
   private:
+    using CoinsInfo = QHash<Name, Symbol>;
+
     Name   _name;
     Symbol _symbol;
+
+    static CoinsInfo _coinsInfo;
 };
 
 using CoinList = QList<Coin>;

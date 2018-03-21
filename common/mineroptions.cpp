@@ -14,13 +14,20 @@ MinerOptions::MinerOptions(const MUuidPtr &id)
   beginGroup("miner");
 }
 
-Coin::Name MinerOptions::coinName() const
+Coin MinerOptions::coin() const
 {
-  static CoinNameStrings coinNameStrings;
-
   auto coinNameStr = value(Property::Parameters_CoinName).toString();
 
-  return coinNameStrings.fromString(coinNameStr);
+  return Coin::fromString(coinNameStr, Coin::Part::Name);
+}
+
+HwComponent MinerOptions::hwComponent() const
+{
+  auto hwComponentStr = value(Property::Parameters_HwComponent).toString();
+
+  // TODO
+
+  return HwComponent(HwComponent::Company::Any, HwComponent::Type::Cpu);
 }
 
 QString MinerOptions::name() const
