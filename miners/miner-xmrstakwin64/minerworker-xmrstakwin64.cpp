@@ -4,6 +4,7 @@
 #include <QtCore/QResource>
 #include <MkCore/MFile>
 #include <QtCore/QThread>
+#include <QtCore/QRegularExpression>
 
 MinerWorkerXmrStakWin64::MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId), _options(miningUnitId)
 {
@@ -208,7 +209,17 @@ void MinerWorkerXmrStakWin64::on_minerProcess_readyReadStandardOutput()
     emit outputLine(_stdOutLastLine);
     _minerOutput.append(_stdOutLastLine + '\n');
 
-    // TODO
+    QRegularExpression regExp(R"(^\[.*\] : (.*))");
+    auto regExpMatch = regExp.match(_stdOutLastLine);
+    if (regExpMatch.hasMatch())
+    {
+      auto message = _miningUnitId.toString() + ' ' + regExpMatch.capturedRef(1);
+
+      if (regExpMatch.capturedRef(1).contains("ERROR") || regExpMatch.capturedRef(1).contains("FAILED"))
+      {
+        mCCritical(XmrStakWin64) << message;
+      }
+    }
 
     _stdOutLastLine.clear();
   }
