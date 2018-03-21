@@ -13,14 +13,14 @@
  */
 "pool_list" :
 [
-	{"pool_address" : "%pool_address%", "wallet_address" : "%wallet_address%", "pool_password" : "%pool_password%", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },
+	{"pool_address" : "", "wallet_address" : "", "pool_password" : "", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },
 ],
 
 /*
  * currency to mine
  * allowed values: 'monero' or 'aeon'
  */
-"currency" : "%currency%",
+"currency" : "",
 
 /*
  * Network timeouts.

@@ -11,14 +11,57 @@ MinerWorkerXmrStakWin64::MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId) :
   _minerProcess.setWorkingDirectory(_minerDir.path());
 }
 
-QStringList MinerWorkerXmrStakWin64::prepareArguments() const
+QStringList MinerWorkerXmrStakWin64::currencyArguments() const
 {
   QStringList arguments;
+
+  arguments << "--currency";
+
+  auto coin = _options.coin();
+  switch (coin.name())
+  {
+    case Coin::Name::Aeon:
+      arguments << "aeon";
+      break;
+    case Coin::Name::Monero:
+      arguments << "monero";
+      break;
+    default:
+      Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::currencyArguments", "switch (coin.name())");
+  }
+
+  return arguments;
+}
+
+QStringList MinerWorkerXmrStakWin64::poolArguments() const
+{
+  QStringList arguments;
+
+  arguments << "--url"  << _poolAddress;
+  arguments << "--user" << _poolCredentials.username;
+  arguments << "--pass";
+  if (_poolCredentials.password.isEmpty())
+  {
+    arguments << R"("")";
+  }
+  else
+  {
+    arguments << _poolCredentials.password;
+  }
+
+  return arguments;
+}
+
+QStringList MinerWorkerXmrStakWin64::prepareArguments() const
+{
+  auto arguments = poolArguments();
 
   arguments << "--config";
   arguments << prepareCommonConfig();
 
   arguments << "--noUAC";
+
+  arguments << currencyArguments();
 
   auto hwComponent = _options.hwComponent();
   switch (hwComponent.type())
@@ -53,25 +96,6 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
 {
   QResource configResource(":/resources/files/config.txt");
   QByteArray configData = reinterpret_cast<const char *>(configResource.data());
-
-  configData.replace("%pool_address%",   _poolAddress.toLocal8Bit());
-  configData.replace("%wallet_address%", _poolCredentials.username.toLocal8Bit());
-  configData.replace("%pool_password%",  _poolCredentials.password.toLocal8Bit());
-
-  QString currency;
-  auto coin = _options.coin();
-  switch (coin.name())
-  {
-    case Coin::Name::Aeon:
-      currency = "aeon";
-      break;
-    case Coin::Name::Monero:
-      currency = "monero";
-      break;
-    default:
-      Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::prepareCommonConfig", "switch (coinName)");
-  }
-  configData.replace("%currency%", currency.toLocal8Bit());
 
   auto configFilePath = _workDir.path();
   configFilePath.append(QDir::separator());
