@@ -72,6 +72,24 @@ Qt::ItemFlags CoinsModel::flags(const QModelIndex &index) const
   return itemFlags;
 }
 
+QVariant CoinsModel::headerData(int section, Qt::Orientation orientation, int role /* Qt::DisplayRole */) const
+{
+  if (orientation != Qt::Horizontal || role != Qt::DisplayRole)
+  {
+    return QVariant();
+  }
+
+  switch (section)
+  {
+    case Column::Name:
+      return tr("Coin");
+    default:
+      Q_ASSERT_X(false, "CoinsModel::headerData", "switch (section)");
+  }
+
+  return QVariant();
+}
+
 QModelIndex CoinsModel::index(int row, int column, const QModelIndex &parent /* QModelIndex() */) const
 {
   if (parent.isValid())
