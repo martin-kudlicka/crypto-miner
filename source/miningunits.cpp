@@ -7,11 +7,11 @@ MiningUnits::MiningUnits(MinerPlugins *minerPlugins, MiningModel *miningModel) :
 
 MiningUnits::~MiningUnits()
 {
-  for (const auto &miningUnit : _miningUnits)
+  for (auto &miningUnit : _miningUnits)
   {
     if (miningUnit->isRunning())
     {
-      miningUnit->stop();
+      miningUnit.clear();
     }
   }
 }
