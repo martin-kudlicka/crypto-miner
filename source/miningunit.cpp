@@ -120,8 +120,6 @@ void MiningUnit::on_worker_finished()
   _miningTime.invalidate();
   _options.setMiningTime(totalMiningTime);
 
-  _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
-
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
 
   emit finished();
@@ -133,6 +131,8 @@ void MiningUnit::on_worker_finished()
     _worker.clear();
   }
   // else worker is under destruction
+
+  _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
 }
 
 void MiningUnit::on_worker_hashRate(float value)
