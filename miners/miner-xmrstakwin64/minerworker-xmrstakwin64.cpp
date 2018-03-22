@@ -176,6 +176,15 @@ void MinerWorkerXmrStakWin64::on_minerProcess_readyReadStandardOutput()
         mCCritical(XmrStakWin64) << message;
       }
     }
+    else
+    {
+      regExp.setPattern(R"(^Totals:\D*(\d+\.\d))");
+      regExpMatch = regExp.match(_stdOutLastLine);
+      if (regExpMatch.hasMatch())
+      {
+        emit hashRate(regExpMatch.capturedRef(1).toFloat());
+      }
+    }
 
     _stdOutLastLine.clear();
   }
