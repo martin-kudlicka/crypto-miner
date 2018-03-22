@@ -165,21 +165,31 @@ void MinerWorkerXmrStakWin64::on_minerProcess_readyReadStandardOutput()
     emit outputLine(_stdOutLastLine);
     _minerOutput.append(_stdOutLastLine + '\n');
 
-    QRegularExpression regExp(R"(^\[.*\] : (.*))");
-    auto regExpMatch = regExp.match(_stdOutLastLine);
-    if (regExpMatch.hasMatch())
+    auto outLines = _stdOutLastLine.split(QRegularExpression(R"(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])"), QString::SkipEmptyParts);
+    for (auto outLine : outLines)
     {
-      auto message = _miningUnitId.toString() + ' ' + regExpMatch.capturedRef(1);
+      if (outLine.startsWith(" : "))
+      {
+        outLine.remove(0, 3);
+      }
+      auto message = _miningUnitId.toString() + ' ' + outLine;
 
-      if (regExpMatch.capturedRef(1).contains("ERROR") || regExpMatch.capturedRef(1).contains("FAILED"))
+      if (outLine.contains("ERROR") || outLine.contains("FAILED"))
       {
         mCCritical(XmrStakWin64) << message;
       }
-    }
-    else
-    {
-      regExp.setPattern(R"(^Totals:\D*(\d+\.\d))");
-      regExpMatch = regExp.match(_stdOutLastLine);
+      else
+      {
+        mCInfo(XmrStakWin64) << message;
+      }
+
+      if (outLine.contains("Result accepted"))
+      {
+        emit resultAccepted();
+      }
+
+      QRegularExpression regExp(R"(^Totals:\D*(\d+\.\d))");
+      auto regExpMatch = regExp.match(outLine);
       if (regExpMatch.hasMatch())
       {
         emit hashRate(regExpMatch.capturedRef(1).toFloat());
