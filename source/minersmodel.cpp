@@ -47,6 +47,24 @@ Qt::ItemFlags MinersModel::flags(const QModelIndex &index) const
   return itemFlags;
 }
 
+QVariant MinersModel::headerData(int section, Qt::Orientation orientation, int role /* Qt::DisplayRole */) const
+{
+  if (orientation != Qt::Horizontal || role != Qt::DisplayRole)
+  {
+    return QVariant();
+  }
+
+  switch (section)
+  {
+    case Column::Name:
+      return tr("Miner");
+    default:
+      Q_ASSERT_X(false, "MinersModel::headerData", "switch (section)");
+  }
+
+  return QVariant();
+}
+
 QModelIndex MinersModel::index(int row, int column, const QModelIndex &parent /* QModelIndex() */) const
 {
   if (parent.isValid())

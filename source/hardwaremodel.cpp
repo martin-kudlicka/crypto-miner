@@ -72,6 +72,24 @@ Qt::ItemFlags HardwareModel::flags(const QModelIndex &index) const
   return itemFlags;
 }
 
+QVariant HardwareModel::headerData(int section, Qt::Orientation orientation, int role /* Qt::DisplayRole */) const
+{
+  if (orientation != Qt::Horizontal || role != Qt::DisplayRole)
+  {
+    return QVariant();
+  }
+
+  switch (section)
+  {
+    case Column::Name:
+      return tr("Hardware");
+    default:
+      Q_ASSERT_X(false, "HardwareModel::headerData", "switch (section)");
+  }
+
+  return QVariant();
+}
+
 QModelIndex HardwareModel::index(int row, int column, const QModelIndex &parent /* QModelIndex() */) const
 {
   if (parent.isValid())
