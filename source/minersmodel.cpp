@@ -6,6 +6,11 @@ MinersModel::MinersModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins
 {
 }
 
+int MinersModel::columnCount(const QModelIndex &parent /* QModelIndex() */) const
+{
+  return Column::Count;
+}
+
 QVariant MinersModel::data(const QModelIndex &index, int role /* Qt::DisplayRole */) const
 {
   if (role != Qt::DisplayRole)
@@ -15,12 +20,20 @@ QVariant MinersModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
 
   auto minerPlugin = _minerPlugins->toList().at(index.row());
 
-  return minerPlugin->name();
+  switch (index.column())
+  {
+    case Column::Name:
+      return minerPlugin->name();
+    default:
+      Q_ASSERT_X(false, "MinersModel::data", "switch (index.column())");
+  }
+
+  return QVariant();
 }
 
 Qt::ItemFlags MinersModel::flags(const QModelIndex &index) const
 {
-  auto itemFlags = QAbstractListModel::flags(index);
+  auto itemFlags = QAbstractItemModel::flags(index);
 
   if (!_allowedMiners->isEmpty())
   {
@@ -34,7 +47,27 @@ Qt::ItemFlags MinersModel::flags(const QModelIndex &index) const
   return itemFlags;
 }
 
+QModelIndex MinersModel::index(int row, int column, const QModelIndex &parent /* QModelIndex() */) const
+{
+  if (parent.isValid())
+  {
+    return QModelIndex();
+  }
+
+  return createIndex(row, column);
+}
+
+QModelIndex MinersModel::parent(const QModelIndex &child) const
+{
+  return QModelIndex();
+}
+
 int MinersModel::rowCount(const QModelIndex &parent /* QModelIndex() */) const
 {
+  if (parent.isValid())
+  {
+    return 0;
+  }
+
   return _minerPlugins->toList().count();
 }
