@@ -30,6 +30,11 @@ MinerInterfacePtrSet CoinsModel::miners(const QModelIndex &index) const
   return _coinMiners.value(coin);
 }
 
+int CoinsModel::columnCount(const QModelIndex &parent /* QModelIndex() */) const
+{
+  return Column::Count;
+}
+
 QVariant CoinsModel::data(const QModelIndex &index, int role /* Qt::DisplayRole */) const
 {
   if (role != Qt::DisplayRole)
@@ -39,12 +44,20 @@ QVariant CoinsModel::data(const QModelIndex &index, int role /* Qt::DisplayRole 
 
   auto coin = _coins.at(index.row());
 
-  return coin.toString();
+  switch (index.column())
+  {
+    case Column::Name:
+      return coin.toString();
+    default:
+      Q_ASSERT_X(false, "CoinsModel::data", "switch (index.column())");
+  }
+
+  return QVariant();
 }
 
 Qt::ItemFlags CoinsModel::flags(const QModelIndex &index) const
 {
-  auto itemFlags = QAbstractListModel::flags(index);
+  auto itemFlags = QAbstractItemModel::flags(index);
 
   if (!_allowedMiners->isEmpty())
   {
@@ -59,7 +72,27 @@ Qt::ItemFlags CoinsModel::flags(const QModelIndex &index) const
   return itemFlags;
 }
 
+QModelIndex CoinsModel::index(int row, int column, const QModelIndex &parent /* QModelIndex() */) const
+{
+  if (parent.isValid())
+  {
+    return QModelIndex();
+  }
+
+  return createIndex(row, column);
+}
+
+QModelIndex CoinsModel::parent(const QModelIndex &child) const
+{
+  return QModelIndex();
+}
+
 int CoinsModel::rowCount(const QModelIndex &parent /* QModelIndex() */) const
 {
+  if (parent.isValid())
+  {
+    return 0;
+  }
+
   return _coins.count();
 }

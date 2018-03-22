@@ -30,6 +30,11 @@ MinerInterfacePtrSet HardwareModel::miners(const QModelIndex &index) const
   return _hwComponentMiners.value(*hwComponent);
 }
 
+int HardwareModel::columnCount(const QModelIndex &parent /* QModelIndex() */) const
+{
+  return Column::Count;
+}
+
 QVariant HardwareModel::data(const QModelIndex &index, int role /* Qt::DisplayRole */) const
 {
   if (role != Qt::DisplayRole)
@@ -39,12 +44,20 @@ QVariant HardwareModel::data(const QModelIndex &index, int role /* Qt::DisplayRo
 
   auto hwComponent = &_hwComponents.at(index.row());
 
-  return hwComponent->toString();
+  switch (index.column())
+  {
+    case Column::Name:
+      return hwComponent->toString();
+    default:
+      Q_ASSERT_X(false, "HardwareModel::data", "switch (index.column())");
+  }
+
+  return QVariant();
 }
 
 Qt::ItemFlags HardwareModel::flags(const QModelIndex &index) const
 {
-  auto itemFlags = QAbstractListModel::flags(index);
+  auto itemFlags = QAbstractItemModel::flags(index);
 
   if (!_allowedMiners->isEmpty())
   {
@@ -59,7 +72,27 @@ Qt::ItemFlags HardwareModel::flags(const QModelIndex &index) const
   return itemFlags;
 }
 
+QModelIndex HardwareModel::index(int row, int column, const QModelIndex &parent /* QModelIndex() */) const
+{
+  if (parent.isValid())
+  {
+    return QModelIndex();
+  }
+
+  return createIndex(row, column);
+}
+
+QModelIndex HardwareModel::parent(const QModelIndex &child) const
+{
+  return QModelIndex();
+}
+
 int HardwareModel::rowCount(const QModelIndex &parent /* QModelIndex() */) const
 {
+  if (parent.isValid())
+  {
+    return 0;
+  }
+
   return _hwComponents.count();
 }
