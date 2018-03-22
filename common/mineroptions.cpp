@@ -4,7 +4,7 @@
 #include "../coins/coinnamestrings.h"
 
 Q_DECL_CONSTEXPR QString MinerOptions::Property::Name                   = "name";
-Q_DECL_CONSTEXPR QString MinerOptions::Property::Parameters_CoinName    = "parameters/coinName";
+Q_DECL_CONSTEXPR QString MinerOptions::Property::Parameters_Coin        = "parameters/coin";
 Q_DECL_CONSTEXPR QString MinerOptions::Property::Parameters_HwComponent = "parameters/hwComponent";
 
 MinerOptions::MinerOptions(const MUuidPtr &id)
@@ -16,7 +16,7 @@ MinerOptions::MinerOptions(const MUuidPtr &id)
 
 Coin MinerOptions::coin() const
 {
-  auto coinNameStr = value(Property::Parameters_CoinName).toString();
+  auto coinNameStr = value(Property::Parameters_Coin).toString();
 
   return Coin::fromString(coinNameStr, Coin::Part::Name);
 }
