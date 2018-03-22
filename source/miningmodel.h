@@ -11,6 +11,7 @@ class MiningModel : public QAbstractItemModel
     {
       Status,
       Miner,
+      HwComponent,
       HashRate,
       Results,
       Count
