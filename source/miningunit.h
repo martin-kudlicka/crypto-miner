@@ -32,6 +32,7 @@ class MiningUnit : public QObject
           bool               isRunning        () const;
     const MinerInterface    *minerPlugin      () const;
     const MiningUnitOptions &options          () const;
+          void               restart          ();
     const Statistics        &sessionStatistics() const;
           void               showConsole      ();
           void               start            ();
