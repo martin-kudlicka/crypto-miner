@@ -48,6 +48,12 @@ const MiningUnitOptions &MiningUnit::options() const
   return _options;
 }
 
+void MiningUnit::restart()
+{
+  stop();
+  start();
+}
+
 const MiningUnit::Statistics &MiningUnit::sessionStatistics() const
 {
   return _sessionStatistics;

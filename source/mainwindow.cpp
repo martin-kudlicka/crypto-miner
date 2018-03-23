@@ -114,8 +114,7 @@ void MainWindow::on_miningUnitEdit_clicked(bool checked /* false */)
 
   if (miningUnit->isRunning())
   {
-    miningUnit->stop();
-    miningUnit->start();
+    miningUnit->restart();
   }
 }
 
