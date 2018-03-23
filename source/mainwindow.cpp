@@ -58,6 +58,7 @@ void MainWindow::on_miningUnit_finished()
   auto miningUnit = _miningModel.miningUnit(index);
   if (miningUnit)
   {
+    _ui.miningUnitRemove->setEnabled(!miningUnit->isRunning());
     _ui.miningUnitStart->setEnabled(!miningUnit->isRunning());
     _ui.miningUnitStop->setEnabled(miningUnit->isRunning());
   }
@@ -68,6 +69,7 @@ void MainWindow::on_miningUnit_started()
   auto index      = _ui.miningView->currentIndex();
   auto miningUnit = _miningModel.miningUnit(index);
 
+  _ui.miningUnitRemove->setEnabled(!miningUnit->isRunning());
   _ui.miningUnitStart->setEnabled(!miningUnit->isRunning());
   _ui.miningUnitStop->setEnabled(miningUnit->isRunning());
 }
@@ -120,14 +122,7 @@ void MainWindow::on_miningUnitEdit_clicked(bool checked /* false */)
 
 void MainWindow::on_miningUnitRemove_clicked(bool checked /* false */)
 {
-  auto index      = _ui.miningView->currentIndex();
-  auto miningUnit = _miningModel.miningUnit(index);
-
-  if (miningUnit->isRunning())
-  {
-    miningUnit->stop();
-  }
-
+  auto index = _ui.miningView->currentIndex();
   _miningModel.remove(index);
 }
 
@@ -159,7 +154,6 @@ void MainWindow::on_miningView_selectionChanged(const QItemSelection &selected, 
   auto isSelected = !_ui.miningView->selectionModel()->selectedRows().isEmpty();
 
   _ui.miningUnitEdit->setEnabled(isSelected);
-  _ui.miningUnitRemove->setEnabled(isSelected);
   _ui.miningUnitConsole->setEnabled(isSelected);
 
   if (isSelected)
@@ -167,6 +161,7 @@ void MainWindow::on_miningView_selectionChanged(const QItemSelection &selected, 
     auto index      = _ui.miningView->currentIndex();
     auto miningUnit = _miningModel.miningUnit(index);
 
+    _ui.miningUnitRemove->setEnabled(!miningUnit->isRunning());
     _ui.miningUnitStart->setEnabled(!miningUnit->isRunning());
     _ui.miningUnitStop->setEnabled(miningUnit->isRunning());
   }
