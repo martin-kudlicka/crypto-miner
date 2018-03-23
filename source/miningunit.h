@@ -5,6 +5,7 @@
 #include "miningunitoptions.h"
 #include "../miners/minerworkerinterface.h"
 #include <QtCore/QElapsedTimer>
+#include <QtCore/QQueue>
 
 class ConsoleWindow;
 class MinerInterface;
@@ -37,13 +38,14 @@ class MiningUnit : public QObject
           void               stop             ();
 
   private:
-          QScopedPointer<ConsoleWindow> _consoleWindow;
-    const MinerInterface               *_minerPlugin;
-          MiningModel                  *_miningModel;
-          MiningUnitOptions             _options;
-          MinerWorkerInterfaceSPtr      _worker;
-          QElapsedTimer                 _miningTime;
-          Statistics                    _sessionStatistics;
+          QScopedPointer<ConsoleWindow>    _consoleWindow;
+    const MinerInterface                  *_minerPlugin;
+          MiningModel                     *_miningModel;
+          MiningUnitOptions                _options;
+          QQueue<MinerWorkerInterfaceSPtr> _stoppingWorkers;
+          MinerWorkerInterfaceSPtr         _worker;
+          QElapsedTimer                    _miningTime;
+          Statistics                       _sessionStatistics;
 
   Q_SIGNALS:
     void finished() const;

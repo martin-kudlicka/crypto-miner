@@ -106,6 +106,9 @@ void MiningUnit::start()
 void MiningUnit::stop()
 {
   _worker->stop();
+
+  _stoppingWorkers.enqueue(_worker);
+  _worker.clear();
 }
 
 void MiningUnit::on_consoleWindow_destroyed(QObject *obj /* Q_NULLPTR */)
@@ -124,13 +127,23 @@ void MiningUnit::on_worker_finished()
 
   emit finished();
 
-  mAnalytics->sendTiming("miner", MAnalyticsTiming::Title::RunTime, miningTime, _worker->name());
-
-  if (_worker.toWeakRef().toStrongRef())
+  QString workerName;
+  if (_stoppingWorkers.isEmpty())
   {
-    _worker.clear();
+    workerName = _worker->name();
+
+    if (_worker.toWeakRef().toStrongRef())
+    {
+      _worker.clear();
+    }
+    // else worker is under destruction
   }
-  // else worker is under destruction
+  else
+  {
+    workerName = _stoppingWorkers.dequeue()->name();
+  }
+
+  mAnalytics->sendTiming("miner", MAnalyticsTiming::Title::RunTime, miningTime, workerName);
 
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
 }
