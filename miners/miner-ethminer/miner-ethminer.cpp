@@ -1,9 +1,10 @@
 #include "miner-ethminer.h"
 
+#include "minerworker-ethminer.h"
+
 MinerWorkerInterfaceSPtr MinerEthMiner::createWorker(const MUuidPtr &id) const
 {
-  // TODO
-  return Q_NULLPTR;
+  return QSharedPointer<MinerWorkerEthMiner>::create(id);
 }
 
 QString MinerEthMiner::name() const
