@@ -1,10 +1,11 @@
 #ifndef HWTYPESTRINGS_H
 #define HWTYPESTRINGS_H
 
+#include "hardware_global.h"
 #include <MkCore/MStringizer>
 #include "hwcomponent.h"
 
-class HwTypeStrings : public MStringizer<HwComponent::Type>
+class HARDWARE_EXPORT HwTypeStrings : public MStringizer<HwComponent::Type>
 {
   public:
              HwTypeStrings();

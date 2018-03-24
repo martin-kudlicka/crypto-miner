@@ -1,6 +1,7 @@
-#pragma once
+#ifndef HARDWARE_GLOBAL_H
+#define HARDWARE_GLOBAL_H
 
-#include <QtCore/qglobal.h>
+#include <QtCore/QtGlobal>
 
 #ifndef BUILD_STATIC
 # if defined(HARDWARE_LIB)
@@ -10,4 +11,6 @@
 # endif
 #else
 # define HARDWARE_EXPORT
+#endif
+
 #endif

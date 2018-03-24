@@ -1,10 +1,11 @@
 #ifndef COINNAMESTRINGS_H
 #define COINNAMESTRINGS_H
 
+#include "coins_global.h"
 #include <MkCore/MStringizer>
 #include "coin.h"
 
-class CoinNameStrings : public MStringizer<Coin::Name>
+class COINS_EXPORT CoinNameStrings : public MStringizer<Coin::Name>
 {
   public:
              CoinNameStrings();
