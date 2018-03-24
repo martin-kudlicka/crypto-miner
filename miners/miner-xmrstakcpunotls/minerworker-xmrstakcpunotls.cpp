@@ -92,11 +92,6 @@ void MinerWorkerXmrStakCpuNoTls::start()
   }
 }
 
-void MinerWorkerXmrStakCpuNoTls::stop()
-{
-  _minerProcess.kill();
-}
-
 void MinerWorkerXmrStakCpuNoTls::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
 {
   mCInfo(XmrStakCpuNoTls) << "miner for mining unit " << _miningUnitId.toString() << " stopped";

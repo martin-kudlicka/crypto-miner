@@ -55,3 +55,8 @@ void MinerWorkerCommon::setPoolCredentials(const PoolCredentials &credentials)
 {
   _poolCredentials = credentials;
 }
+
+void MinerWorkerCommon::stop()
+{
+  _minerProcess.kill();
+}

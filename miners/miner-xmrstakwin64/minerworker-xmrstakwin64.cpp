@@ -131,11 +131,6 @@ void MinerWorkerXmrStakWin64::start()
   }
 }
 
-void MinerWorkerXmrStakWin64::stop()
-{
-  _minerProcess.kill();
-}
-
 void MinerWorkerXmrStakWin64::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
 {
   mCInfo(XmrStakWin64) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
