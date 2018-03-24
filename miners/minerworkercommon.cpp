@@ -36,6 +36,11 @@ const QStringList &MinerWorkerCommon::consoleOutput() const
   return _minerOutput;
 }
 
+bool MinerWorkerCommon::isRunning() const
+{
+  return _minerProcess.state() != QProcess::NotRunning;
+}
+
 const QString &MinerWorkerCommon::name() const
 {
   return _minerName;
