@@ -67,8 +67,8 @@ void MiningUnit::showConsole()
   }
   else
   {
-    auto text = _worker ? _worker->consoleOutput() : "";
-    _consoleWindow.reset(new ConsoleWindow(text));
+    auto lines = _worker ? _worker->consoleOutput() : QStringList();
+    _consoleWindow.reset(new ConsoleWindow(lines));
 
     if (_worker)
     {

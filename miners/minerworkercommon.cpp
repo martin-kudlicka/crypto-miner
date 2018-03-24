@@ -21,6 +21,21 @@ MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _miningUnit
   _workDir.setPath(workPath);
 }
 
+void MinerWorkerCommon::appendOutput(const QString &line)
+{
+  if (_minerOutput.count() >= 262144)
+  {
+    _minerOutput.removeFirst();
+  }
+
+  _minerOutput.append(line);
+}
+
+const QStringList &MinerWorkerCommon::consoleOutput() const
+{
+  return _minerOutput;
+}
+
 const QString &MinerWorkerCommon::name() const
 {
   return _minerName;

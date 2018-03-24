@@ -15,7 +15,6 @@ class MinerWorkerXmrStakCpuNoTls : public MinerWorkerCommon
 
   private:
     QProcess    _minerProcess;
-    QString     _minerOutput;
     QString     _stdOutLastLine;
     QTextStream _stdOutStream;
 
@@ -24,10 +23,9 @@ class MinerWorkerXmrStakCpuNoTls : public MinerWorkerCommon
     QString readVanillaConfig()                      const;
     QString writeWorkerConfig(const QString &config) const;
 
-    virtual const QString &consoleOutput() const Q_DECL_OVERRIDE;
-    virtual       bool     isRunning    () const Q_DECL_OVERRIDE;
-    virtual       void     start        ()       Q_DECL_OVERRIDE;
-    virtual       void     stop         ()       Q_DECL_OVERRIDE;
+    virtual bool isRunning() const Q_DECL_OVERRIDE;
+    virtual void start    ()       Q_DECL_OVERRIDE;
+    virtual void stop     ()       Q_DECL_OVERRIDE;
 
   private Q_SLOTS:
     void on_minerProcess_finished               (int exitCode, QProcess::ExitStatus exitStatus) const;

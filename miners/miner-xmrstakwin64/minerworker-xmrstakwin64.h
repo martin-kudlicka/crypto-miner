@@ -17,7 +17,6 @@ class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
   private:
     MinerOptions _options;
     QProcess     _minerProcess;
-    QString      _minerOutput;
     QString      _stdOutLastLine;
     QTextStream  _stdOutStream;
 
@@ -26,10 +25,9 @@ class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
     QStringList prepareArguments   () const;
     QString     prepareCommonConfig() const;
 
-    virtual const QString &consoleOutput() const Q_DECL_OVERRIDE;
-    virtual       bool     isRunning    () const Q_DECL_OVERRIDE;
-    virtual       void     start        ()       Q_DECL_OVERRIDE;
-    virtual       void     stop         ()       Q_DECL_OVERRIDE;
+    virtual bool isRunning() const Q_DECL_OVERRIDE;
+    virtual void start    ()       Q_DECL_OVERRIDE;
+    virtual void stop     ()       Q_DECL_OVERRIDE;
 
   private Q_SLOTS:
     void on_minerProcess_finished               (int exitCode, QProcess::ExitStatus exitStatus) const;
