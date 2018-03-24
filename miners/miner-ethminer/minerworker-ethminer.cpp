@@ -31,11 +31,6 @@ void MinerWorkerEthMiner::start()
   }
 }
 
-void MinerWorkerEthMiner::stop()
-{
-  _minerProcess.kill();
-}
-
 void MinerWorkerEthMiner::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
 {
   mCInfo(EthMiner) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
