@@ -20,6 +20,12 @@ class MiningUnitDialog : public QDialog
     const MiningUnitOptions &options() const;
 
   private:
+    enum class Tab
+    {
+      Parameters,
+      Pool
+    };
+
     const MinerInterface      *_minerPlugin;
           Ui::MiningUnitDialog _ui;
           MiningUnitOptions    _options;

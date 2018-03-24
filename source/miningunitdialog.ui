@@ -22,7 +22,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QTabWidget" name="tabWidget">
+    <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
       <number>0</number>
      </property>
