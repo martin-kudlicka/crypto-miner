@@ -8,11 +8,6 @@ MinerWorkerEthMiner::MinerWorkerEthMiner(const MUuidPtr &miningUnitId) : MinerWo
   _minerProcess.setWorkingDirectory(_minerDir.path());
 }
 
-bool MinerWorkerEthMiner::isRunning() const
-{
-  return _minerProcess.state() != QProcess::NotRunning;
-}
-
 void MinerWorkerEthMiner::start()
 {
   // TODO

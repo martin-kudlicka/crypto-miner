@@ -68,11 +68,6 @@ QString MinerWorkerXmrStakCpuNoTls::writeWorkerConfig(const QString &config) con
   return configFilePath;
 }
 
-bool MinerWorkerXmrStakCpuNoTls::isRunning() const
-{
-  return _minerProcess.state() != QProcess::NotRunning;
-}
-
 void MinerWorkerXmrStakCpuNoTls::start()
 {
   auto configFilePath = prepareConfigFile();

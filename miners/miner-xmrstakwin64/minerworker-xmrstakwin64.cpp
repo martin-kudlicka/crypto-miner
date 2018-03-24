@@ -107,11 +107,6 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
   return configFilePath;
 }
 
-bool MinerWorkerXmrStakWin64::isRunning() const
-{
-  return _minerProcess.state() != QProcess::NotRunning;
-}
-
 void MinerWorkerXmrStakWin64::start()
 {
   auto arguments = prepareArguments();

@@ -6,6 +6,8 @@
 #include "../common/poolcredentials.h"
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
+#include <QtCore/QProcess>
+#include <QtCore/QTextStream>
 
 class MinerWorkerCommon : public MinerWorkerInterface
 {
@@ -19,7 +21,10 @@ class MinerWorkerCommon : public MinerWorkerInterface
     QStringList     _minerOutput;
     QDir            _minerDir;
     QDir            _workDir;
+    QProcess        _minerProcess;
     QString         _poolAddress;
+    QString         _stdOutLastLine;
+    QTextStream     _stdOutStream;
 
     void appendOutput(const QString &line);
 
@@ -27,6 +32,7 @@ class MinerWorkerCommon : public MinerWorkerInterface
     QString _minerName;
 
     virtual const QStringList &consoleOutput     () const                             Q_DECL_OVERRIDE;
+    virtual       bool         isRunning         () const                             Q_DECL_OVERRIDE;
     virtual const QString     &name              () const                             Q_DECL_OVERRIDE;
     virtual       void         setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
     virtual       void         setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;

@@ -2,8 +2,6 @@
 #define MINERWORKERXMRSTAKCPUNOTLS_H
 
 #include "../minerworkercommon.h"
-#include <QtCore/QProcess>
-#include <QtCore/QTextStream>
 
 class MinerWorkerXmrStakCpuNoTls : public MinerWorkerCommon
 {
@@ -14,18 +12,13 @@ class MinerWorkerXmrStakCpuNoTls : public MinerWorkerCommon
     virtual ~MinerWorkerXmrStakCpuNoTls() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
-    QProcess    _minerProcess;
-    QString     _stdOutLastLine;
-    QTextStream _stdOutStream;
-
     void    modifyConfig     (QString *config)       const;
     QString prepareConfigFile()                      const;
     QString readVanillaConfig()                      const;
     QString writeWorkerConfig(const QString &config) const;
 
-    virtual bool isRunning() const Q_DECL_OVERRIDE;
-    virtual void start    ()       Q_DECL_OVERRIDE;
-    virtual void stop     ()       Q_DECL_OVERRIDE;
+    virtual void start() Q_DECL_OVERRIDE;
+    virtual void stop () Q_DECL_OVERRIDE;
 
   private Q_SLOTS:
     void on_minerProcess_finished               (int exitCode, QProcess::ExitStatus exitStatus) const;
