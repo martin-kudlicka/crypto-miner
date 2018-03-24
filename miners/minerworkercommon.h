@@ -16,16 +16,20 @@ class MinerWorkerCommon : public MinerWorkerInterface
   protected:
     MUuidPtr        _miningUnitId;
     PoolCredentials _poolCredentials;
+    QStringList     _minerOutput;
     QDir            _minerDir;
     QDir            _workDir;
     QString         _poolAddress;
 
+    void appendOutput(const QString &line);
+
   private:
     QString _minerName;
 
-    virtual const QString &name              () const                             Q_DECL_OVERRIDE;
-    virtual       void     setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
-    virtual       void     setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;
+    virtual const QStringList &consoleOutput     () const                             Q_DECL_OVERRIDE;
+    virtual const QString     &name              () const                             Q_DECL_OVERRIDE;
+    virtual       void         setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
+    virtual       void         setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;
 };
 
 #endif

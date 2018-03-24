@@ -106,10 +106,6 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
 
   return configFilePath;
 }
-const QString &MinerWorkerXmrStakWin64::consoleOutput() const
-{
-  return _minerOutput;
-}
 
 bool MinerWorkerXmrStakWin64::isRunning() const
 {
@@ -163,7 +159,7 @@ void MinerWorkerXmrStakWin64::on_minerProcess_readyReadStandardOutput()
     }
 
     emit outputLine(_stdOutLastLine);
-    _minerOutput.append(_stdOutLastLine + '\n');
+    appendOutput(_stdOutLastLine);
 
     auto outLines = _stdOutLastLine.split(QRegularExpression(R"(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])"), QString::SkipEmptyParts);
     for (auto outLine : outLines)
