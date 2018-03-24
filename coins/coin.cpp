@@ -6,8 +6,9 @@
 
 Coin::CoinsInfo Coin::_coinsInfo =
 {
-  { Name::Aeon,   Symbol::AEON },
-  { Name::Monero, Symbol::XMR }
+  { Name::Aeon,     Symbol::AEON },
+  { Name::Ethereum, Symbol::ETH },
+  { Name::Monero,   Symbol::XMR }
 };
 
 Coin::Coin(Name name) : _name(name)

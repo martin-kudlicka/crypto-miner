@@ -10,6 +10,7 @@ class COINS_EXPORT Coin
     enum Name
     {
       Aeon,
+      Ethereum,
       Monero
     };
     enum class Part
@@ -23,6 +24,7 @@ class COINS_EXPORT Coin
     enum Symbol
     {
       AEON,
+      ETH,
       XMR
     };
 
