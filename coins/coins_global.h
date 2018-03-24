@@ -1,6 +1,7 @@
-#pragma once
+#ifndef COINS_GLOBAL_H
+#define COINS_GLOBAL_H
 
-#include <QtCore/qglobal.h>
+#include <QtCore/QtGlobal>
 
 #ifndef BUILD_STATIC
 # if defined(COINS_LIB)
@@ -10,4 +11,6 @@
 # endif
 #else
 # define COINS_EXPORT
+#endif
+
 #endif

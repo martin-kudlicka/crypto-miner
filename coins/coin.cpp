@@ -83,6 +83,7 @@ Coin Coin::fromString(const QString &text, Parts parts /* Part::All */)
     return Coin(symbol);
   }
 
+  // must be found by name or symbol
   Q_UNREACHABLE();
 }
 
