@@ -58,6 +58,12 @@
     <ClCompile Include="..\..\common\mineroptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-ethminer\Debug\moc_minerworkercommon.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-ethminer\Release\moc_minerworkercommon.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="miner-ethminer.h">
@@ -72,11 +78,11 @@
     <CustomBuild Include="minerworker-ethminer.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="..\minerworkercommon.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\minerworkercommon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="log.h">
       <Filter>Header Files</Filter>
     </ClInclude>

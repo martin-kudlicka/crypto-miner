@@ -58,6 +58,12 @@
     <ClCompile Include="..\..\common\mineroptions.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Debug\moc_minerworkercommon.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Release\moc_minerworkercommon.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="miner-xmrstakcpunotls.h">
@@ -72,15 +78,15 @@
     <CustomBuild Include="..\minerworkerinterface.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="..\minerworkercommon.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\poolcredentials.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\minerworkercommon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">

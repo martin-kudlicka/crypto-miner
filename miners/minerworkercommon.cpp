@@ -2,6 +2,8 @@
 
 #include <MkLib/MModuleInfo>
 #include <QtCore/QStandardPaths>
+#include <MkCore/MMessageLogger>
+#include <MkCore/MLoggingCategory>
 
 MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(miningUnitId), _miningUnitId(miningUnitId)
 {
@@ -21,6 +23,8 @@ MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(mi
   workPath.append(QDir::separator());
   workPath.append(fileInfo.completeBaseName());
   _workDir.setPath(workPath);
+
+  connect(&_minerProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerCommon::on_minerProcess_finished);
 }
 
 void MinerWorkerCommon::appendOutput(const QString &line)
@@ -61,4 +65,11 @@ void MinerWorkerCommon::setPoolCredentials(const PoolCredentials &credentials)
 void MinerWorkerCommon::stop()
 {
   _minerProcess.kill();
+}
+
+void MinerWorkerCommon::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
+{
+  mCInfo(logCategory()) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
+
+  emit finished();
 }
