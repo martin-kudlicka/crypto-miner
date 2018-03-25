@@ -5,7 +5,7 @@
 #include <MkCore/MMessageLogger>
 #include <MkCore/MLoggingCategory>
 
-MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(miningUnitId), _miningUnitId(miningUnitId), _stdOutStream(&_minerProcess), _stdErrStream(&_stdErrData)
+MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(miningUnitId), _miningUnitId(miningUnitId), _stdOutStream(&_minerProcess)
 {
   auto fileInfo = MModuleInfo().fileInfo();
 
@@ -95,14 +95,20 @@ void MinerWorkerCommon::on_minerProcess_finished(int exitCode, QProcess::ExitSta
 
 void MinerWorkerCommon::on_minerProcess_readyReadStandardError()
 {
-  _stdErrData += _minerProcess.readAllStandardError();
+  _stdErrData = _minerProcess.readAllStandardError();
 
-  forever
+  while (!_stdErrData.isEmpty())
   {
-    _stdErrLastLine += _stdErrStream.readLine();
-    if (_stdErrStream.atEnd())
+    auto lineEndPos = _stdErrData.indexOf('\n');
+    if (lineEndPos == -1)
     {
-      break;
+      _stdErrLastLine = _stdErrData;
+      _stdErrData.clear();
+    }
+    else
+    {
+      _stdErrLastLine = _stdErrData.left(lineEndPos - 1);
+      _stdErrData.remove(0, lineEndPos + 1);
     }
 
     emit outputLine(_stdErrLastLine);
@@ -116,7 +122,7 @@ void MinerWorkerCommon::on_minerProcess_readyReadStandardError()
 
 void MinerWorkerCommon::on_minerProcess_readyReadStandardOutput()
 {
-  forever
+  while (!_stdOutStream.atEnd())
   {
     _stdOutLastLine = _stdOutStream.readLine();
 
@@ -126,10 +132,5 @@ void MinerWorkerCommon::on_minerProcess_readyReadStandardOutput()
     parseStdOutLine();
 
     _stdOutLastLine.clear();
-
-    if (_stdOutStream.atEnd())
-    {
-      break;
-    }
   }
 }
