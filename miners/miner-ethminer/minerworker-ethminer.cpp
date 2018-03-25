@@ -7,14 +7,18 @@ MinerWorkerEthMiner::MinerWorkerEthMiner(const MUuidPtr &miningUnitId) : MinerWo
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "ethminer.exe");
 }
 
+const QLoggingCategory &MinerWorkerEthMiner::logCategory() const
+{
+  return EthMiner();
+}
+
 void MinerWorkerEthMiner::start()
 {
   // TODO
 
   _stdOutStream.setDevice(&_minerProcess);
 
-  connect(&_minerProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerEthMiner::on_minerProcess_finished);
-  connect(&_minerProcess, &QProcess::readyReadStandardOutput,                            this, &MinerWorkerEthMiner::on_minerProcess_readyReadStandardOutput);
+  connect(&_minerProcess, &QProcess::readyReadStandardOutput, this, &MinerWorkerEthMiner::on_minerProcess_readyReadStandardOutput);
 
   _minerProcess.start(QIODevice::ReadOnly);
 
@@ -28,13 +32,6 @@ void MinerWorkerEthMiner::start()
   {
     mCInfo(EthMiner) << "miner for mining unit " << _miningUnitId.toString() << " started";
   }
-}
-
-void MinerWorkerEthMiner::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
-{
-  mCInfo(EthMiner) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
-
-  emit finished();
 }
 
 void MinerWorkerEthMiner::on_minerProcess_readyReadStandardOutput()

@@ -12,6 +12,8 @@
 
 class MinerWorkerCommon : public MinerWorkerInterface
 {
+  Q_OBJECT
+
   public:
              MinerWorkerCommon(const MUuidPtr &miningUnitId);
     virtual ~MinerWorkerCommon() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
@@ -39,6 +41,11 @@ class MinerWorkerCommon : public MinerWorkerInterface
     virtual       void         setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
     virtual       void         setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;
     virtual       void         stop              ()                                   Q_DECL_OVERRIDE;
+
+    virtual const QLoggingCategory &logCategory() const = 0;
+
+    private Q_SLOTS:
+      void on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const;
 };
 
 #endif

@@ -106,6 +106,11 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
   return configFilePath;
 }
 
+const QLoggingCategory &MinerWorkerXmrStakWin64::logCategory() const
+{
+  return XmrStakWin64();
+}
+
 void MinerWorkerXmrStakWin64::start()
 {
   auto arguments = prepareArguments();
@@ -113,8 +118,7 @@ void MinerWorkerXmrStakWin64::start()
 
   _stdOutStream.setDevice(&_minerProcess);
 
-  connect(&_minerProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerXmrStakWin64::on_minerProcess_finished);
-  connect(&_minerProcess, &QProcess::readyReadStandardOutput,                            this, &MinerWorkerXmrStakWin64::on_minerProcess_readyReadStandardOutput);
+  connect(&_minerProcess, &QProcess::readyReadStandardOutput, this, &MinerWorkerXmrStakWin64::on_minerProcess_readyReadStandardOutput);
 
   _minerProcess.start(QIODevice::ReadOnly);
 
@@ -128,13 +132,6 @@ void MinerWorkerXmrStakWin64::start()
   {
     mCInfo(XmrStakWin64) << "miner for mining unit " << _miningUnitId.toString() << " started";
   }
-}
-
-void MinerWorkerXmrStakWin64::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
-{
-  mCInfo(XmrStakWin64) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
-
-  emit finished();
 }
 
 void MinerWorkerXmrStakWin64::on_minerProcess_readyReadStandardOutput()

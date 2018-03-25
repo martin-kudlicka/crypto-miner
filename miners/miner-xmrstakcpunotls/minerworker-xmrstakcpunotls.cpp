@@ -67,6 +67,11 @@ QString MinerWorkerXmrStakCpuNoTls::writeWorkerConfig(const QString &config) con
   return configFilePath;
 }
 
+const QLoggingCategory &MinerWorkerXmrStakCpuNoTls::logCategory() const
+{
+  return XmrStakCpuNoTls();
+}
+
 void MinerWorkerXmrStakCpuNoTls::start()
 {
   auto configFilePath = prepareConfigFile();
@@ -74,8 +79,7 @@ void MinerWorkerXmrStakCpuNoTls::start()
 
   _stdOutStream.setDevice(&_minerProcess);
 
-  connect(&_minerProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerXmrStakCpuNoTls::on_minerProcess_finished);
-  connect(&_minerProcess, &QProcess::readyReadStandardOutput,                            this, &MinerWorkerXmrStakCpuNoTls::on_minerProcess_readyReadStandardOutput);
+  connect(&_minerProcess, &QProcess::readyReadStandardOutput, this, &MinerWorkerXmrStakCpuNoTls::on_minerProcess_readyReadStandardOutput);
 
   _minerProcess.start(QIODevice::ReadOnly);
 
@@ -89,13 +93,6 @@ void MinerWorkerXmrStakCpuNoTls::start()
   {
     mCInfo(XmrStakCpuNoTls) << "miner for mining unit " << _miningUnitId.toString() << " started";
   }
-}
-
-void MinerWorkerXmrStakCpuNoTls::on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const
-{
-  mCInfo(XmrStakCpuNoTls) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
-
-  emit finished();
 }
 
 void MinerWorkerXmrStakCpuNoTls::on_minerProcess_readyReadStandardOutput()

@@ -17,10 +17,10 @@ class MinerWorkerXmrStakCpuNoTls : public MinerWorkerCommon
     QString readVanillaConfig()                      const;
     QString writeWorkerConfig(const QString &config) const;
 
-    virtual void start() Q_DECL_OVERRIDE;
+    virtual const QLoggingCategory &logCategory() const Q_DECL_OVERRIDE;
+    virtual       void              start      ()       Q_DECL_OVERRIDE;
 
   private Q_SLOTS:
-    void on_minerProcess_finished               (int exitCode, QProcess::ExitStatus exitStatus) const;
     void on_minerProcess_readyReadStandardOutput();
 };
 
