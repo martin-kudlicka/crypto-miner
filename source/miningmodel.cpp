@@ -80,7 +80,25 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
         case Column::HwComponent:
           return miningUnit->options().miner().hwComponent().toString();
         case Column::HashRate:
-          return QString::number(miningUnit->sessionStatistics().hashRate, 'f', 1);
+          {
+            auto hashRate = miningUnit->sessionStatistics().hashRate;
+            QString suffix;
+            auto precision = 1;
+            if (hashRate > 1000000)
+            {
+              hashRate /= 1000000;
+              suffix    = " M";
+              precision = 2;
+            }
+            else if (hashRate > 1000)
+            {
+              hashRate /= 1000;
+              suffix    = " K";
+              precision = 2;
+            }
+
+            return QString::number(hashRate, 'f', precision) + suffix;
+          }
         case Column::Results:
           return miningUnit->sessionStatistics().results;
       }
