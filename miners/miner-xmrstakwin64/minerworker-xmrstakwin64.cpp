@@ -51,46 +51,6 @@ QStringList MinerWorkerXmrStakWin64::poolArguments() const
   return arguments;
 }
 
-QStringList MinerWorkerXmrStakWin64::prepareArguments() const
-{
-  auto arguments = poolArguments();
-
-  arguments << "--config";
-  arguments << prepareCommonConfig();
-
-  arguments << "--noUAC";
-
-  arguments << currencyArguments();
-
-  auto hwComponent = _options.hwComponent();
-  switch (hwComponent.type())
-  {
-    case HwComponent::Type::Cpu:
-      arguments << "--noAMD";
-      arguments << "--noNVIDIA";
-      break;
-    case HwComponent::Type::Gpu:
-      arguments << "--noCPU";
-
-      switch (hwComponent.company())
-      {
-        case HwComponent::Company::Amd:
-          arguments << "--noNVIDIA";
-          break;
-        case HwComponent::Company::Nvidia:
-          arguments << "--noAMD";
-          break;
-        default:
-          Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::prepareArguments", "switch (hwComponent.company())");
-      }
-      break;
-    default:
-      Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::prepareArguments", "switch (hwComponent.type())");
-  }
-
-  return arguments;
-}
-
 QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
 {
   QResource configResource(":/resources/files/config.txt");
@@ -145,23 +105,42 @@ void MinerWorkerXmrStakWin64::parseStdOutLine() const
   }
 }
 
-void MinerWorkerXmrStakWin64::start()
+QStringList MinerWorkerXmrStakWin64::processArguments() const
 {
-  auto arguments = prepareArguments();
-  _minerProcess.setArguments(arguments);
+  auto arguments = poolArguments();
 
-  _stdOutStream.setDevice(&_minerProcess);
+  arguments << "--config";
+  arguments << prepareCommonConfig();
 
-  _minerProcess.start(QIODevice::ReadOnly);
+  arguments << "--noUAC";
 
-  if (_minerProcess.error() == QProcess::FailedToStart)
+  arguments << currencyArguments();
+
+  auto hwComponent = _options.hwComponent();
+  switch (hwComponent.type())
   {
-    mCCritical(XmrStakWin64) << "failed to start miner for mining unit " << _miningUnitId.toString();
+    case HwComponent::Type::Cpu:
+      arguments << "--noAMD";
+      arguments << "--noNVIDIA";
+      break;
+    case HwComponent::Type::Gpu:
+      arguments << "--noCPU";
 
-    emit finished();
+      switch (hwComponent.company())
+      {
+        case HwComponent::Company::Amd:
+          arguments << "--noNVIDIA";
+          break;
+        case HwComponent::Company::Nvidia:
+          arguments << "--noAMD";
+          break;
+        default:
+          Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::processArguments", "switch (hwComponent.company())");
+      }
+      break;
+    default:
+      Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::processArguments", "switch (hwComponent.type())");
   }
-  else
-  {
-    mCInfo(XmrStakWin64) << "miner for mining unit " << _miningUnitId.toString() << " started";
-  }
+
+  return arguments;
 }
