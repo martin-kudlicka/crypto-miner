@@ -40,12 +40,6 @@
     <ClCompile Include="..\minerworkercommon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-ethminer\Debug\moc_minerworker-ethminer.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-ethminer\Release\moc_minerworker-ethminer.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\intermediate\miner-ethminer\Debug\moc_minerworkerinterface.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>

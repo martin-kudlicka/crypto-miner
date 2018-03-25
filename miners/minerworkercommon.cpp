@@ -25,6 +25,7 @@ MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(mi
   _workDir.setPath(workPath);
 
   connect(&_minerProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerCommon::on_minerProcess_finished);
+  connect(&_minerProcess, &QProcess::readyReadStandardOutput,                            this, &MinerWorkerCommon::on_minerProcess_readyReadStandardOutput);
 }
 
 void MinerWorkerCommon::appendOutput(const QString &line)
@@ -72,4 +73,23 @@ void MinerWorkerCommon::on_minerProcess_finished(int exitCode, QProcess::ExitSta
   mCInfo(logCategory()) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
 
   emit finished();
+}
+
+void MinerWorkerCommon::on_minerProcess_readyReadStandardOutput()
+{
+  forever
+  {
+    _stdOutLastLine += _stdOutStream.readLine();
+    if (_stdOutStream.atEnd())
+    {
+      break;
+    }
+
+    emit outputLine(_stdOutLastLine);
+    appendOutput(_stdOutLastLine);
+
+    parseStdOutLine();
+
+    _stdOutLastLine.clear();
+  }
 }

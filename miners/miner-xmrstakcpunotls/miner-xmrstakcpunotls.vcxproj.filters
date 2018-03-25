@@ -34,12 +34,6 @@
     <ClCompile Include="log.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Debug\moc_minerworker-xmrstakcpunotls.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Release\moc_minerworker-xmrstakcpunotls.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Debug\moc_minerinterface.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>

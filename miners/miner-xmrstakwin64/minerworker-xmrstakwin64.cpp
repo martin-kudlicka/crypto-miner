@@ -111,14 +111,46 @@ const QLoggingCategory &MinerWorkerXmrStakWin64::logCategory() const
   return XmrStakWin64();
 }
 
+void MinerWorkerXmrStakWin64::parseStdOutLine() const
+{
+  auto outLines = _stdOutLastLine.split(QRegularExpression(R"(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])"), QString::SkipEmptyParts);
+  for (auto outLine : outLines)
+  {
+    if (outLine.startsWith(" : "))
+    {
+      outLine.remove(0, 3);
+    }
+    auto message = _miningUnitId.toString() + ' ' + outLine;
+
+    if (outLine.contains("ERROR") || outLine.contains("FAILED"))
+    {
+      mCCritical(XmrStakWin64) << message;
+    }
+    else
+    {
+      mCInfo(XmrStakWin64) << message;
+    }
+
+    if (outLine.contains("Result accepted"))
+    {
+      emit resultAccepted();
+    }
+
+    QRegularExpression regExp(R"(^Totals:\D*(\d+\.\d))");
+    auto regExpMatch = regExp.match(outLine);
+    if (regExpMatch.hasMatch())
+    {
+      emit hashRate(regExpMatch.capturedRef(1).toFloat());
+    }
+  }
+}
+
 void MinerWorkerXmrStakWin64::start()
 {
   auto arguments = prepareArguments();
   _minerProcess.setArguments(arguments);
 
   _stdOutStream.setDevice(&_minerProcess);
-
-  connect(&_minerProcess, &QProcess::readyReadStandardOutput, this, &MinerWorkerXmrStakWin64::on_minerProcess_readyReadStandardOutput);
 
   _minerProcess.start(QIODevice::ReadOnly);
 
@@ -131,53 +163,5 @@ void MinerWorkerXmrStakWin64::start()
   else
   {
     mCInfo(XmrStakWin64) << "miner for mining unit " << _miningUnitId.toString() << " started";
-  }
-}
-
-void MinerWorkerXmrStakWin64::on_minerProcess_readyReadStandardOutput()
-{
-  forever
-  {
-    _stdOutLastLine += _stdOutStream.readLine();
-    if (_stdOutStream.atEnd())
-    {
-      break;
-    }
-
-    emit outputLine(_stdOutLastLine);
-    appendOutput(_stdOutLastLine);
-
-    auto outLines = _stdOutLastLine.split(QRegularExpression(R"(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])"), QString::SkipEmptyParts);
-    for (auto outLine : outLines)
-    {
-      if (outLine.startsWith(" : "))
-      {
-        outLine.remove(0, 3);
-      }
-      auto message = _miningUnitId.toString() + ' ' + outLine;
-
-      if (outLine.contains("ERROR") || outLine.contains("FAILED"))
-      {
-        mCCritical(XmrStakWin64) << message;
-      }
-      else
-      {
-        mCInfo(XmrStakWin64) << message;
-      }
-
-      if (outLine.contains("Result accepted"))
-      {
-        emit resultAccepted();
-      }
-
-      QRegularExpression regExp(R"(^Totals:\D*(\d+\.\d))");
-      auto regExpMatch = regExp.match(outLine);
-      if (regExpMatch.hasMatch())
-      {
-        emit hashRate(regExpMatch.capturedRef(1).toFloat());
-      }
-    }
-
-    _stdOutLastLine.clear();
   }
 }

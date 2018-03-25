@@ -5,8 +5,6 @@
 
 class MinerWorkerXmrStakCpuNoTls : public MinerWorkerCommon
 {
-  Q_OBJECT
-
   public:
              MinerWorkerXmrStakCpuNoTls(const MUuidPtr &miningUnitId);
     virtual ~MinerWorkerXmrStakCpuNoTls() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
@@ -17,11 +15,9 @@ class MinerWorkerXmrStakCpuNoTls : public MinerWorkerCommon
     QString readVanillaConfig()                      const;
     QString writeWorkerConfig(const QString &config) const;
 
-    virtual const QLoggingCategory &logCategory() const Q_DECL_OVERRIDE;
-    virtual       void              start      ()       Q_DECL_OVERRIDE;
-
-  private Q_SLOTS:
-    void on_minerProcess_readyReadStandardOutput();
+    virtual const QLoggingCategory &logCategory    () const Q_DECL_OVERRIDE;
+    virtual       void              parseStdOutLine() const Q_DECL_OVERRIDE;
+    virtual       void              start          ()       Q_DECL_OVERRIDE;
 };
 
 #endif

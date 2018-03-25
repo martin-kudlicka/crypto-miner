@@ -5,8 +5,6 @@
 
 class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
 {
-  Q_OBJECT
-
   public:
              MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId);
     virtual ~MinerWorkerXmrStakWin64() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
@@ -17,11 +15,9 @@ class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
     QStringList prepareArguments   () const;
     QString     prepareCommonConfig() const;
 
-    virtual const QLoggingCategory &logCategory() const Q_DECL_OVERRIDE;
-    virtual       void              start      ()       Q_DECL_OVERRIDE;
-
-  private Q_SLOTS:
-    void on_minerProcess_readyReadStandardOutput();
+    virtual const QLoggingCategory &logCategory    () const Q_DECL_OVERRIDE;
+    virtual       void              parseStdOutLine() const Q_DECL_OVERRIDE;
+    virtual       void              start          ()       Q_DECL_OVERRIDE;
 };
 
 #endif

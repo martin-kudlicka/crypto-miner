@@ -72,14 +72,50 @@ const QLoggingCategory &MinerWorkerXmrStakCpuNoTls::logCategory() const
   return XmrStakCpuNoTls();
 }
 
+void MinerWorkerXmrStakCpuNoTls::parseStdOutLine() const
+{
+  auto outLines = _stdOutLastLine.split(QRegularExpression(R"(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])"), QString::SkipEmptyParts);
+  for (auto outLine : outLines)
+  {
+    if (outLine.startsWith(" : "))
+    {
+      outLine.remove(0, 3);
+    }
+    auto message = _miningUnitId.toString() + ' ' + outLine;
+
+    if (outLine.contains("ERROR") || outLine.contains("FAILED"))
+    {
+      mCCritical(XmrStakCpuNoTls) << message;
+    }
+    else if (outLine.contains("connection lost"))
+    {
+      mCWarning(XmrStakCpuNoTls) << message;
+    }
+    else
+    {
+      mCInfo(XmrStakCpuNoTls) << message;
+    }
+
+    if (outLine.contains("Result accepted"))
+    {
+      emit resultAccepted();
+    }
+
+    QRegularExpression regExp(R"(^Totals:\D*(\d+\.\d))");
+    auto regExpMatch = regExp.match(outLine);
+    if (regExpMatch.hasMatch())
+    {
+      emit hashRate(regExpMatch.capturedRef(1).toFloat());
+    }
+  }
+}
+
 void MinerWorkerXmrStakCpuNoTls::start()
 {
   auto configFilePath = prepareConfigFile();
   _minerProcess.setArguments(QStringList() << configFilePath);
 
   _stdOutStream.setDevice(&_minerProcess);
-
-  connect(&_minerProcess, &QProcess::readyReadStandardOutput, this, &MinerWorkerXmrStakCpuNoTls::on_minerProcess_readyReadStandardOutput);
 
   _minerProcess.start(QIODevice::ReadOnly);
 
@@ -92,57 +128,5 @@ void MinerWorkerXmrStakCpuNoTls::start()
   else
   {
     mCInfo(XmrStakCpuNoTls) << "miner for mining unit " << _miningUnitId.toString() << " started";
-  }
-}
-
-void MinerWorkerXmrStakCpuNoTls::on_minerProcess_readyReadStandardOutput()
-{
-  forever
-  {
-    _stdOutLastLine += _stdOutStream.readLine();
-    if (_stdOutStream.atEnd())
-    {
-      break;
-    }
-
-    emit outputLine(_stdOutLastLine);
-    appendOutput(_stdOutLastLine);
-
-    auto outLines = _stdOutLastLine.split(QRegularExpression(R"(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])"), QString::SkipEmptyParts);
-    for (auto outLine : outLines)
-    {
-      if (outLine.startsWith(" : "))
-      {
-        outLine.remove(0, 3);
-      }
-      auto message = _miningUnitId.toString() + ' ' + outLine;
-
-      if (outLine.contains("ERROR") || outLine.contains("FAILED"))
-      {
-        mCCritical(XmrStakCpuNoTls) << message;
-      }
-      else if (outLine.contains("connection lost"))
-      {
-        mCWarning(XmrStakCpuNoTls) << message;
-      }
-      else
-      {
-        mCInfo(XmrStakCpuNoTls) << message;
-      }
-
-      if (outLine.contains("Result accepted"))
-      {
-        emit resultAccepted();
-      }
-
-      QRegularExpression regExp(R"(^Totals:\D*(\d+\.\d))");
-      auto regExpMatch = regExp.match(outLine);
-      if (regExpMatch.hasMatch())
-      {
-        emit hashRate(regExpMatch.capturedRef(1).toFloat());
-      }
-    }
-
-    _stdOutLastLine.clear();
   }
 }
