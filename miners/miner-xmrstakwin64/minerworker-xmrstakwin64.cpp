@@ -8,7 +8,6 @@
 MinerWorkerXmrStakWin64::MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId)
 {
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "xmr-stak.exe");
-  _minerProcess.setWorkingDirectory(_minerDir.path());
 }
 
 QStringList MinerWorkerXmrStakWin64::currencyArguments() const

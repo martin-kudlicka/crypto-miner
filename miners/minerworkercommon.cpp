@@ -15,6 +15,8 @@ MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(mi
   _minerDir.cd("miners");
   _minerDir.cd(_minerName);
 
+  _minerProcess.setWorkingDirectory(_minerDir.path());
+
   auto workPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
   workPath.append(QDir::separator());
   workPath.append(fileInfo.completeBaseName());

@@ -5,7 +5,6 @@
 MinerWorkerEthMiner::MinerWorkerEthMiner(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId)
 {
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "ethminer.exe");
-  _minerProcess.setWorkingDirectory(_minerDir.path());
 }
 
 void MinerWorkerEthMiner::start()
