@@ -3,7 +3,7 @@
 #include <MkLib/MModuleInfo>
 #include <QtCore/QStandardPaths>
 
-MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _miningUnitId(miningUnitId)
+MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(miningUnitId), _miningUnitId(miningUnitId)
 {
   auto fileInfo = MModuleInfo().fileInfo();
 

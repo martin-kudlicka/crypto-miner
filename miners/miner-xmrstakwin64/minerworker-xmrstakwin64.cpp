@@ -5,7 +5,7 @@
 #include <MkCore/MFile>
 #include <QtCore/QRegularExpression>
 
-MinerWorkerXmrStakWin64::MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId), _options(miningUnitId)
+MinerWorkerXmrStakWin64::MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId)
 {
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "xmr-stak.exe");
   _minerProcess.setWorkingDirectory(_minerDir.path());
