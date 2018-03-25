@@ -24,32 +24,32 @@ QStringList MinerWorkerEthMiner::poolArguments() const
   return arguments;
 }
 
-QStringList MinerWorkerEthMiner::splitStdOutput() const
+QStringList MinerWorkerEthMiner::splitStdError() const
 {
   QStringList lines;
 
-  auto outLines = _stdOutLastLine;
-  while (!outLines.isEmpty())
+  auto errLines = _stdErrLastLine;
+  while (!errLines.isEmpty())
   {
-    auto pipePos = outLines.indexOf('|');
+    auto pipePos = errLines.indexOf('|');
     if (pipePos == -1)
     {
-      lines.append(outLines);
+      lines.append(errLines);
       break;
     }
     else
     {
-      auto nextPipePos = outLines.indexOf('|', pipePos + 1);
+      auto nextPipePos = errLines.indexOf('|', pipePos + 1);
       if (nextPipePos == -1)
       {
-        lines.append(outLines);
+        lines.append(errLines);
         break;
       }
       else
       {
-        auto outLineLength = qMax(nextPipePos - 13, 1);
-        lines.append(outLines.left(outLineLength));
-        outLines.remove(0, outLineLength);
+        auto errLineLength = qMax(nextPipePos - 13, 1);
+        lines.append(errLines.left(errLineLength));
+        errLines.remove(0, errLineLength);
       }
     }
   }
@@ -62,31 +62,31 @@ const QLoggingCategory &MinerWorkerEthMiner::logCategory() const
   return EthMiner();
 }
 
-void MinerWorkerEthMiner::parseStdOutLine() const
+void MinerWorkerEthMiner::parseStdErrLine() const
 {
-  auto outLines = splitStdOutput();
-  for (const auto &outLine : outLines)
+  auto errLines = splitStdError();
+  for (const auto &errLine : errLines)
   {
     QString message = _miningUnitId.toString() + ' ';
 
-    auto pipePos = outLine.indexOf('|');
+    auto pipePos = errLine.indexOf('|');
     if (pipePos == -1)
     {
-      message.append(outLine);
+      message.append(errLine);
     }
     else
     {
-      message.append(outLine.mid(pipePos + 1));
+      message.append(errLine.mid(pipePos + 1));
     }
 
-    if (outLine.contains("Error") || outLine.contains("failed"))
+    if (errLine.contains("Error") || errLine.contains("failed"))
     {
       mCCritical(EthMiner) << message;
     }
     else
     {
       QRegularExpression regExp(R"(\s*(\S+))");
-      auto regExpMatch = regExp.match(outLine);
+      auto regExpMatch = regExp.match(errLine);
       if (regExpMatch.hasMatch())
       {
         if (regExpMatch.capturedRef(1) == 'X')
@@ -105,12 +105,16 @@ void MinerWorkerEthMiner::parseStdOutLine() const
     }
 
     QRegularExpression regExp(R"(Speed\s+(\d+\.\d+))");
-    auto regExpMatch = regExp.match(outLine);
+    auto regExpMatch = regExp.match(errLine);
     if (regExpMatch.hasMatch())
     {
       emit hashRate(regExpMatch.capturedRef(1).toFloat() * 1000000);
     }
   }
+}
+
+void MinerWorkerEthMiner::parseStdOutLine() const
+{
 }
 
 QStringList MinerWorkerEthMiner::processArguments() const

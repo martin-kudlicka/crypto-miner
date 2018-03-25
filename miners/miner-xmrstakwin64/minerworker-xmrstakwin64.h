@@ -1,5 +1,5 @@
-#ifndef MINERWORKERXMRSTAKCPUNOTLS_H
-#define MINERWORKERXMRSTAKCPUNOTLS_H
+#ifndef MINERWORKERXMRSTAKWIN64_H
+#define MINERWORKERXMRSTAKWIN64_H
 
 #include "../minerworkercommon.h"
 
@@ -15,6 +15,7 @@ class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
     QString     prepareCommonConfig() const;
 
     virtual const QLoggingCategory &logCategory     () const Q_DECL_OVERRIDE;
+    virtual       void              parseStdErrLine () const Q_DECL_OVERRIDE;
     virtual       void              parseStdOutLine () const Q_DECL_OVERRIDE;
     virtual       QStringList       processArguments() const Q_DECL_OVERRIDE;
 };
