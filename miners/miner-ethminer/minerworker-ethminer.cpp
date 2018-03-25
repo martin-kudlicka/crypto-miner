@@ -103,6 +103,13 @@ void MinerWorkerEthMiner::parseStdOutLine() const
         }
       }
     }
+
+    QRegularExpression regExp(R"(Speed\s+(\d+\.\d+))");
+    auto regExpMatch = regExp.match(outLine);
+    if (regExpMatch.hasMatch())
+    {
+      emit hashRate(regExpMatch.capturedRef(1).toFloat() * 1000000);
+    }
   }
 }
 
