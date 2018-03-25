@@ -30,7 +30,6 @@ class MinerWorkerCommon : public MinerWorkerInterface
     QString         _poolAddress;
     QString         _stdErrLastLine;
     QString         _stdOutLastLine;
-    QTextStream     _stdErrStream;
     QTextStream     _stdOutStream;
 
     void appendOutput(const QString &line);
