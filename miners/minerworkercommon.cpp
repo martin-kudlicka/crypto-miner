@@ -5,7 +5,7 @@
 #include <MkCore/MMessageLogger>
 #include <MkCore/MLoggingCategory>
 
-MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(miningUnitId), _miningUnitId(miningUnitId)
+MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(miningUnitId), _miningUnitId(miningUnitId), _stdOutStream(&_minerProcess), _stdErrStream(&_stdErrData)
 {
   auto fileInfo = MModuleInfo().fileInfo();
 
@@ -16,8 +16,6 @@ MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(mi
   _minerDir.setPath(fileInfo.path());
   _minerDir.cd("miners");
   _minerDir.cd(_minerName);
-
-  _minerProcess.setWorkingDirectory(_minerDir.path());
 
   auto workPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
   workPath.append(QDir::separator());
@@ -63,11 +61,11 @@ void MinerWorkerCommon::setPoolCredentials(const PoolCredentials &credentials)
 void MinerWorkerCommon::start()
 {
   _minerProcess.setArguments(processArguments());
-
-  _stdOutStream.setDevice(&_minerProcess);
+  _minerProcess.setWorkingDirectory(_minerDir.path());
 
   connect(&_minerProcess,  QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerCommon::on_minerProcess_finished);
   connect(&_minerProcess, &QProcess::readyReadStandardOutput,                             this, &MinerWorkerCommon::on_minerProcess_readyReadStandardOutput);
+  connect(&_minerProcess, &QProcess::readyReadStandardError,                              this, &MinerWorkerCommon::on_minerProcess_readyReadStandardError);
 
   _minerProcess.start(QIODevice::ReadOnly);
 
@@ -93,6 +91,27 @@ void MinerWorkerCommon::on_minerProcess_finished(int exitCode, QProcess::ExitSta
   mCInfo(logCategory()) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
 
   emit finished();
+}
+
+void MinerWorkerCommon::on_minerProcess_readyReadStandardError()
+{
+  _stdErrData += _minerProcess.readAllStandardError();
+
+  forever
+  {
+    _stdErrLastLine += _stdErrStream.readLine();
+    if (_stdErrStream.atEnd())
+    {
+      break;
+    }
+
+    emit outputLine(_stdErrLastLine);
+    appendOutput(_stdErrLastLine);
+
+    parseStdErrLine();
+
+    _stdErrLastLine.clear();
+  }
 }
 
 void MinerWorkerCommon::on_minerProcess_readyReadStandardOutput()

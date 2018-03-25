@@ -22,12 +22,15 @@ class MinerWorkerCommon : public MinerWorkerInterface
     MinerOptions    _options;
     MUuidPtr        _miningUnitId;
     PoolCredentials _poolCredentials;
+    QByteArray      _stdErrData;
     QStringList     _minerOutput;
     QDir            _minerDir;
     QDir            _workDir;
     QProcess        _minerProcess;
     QString         _poolAddress;
+    QString         _stdErrLastLine;
     QString         _stdOutLastLine;
+    QTextStream     _stdErrStream;
     QTextStream     _stdOutStream;
 
     void appendOutput(const QString &line);
@@ -44,11 +47,13 @@ class MinerWorkerCommon : public MinerWorkerInterface
     virtual       void         stop              ()                                   Q_DECL_OVERRIDE;
 
     virtual const QLoggingCategory &logCategory     () const = 0;
+    virtual       void              parseStdErrLine () const = 0;
     virtual       void              parseStdOutLine () const = 0;
     virtual       QStringList       processArguments() const = 0;
 
     private Q_SLOTS:
       void on_minerProcess_finished               (int exitCode, QProcess::ExitStatus exitStatus) const;
+      void on_minerProcess_readyReadStandardError ();
       void on_minerProcess_readyReadStandardOutput();
 };
 

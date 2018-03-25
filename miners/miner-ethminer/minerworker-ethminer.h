@@ -11,9 +11,10 @@ class MinerWorkerEthMiner : public MinerWorkerCommon
 
   private:
     QStringList poolArguments () const;
-    QStringList splitStdOutput() const;
+    QStringList splitStdError () const;
 
     virtual const QLoggingCategory &logCategory     () const Q_DECL_OVERRIDE;
+    virtual       void              parseStdErrLine () const Q_DECL_OVERRIDE;
     virtual       void              parseStdOutLine () const Q_DECL_OVERRIDE;
     virtual       QStringList       processArguments() const Q_DECL_OVERRIDE;
 };

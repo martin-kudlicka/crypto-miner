@@ -15,6 +15,7 @@ class MinerWorkerXmrStakCpuNoTls : public MinerWorkerCommon
     QString writeWorkerConfig(const QString &config) const;
 
     virtual const QLoggingCategory &logCategory     () const Q_DECL_OVERRIDE;
+    virtual       void              parseStdErrLine () const Q_DECL_OVERRIDE;
     virtual       void              parseStdOutLine () const Q_DECL_OVERRIDE;
     virtual       QStringList       processArguments() const Q_DECL_OVERRIDE;
 };
