@@ -33,17 +33,6 @@ void MinerWorkerXmrStakCpuNoTls::modifyConfig(QString *config) const
   config->replace(R"("h_print_time" : 60,)",                        R"("h_print_time" : 1,)");
 }
 
-QString MinerWorkerXmrStakCpuNoTls::prepareConfigFile() const
-{
-  auto config = readVanillaConfig();
-
-  modifyConfig(&config);
-
-  auto filePath = writeWorkerConfig(config);
-
-  return filePath;
-}
-
 QString MinerWorkerXmrStakCpuNoTls::readVanillaConfig() const
 {
   auto configFileInfo = QFileInfo(_minerDir, "config.txt");
@@ -110,23 +99,14 @@ void MinerWorkerXmrStakCpuNoTls::parseStdOutLine() const
   }
 }
 
-void MinerWorkerXmrStakCpuNoTls::start()
+QStringList MinerWorkerXmrStakCpuNoTls::processArguments() const
 {
-  auto configFilePath = prepareConfigFile();
-  _minerProcess.setArguments(QStringList() << configFilePath);
+  auto config = readVanillaConfig();
 
-  _stdOutStream.setDevice(&_minerProcess);
+  modifyConfig(&config);
 
-  _minerProcess.start(QIODevice::ReadOnly);
+  auto filePath = writeWorkerConfig(config);
 
-  if (_minerProcess.error() == QProcess::FailedToStart)
-  {
-    mCCritical(XmrStakCpuNoTls) << "failed to start miner for mining unit " << _miningUnitId.toString();
+  return QStringList() << filePath;
 
-    emit finished();
-  }
-  else
-  {
-    mCInfo(XmrStakCpuNoTls) << "miner for mining unit " << _miningUnitId.toString() << " started";
-  }
 }

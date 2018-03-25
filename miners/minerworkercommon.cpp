@@ -23,9 +23,6 @@ MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(mi
   workPath.append(QDir::separator());
   workPath.append(fileInfo.completeBaseName());
   _workDir.setPath(workPath);
-
-  connect(&_minerProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerCommon::on_minerProcess_finished);
-  connect(&_minerProcess, &QProcess::readyReadStandardOutput,                            this, &MinerWorkerCommon::on_minerProcess_readyReadStandardOutput);
 }
 
 void MinerWorkerCommon::appendOutput(const QString &line)
@@ -61,6 +58,29 @@ void MinerWorkerCommon::setPoolAddress(const QString &address)
 void MinerWorkerCommon::setPoolCredentials(const PoolCredentials &credentials)
 {
   _poolCredentials = credentials;
+}
+
+void MinerWorkerCommon::start()
+{
+  _minerProcess.setArguments(processArguments());
+
+  _stdOutStream.setDevice(&_minerProcess);
+
+  connect(&_minerProcess,  QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerCommon::on_minerProcess_finished);
+  connect(&_minerProcess, &QProcess::readyReadStandardOutput,                             this, &MinerWorkerCommon::on_minerProcess_readyReadStandardOutput);
+
+  _minerProcess.start(QIODevice::ReadOnly);
+
+  if (_minerProcess.error() == QProcess::FailedToStart)
+  {
+    mCCritical(logCategory()) << "failed to start miner for mining unit " << _miningUnitId.toString();
+
+    emit finished();
+  }
+  else
+  {
+    mCInfo(logCategory()) << "miner for mining unit " << _miningUnitId.toString() << " started";
+  }
 }
 
 void MinerWorkerCommon::stop()
