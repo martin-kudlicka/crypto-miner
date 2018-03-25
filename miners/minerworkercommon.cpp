@@ -118,11 +118,7 @@ void MinerWorkerCommon::on_minerProcess_readyReadStandardOutput()
 {
   forever
   {
-    _stdOutLastLine += _stdOutStream.readLine();
-    if (_stdOutStream.atEnd())
-    {
-      break;
-    }
+    _stdOutLastLine = _stdOutStream.readLine();
 
     emit outputLine(_stdOutLastLine);
     appendOutput(_stdOutLastLine);
@@ -130,5 +126,10 @@ void MinerWorkerCommon::on_minerProcess_readyReadStandardOutput()
     parseStdOutLine();
 
     _stdOutLastLine.clear();
+
+    if (_stdOutStream.atEnd())
+    {
+      break;
+    }
   }
 }
