@@ -8,7 +8,6 @@
 MinerWorkerXmrStakCpuNoTls::MinerWorkerXmrStakCpuNoTls(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId)
 {
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "xmr-stak-cpu-notls.exe");
-  _minerProcess.setWorkingDirectory(_minerDir.path());
 }
 
 void MinerWorkerXmrStakCpuNoTls::modifyConfig(QString *config) const
