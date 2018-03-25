@@ -2,7 +2,6 @@
 #define MINERWORKERXMRSTAKCPUNOTLS_H
 
 #include "../minerworkercommon.h"
-#include "../../common/mineroptions.h"
 
 class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
 {
@@ -13,8 +12,6 @@ class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
     virtual ~MinerWorkerXmrStakWin64() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
-    MinerOptions _options;
-
     QStringList currencyArguments  () const;
     QStringList poolArguments      () const;
     QStringList prepareArguments   () const;

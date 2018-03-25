@@ -89,6 +89,7 @@
     <ClCompile Include="..\..\..\..\intermediate\miner-xmrstakcpunotls\Release\moc_minerworkerinterface.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\common\mineroptions.cpp" />
     <ClCompile Include="..\minerworkercommon.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="miner-xmrstakcpunotls.cpp" />
@@ -107,6 +108,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\common\mineroptions.h" />
     <ClInclude Include="..\common\poolcredentials.h" />
     <CustomBuild Include="..\minerinterface.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

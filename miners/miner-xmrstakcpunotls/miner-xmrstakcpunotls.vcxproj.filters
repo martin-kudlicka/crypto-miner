@@ -55,6 +55,9 @@
     <ClCompile Include="..\minerworkercommon.cpp">
       <Filter>Source FIles</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\common\mineroptions.cpp">
+      <Filter>Source FIles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="miner-xmrstakcpunotls.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\mineroptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

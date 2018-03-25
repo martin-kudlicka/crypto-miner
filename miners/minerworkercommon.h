@@ -8,6 +8,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QProcess>
 #include <QtCore/QTextStream>
+#include "../../common/mineroptions.h"
 
 class MinerWorkerCommon : public MinerWorkerInterface
 {
@@ -16,6 +17,7 @@ class MinerWorkerCommon : public MinerWorkerInterface
     virtual ~MinerWorkerCommon() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   protected:
+    MinerOptions    _options;
     MUuidPtr        _miningUnitId;
     PoolCredentials _poolCredentials;
     QStringList     _minerOutput;
