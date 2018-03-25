@@ -1,6 +1,7 @@
 #include "minerworker-ethminer.h"
 
 #include "log.h"
+#include <QtCore/QRegularExpression>
 
 MinerWorkerEthMiner::MinerWorkerEthMiner(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId)
 {
@@ -23,6 +24,39 @@ QStringList MinerWorkerEthMiner::poolArguments() const
   return arguments;
 }
 
+QStringList MinerWorkerEthMiner::splitStdOutput() const
+{
+  QStringList lines;
+
+  auto outLines = _stdOutLastLine;
+  while (!outLines.isEmpty())
+  {
+    auto pipePos = outLines.indexOf('|');
+    if (pipePos == -1)
+    {
+      lines.append(outLines);
+      break;
+    }
+    else
+    {
+      auto nextPipePos = outLines.indexOf('|', pipePos + 1);
+      if (nextPipePos == -1)
+      {
+        lines.append(outLines);
+        break;
+      }
+      else
+      {
+        auto outLineLength = qMax(nextPipePos - 13, 1);
+        lines.append(outLines.left(outLineLength));
+        outLines.remove(0, outLineLength);
+      }
+    }
+  }
+
+  return lines;
+}
+
 const QLoggingCategory &MinerWorkerEthMiner::logCategory() const
 {
   return EthMiner();
@@ -30,7 +64,46 @@ const QLoggingCategory &MinerWorkerEthMiner::logCategory() const
 
 void MinerWorkerEthMiner::parseStdOutLine() const
 {
-  // TODO
+  auto outLines = splitStdOutput();
+  for (const auto &outLine : outLines)
+  {
+    QString message = _miningUnitId.toString() + ' ';
+
+    auto pipePos = outLine.indexOf('|');
+    if (pipePos == -1)
+    {
+      message.append(outLine);
+    }
+    else
+    {
+      message.append(outLine.mid(pipePos + 1));
+    }
+
+    if (outLine.contains("Error") || outLine.contains("failed"))
+    {
+      mCCritical(EthMiner) << message;
+    }
+    else
+    {
+      QRegularExpression regExp(R"(\s*(\S+))");
+      auto regExpMatch = regExp.match(outLine);
+      if (regExpMatch.hasMatch())
+      {
+        if (regExpMatch.capturedRef(1) == 'X')
+        {
+          mCCritical(EthMiner) << message;
+        }
+        else if (regExpMatch.capturedRef(1) == 'D')
+        {
+          mCDebug(EthMiner) << message;
+        }
+        else
+        {
+          mCInfo(EthMiner) << message;
+        }
+      }
+    }
+  }
 }
 
 QStringList MinerWorkerEthMiner::processArguments() const
