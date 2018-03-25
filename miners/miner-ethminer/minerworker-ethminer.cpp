@@ -12,13 +12,16 @@ const QLoggingCategory &MinerWorkerEthMiner::logCategory() const
   return EthMiner();
 }
 
+void MinerWorkerEthMiner::parseStdOutLine() const
+{
+  // TODO
+}
+
 void MinerWorkerEthMiner::start()
 {
   // TODO
 
   _stdOutStream.setDevice(&_minerProcess);
-
-  connect(&_minerProcess, &QProcess::readyReadStandardOutput, this, &MinerWorkerEthMiner::on_minerProcess_readyReadStandardOutput);
 
   _minerProcess.start(QIODevice::ReadOnly);
 
@@ -31,24 +34,5 @@ void MinerWorkerEthMiner::start()
   else
   {
     mCInfo(EthMiner) << "miner for mining unit " << _miningUnitId.toString() << " started";
-  }
-}
-
-void MinerWorkerEthMiner::on_minerProcess_readyReadStandardOutput()
-{
-  forever
-  {
-    _stdOutLastLine += _stdOutStream.readLine();
-    if (_stdOutStream.atEnd())
-    {
-      break;
-    }
-
-    emit outputLine(_stdOutLastLine);
-    appendOutput(_stdOutLastLine);
-
-    // TODO
-
-    _stdOutLastLine.clear();
   }
 }

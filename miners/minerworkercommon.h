@@ -42,10 +42,12 @@ class MinerWorkerCommon : public MinerWorkerInterface
     virtual       void         setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;
     virtual       void         stop              ()                                   Q_DECL_OVERRIDE;
 
-    virtual const QLoggingCategory &logCategory() const = 0;
+    virtual const QLoggingCategory &logCategory    () const = 0;
+    virtual       void              parseStdOutLine() const = 0;
 
     private Q_SLOTS:
-      void on_minerProcess_finished(int exitCode, QProcess::ExitStatus exitStatus) const;
+      void on_minerProcess_finished               (int exitCode, QProcess::ExitStatus exitStatus) const;
+      void on_minerProcess_readyReadStandardOutput();
 };
 
 #endif
