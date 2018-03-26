@@ -8,7 +8,7 @@ class ConsoleWindow : public QDialog
   Q_OBJECT
 
   public:
-             ConsoleWindow(const QStringList &lines);
+             ConsoleWindow(const QString &title, const QStringList &lines);
     virtual ~ConsoleWindow() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
