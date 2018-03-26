@@ -89,7 +89,7 @@ void MinerWorkerXmrStakCpuNoTls::parseStdOutLine() const
       mCInfo(XmrStakCpuNoTls) << message;
     }
 
-    if (outLine.contains("Result accepted"))
+    if (outLine.contains("Result accepted by the pool."))
     {
       emit resultAccepted();
     }

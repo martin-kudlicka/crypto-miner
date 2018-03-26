@@ -95,7 +95,7 @@ void MinerWorkerXmrStakWin64::parseStdOutLine() const
       mCInfo(XmrStakWin64) << message;
     }
 
-    if (outLine.contains("Result accepted"))
+    if (outLine.contains("Result accepted by the pool."))
     {
       emit resultAccepted();
     }
