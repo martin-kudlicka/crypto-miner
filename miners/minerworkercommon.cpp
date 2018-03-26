@@ -116,7 +116,7 @@ void MinerWorkerCommon::on_minerProcess_readyReadStandardError()
   forever
   {
     _stdErrLastLine = readLine(&_stdErrData);
-    if (_stdErrLastLine.isEmpty())
+    if (_stdErrLastLine.isNull())
     {
       break;
     }
@@ -135,7 +135,7 @@ void MinerWorkerCommon::on_minerProcess_readyReadStandardOutput()
   forever
   {
     _stdOutLastLine = readLine(&_stdOutData);
-    if (_stdOutLastLine.isEmpty())
+    if (_stdOutLastLine.isNull())
     {
       break;
     }
