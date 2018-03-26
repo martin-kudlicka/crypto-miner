@@ -1,10 +1,10 @@
 #include "consolewindow.h"
 
-ConsoleWindow::ConsoleWindow(const QString &title, const QStringList &lines) : QDialog(QApplication::activeWindow())
+ConsoleWindow::ConsoleWindow(const QString &description, const QStringList &lines) : QDialog(QApplication::activeWindow())
 {
   _ui.setupUi(this);
 
-  setWindowTitle(title);
+  setWindowTitle(tr("Console - ") + description);
 
   _ui.minerText->setPlainText(lines.join('\n'));
   _ui.minerText->moveCursor(QTextCursor::End);

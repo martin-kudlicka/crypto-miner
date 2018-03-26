@@ -67,9 +67,9 @@ void MiningUnit::showConsole()
   }
   else
   {
-    auto title = tr("Console: ") + _options.miner().name() + tr(" mining ") + _options.miner().coin().toString();
-    auto lines = _worker ? _worker->consoleOutput() : QStringList();
-    _consoleWindow.reset(new ConsoleWindow(title, lines));
+    auto description = _options.miner().name() + tr(" mining ") + _options.miner().coin().toString();
+    auto lines       = _worker ? _worker->consoleOutput() : QStringList();
+    _consoleWindow.reset(new ConsoleWindow(description, lines));
 
     if (_worker)
     {
