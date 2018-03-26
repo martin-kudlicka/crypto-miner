@@ -7,7 +7,6 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QDir>
 #include <QtCore/QProcess>
-#include <QtCore/QTextStream>
 #include "../../common/mineroptions.h"
 
 class MinerWorkerCommon : public MinerWorkerInterface
@@ -26,6 +25,7 @@ class MinerWorkerCommon : public MinerWorkerInterface
     MUuidPtr        _miningUnitId;
     PoolCredentials _poolCredentials;
     QByteArray      _stdErrData;
+    QByteArray      _stdOutData;
     QStringList     _minerOutput;
     QDir            _minerDir;
     QDir            _workDir;
@@ -33,11 +33,12 @@ class MinerWorkerCommon : public MinerWorkerInterface
     QString         _poolAddress;
     QString         _stdErrLastLine;
     QString         _stdOutLastLine;
-    QTextStream     _stdOutStream;
 
     void appendOutput(const QString &line);
 
   private:
+    QString readLine(QByteArray *data) const;
+
     virtual const QStringList &consoleOutput     () const                             Q_DECL_OVERRIDE;
     virtual       bool         isRunning         () const                             Q_DECL_OVERRIDE;
     virtual const QString     &name              () const                             Q_DECL_OVERRIDE;
