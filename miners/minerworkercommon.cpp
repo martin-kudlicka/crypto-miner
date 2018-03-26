@@ -5,7 +5,7 @@
 #include <MkCore/MMessageLogger>
 #include <MkCore/MLoggingCategory>
 
-MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(miningUnitId), _miningUnitId(miningUnitId), _stdOutStream(&_minerProcess)
+MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(miningUnitId), _miningUnitId(miningUnitId)
 {
   auto fileInfo = MModuleInfo().fileInfo();
 
@@ -31,6 +31,22 @@ void MinerWorkerCommon::appendOutput(const QString &line)
   }
 
   _minerOutput.append(line);
+}
+
+QString MinerWorkerCommon::readLine(QByteArray *data) const
+{
+  auto lineEndPos = data->indexOf('\n');
+  if (lineEndPos == -1)
+  {
+    return QString();
+  }
+  else
+  {
+    auto line = data->left(lineEndPos - 1);
+    data->remove(0, lineEndPos + 1);
+
+    return line;
+  }
 }
 
 const QStringList &MinerWorkerCommon::consoleOutput() const
@@ -95,42 +111,38 @@ void MinerWorkerCommon::on_minerProcess_finished(int exitCode, QProcess::ExitSta
 
 void MinerWorkerCommon::on_minerProcess_readyReadStandardError()
 {
-  _stdErrData = _minerProcess.readAllStandardError();
+  _stdErrData += _minerProcess.readAllStandardError();
 
-  while (!_stdErrData.isEmpty())
+  forever
   {
-    auto lineEndPos = _stdErrData.indexOf('\n');
-    if (lineEndPos == -1)
+    _stdErrLastLine = readLine(&_stdErrData);
+    if (_stdErrLastLine.isEmpty())
     {
-      _stdErrLastLine = _stdErrData;
-      _stdErrData.clear();
-    }
-    else
-    {
-      _stdErrLastLine = _stdErrData.left(lineEndPos - 1);
-      _stdErrData.remove(0, lineEndPos + 1);
+      break;
     }
 
     emit outputLine(_stdErrLastLine);
     appendOutput(_stdErrLastLine);
 
     parseStdErrLine();
-
-    _stdErrLastLine.clear();
   }
 }
 
 void MinerWorkerCommon::on_minerProcess_readyReadStandardOutput()
 {
-  while (!_stdOutStream.atEnd())
+  _stdOutData += _minerProcess.readAllStandardOutput();
+
+  forever
   {
-    _stdOutLastLine = _stdOutStream.readLine();
+    _stdOutLastLine = readLine(&_stdOutData);
+    if (_stdOutLastLine.isEmpty())
+    {
+      break;
+    }
 
     emit outputLine(_stdOutLastLine);
     appendOutput(_stdOutLastLine);
 
     parseStdOutLine();
-
-    _stdOutLastLine.clear();
   }
 }
