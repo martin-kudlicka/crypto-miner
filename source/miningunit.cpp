@@ -102,6 +102,7 @@ void MiningUnit::start()
   }
 
   _miningTime.start();
+  _hashReportTime.invalidate();
 
   _worker->start();
 
@@ -141,6 +142,17 @@ void MiningUnit::on_worker_hashRate(float value)
 {
   _sessionStatistics.hashRate = value;
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::HashRate);
+
+  if (_hashReportTime.isValid())
+  {
+    auto hashCount = _options.hashCount();
+    hashCount     += value * _hashReportTime.restart() / 1000;
+    _options.setHashCount(hashCount);
+  }
+  else
+  {
+    _hashReportTime.start();
+  }
 }
 
 void MiningUnit::on_worker_resultAccepted()

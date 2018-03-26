@@ -43,6 +43,7 @@ class MiningUnit : public QObject
           MiningModel                  *_miningModel;
           MiningUnitOptions             _options;
           MinerWorkerInterfaceSPtr      _worker;
+          QElapsedTimer                 _hashReportTime;
           QElapsedTimer                 _miningTime;
           Statistics                    _sessionStatistics;
 

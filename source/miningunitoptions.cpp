@@ -5,6 +5,7 @@ Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Password = "pool/pass
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Pool_Username = "pool/username";
 
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Statistics_AcceptedResults = "statistics/acceptedResults";
+Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Statistics_HashCount       = "statistics/hashCount";
 Q_DECL_CONSTEXPR QString MiningUnitOptions::Property::Statistics_MiningTime      = "statistics/miningTime";
 
 MiningUnitOptions::MiningUnitOptions(const MUuidPtr &id) : _id(id), _minerOptions(id)
@@ -16,6 +17,11 @@ MiningUnitOptions::MiningUnitOptions(const MUuidPtr &id) : _id(id), _minerOption
 quintptr MiningUnitOptions::acceptedResults() const
 {
   return value(Property::Statistics_AcceptedResults).toUInt();
+}
+
+quintptr MiningUnitOptions::hashCount() const
+{
+  return value(Property::Statistics_HashCount).toUInt();
 }
 
 const MUuidPtr &MiningUnitOptions::id() const
@@ -56,6 +62,11 @@ QString MiningUnitOptions::poolUsername() const
 void MiningUnitOptions::setAcceptedResults(quintptr count)
 {
   setValue(Property::Statistics_AcceptedResults, count);
+}
+
+void MiningUnitOptions::setHashCount(quintptr count)
+{
+  setValue(Property::Statistics_HashCount, count);
 }
 
 void MiningUnitOptions::setMiningTime(quintptr seconds)
