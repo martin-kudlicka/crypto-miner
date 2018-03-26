@@ -5,7 +5,6 @@
 #include "miningunitoptions.h"
 #include "../miners/minerworkerinterface.h"
 #include <QtCore/QElapsedTimer>
-#include <QtCore/QQueue>
 
 class ConsoleWindow;
 class MinerInterface;
@@ -39,14 +38,13 @@ class MiningUnit : public QObject
           void               stop             ();
 
   private:
-          QScopedPointer<ConsoleWindow>    _consoleWindow;
-    const MinerInterface                  *_minerPlugin;
-          MiningModel                     *_miningModel;
-          MiningUnitOptions                _options;
-          QQueue<MinerWorkerInterfaceSPtr> _stoppingWorkers;
-          MinerWorkerInterfaceSPtr         _worker;
-          QElapsedTimer                    _miningTime;
-          Statistics                       _sessionStatistics;
+          QScopedPointer<ConsoleWindow> _consoleWindow;
+    const MinerInterface               *_minerPlugin;
+          MiningModel                  *_miningModel;
+          MiningUnitOptions             _options;
+          MinerWorkerInterfaceSPtr      _worker;
+          QElapsedTimer                 _miningTime;
+          Statistics                    _sessionStatistics;
 
   Q_SIGNALS:
     void finished() const;
@@ -54,7 +52,7 @@ class MiningUnit : public QObject
 
   private Q_SLOTS:
     void on_consoleWindow_destroyed(QObject *obj = Q_NULLPTR);
-    void on_worker_finished        ();
+    void on_worker_finished        (const QString &workerName);
     void on_worker_hashRate        (float value);
     void on_worker_resultAccepted  ();
 };

@@ -73,7 +73,7 @@ void MinerWorkerCommon::start()
   {
     mCCritical(logCategory()) << "failed to start miner for mining unit " << _miningUnitId.toString();
 
-    emit finished();
+    emit finished(_minerName);
   }
   else
   {
@@ -90,7 +90,7 @@ void MinerWorkerCommon::on_minerProcess_finished(int exitCode, QProcess::ExitSta
 {
   mCInfo(logCategory()) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
 
-  emit finished();
+  emit finished(_minerName);
 }
 
 void MinerWorkerCommon::on_minerProcess_readyReadStandardError()
