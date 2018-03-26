@@ -104,7 +104,7 @@ void MinerWorkerEthMiner::parseStdErrLine() const
       }
     }
 
-    if (errLine.contains("Accepted"))
+    if (errLine.contains("Accepted."))
     {
       emit resultAccepted();
     }
