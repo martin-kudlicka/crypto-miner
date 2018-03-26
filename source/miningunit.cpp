@@ -91,9 +91,9 @@ void MiningUnit::start()
   _worker->setPoolAddress(_options.poolAddress());
   _worker->setPoolCredentials(PoolCredentials(_options.poolUsername(), _options.poolPassword()));
 
-  connect(&*_worker, SIGNAL(finished()),       SLOT(on_worker_finished()));
-  connect(&*_worker, SIGNAL(hashRate(float)),  SLOT(on_worker_hashRate(float)));
-  connect(&*_worker, SIGNAL(resultAccepted()), SLOT(on_worker_resultAccepted()));
+  connect(&*_worker, SIGNAL(finished(const QString &)), SLOT(on_worker_finished(const QString &)));
+  connect(&*_worker, SIGNAL(hashRate(float)),           SLOT(on_worker_hashRate(float)));
+  connect(&*_worker, SIGNAL(resultAccepted()),          SLOT(on_worker_resultAccepted()));
 
   if (_consoleWindow)
   {
@@ -112,8 +112,6 @@ void MiningUnit::start()
 void MiningUnit::stop()
 {
   _worker->stop();
-
-  _stoppingWorkers.enqueue(_worker);
   _worker.clear();
 }
 
@@ -122,7 +120,7 @@ void MiningUnit::on_consoleWindow_destroyed(QObject *obj /* Q_NULLPTR */)
   _consoleWindow.take();
 }
 
-void MiningUnit::on_worker_finished()
+void MiningUnit::on_worker_finished(const QString &workerName)
 {
   auto miningTime      = _miningTime.elapsed();
   auto totalMiningTime = _options.miningTime() + miningTime / 1000;
@@ -131,27 +129,11 @@ void MiningUnit::on_worker_finished()
 
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
 
-  emit finished();
-
-  QString workerName;
-  if (_stoppingWorkers.isEmpty())
-  {
-    workerName = _worker->name();
-
-    if (_worker.toWeakRef().toStrongRef())
-    {
-      _worker.clear();
-    }
-    // else worker is under destruction
-  }
-  else
-  {
-    workerName = _stoppingWorkers.dequeue()->name();
-  }
-
   mAnalytics->sendTiming("miner", MAnalyticsTiming::Title::RunTime, miningTime, workerName);
 
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
+
+  emit finished();
 }
 
 void MiningUnit::on_worker_hashRate(float value)

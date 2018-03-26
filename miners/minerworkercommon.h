@@ -18,6 +18,9 @@ class MinerWorkerCommon : public MinerWorkerInterface
              MinerWorkerCommon(const MUuidPtr &miningUnitId);
     virtual ~MinerWorkerCommon() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
+  private:
+    QString _minerName;
+
   protected:
     MinerOptions    _options;
     MUuidPtr        _miningUnitId;
@@ -35,8 +38,6 @@ class MinerWorkerCommon : public MinerWorkerInterface
     void appendOutput(const QString &line);
 
   private:
-    QString _minerName;
-
     virtual const QStringList &consoleOutput     () const                             Q_DECL_OVERRIDE;
     virtual       bool         isRunning         () const                             Q_DECL_OVERRIDE;
     virtual const QString     &name              () const                             Q_DECL_OVERRIDE;

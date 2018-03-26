@@ -23,7 +23,7 @@ class MinerWorkerInterface : public QObject
     virtual ~MinerWorkerInterface() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   Q_SIGNALS:
-    void finished      ()                    const;
+    void finished      (const QString &name) const;
     void hashRate      (float value)         const;
     void outputLine    (const QString &line) const;
     void resultAccepted()                    const;
