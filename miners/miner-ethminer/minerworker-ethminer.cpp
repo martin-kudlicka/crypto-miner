@@ -104,6 +104,11 @@ void MinerWorkerEthMiner::parseStdErrLine() const
       }
     }
 
+    if (errLine.contains("Accepted"))
+    {
+      emit resultAccepted();
+    }
+
     QRegularExpression regExp(R"(Speed\s+(\d+\.\d+))");
     auto regExpMatch = regExp.match(errLine);
     if (regExpMatch.hasMatch())
