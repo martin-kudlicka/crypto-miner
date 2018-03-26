@@ -79,6 +79,8 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
           return miningUnit->options().miner().name();
         case Column::HwComponent:
           return miningUnit->options().miner().hwComponent().toString();
+        case Column::Coin:
+          return miningUnit->options().miner().coin().toString(Coin::Part::Symbol);
         case Column::HashRate:
           {
             auto hashRate = miningUnit->sessionStatistics().hashRate;
@@ -127,6 +129,8 @@ QVariant MiningModel::headerData(int section, Qt::Orientation orientation, int r
       return tr("Miner");
     case Column::HwComponent:
       return tr("HW");
+    case Column::Coin:
+      return tr("Coin");
     case Column::HashRate:
       return "H/s";
     case Column::Results:
