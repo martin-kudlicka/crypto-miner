@@ -14,6 +14,7 @@ class MiningUnitOptions : public MSettings
       static Q_DECL_CONSTEXPR QString Pool_Password;
       static Q_DECL_CONSTEXPR QString Pool_Username;
       static Q_DECL_CONSTEXPR QString Statistics_AcceptedResults;
+      static Q_DECL_CONSTEXPR QString Statistics_HashCount;
       static Q_DECL_CONSTEXPR QString Statistics_MiningTime;
     };
 
@@ -21,6 +22,7 @@ class MiningUnitOptions : public MSettings
     virtual ~MiningUnitOptions() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
           quintptr      acceptedResults   () const;
+          quintptr      hashCount         () const;
     const MUuidPtr     &id                () const;
           MinerOptions &miner             ();
     const MinerOptions &miner             () const;
@@ -29,6 +31,7 @@ class MiningUnitOptions : public MSettings
           QString       poolPassword      () const;
           QString       poolUsername      () const;
           void          setAcceptedResults(quintptr count);
+          void          setHashCount      (quintptr count);
           void          setMiningTime     (quintptr seconds);
 
   private:
