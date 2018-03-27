@@ -142,6 +142,8 @@ void MinerWorkerCommon::on_minerProcess_finished(int exitCode, QProcess::ExitSta
 {
   mCInfo(logCategory()) << "miner for mining unit " << _miningUnitId.toString() << " stopped";
 
+  QDir(_minerProcess.workingDirectory()).removeRecursively();
+
   emit finished(_minerName);
 }
 
