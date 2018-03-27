@@ -28,7 +28,7 @@ MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(mi
 
 void MinerWorkerCommon::appendOutput(const QString &line)
 {
-  if (_minerOutput.count() >= 262144)
+  if (_minerOutput.count() >= 32)
   {
     _minerOutput.removeFirst();
   }
