@@ -107,7 +107,7 @@ void MinerWorkerXmrStakWin64::parseStdOutLine() const
       emit resultAccepted();
     }
 
-    QRegularExpression regExp(R"(^Totals:\D*(\d+\.\d))");
+    QRegularExpression regExp(R"(^Totals \(ALL\):\D*(\d+\.\d))");
     auto regExpMatch = regExp.match(outLine);
     if (regExpMatch.hasMatch())
     {
