@@ -28,7 +28,6 @@ class MinerWorkerCommon : public MinerWorkerInterface
     QByteArray      _stdOutData;
     QStringList     _minerOutput;
     QDir            _minerDir;
-    QDir            _workDir;
     QProcess        _minerProcess;
     QString         _poolAddress;
     QString         _stdErrLastLine;
