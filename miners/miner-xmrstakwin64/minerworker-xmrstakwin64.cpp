@@ -63,10 +63,9 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
     configData.replace(R"("use_slow_memory" : "warn",)", R"("use_slow_memory" : "always",)");
   }
 
-  auto configFilePath = _workDir.path();
+  auto configFilePath = _minerProcess.workingDirectory();
   configFilePath.append(QDir::separator());
-  configFilePath.append(_miningUnitId.toString());
-  configFilePath.append("-config.txt");
+  configFilePath.append("config.txt");
 
   MFile::write(configFilePath, configData);
 

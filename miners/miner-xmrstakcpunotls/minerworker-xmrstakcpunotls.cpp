@@ -46,10 +46,9 @@ QString MinerWorkerXmrStakCpuNoTls::readVanillaConfig() const
 
 QString MinerWorkerXmrStakCpuNoTls::writeWorkerConfig(const QString &config) const
 {
-  auto configFilePath = _workDir.path();
+  auto configFilePath = _minerProcess.workingDirectory();
   configFilePath.append(QDir::separator());
-  configFilePath.append(_miningUnitId.toString());
-  configFilePath.append(".txt");
+  configFilePath.append("config.txt");
 
   MFile::write(configFilePath, config);
 

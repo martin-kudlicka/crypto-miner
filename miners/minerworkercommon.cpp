@@ -20,12 +20,15 @@ MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(mi
   auto workPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
   workPath.append(QDir::separator());
   workPath.append(fileInfo.completeBaseName());
-  _workDir.setPath(workPath);
+  workPath.append(QDir::separator());
+  workPath.append(_miningUnitId.toString());
+  QDir().mkpath(workPath);
+  _minerProcess.setWorkingDirectory(workPath);
 }
 
 void MinerWorkerCommon::appendOutput(const QString &line)
 {
-  if (_minerOutput.count() >= 16)
+  if (_minerOutput.count() >= 262144)
   {
     _minerOutput.removeFirst();
   }
@@ -109,7 +112,6 @@ void MinerWorkerCommon::setPoolCredentials(const PoolCredentials &credentials)
 void MinerWorkerCommon::start()
 {
   _minerProcess.setArguments(processArguments());
-  _minerProcess.setWorkingDirectory(_minerDir.path());
 
   connect(&_minerProcess,  QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerCommon::on_minerProcess_finished);
   connect(&_minerProcess, &QProcess::readyReadStandardOutput,                             this, &MinerWorkerCommon::on_minerProcess_readyReadStandardOutput);
