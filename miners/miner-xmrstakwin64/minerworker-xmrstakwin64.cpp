@@ -23,7 +23,7 @@ QStringList MinerWorkerXmrStakWin64::currencyArguments() const
       arguments << "aeon";
       break;
     case Coin::Name::Monero:
-      arguments << "monero";
+      arguments << "monero7";
       break;
     default:
       Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::currencyArguments", "switch (coin.name())");
