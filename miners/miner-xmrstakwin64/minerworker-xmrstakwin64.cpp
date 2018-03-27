@@ -4,6 +4,7 @@
 #include <QtCore/QResource>
 #include <MkCore/MFile>
 #include <QtCore/QRegularExpression>
+#include <MkCore/MThread>
 
 MinerWorkerXmrStakWin64::MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId) : MinerWorkerCommon(miningUnitId)
 {
@@ -56,6 +57,11 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
 {
   QResource configResource(":/resources/files/config.txt");
   QByteArray configData = reinterpret_cast<const char *>(configResource.data());
+
+  if (!MThread::runningAsAdministrator())
+  {
+    configData.replace(R"("use_slow_memory" : "warn",)", R"("use_slow_memory" : "always",)");
+  }
 
   auto configFilePath = _workDir.path();
   configFilePath.append(QDir::separator());
@@ -117,7 +123,10 @@ QStringList MinerWorkerXmrStakWin64::processArguments() const
   arguments << "--config";
   arguments << prepareCommonConfig();
 
-  arguments << "--noUAC";
+  if (!MThread::runningAsAdministrator())
+  {
+    arguments << "--noUAC";
+  }
 
   arguments << currencyArguments();
 
