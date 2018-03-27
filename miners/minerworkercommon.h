@@ -37,7 +37,9 @@ class MinerWorkerCommon : public MinerWorkerInterface
     void appendOutput(const QString &line);
 
   private:
-    QString readLine(QByteArray *data) const;
+    void    addToCommandLine(const QString &argument, QString *commandLine) const;
+    void    logCommandLine  ()                                              const;
+    QString readLine        (QByteArray *data)                              const;
 
     virtual const QStringList &consoleOutput     () const                             Q_DECL_OVERRIDE;
     virtual       bool         isRunning         () const                             Q_DECL_OVERRIDE;
