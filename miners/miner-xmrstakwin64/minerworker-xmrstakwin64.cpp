@@ -36,8 +36,9 @@ QStringList MinerWorkerXmrStakWin64::poolArguments() const
 {
   QStringList arguments;
 
-  arguments << "--url"  << _poolAddress;
-  arguments << "--user" << _poolCredentials.username;
+  arguments << "--url"   << _poolAddress;
+  arguments << "--user"  << _poolCredentials.username;
+  arguments << "--rigid" << QString();
   arguments << "--pass";
   if (_poolCredentials.password.isEmpty())
   {
