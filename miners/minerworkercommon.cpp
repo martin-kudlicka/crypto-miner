@@ -33,6 +33,38 @@ void MinerWorkerCommon::appendOutput(const QString &line)
   _minerOutput.append(line);
 }
 
+void MinerWorkerCommon::addToCommandLine(const QString &argument, QString *commandLine) const
+{
+  if (!commandLine->isEmpty())
+  {
+    commandLine->append(' ');
+  }
+
+  auto hasSpace = argument.contains(' ');
+  if (hasSpace)
+  {
+    commandLine->append('"');
+  }
+  commandLine->append(argument);
+  if (hasSpace)
+  {
+    commandLine->append('"');
+  }
+}
+
+void MinerWorkerCommon::logCommandLine() const
+{
+  QString commandLine;
+  addToCommandLine(_minerProcess.program(), &commandLine);
+
+  for (const auto &argument : _minerProcess.arguments())
+  {
+    addToCommandLine(argument, &commandLine);
+  }
+
+  mCDebug(logCategory()) << "executing " << commandLine;
+}
+
 QString MinerWorkerCommon::readLine(QByteArray *data) const
 {
   auto lineEndPos = data->indexOf('\n');
@@ -82,6 +114,8 @@ void MinerWorkerCommon::start()
   connect(&_minerProcess,  QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerCommon::on_minerProcess_finished);
   connect(&_minerProcess, &QProcess::readyReadStandardOutput,                             this, &MinerWorkerCommon::on_minerProcess_readyReadStandardOutput);
   connect(&_minerProcess, &QProcess::readyReadStandardError,                              this, &MinerWorkerCommon::on_minerProcess_readyReadStandardError);
+
+  logCommandLine();
 
   _minerProcess.start(QIODevice::ReadOnly);
 
