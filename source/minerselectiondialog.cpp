@@ -2,9 +2,13 @@
 
 #include "minerplugins.h"
 
+Q_DECL_CONSTEXPR QString MinerSelectionDialog::Property::OperatingSystemSupportedOnly = "operatingSystemSupportedOnly";
+
 MinerSelectionDialog::MinerSelectionDialog(MinerPlugins *minerPlugins, QWidget *parent) : QDialog(parent), _minerPlugins(minerPlugins), _coinsModel(&_allowedCoinMiners, minerPlugins), _hardwareModel(&_allowedHwComponentMiners, minerPlugins), _minersModel(&_allowedMinerMiners, minerPlugins), _minersMiner(Q_NULLPTR)
 {
   _ui.setupUi(this);
+
+  _settings.beginGroup("minerSelection");
 
   setupWidgets();
 
@@ -30,6 +34,20 @@ MinerInterface *MinerSelectionDialog::selectedMiner() const
 
 void MinerSelectionDialog::refreshAllowedMiners()
 {
+  auto allowedMiners = _minerPlugins->toRawList().toSet();
+  if (_ui.operatingSystemSupportedOnly->isChecked())
+  {
+    QMutableSetIterator<MinerInterface *> miner(allowedMiners);
+    while (miner.hasNext())
+    {
+      miner.next();
+      if (!MOperatingSystemVersion::isPlatformSupported(miner.value()->platform()))
+      {
+        miner.remove();
+      }
+    }
+  }
+
   if (_minersMiner)
   {
     _allowedHwComponentMiners = { _minersMiner };
@@ -37,10 +55,10 @@ void MinerSelectionDialog::refreshAllowedMiners()
   }
   else
   {
-    _allowedHwComponentMiners = _minerPlugins->toRawList().toSet();
-    _allowedCoinMiners        = _minerPlugins->toRawList().toSet();
+    _allowedHwComponentMiners = allowedMiners;
+    _allowedCoinMiners        = allowedMiners;
   }
-  _allowedMinerMiners = _minerPlugins->toRawList().toSet();
+  _allowedMinerMiners = allowedMiners;
 
   if (!_hwComponentMiners.isEmpty())
   {
@@ -65,6 +83,8 @@ void MinerSelectionDialog::setupWidgets()
   _ui.hwComponentsView->setModel(&_hardwareModel);
   _ui.coinsView->setModel(&_coinsModel);
   _ui.minersView->setModel(&_minersModel);
+
+  _ui.operatingSystemSupportedOnly->setChecked(_settings.value(Property::OperatingSystemSupportedOnly, true).toBool());
 }
 
 void MinerSelectionDialog::on_coinsView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
@@ -123,6 +143,19 @@ void MinerSelectionDialog::on_minersView_selectionChanged(const QItemSelection &
 
   emit _hardwareModel.layoutChanged();
   emit _coinsModel.layoutChanged();
+
+  refreshOkButton();
+}
+
+void MinerSelectionDialog::on_operatingSystemSupportedOnly_toggled(bool checked)
+{
+  _settings.setValue(Property::OperatingSystemSupportedOnly, checked);
+
+  refreshAllowedMiners();
+
+  emit _hardwareModel.layoutChanged();
+  emit _coinsModel.layoutChanged();
+  emit _minersModel.layoutChanged();
 
   refreshOkButton();
 }

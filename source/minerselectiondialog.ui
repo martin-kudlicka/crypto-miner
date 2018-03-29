@@ -67,6 +67,13 @@
     </layout>
    </item>
    <item>
+    <widget class="QCheckBox" name="operatingSystemSupportedOnly">
+     <property name="text">
+      <string>Allow only &amp;operating system supported miners</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout">
      <property name="spacing">
       <number>6</number>
