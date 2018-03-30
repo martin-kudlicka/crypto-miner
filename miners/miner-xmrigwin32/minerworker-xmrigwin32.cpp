@@ -40,6 +40,7 @@ QStringList MinerWorkerXmrigWin32::processArguments() const
   auto arguments = poolArguments();
 
   arguments << "--donate-level=1";
+  arguments << "--max-cpu-usage=100";
 
   // TODO
 
