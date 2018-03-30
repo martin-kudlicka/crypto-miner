@@ -11,11 +11,11 @@ QStringList MinerWorkerXmrigWin32::poolArguments() const
 {
   QStringList arguments;
 
-  arguments << "--url" << _poolAddress;
-  arguments << "--user" << _poolCredentials.username;
+  arguments << "--url=" + _poolAddress;
+  arguments << "--user=" + _poolCredentials.username;
   if (!_poolCredentials.password.isEmpty())
   {
-    arguments << "--pass" << _poolCredentials.password;
+    arguments << "--pass=" + _poolCredentials.password;
   }
 
   return arguments;
@@ -38,6 +38,8 @@ void MinerWorkerXmrigWin32::parseStdOutLine() const
 QStringList MinerWorkerXmrigWin32::processArguments() const
 {
   auto arguments = poolArguments();
+
+  arguments << "--donate-level=1";
 
   // TODO
 
