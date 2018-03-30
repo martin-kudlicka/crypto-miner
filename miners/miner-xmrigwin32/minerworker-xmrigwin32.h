@@ -10,6 +10,8 @@ class MinerWorkerXmrigWin32 : public MinerWorkerCommon
     virtual ~MinerWorkerXmrigWin32() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
+    QStringList poolArguments() const;
+
     virtual const QLoggingCategory &logCategory     () const Q_DECL_OVERRIDE;
     virtual       void              parseStdErrLine () const Q_DECL_OVERRIDE;
     virtual       void              parseStdOutLine () const Q_DECL_OVERRIDE;
