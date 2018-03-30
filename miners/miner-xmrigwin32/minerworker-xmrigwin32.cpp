@@ -48,6 +48,11 @@ void MinerWorkerXmrigWin32::parseStdOutLine() const
       mCInfo(XmrigWin32) << message;
     }
 
+    if (outLine.contains("accepted "))
+    {
+      emit resultAccepted();
+    }
+
     QRegularExpression regExp(R"(^speed\s\S+\s\D*(\d+\.\d+))");
     auto regExpMatch = regExp.match(outLine);
     if (regExpMatch.hasMatch())
