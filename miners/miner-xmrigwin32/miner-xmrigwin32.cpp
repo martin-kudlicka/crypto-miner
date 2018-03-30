@@ -1,9 +1,10 @@
 #include "miner-xmrigwin32.h"
 
+#include "minerworker-xmrigwin32.h"
+
 MinerWorkerInterfaceSPtr MinerXmrigWin32::createWorker(const MUuidPtr &id) const
 {
-  // TODO
-  return Q_NULLPTR;
+  return QSharedPointer<MinerWorkerXmrigWin32>::create(id);
 }
 
 QString MinerXmrigWin32::name() const
