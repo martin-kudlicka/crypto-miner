@@ -1,6 +1,7 @@
-#pragma once
+#ifndef MINERETHMINER_GLOBAL_H
+#define MINERETHMINER_GLOBAL_H
 
-#include <QtCore/qglobal.h>
+#include <QtCore/QtGlobal>
 
 #ifndef BUILD_STATIC
 # if defined(MINERETHMINER_LIB)
@@ -10,4 +11,6 @@
 # endif
 #else
 # define MINERETHMINER_EXPORT
+#endif
+
 #endif

@@ -85,7 +85,7 @@ void MinerWorkerEthMiner::parseStdErrLine() const
     }
     else
     {
-      QRegularExpression regExp(R"(\s*(\S+))");
+      QRegularExpression regExp(R"(^\s*(\S+))");
       auto regExpMatch = regExp.match(errLine);
       if (regExpMatch.hasMatch())
       {
