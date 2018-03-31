@@ -15,6 +15,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "coins", "coins\coins.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hardware", "hardware\hardware.vcxproj", "{A4AE5A83-4ABD-4281-99B5-5F62E1897150}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "miner-ethminer", "miners\miner-ethminer\miner-ethminer.vcxproj", "{D273D992-26C6-4503-9E4E-00097A283B85}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "miner-xmrigwin32", "miners\miner-xmrigwin32\miner-xmrigwin32.vcxproj", "{A86B05D1-ABAC-4892-AB22-BECA4934B1AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -41,6 +45,14 @@ Global
 		{A4AE5A83-4ABD-4281-99B5-5F62E1897150}.Debug|x86.Build.0 = Debug|Win32
 		{A4AE5A83-4ABD-4281-99B5-5F62E1897150}.Release|x86.ActiveCfg = Release|Win32
 		{A4AE5A83-4ABD-4281-99B5-5F62E1897150}.Release|x86.Build.0 = Release|Win32
+		{D273D992-26C6-4503-9E4E-00097A283B85}.Debug|x86.ActiveCfg = Debug|Win32
+		{D273D992-26C6-4503-9E4E-00097A283B85}.Debug|x86.Build.0 = Debug|Win32
+		{D273D992-26C6-4503-9E4E-00097A283B85}.Release|x86.ActiveCfg = Release|Win32
+		{D273D992-26C6-4503-9E4E-00097A283B85}.Release|x86.Build.0 = Release|Win32
+		{A86B05D1-ABAC-4892-AB22-BECA4934B1AF}.Debug|x86.ActiveCfg = Debug|Win32
+		{A86B05D1-ABAC-4892-AB22-BECA4934B1AF}.Debug|x86.Build.0 = Debug|Win32
+		{A86B05D1-ABAC-4892-AB22-BECA4934B1AF}.Release|x86.ActiveCfg = Release|Win32
+		{A86B05D1-ABAC-4892-AB22-BECA4934B1AF}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +60,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{50CC2DD5-4FC8-47EF-B2B9-3ACB79D85DEF} = {575096F1-6AB4-4D15-A0AA-8745B0A161EC}
 		{B0D8A647-72FA-4E1A-ACBD-5D861EEE31F5} = {575096F1-6AB4-4D15-A0AA-8745B0A161EC}
+		{D273D992-26C6-4503-9E4E-00097A283B85} = {575096F1-6AB4-4D15-A0AA-8745B0A161EC}
+		{A86B05D1-ABAC-4892-AB22-BECA4934B1AF} = {575096F1-6AB4-4D15-A0AA-8745B0A161EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {93DDA5EC-D439-4F3B-A5DC-DBCB8859BCCC}
