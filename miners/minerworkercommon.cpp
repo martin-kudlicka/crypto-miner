@@ -26,16 +26,6 @@ MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(mi
   _minerProcess.setWorkingDirectory(workPath);
 }
 
-void MinerWorkerCommon::appendOutput(const QString &line)
-{
-  if (_minerOutput.count() >= 32)
-  {
-    _minerOutput.removeFirst();
-  }
-
-  _minerOutput.append(line);
-}
-
 void MinerWorkerCommon::addToCommandLine(const QString &argument, QString *commandLine) const
 {
   if (!commandLine->isEmpty())
@@ -82,11 +72,6 @@ QString MinerWorkerCommon::readLine(QByteArray *data) const
 
     return line;
   }
-}
-
-const QStringList &MinerWorkerCommon::consoleOutput() const
-{
-  return _minerOutput;
 }
 
 bool MinerWorkerCommon::isRunning() const
@@ -160,7 +145,6 @@ void MinerWorkerCommon::on_minerProcess_readyReadStandardError()
     }
 
     emit outputLine(_stdErrLastLine);
-    appendOutput(_stdErrLastLine);
 
     parseStdErrLine();
   }
@@ -179,7 +163,6 @@ void MinerWorkerCommon::on_minerProcess_readyReadStandardOutput()
     }
 
     emit outputLine(_stdOutLastLine);
-    appendOutput(_stdOutLastLine);
 
     parseStdOutLine();
   }

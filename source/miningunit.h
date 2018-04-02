@@ -45,6 +45,7 @@ class MiningUnit : public QObject
           MinerWorkerInterfaceSPtr      _worker;
           QElapsedTimer                 _hashReportTime;
           QElapsedTimer                 _miningTime;
+          QStringList                   _minerOutput;
           Statistics                    _sessionStatistics;
 
   Q_SIGNALS:
@@ -55,6 +56,7 @@ class MiningUnit : public QObject
     void on_consoleWindow_destroyed(QObject *obj = Q_NULLPTR);
     void on_worker_finished        (const QString &workerName);
     void on_worker_hashRate        (float value);
+    void on_worker_outputLine      (const QString &line);
     void on_worker_resultAccepted  ();
 };
 

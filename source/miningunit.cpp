@@ -68,8 +68,7 @@ void MiningUnit::showConsole()
   else
   {
     auto description = _options.miner().name() + tr(" mining ") + _options.miner().coin().toString();
-    auto lines       = _worker ? _worker->consoleOutput() : QStringList();
-    _consoleWindow.reset(new ConsoleWindow(description, lines));
+    _consoleWindow.reset(new ConsoleWindow(description, _minerOutput));
 
     if (_worker)
     {
@@ -92,15 +91,17 @@ void MiningUnit::start()
   _worker->setPoolAddress(_options.poolAddress());
   _worker->setPoolCredentials(PoolCredentials(_options.poolUsername(), _options.poolPassword()));
 
-  connect(&*_worker, SIGNAL(finished(const QString &)), SLOT(on_worker_finished(const QString &)));
-  connect(&*_worker, SIGNAL(hashRate(float)),           SLOT(on_worker_hashRate(float)));
-  connect(&*_worker, SIGNAL(resultAccepted()),          SLOT(on_worker_resultAccepted()));
+  connect(&*_worker, SIGNAL(finished(const QString &)),   SLOT(on_worker_finished(const QString &)));
+  connect(&*_worker, SIGNAL(hashRate(float)),             SLOT(on_worker_hashRate(float)));
+  connect(&*_worker, SIGNAL(outputLine(const QString &)), SLOT(on_worker_outputLine(const QString &)));
+  connect(&*_worker, SIGNAL(resultAccepted()),            SLOT(on_worker_resultAccepted()));
 
   if (_consoleWindow)
   {
     connect(&*_worker, SIGNAL(outputLine(const QString &)), &*_consoleWindow, SLOT(on_minerWorker_outputLine(const QString &)));
   }
 
+  _minerOutput.clear();
   _miningTime.start();
   _hashReportTime.invalidate();
 
@@ -153,6 +154,16 @@ void MiningUnit::on_worker_hashRate(float value)
   {
     _hashReportTime.start();
   }
+}
+
+void MiningUnit::on_worker_outputLine(const QString &line)
+{
+  if (_minerOutput.count() >= 32)
+  {
+    _minerOutput.removeFirst();
+  }
+
+  _minerOutput.append(line);
 }
 
 void MiningUnit::on_worker_resultAccepted()
