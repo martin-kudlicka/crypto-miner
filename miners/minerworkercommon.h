@@ -26,27 +26,23 @@ class MinerWorkerCommon : public MinerWorkerInterface
     PoolCredentials _poolCredentials;
     QByteArray      _stdErrData;
     QByteArray      _stdOutData;
-    QStringList     _minerOutput;
     QDir            _minerDir;
     QProcess        _minerProcess;
     QString         _poolAddress;
     QString         _stdErrLastLine;
     QString         _stdOutLastLine;
 
-    void appendOutput(const QString &line);
-
   private:
     void    addToCommandLine(const QString &argument, QString *commandLine) const;
     void    logCommandLine  ()                                              const;
     QString readLine        (QByteArray *data)                              const;
 
-    virtual const QStringList &consoleOutput     () const                             Q_DECL_OVERRIDE;
-    virtual       bool         isRunning         () const                             Q_DECL_OVERRIDE;
-    virtual const QString     &name              () const                             Q_DECL_OVERRIDE;
-    virtual       void         setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
-    virtual       void         setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;
-    virtual       void         start             ()                                   Q_DECL_OVERRIDE;
-    virtual       void         stop              ()                                   Q_DECL_OVERRIDE;
+    virtual       bool     isRunning         () const                             Q_DECL_OVERRIDE;
+    virtual const QString &name              () const                             Q_DECL_OVERRIDE;
+    virtual       void     setPoolAddress    (const QString &address)             Q_DECL_OVERRIDE;
+    virtual       void     setPoolCredentials(const PoolCredentials &credentials) Q_DECL_OVERRIDE;
+    virtual       void     start             ()                                   Q_DECL_OVERRIDE;
+    virtual       void     stop              ()                                   Q_DECL_OVERRIDE;
 
     virtual const QLoggingCategory &logCategory     () const = 0;
     virtual       void              parseStdErrLine () const = 0;
