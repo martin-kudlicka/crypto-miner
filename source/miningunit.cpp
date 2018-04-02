@@ -6,6 +6,7 @@
 #include "miningmodel.h"
 #include "consolewindow.h"
 #include <MkAnalytics/MAnalytics>
+#include "options.h"
 
 MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins, MiningModel *miningModel) : _miningModel(miningModel), _minerPlugin(Q_NULLPTR), _options(id)
 {
@@ -158,7 +159,7 @@ void MiningUnit::on_worker_hashRate(float value)
 
 void MiningUnit::on_worker_outputLine(const QString &line)
 {
-  if (_minerOutput.count() >= 32)
+  while (!_minerOutput.isEmpty() && _minerOutput.count() >= gOptions->consoleOutputLinesInMemory())
   {
     _minerOutput.removeFirst();
   }
