@@ -16,6 +16,8 @@ void OptionsDialog::setupSettings()
 
   _widgetSettings.setWidget(Options::Property::Startup_MineOnStartup, _ui.mineOnStartup);
 
+  _widgetSettings.setWidget(Options::Property::Console_OutputLinesInMemory, _ui.consoleOutputLines);
+
   _widgetSettings.load();
 }
 
