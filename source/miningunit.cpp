@@ -114,8 +114,8 @@ void MiningUnit::start()
   if (_sessionStatistics.results > 0)
   {
     _resultEta.setRemainingTime((_sessionStatistics.runTimeMSec + _workerRunTime.elapsed()) / _sessionStatistics.results, Qt::VeryCoarseTimer);
+    _resultEtaTimer = startTimer(1000, Qt::VeryCoarseTimer);
   }
-  _resultEtaTimer = startTimer(1000, Qt::VeryCoarseTimer);
 
   _worker->start();
 
@@ -132,6 +132,12 @@ void MiningUnit::stop()
 
 void MiningUnit::timerEvent(QTimerEvent *event)
 {
+  if (_resultEta.hasExpired())
+  {
+    killTimer(_resultEtaTimer);
+    _resultEtaTimer = 0;
+  }
+
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::ResultETA);
 }
 
@@ -152,8 +158,11 @@ void MiningUnit::on_worker_finished(const QString &workerName)
 
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
 
-  killTimer(_resultEtaTimer);
-  _resultEtaTimer = 0;
+  if (_resultEtaTimer != 0)
+  {
+    killTimer(_resultEtaTimer);
+    _resultEtaTimer = 0;
+  }
 
   emit finished();
 
@@ -189,9 +198,13 @@ void MiningUnit::on_worker_outputLine(const QString &line)
 
 void MiningUnit::on_worker_resultAccepted()
 {
-  _resultEta.setRemainingTime((_sessionStatistics.runTimeMSec + _workerRunTime.elapsed()) / _sessionStatistics.results + 1, Qt::VeryCoarseTimer);
-  ++_sessionStatistics.results;
+  _resultEta.setRemainingTime((_sessionStatistics.runTimeMSec + _workerRunTime.elapsed()) / ++_sessionStatistics.results, Qt::VeryCoarseTimer);
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Results);
+
+  if (_resultEtaTimer == 0)
+  {
+    _resultEtaTimer = startTimer(1000, Qt::VeryCoarseTimer);
+  }
 
   _options.setAcceptedResults(_options.acceptedResults() + 1);
 
