@@ -14,6 +14,7 @@ class MiningModel : public QAbstractItemModel
       HwComponent,
       Coin,
       HashRate,
+      ResultETA,
       Results,
       Count
     };

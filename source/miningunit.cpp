@@ -8,7 +8,7 @@
 #include <MkAnalytics/MAnalytics>
 #include "options.h"
 
-MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins, MiningModel *miningModel) : _miningModel(miningModel), _minerPlugin(Q_NULLPTR), _options(id)
+MiningUnit::MiningUnit(const MUuidPtr &id, MinerPlugins *minerPlugins, MiningModel *miningModel) : _miningModel(miningModel), _resultEtaTimer(0), _minerPlugin(Q_NULLPTR), _options(id)
 {
   for (auto &minerPlugin : minerPlugins->toList())
   {
@@ -47,6 +47,11 @@ const MinerInterface *MiningUnit::minerPlugin() const
 const MiningUnitOptions &MiningUnit::options() const
 {
   return _options;
+}
+
+quintptr MiningUnit::resultEtaTimeSec() const
+{
+  return _resultEta.remainingTime() / 1000;
 }
 
 void MiningUnit::restart()
@@ -103,8 +108,14 @@ void MiningUnit::start()
   }
 
   _minerOutput.clear();
-  _miningTime.start();
+  _workerRunTime.start();
   _hashReportTime.invalidate();
+
+  if (_sessionStatistics.results > 0)
+  {
+    _resultEta.setRemainingTime((_sessionStatistics.runTimeMSec + _workerRunTime.elapsed()) / _sessionStatistics.results, Qt::VeryCoarseTimer);
+  }
+  _resultEtaTimer = startTimer(1000, Qt::VeryCoarseTimer);
 
   _worker->start();
 
@@ -119,25 +130,34 @@ void MiningUnit::stop()
   _worker.clear();
 }
 
-void MiningUnit::on_consoleWindow_destroyed(QObject *obj /* Q_NULLPTR */)
+void MiningUnit::timerEvent(QTimerEvent *event)
+{
+  _miningModel->setDataChanged(_options.id(), MiningModel::Column::ResultETA);
+}
+
+void MiningUnit::on_consoleWindow_destroyed(QObject *object /* Q_NULLPTR */)
 {
   _consoleWindow.take();
 }
 
 void MiningUnit::on_worker_finished(const QString &workerName)
 {
-  auto miningTime      = _miningTime.elapsed();
-  auto totalMiningTime = _options.miningTime() + miningTime / 1000;
-  _miningTime.invalidate();
-  _options.setMiningTime(totalMiningTime);
+  _sessionStatistics.runTimeMSec += _workerRunTime.elapsed();
+  auto miningTimeSec              = _workerRunTime.elapsed() / 1000;
+  auto totalMiningTimeSec         = _options.miningTime() + miningTimeSec;
+  _workerRunTime.invalidate();
+  _options.setMiningTime(totalMiningTimeSec);
 
   mCInfo(CryptoMiner) << "mining unit " << _options.id().toString() << " stopped";
 
-  mAnalytics->sendTiming("miner", MAnalyticsTiming::Title::RunTime, miningTime, workerName);
-
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Status);
 
+  killTimer(_resultEtaTimer);
+  _resultEtaTimer = 0;
+
   emit finished();
+
+  mAnalytics->sendTiming("miner", MAnalyticsTiming::Title::RunTime, miningTimeSec, workerName);
 }
 
 void MiningUnit::on_worker_hashRate(float value)
@@ -169,6 +189,7 @@ void MiningUnit::on_worker_outputLine(const QString &line)
 
 void MiningUnit::on_worker_resultAccepted()
 {
+  _resultEta.setRemainingTime((_sessionStatistics.runTimeMSec + _workerRunTime.elapsed()) / _sessionStatistics.results + 1, Qt::VeryCoarseTimer);
   ++_sessionStatistics.results;
   _miningModel->setDataChanged(_options.id(), MiningModel::Column::Results);
 
@@ -177,6 +198,6 @@ void MiningUnit::on_worker_resultAccepted()
   mAnalytics->sendEvent("miner", "resultFound", _worker->name(), 1);
 }
 
-MiningUnit::Statistics::Statistics() : hashRate(0.0), results(0)
+MiningUnit::Statistics::Statistics() : hashRate(0.0), results(0), runTimeMSec(0)
 {
 }
