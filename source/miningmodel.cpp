@@ -1,6 +1,7 @@
 #include "miningmodel.h"
 
 #include <QtGui/QIcon>
+#include <QtCore/QTime>
 
 MiningModel::MiningModel(MinerPlugins *minerPlugins) : _miningUnits(minerPlugins, this)
 {
@@ -67,6 +68,7 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
   auto miningUnit = const_cast<MiningUnits *>(&_miningUnits)->get(index.internalId());
   if (!miningUnit)
   {
+    // is being removed
     return QVariant();
   }
 
@@ -85,7 +87,7 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
           {
             auto hashRate = miningUnit->sessionStatistics().hashRate;
             QString suffix;
-            auto precision = 1;
+            int precision;
             if (hashRate > 1000000)
             {
               hashRate /= 1000000;
@@ -98,8 +100,31 @@ QVariant MiningModel::data(const QModelIndex &index, int role /* Qt::DisplayRole
               suffix    = " K";
               precision = 2;
             }
+            else
+            {
+              precision = 1;
+            }
 
             return QString::number(hashRate, 'f', precision) + suffix;
+          }
+        case Column::ResultETA:
+          {
+            if (miningUnit->isRunning())
+            {
+              if (miningUnit->sessionStatistics().results > 0)
+              {
+                auto resultEta = QTime(0, 0).addSecs(miningUnit->resultEtaTimeSec());
+                return resultEta.toString("m:ss");
+              }
+              else
+              {
+                return "n/a";
+              }
+            }
+            else
+            {
+              return "-";
+            }
           }
         case Column::Results:
           return miningUnit->sessionStatistics().results;
@@ -132,7 +157,9 @@ QVariant MiningModel::headerData(int section, Qt::Orientation orientation, int r
     case Column::Coin:
       return tr("Coin");
     case Column::HashRate:
-      return "H/s";
+      return tr("H/s");
+    case Column::ResultETA:
+      return tr("ETA");
     case Column::Results:
       return tr("Results");
   }

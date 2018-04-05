@@ -5,6 +5,7 @@
 #include "miningunitoptions.h"
 #include "../miners/minerworkerinterface.h"
 #include <QtCore/QElapsedTimer>
+#include <QtCore/QDeadlineTimer>
 
 class ConsoleWindow;
 class MinerInterface;
@@ -20,6 +21,7 @@ class MiningUnit : public QObject
     {
       float    hashRate;
       quintptr results;
+      quintptr runTimeMSec;
 
       Statistics();
     };
@@ -32,6 +34,7 @@ class MiningUnit : public QObject
     const MinerInterface    *minerPlugin      () const;
     const MiningUnitOptions &options          () const;
           void               restart          ();
+          quintptr           resultEtaTimeSec () const;
     const Statistics        &sessionStatistics() const;
           void               showConsole      ();
           void               start            ();
@@ -39,21 +42,25 @@ class MiningUnit : public QObject
 
   private:
           QScopedPointer<ConsoleWindow> _consoleWindow;
+          int                           _resultEtaTimer;
     const MinerInterface               *_minerPlugin;
           MiningModel                  *_miningModel;
           MiningUnitOptions             _options;
           MinerWorkerInterfaceSPtr      _worker;
+          QDeadlineTimer                _resultEta;
           QElapsedTimer                 _hashReportTime;
-          QElapsedTimer                 _miningTime;
+          QElapsedTimer                 _workerRunTime;
           QStringList                   _minerOutput;
           Statistics                    _sessionStatistics;
+
+    virtual void timerEvent(QTimerEvent *event) Q_DECL_OVERRIDE;
 
   Q_SIGNALS:
     void finished() const;
     void started () const;
 
   private Q_SLOTS:
-    void on_consoleWindow_destroyed(QObject *obj = Q_NULLPTR);
+    void on_consoleWindow_destroyed(QObject *object = Q_NULLPTR);
     void on_worker_finished        (const QString &workerName);
     void on_worker_hashRate        (float value);
     void on_worker_outputLine      (const QString &line);
