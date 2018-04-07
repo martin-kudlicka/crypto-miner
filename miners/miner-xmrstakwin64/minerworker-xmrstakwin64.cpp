@@ -21,7 +21,7 @@ QStringList MinerWorkerXmrStakWin64::currencyArguments() const
   switch (coin.name())
   {
     case Coin::Name::Aeon:
-      arguments << "aeon";
+      arguments << "aeon7";
       break;
     case Coin::Name::Monero:
       arguments << "monero7";
