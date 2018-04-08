@@ -82,6 +82,15 @@ void MiningUnitDialog::accept()
   QDialog::accept();
 }
 
+void MiningUnitDialog::on_parameterCoin_currentIndexChanged(int index) const
+{
+  auto coin = Coin::fromString(_ui.parameterCoin->currentData().toString(), Coin::Part::Name);
+
+  WalletOptions _walletOptions;
+
+  _ui.walletAddress->setEnabled(!_walletOptions.address(coin).isEmpty());
+}
+
 void MiningUnitDialog::on_walletAddress_clicked(bool checked /* false */) const
 {
   auto coin = Coin::fromString(_ui.parameterCoin->currentData().toString(), Coin::Part::Name);
