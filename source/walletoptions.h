@@ -11,6 +11,7 @@ class WalletOptions : public MSettings
              WalletOptions();
     virtual ~WalletOptions() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
+    QString address        (const Coin &coin) const;
     QString addressProperty(const Coin &coin) const;
 };
 
