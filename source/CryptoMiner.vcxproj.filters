@@ -111,6 +111,12 @@
     <ClCompile Include="walletoptionsdialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="walletoptionswidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="walletoptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -212,6 +218,12 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="walletoptionsdialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="walletoptionswidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="walletoptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

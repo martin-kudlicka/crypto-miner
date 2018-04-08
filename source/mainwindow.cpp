@@ -6,6 +6,7 @@
 #include "optionsdialog.h"
 #include "options.h"
 #include "minerselectiondialog.h"
+#include "walletoptionsdialog.h"
 
 MainWindow::MainWindow() : _miningModel(&_minerPlugins)
 {
@@ -52,6 +53,12 @@ void MainWindow::on_actionOptions_triggered(bool checked /* false */)
 void MainWindow::on_actionSendFeedback_triggered(bool checked /* false */) const
 {
   MFeedback::createEmailForm();
+}
+
+void MainWindow::on_actionWallets_triggered(bool checked /* false */)
+{
+  WalletOptionsDialog walletOptionsDialog(&_minerPlugins, this);
+  walletOptionsDialog.exec();
 }
 
 void MainWindow::on_miningUnit_finished()
