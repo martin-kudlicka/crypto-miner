@@ -40,7 +40,8 @@ class MiningUnitDialog : public QDialog
     virtual void accept() Q_DECL_OVERRIDE;
 
   private Q_SLOTS:
-    void on_walletAddress_clicked(bool checked = false) const;
+    void on_parameterCoin_currentIndexChanged(int index)            const;
+    void on_walletAddress_clicked            (bool checked = false) const;
 };
 
 #endif
