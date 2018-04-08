@@ -108,6 +108,9 @@
     <ClCompile Include="..\common\mineroptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="walletoptionsdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -139,6 +142,12 @@
     </CustomBuild>
     <CustomBuild Include="minerselectiondialog.h">
       <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="walletoptionsdialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="walletoptionswidget.ui">
+      <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +203,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\common\mineroptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\intermediate\cryptominer\ui_walletoptionsdialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\intermediate\cryptominer\ui_walletoptionswidget.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="walletoptionsdialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
