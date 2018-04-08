@@ -2,6 +2,10 @@
 
 #include "minerplugins.h"
 
+CoinsModel::CoinsModel(MinerPlugins *minerPlugins) : CoinsModel(Q_NULLPTR, minerPlugins)
+{
+}
+
 CoinsModel::CoinsModel(const MinerInterfacePtrSet *allowedMiners, MinerPlugins *minerPlugins) : _allowedMiners(allowedMiners)
 {
   for (auto &miner : minerPlugins->toList())
@@ -28,6 +32,16 @@ MinerInterfacePtrSet CoinsModel::miners(const QModelIndex &index) const
   auto coin = _coins.at(index.row());
 
   return _coinMiners.value(coin);
+}
+
+QModelIndex CoinsModel::index(int row, int column, const QModelIndex &parent /* QModelIndex() */) const
+{
+  if (parent.isValid())
+  {
+    return QModelIndex();
+  }
+
+  return createIndex(row, column);
 }
 
 int CoinsModel::columnCount(const QModelIndex &parent /* QModelIndex() */) const
@@ -59,7 +73,7 @@ Qt::ItemFlags CoinsModel::flags(const QModelIndex &index) const
 {
   auto itemFlags = QAbstractItemModel::flags(index);
 
-  if (!_allowedMiners->isEmpty())
+  if (_allowedMiners && !_allowedMiners->isEmpty())
   {
     auto coin       = _coins.at(index.row());
     auto coinMiners = _coinMiners.value(coin);
@@ -88,16 +102,6 @@ QVariant CoinsModel::headerData(int section, Qt::Orientation orientation, int ro
   }
 
   return QVariant();
-}
-
-QModelIndex CoinsModel::index(int row, int column, const QModelIndex &parent /* QModelIndex() */) const
-{
-  if (parent.isValid())
-  {
-    return QModelIndex();
-  }
-
-  return createIndex(row, column);
 }
 
 QModelIndex CoinsModel::parent(const QModelIndex &child) const
