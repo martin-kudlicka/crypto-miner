@@ -11,6 +11,8 @@ class MinerInterface;
 
 class MiningUnitDialog : public QDialog
 {
+  Q_OBJECT
+
   public:
              MiningUnitDialog(const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin coin, QWidget *parent);
              MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, QWidget *parent);
@@ -36,6 +38,9 @@ class MiningUnitDialog : public QDialog
     void setupWidgets (const HwComponent &hwComponent, Coin coin) const;
 
     virtual void accept() Q_DECL_OVERRIDE;
+
+  private Q_SLOTS:
+    void on_walletAddress_clicked(bool checked = false) const;
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "miningunitdialog.h"
 
 #include "../miners/minerinterface.h"
+#include "walletoptions.h"
 
 MiningUnitDialog::MiningUnitDialog(const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin coin, QWidget *parent) : MiningUnitDialog(MUuidPtr::createUuid(), minerPlugin, hwComponent, coin, parent)
 {
@@ -79,4 +80,13 @@ void MiningUnitDialog::accept()
   _widgetSettings.save();
 
   QDialog::accept();
+}
+
+void MiningUnitDialog::on_walletAddress_clicked(bool checked /* false */) const
+{
+  auto coin = Coin::fromString(_ui.parameterCoin->currentData().toString(), Coin::Part::Name);
+
+  WalletOptions _walletOptions;
+
+  _ui.poolUsername->setText(_walletOptions.address(coin));
 }

@@ -117,6 +117,12 @@
     <ClCompile Include="walletoptions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\intermediate\cryptominer\Debug\moc_miningunitdialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\intermediate\cryptominer\Release\moc_miningunitdialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -155,6 +161,9 @@
     <CustomBuild Include="walletoptionswidget.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="miningunitdialog.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_mainwindow.h">
@@ -165,9 +174,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_miningunitdialog.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="miningunitdialog.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="minerplugins.h">
       <Filter>Header Files</Filter>

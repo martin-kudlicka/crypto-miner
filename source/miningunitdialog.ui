@@ -115,9 +115,6 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="poolUsername"/>
-       </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
@@ -130,6 +127,20 @@
        </item>
        <item row="2" column="1">
         <widget class="QLineEdit" name="poolPassword"/>
+       </item>
+       <item row="1" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLineEdit" name="poolUsername"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="walletAddress">
+           <property name="text">
+            <string>&amp;Set address</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -192,8 +203,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>278</x>
-     <y>253</y>
+     <x>658</x>
+     <y>178</y>
     </hint>
     <hint type="destinationlabel">
      <x>96</x>
@@ -208,8 +219,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>369</x>
-     <y>253</y>
+     <x>739</x>
+     <y>178</y>
     </hint>
     <hint type="destinationlabel">
      <x>179</x>
