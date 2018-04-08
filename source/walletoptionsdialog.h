@@ -12,7 +12,12 @@ class WalletOptionsDialog : public QDialog
 
   private:
     CoinsModel              _coinsModel;
+    QHash<Coin, int>        _walletWidgets;
     Ui::WalletOptionsDialog _ui;
+
+    void setCurrentWalletWidget(const Coin &coin);
+
+    virtual void accept() Q_DECL_OVERRIDE;
 
   private Q_SLOTS:
     void on_coinsView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);

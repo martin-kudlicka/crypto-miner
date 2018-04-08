@@ -112,7 +112,9 @@
     <ClCompile Include="miningunits.cpp" />
     <ClCompile Include="options.cpp" />
     <ClCompile Include="optionsdialog.cpp" />
+    <ClCompile Include="walletoptions.cpp" />
     <ClCompile Include="walletoptionsdialog.cpp" />
+    <ClCompile Include="walletoptionswidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -155,7 +157,9 @@
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_mainwindow.h" />
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_minerselectiondialog.h" />
     <ClInclude Include="..\..\..\intermediate\cryptominer\ui_miningunitdialog.h" />
+    <ClInclude Include="walletoptions.h" />
     <ClInclude Include="walletoptionsdialog.h" />
+    <ClInclude Include="walletoptionswidget.h" />
     <CustomBuild Include="consolewindow.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Identity)...</Message>

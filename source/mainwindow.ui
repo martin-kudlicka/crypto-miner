@@ -149,6 +149,7 @@
      <string>&amp;Configuration</string>
     </property>
     <addaction name="actionOptions"/>
+    <addaction name="actionWallets"/>
    </widget>
    <addaction name="menu_File"/>
    <addaction name="menu_Configuration"/>
@@ -172,6 +173,11 @@
   <action name="actionOptions">
    <property name="text">
     <string>&amp;Options...</string>
+   </property>
+  </action>
+  <action name="actionWallets">
+   <property name="text">
+    <string>&amp;Wallets...</string>
    </property>
   </action>
  </widget>
