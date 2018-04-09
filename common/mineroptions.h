@@ -12,6 +12,7 @@ class MinerOptions : public MSettings
   public:
     struct Property
     {
+      static Q_DECL_CONSTEXPR QString Arguments_AdditionalCommandLine;
       static Q_DECL_CONSTEXPR QString Name;
       static Q_DECL_CONSTEXPR QString Parameters_Coin;
       static Q_DECL_CONSTEXPR QString Parameters_HwComponent;

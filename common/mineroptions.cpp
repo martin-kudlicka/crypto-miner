@@ -3,9 +3,10 @@
 #include <MkCore/MUuidPtr>
 #include "../coins/coinnamestrings.h"
 
-Q_DECL_CONSTEXPR QString MinerOptions::Property::Name                   = "name";
-Q_DECL_CONSTEXPR QString MinerOptions::Property::Parameters_Coin        = "parameters/coin";
-Q_DECL_CONSTEXPR QString MinerOptions::Property::Parameters_HwComponent = "parameters/hwComponent";
+Q_DECL_CONSTEXPR QString MinerOptions::Property::Arguments_AdditionalCommandLine = "arguments/additionalCommandLine";
+Q_DECL_CONSTEXPR QString MinerOptions::Property::Name                            = "name";
+Q_DECL_CONSTEXPR QString MinerOptions::Property::Parameters_Coin                 = "parameters/coin";
+Q_DECL_CONSTEXPR QString MinerOptions::Property::Parameters_HwComponent          = "parameters/hwComponent";
 
 MinerOptions::MinerOptions(const MUuidPtr &id)
 {
