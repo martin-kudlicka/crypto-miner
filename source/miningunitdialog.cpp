@@ -40,6 +40,9 @@ void MiningUnitDialog::setupSettings()
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Username, _ui.poolUsername);
   _widgetSettings.setWidget(MiningUnitOptions::Property::Pool_Password, _ui.poolPassword);
 
+  // arguments
+  _widgetSettings.setWidget(MinerOptions::Property::Arguments_AdditionalCommandLine, _ui.agumentsAdditionalCommandLine);
+
   _widgetSettings.load();
 }
 
