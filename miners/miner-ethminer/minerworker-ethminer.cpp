@@ -24,11 +24,10 @@ QStringList MinerWorkerEthMiner::poolArguments() const
   return arguments;
 }
 
-QStringList MinerWorkerEthMiner::splitStdError() const
+QStringList MinerWorkerEthMiner::splitStdError(QString errLines) const
 {
   QStringList lines;
 
-  auto errLines = _stdErrLastLine;
   while (!errLines.isEmpty())
   {
     auto pipePos = errLines.indexOf('|');
@@ -62,9 +61,9 @@ const QLoggingCategory &MinerWorkerEthMiner::logCategory() const
   return EthMiner();
 }
 
-void MinerWorkerEthMiner::parseStdErrLine() const
+void MinerWorkerEthMiner::parseStdErrLine(const QString &line) const
 {
-  auto errLines = splitStdError();
+  auto errLines = splitStdError(line);
   for (const auto &errLine : errLines)
   {
     QString message = _miningUnitId.toString() + ' ';
@@ -118,7 +117,7 @@ void MinerWorkerEthMiner::parseStdErrLine() const
   }
 }
 
-void MinerWorkerEthMiner::parseStdOutLine() const
+void MinerWorkerEthMiner::parseStdOutLine(const QString &line) const
 {
 }
 

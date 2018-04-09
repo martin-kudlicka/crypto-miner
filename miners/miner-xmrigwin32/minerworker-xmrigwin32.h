@@ -12,10 +12,10 @@ class MinerWorkerXmrigWin32 : public MinerWorkerCommon
   private:
     QStringList poolArguments() const;
 
-    virtual const QLoggingCategory &logCategory     () const Q_DECL_OVERRIDE;
-    virtual       void              parseStdErrLine () const Q_DECL_OVERRIDE;
-    virtual       void              parseStdOutLine () const Q_DECL_OVERRIDE;
-    virtual       QStringList       processArguments() const Q_DECL_OVERRIDE;
+    virtual const QLoggingCategory &logCategory     ()                    const Q_DECL_OVERRIDE;
+    virtual       void              parseStdErrLine (const QString &line) const Q_DECL_OVERRIDE;
+    virtual       void              parseStdOutLine (const QString &line) const Q_DECL_OVERRIDE;
+    virtual       QStringList       processArguments()                    const Q_DECL_OVERRIDE;
 };
 
 #endif

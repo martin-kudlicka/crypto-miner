@@ -14,10 +14,10 @@ class MinerWorkerXmrStakWin64 : public MinerWorkerCommon
     QStringList poolArguments      () const;
     QString     prepareCommonConfig() const;
 
-    virtual const QLoggingCategory &logCategory     () const Q_DECL_OVERRIDE;
-    virtual       void              parseStdErrLine () const Q_DECL_OVERRIDE;
-    virtual       void              parseStdOutLine () const Q_DECL_OVERRIDE;
-    virtual       QStringList       processArguments() const Q_DECL_OVERRIDE;
+    virtual const QLoggingCategory &logCategory     ()                    const Q_DECL_OVERRIDE;
+    virtual       void              parseStdErrLine (const QString &line) const Q_DECL_OVERRIDE;
+    virtual       void              parseStdOutLine (const QString &line) const Q_DECL_OVERRIDE;
+    virtual       QStringList       processArguments()                    const Q_DECL_OVERRIDE;
 };
 
 #endif

@@ -77,13 +77,13 @@ const QLoggingCategory &MinerWorkerXmrStakWin64::logCategory() const
   return XmrStakWin64();
 }
 
-void MinerWorkerXmrStakWin64::parseStdErrLine() const
+void MinerWorkerXmrStakWin64::parseStdErrLine(const QString &line) const
 {
 }
 
-void MinerWorkerXmrStakWin64::parseStdOutLine() const
+void MinerWorkerXmrStakWin64::parseStdOutLine(const QString &line) const
 {
-  auto outLines = _stdOutLastLine.split(QRegularExpression(R"(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])"), QString::SkipEmptyParts);
+  auto outLines = line.split(QRegularExpression(R"(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])"), QString::SkipEmptyParts);
   for (auto outLine : outLines)
   {
     if (outLine.startsWith(" : "))
