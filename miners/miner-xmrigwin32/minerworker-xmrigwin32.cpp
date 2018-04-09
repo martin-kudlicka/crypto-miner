@@ -27,13 +27,13 @@ const QLoggingCategory &MinerWorkerXmrigWin32::logCategory() const
   return XmrigWin32();
 }
 
-void MinerWorkerXmrigWin32::parseStdErrLine() const
+void MinerWorkerXmrigWin32::parseStdErrLine(const QString &line) const
 {
 }
 
-void MinerWorkerXmrigWin32::parseStdOutLine() const
+void MinerWorkerXmrigWin32::parseStdOutLine(const QString &line) const
 {
-  auto outLines = _stdOutLastLine.split(QRegularExpression(R"(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])"), QString::SkipEmptyParts);
+  auto outLines = line.split(QRegularExpression(R"(\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\])"), QString::SkipEmptyParts);
   for (auto outLine : outLines)
   {
     outLine      = outLine.trimmed();

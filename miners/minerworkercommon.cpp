@@ -138,15 +138,15 @@ void MinerWorkerCommon::on_minerProcess_readyReadStandardError()
 
   forever
   {
-    _stdErrLastLine = readLine(&_stdErrData);
-    if (_stdErrLastLine.isNull())
+    auto line = readLine(&_stdErrData);
+    if (line.isNull())
     {
       break;
     }
 
-    emit outputLine(_stdErrLastLine);
+    emit outputLine(line);
 
-    parseStdErrLine();
+    parseStdErrLine(line);
   }
 }
 
@@ -156,14 +156,14 @@ void MinerWorkerCommon::on_minerProcess_readyReadStandardOutput()
 
   forever
   {
-    _stdOutLastLine = readLine(&_stdOutData);
-    if (_stdOutLastLine.isNull())
+    auto line = readLine(&_stdOutData);
+    if (line.isNull())
     {
       break;
     }
 
-    emit outputLine(_stdOutLastLine);
+    emit outputLine(line);
 
-    parseStdOutLine();
+    parseStdOutLine(line);
   }
 }
