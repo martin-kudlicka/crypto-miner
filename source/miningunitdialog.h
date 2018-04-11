@@ -25,7 +25,8 @@ class MiningUnitDialog : public QDialog
     enum class Tab
     {
       Parameters,
-      Pool
+      Pool,
+      Arguments
     };
 
     const MinerInterface      *_minerPlugin;
