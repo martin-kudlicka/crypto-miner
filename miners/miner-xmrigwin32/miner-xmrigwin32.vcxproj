@@ -155,6 +155,10 @@
     <ClInclude Include="..\..\common\mineroptions.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="minerworker-xmrigwin32.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="miner-xmrigwin32.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
