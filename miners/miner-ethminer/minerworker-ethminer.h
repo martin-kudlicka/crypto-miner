@@ -10,13 +10,13 @@ class MinerWorkerEthMiner : public MinerWorkerCommon
     virtual ~MinerWorkerEthMiner() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
   private:
-    QStringList poolArguments ()                 const;
-    QStringList splitStdError (QString errLines) const;
+    void        addPoolArguments();
+    QStringList splitStdError   (QString errLines) const;
 
-    virtual const QLoggingCategory &logCategory     ()                    const Q_DECL_OVERRIDE;
-    virtual       void              parseStdErrLine (const QString &line) const Q_DECL_OVERRIDE;
-    virtual       void              parseStdOutLine (const QString &line) const Q_DECL_OVERRIDE;
-    virtual       QStringList       processArguments()                    const Q_DECL_OVERRIDE;
+    virtual       void              addOptionArguments()                          Q_DECL_OVERRIDE;
+    virtual const QLoggingCategory &logCategory       ()                    const Q_DECL_OVERRIDE;
+    virtual       void              parseStdErrLine   (const QString &line) const Q_DECL_OVERRIDE;
+    virtual       void              parseStdOutLine   (const QString &line) const Q_DECL_OVERRIDE;
 };
 
 #endif

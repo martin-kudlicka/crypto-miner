@@ -26,6 +26,23 @@ MinerWorkerCommon::MinerWorkerCommon(const MUuidPtr &miningUnitId) : _options(mi
   _minerProcess.setWorkingDirectory(workPath);
 }
 
+void MinerWorkerCommon::addArgument(const QString &name)
+{
+  if (!_arguments.contains(name))
+  {
+    _arguments.append(name);
+  }
+}
+
+void MinerWorkerCommon::addArgument(const QString &name, const QString &value)
+{
+  if (!_arguments.contains(name))
+  {
+    _arguments.append(name);
+    _arguments.append(value);
+  }
+}
+
 void MinerWorkerCommon::addToCommandLine(const QString &argument, QString *commandLine) const
 {
   if (!commandLine->isEmpty())
@@ -147,7 +164,9 @@ void MinerWorkerCommon::setPoolCredentials(const PoolCredentials &credentials)
 
 void MinerWorkerCommon::start()
 {
-  _minerProcess.setArguments(processArguments());
+  prepareArguments();
+  addOptionArguments();
+  _minerProcess.setArguments(_arguments);
 
   connect(&_minerProcess,  QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MinerWorkerCommon::on_minerProcess_finished);
   connect(&_minerProcess, &QProcess::readyReadStandardOutput,                             this, &MinerWorkerCommon::on_minerProcess_readyReadStandardOutput);

@@ -8,23 +8,27 @@ MinerWorkerXmrigWin32::MinerWorkerXmrigWin32(const MUuidPtr &miningUnitId) : Min
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "xmrig.exe");
 }
 
-QStringList MinerWorkerXmrigWin32::poolArguments() const
+void MinerWorkerXmrigWin32::addPoolArguments()
 {
-  QStringList arguments;
-
-  arguments << "--url=" + _poolAddress;
-  arguments << "--user=" + _poolCredentials.username;
+  addArgument("--url=" + _poolAddress);
+  addArgument("--user=" + _poolCredentials.username);
   if (!_poolCredentials.password.isEmpty())
   {
-    arguments << "--pass=" + _poolCredentials.password;
+    addArgument("--pass=" + _poolCredentials.password);
   }
-
-  return arguments;
 }
 
 const QLoggingCategory &MinerWorkerXmrigWin32::logCategory() const
 {
   return XmrigWin32();
+}
+
+void MinerWorkerXmrigWin32::addOptionArguments()
+{
+  addPoolArguments();
+
+  addArgument("--donate-level=1");
+  addArgument("--max-cpu-usage=100");
 }
 
 void MinerWorkerXmrigWin32::parseStdErrLine(const QString &line) const
@@ -60,14 +64,4 @@ void MinerWorkerXmrigWin32::parseStdOutLine(const QString &line) const
       emit hashRate(regExpMatch.capturedRef(1).toFloat());
     }
   }
-}
-
-QStringList MinerWorkerXmrigWin32::processArguments() const
-{
-  auto arguments = poolArguments();
-
-  arguments << "--donate-level=1";
-  arguments << "--max-cpu-usage=100";
-
-  return arguments;
 }
