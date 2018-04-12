@@ -58,6 +58,57 @@ void MinerWorkerCommon::logCommandLine() const
   mCDebug(logCategory()) << "executing " << commandLine;
 }
 
+void MinerWorkerCommon::prepareArguments()
+{
+  _arguments.clear();
+
+  auto inQuotes = false;
+  QString argument;
+
+  for (const auto &cmdChar : _options.additionalCommandLine())
+  {
+    if (cmdChar == '"')
+    {
+      if (inQuotes)
+      {
+        _arguments.append(argument);
+        argument.clear();
+        inQuotes = false;
+      }
+      else
+      {
+        inQuotes = true;
+      }
+    }
+    else
+    {
+      if (inQuotes)
+      {
+        argument.append(cmdChar);
+      }
+      else
+      {
+        if (cmdChar.isSpace())
+        {
+          if (!argument.isEmpty())
+          {
+            argument.append(cmdChar);
+          }
+        }
+        else
+        {
+          argument.append(cmdChar);
+        }
+      }
+    }
+  }
+
+  if (!argument.isEmpty())
+  {
+    _arguments.append(argument);
+  }
+}
+
 QString MinerWorkerCommon::readLine(QByteArray *data) const
 {
   auto lineEndPos = data->indexOf('\n');
