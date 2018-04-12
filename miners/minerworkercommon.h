@@ -29,10 +29,12 @@ class MinerWorkerCommon : public MinerWorkerInterface
     QDir            _minerDir;
     QProcess        _minerProcess;
     QString         _poolAddress;
+    QStringList     _arguments;
 
   private:
     void    addToCommandLine(const QString &argument, QString *commandLine) const;
     void    logCommandLine  ()                                              const;
+    void    prepareArguments();
     QString readLine        (QByteArray *data)                              const;
 
     virtual       bool     isRunning         () const                             Q_DECL_OVERRIDE;

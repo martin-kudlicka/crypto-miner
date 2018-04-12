@@ -21,10 +21,11 @@ class MinerOptions : public MSettings
              MinerOptions(const MUuidPtr &id);
     virtual ~MinerOptions() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-    Coin        coin       () const;
-    HwComponent hwComponent() const;
-    QString     name       () const;
-    void        setName    (const QString &name);
+    QString     additionalCommandLine() const;
+    Coin        coin                 () const;
+    HwComponent hwComponent          () const;
+    QString     name                 () const;
+    void        setName              (const QString &name);
 };
 
 #endif

@@ -15,6 +15,11 @@ MinerOptions::MinerOptions(const MUuidPtr &id)
   beginGroup("miner");
 }
 
+QString MinerOptions::additionalCommandLine() const
+{
+  return value(Property::Arguments_AdditionalCommandLine).toString();
+}
+
 Coin MinerOptions::coin() const
 {
   auto coinNameStr = value(Property::Parameters_Coin).toString();
