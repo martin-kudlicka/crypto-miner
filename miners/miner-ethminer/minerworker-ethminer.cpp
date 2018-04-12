@@ -8,20 +8,16 @@ MinerWorkerEthMiner::MinerWorkerEthMiner(const MUuidPtr &miningUnitId) : MinerWo
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "ethminer.exe");
 }
 
-QStringList MinerWorkerEthMiner::poolArguments() const
+void MinerWorkerEthMiner::addPoolArguments()
 {
-  QStringList arguments;
-
-  arguments << "--stratum"  << _poolAddress;
+  addArgument("--stratum", _poolAddress);
 
   auto userPass = _poolCredentials.username;
   if (!_poolCredentials.password.isEmpty())
   {
     userPass += ':' + _poolCredentials.password;
   }
-  arguments << "--userpass" << userPass;
-
-  return arguments;
+  addArgument("--userpass", userPass);
 }
 
 QStringList MinerWorkerEthMiner::splitStdError(QString errLines) const
@@ -54,6 +50,31 @@ QStringList MinerWorkerEthMiner::splitStdError(QString errLines) const
   }
 
   return lines;
+}
+
+void MinerWorkerEthMiner::addOptionArguments()
+{
+  addPoolArguments();
+
+  auto hwComponent = _options.hwComponent();
+  switch (hwComponent.type())
+  {
+    case HwComponent::Type::Gpu:
+      switch (hwComponent.company())
+      {
+        case HwComponent::Company::Amd:
+          addArgument("--opencl");
+          break;
+        case HwComponent::Company::Nvidia:
+          addArgument("--cuda");
+          break;
+        default:
+          Q_ASSERT_X(false, "MinerWorkerEthMiner::processArguments", "switch (hwComponent.company())");
+      }
+      break;
+    default:
+      Q_ASSERT_X(false, "MinerWorkerEthMiner::processArguments", "switch (hwComponent.type())");
+  }
 }
 
 const QLoggingCategory &MinerWorkerEthMiner::logCategory() const
@@ -119,31 +140,4 @@ void MinerWorkerEthMiner::parseStdErrLine(const QString &line) const
 
 void MinerWorkerEthMiner::parseStdOutLine(const QString &line) const
 {
-}
-
-QStringList MinerWorkerEthMiner::processArguments() const
-{
-  auto arguments = poolArguments();
-
-  auto hwComponent = _options.hwComponent();
-  switch (hwComponent.type())
-  {
-    case HwComponent::Type::Gpu:
-      switch (hwComponent.company())
-      {
-        case HwComponent::Company::Amd:
-          arguments << "--opencl";
-          break;
-        case HwComponent::Company::Nvidia:
-          arguments << "--cuda";
-          break;
-        default:
-          Q_ASSERT_X(false, "MinerWorkerEthMiner::processArguments", "switch (hwComponent.company())");
-      }
-      break;
-    default:
-      Q_ASSERT_X(false, "MinerWorkerEthMiner::processArguments", "switch (hwComponent.type())");
-  }
-
-  return arguments;
 }

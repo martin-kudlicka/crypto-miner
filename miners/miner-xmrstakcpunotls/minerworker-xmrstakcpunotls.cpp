@@ -55,6 +55,18 @@ QString MinerWorkerXmrStakCpuNoTls::writeWorkerConfig(const QString &config) con
   return configFilePath;
 }
 
+void MinerWorkerXmrStakCpuNoTls::addOptionArguments()
+{
+  auto config = readVanillaConfig();
+
+  modifyConfig(&config);
+
+  auto filePath = writeWorkerConfig(config);
+
+  addArgument(filePath);
+
+}
+
 const QLoggingCategory &MinerWorkerXmrStakCpuNoTls::logCategory() const
 {
   return XmrStakCpuNoTls();
@@ -100,16 +112,4 @@ void MinerWorkerXmrStakCpuNoTls::parseStdOutLine(const QString &line) const
       emit hashRate(regExpMatch.capturedRef(1).toFloat());
     }
   }
-}
-
-QStringList MinerWorkerXmrStakCpuNoTls::processArguments() const
-{
-  auto config = readVanillaConfig();
-
-  modifyConfig(&config);
-
-  auto filePath = writeWorkerConfig(config);
-
-  return QStringList() << filePath;
-
 }

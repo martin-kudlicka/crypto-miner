@@ -11,46 +11,40 @@ MinerWorkerXmrStakWin64::MinerWorkerXmrStakWin64(const MUuidPtr &miningUnitId) :
   _minerProcess.setProgram(_minerDir.path() + QDir::separator() + "xmr-stak.exe");
 }
 
-QStringList MinerWorkerXmrStakWin64::currencyArguments() const
+void MinerWorkerXmrStakWin64::addCurrencyArguments()
 {
-  QStringList arguments;
-
-  arguments << "--currency";
-
+  QString currencyValue;
   auto coin = _options.coin();
   switch (coin.name())
   {
     case Coin::Name::Aeon:
-      arguments << "aeon7";
+      currencyValue = "aeon7";
       break;
     case Coin::Name::Monero:
-      arguments << "monero7";
+      currencyValue = "monero7";
       break;
     default:
       Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::currencyArguments", "switch (coin.name())");
   }
-
-  return arguments;
+  addArgument("--currency", currencyValue);
 }
 
-QStringList MinerWorkerXmrStakWin64::poolArguments() const
+void MinerWorkerXmrStakWin64::addPoolArguments()
 {
-  QStringList arguments;
+  addArgument("--url",  _poolAddress);
+  addArgument("--user", _poolCredentials.username);
+  addArgument("--rigid", QString());
 
-  arguments << "--url"   << _poolAddress;
-  arguments << "--user"  << _poolCredentials.username;
-  arguments << "--rigid" << QString();
-  arguments << "--pass";
+  QString passwordValue;
   if (_poolCredentials.password.isEmpty())
   {
-    arguments << R"("")";
+    passwordValue = R"("")";
   }
   else
   {
-    arguments << _poolCredentials.password;
+    passwordValue = _poolCredentials.password;
   }
-
-  return arguments;
+  addArgument("--pass", passwordValue);
 }
 
 QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
@@ -70,6 +64,46 @@ QString MinerWorkerXmrStakWin64::prepareCommonConfig() const
   MFile::write(configFilePath, configData);
 
   return configFilePath;
+}
+
+void MinerWorkerXmrStakWin64::addOptionArguments()
+{
+  addPoolArguments();
+
+  addArgument("--config", prepareCommonConfig());
+
+  if (!MThread::runningAsAdministrator())
+  {
+    addArgument("--noUAC");
+  }
+
+  addCurrencyArguments();
+
+  auto hwComponent = _options.hwComponent();
+  switch (hwComponent.type())
+  {
+    case HwComponent::Type::Cpu:
+      addArgument("--noAMD");
+      addArgument("--noNVIDIA");
+      break;
+    case HwComponent::Type::Gpu:
+      addArgument("--noCPU");
+
+      switch (hwComponent.company())
+      {
+        case HwComponent::Company::Amd:
+          addArgument("--noNVIDIA");
+          break;
+        case HwComponent::Company::Nvidia:
+          addArgument("--noAMD");
+          break;
+        default:
+          Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::processArguments", "switch (hwComponent.company())");
+      }
+      break;
+    default:
+      Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::processArguments", "switch (hwComponent.type())");
+  }
 }
 
 const QLoggingCategory &MinerWorkerXmrStakWin64::logCategory() const
@@ -113,47 +147,4 @@ void MinerWorkerXmrStakWin64::parseStdOutLine(const QString &line) const
       emit hashRate(regExpMatch.capturedRef(1).toFloat());
     }
   }
-}
-
-QStringList MinerWorkerXmrStakWin64::processArguments() const
-{
-  auto arguments = poolArguments();
-
-  arguments << "--config";
-  arguments << prepareCommonConfig();
-
-  if (!MThread::runningAsAdministrator())
-  {
-    arguments << "--noUAC";
-  }
-
-  arguments << currencyArguments();
-
-  auto hwComponent = _options.hwComponent();
-  switch (hwComponent.type())
-  {
-    case HwComponent::Type::Cpu:
-      arguments << "--noAMD";
-      arguments << "--noNVIDIA";
-      break;
-    case HwComponent::Type::Gpu:
-      arguments << "--noCPU";
-
-      switch (hwComponent.company())
-      {
-        case HwComponent::Company::Amd:
-          arguments << "--noNVIDIA";
-          break;
-        case HwComponent::Company::Nvidia:
-          arguments << "--noAMD";
-          break;
-        default:
-          Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::processArguments", "switch (hwComponent.company())");
-      }
-      break;
-    default:
-      Q_ASSERT_X(false, "MinerWorkerXmrStakWin64::processArguments", "switch (hwComponent.type())");
-  }
-
-  return arguments;
 }

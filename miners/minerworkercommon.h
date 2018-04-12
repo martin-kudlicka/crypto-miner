@@ -31,6 +31,9 @@ class MinerWorkerCommon : public MinerWorkerInterface
     QString         _poolAddress;
     QStringList     _arguments;
 
+    void addArgument(const QString &name);
+    void addArgument(const QString &name, const QString &value);
+
   private:
     void    addToCommandLine(const QString &argument, QString *commandLine) const;
     void    logCommandLine  ()                                              const;
@@ -44,10 +47,10 @@ class MinerWorkerCommon : public MinerWorkerInterface
     virtual       void     start             ()                                   Q_DECL_OVERRIDE;
     virtual       void     stop              ()                                   Q_DECL_OVERRIDE;
 
-    virtual const QLoggingCategory &logCategory     ()                    const = 0;
-    virtual       void              parseStdErrLine (const QString &line) const = 0;
-    virtual       void              parseStdOutLine (const QString &line) const = 0;
-    virtual       QStringList       processArguments()                    const = 0;
+    virtual       void              addOptionArguments()                          = 0;
+    virtual const QLoggingCategory &logCategory       ()                    const = 0;
+    virtual       void              parseStdErrLine   (const QString &line) const = 0;
+    virtual       void              parseStdOutLine   (const QString &line) const = 0;
 
     private Q_SLOTS:
       void on_minerProcess_finished               (int exitCode, QProcess::ExitStatus exitStatus) const;

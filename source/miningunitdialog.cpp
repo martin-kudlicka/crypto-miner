@@ -14,8 +14,6 @@ MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *min
 
   setupWidgets();
   setupSettings();
-
-  _ui.tabs->removeTab(static_cast<int>(Tab::Arguments));
 }
 
 MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin coin, QWidget *parent) : QDialog(parent), _options(id), _minerPlugin(minerPlugin), _widgetSettings(&_options)
@@ -24,8 +22,6 @@ MiningUnitDialog::MiningUnitDialog(const MUuidPtr &id, const MinerInterface *min
 
   setupWidgets(hwComponent, coin);
   setupSettings();
-
-  _ui.tabs->removeTab(static_cast<int>(Tab::Arguments));
 }
 
 const MiningUnitOptions &MiningUnitDialog::options() const
