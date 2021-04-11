@@ -3,13 +3,12 @@
 
 #include "ui_miningunitdialog.h"
 #include "miningunitoptions.h"
-#include <MkWidgets/MWidgetSettings>
 #include "../coins/coin.h"
 #include "../hardware/hwcomponent.h"
 
 class MinerInterface;
 
-class MiningUnitDialog : public QDialog
+class MiningUnitDialog : public MOptionsDialog<Ui::MiningUnitDialog, MiningUnitOptions>
 {
   Q_OBJECT
 
@@ -19,8 +18,6 @@ class MiningUnitDialog : public QDialog
              MiningUnitDialog(const MUuidPtr &id, const MinerInterface *minerPlugin, const HwComponent &hwComponent, Coin coin, QWidget *parent);
     virtual ~MiningUnitDialog() Q_DECL_OVERRIDE Q_DECL_EQ_DEFAULT;
 
-    const MiningUnitOptions &options() const;
-
   private:
     enum class Tab
     {
@@ -29,16 +26,13 @@ class MiningUnitDialog : public QDialog
       Arguments
     };
 
-    const MinerInterface      *_minerPlugin;
-          Ui::MiningUnitDialog _ui;
-          MiningUnitOptions    _options;
-          MWidgetSettings      _widgetSettings;
+    const MinerInterface *_minerPlugin;
 
-    void setupSettings();
-    void setupWidgets ()                                          const;
-    void setupWidgets (const HwComponent &hwComponent, Coin coin) const;
+    void setupWidgets(const HwComponent &hwComponent, Coin coin) const;
 
-    virtual void accept() Q_DECL_OVERRIDE;
+    virtual void accept       ()       Q_DECL_OVERRIDE;
+    virtual void setupSettings()       Q_DECL_OVERRIDE;
+    virtual void setupWidgets () const Q_DECL_OVERRIDE;
 
   private Q_SLOTS:
     void on_parameterCoin_currentIndexChanged(int index)            const;
